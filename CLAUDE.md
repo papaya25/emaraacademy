@@ -1,0 +1,45 @@
+# Emara Academy Website
+
+## What this is
+Website for **Emara Academy**, a legally incorporated non-profit based in Playa del Carmen, Quintana Roo, Mexico. It runs retention-focused programs for new Muslim converts across Latin America (education, imam/teacher training, community events, mutual aid fund, outdoor retreats, inter-community exchange).
+
+Mostly a **showcase/informational site** (who we are, programs, impact), plus:
+- Donations: Stripe, PayPal, and bank transfer (bank details shown as plain info, no integration needed)
+- Newsletter signup stored in Supabase, campaigns sent via Resend
+- Events calendar/planner
+- Admin panel (like a `/admin` area) to manage events, programs, and newsletter data
+
+Content source: `docs/Imarah_Program_Prospectus.docx` (English). The Arabic prospectus is **not** in use — set aside per the owner as of 2026-08-07.
+
+## Owner
+Maher — business owner, not a developer. Explain things plainly, confirm before deviating from his decisions.
+
+## Naming note
+The org's real name is **Emara Academy**. The original prospectus used "Imārah (عِمَارَة)" as a working title (Arabic word for "cultivation/building up") — that's the etymology/inspiration, not the brand name. Don't use "Imarah" as the site's name.
+
+## Languages
+English first. Spanish and Arabic planned later (Spanish/Portuguese are the actual target audience for the programs; Arabic for broader reach).
+
+## Tech stack
+- Next.js 16 (App Router) + TypeScript + Tailwind v4 + Turbopack
+- Supabase (Postgres) for data: events, newsletter signups, program content
+- Resend for sending newsletter campaigns (Supabase only stores subscribers, doesn't send)
+- Stripe + PayPal for online donations (test mode until real keys are provided)
+- Vercel for deployment
+- No WordPress
+
+## Environment gotcha
+There is no system `node`/`npm`/`npx` on this machine. Node 22 lives at `~/.local/node22/bin`. Prefix every node/npm/npx command:
+```bash
+export PATH="$HOME/.local/node22/bin:$PATH"
+```
+
+## Pending from the owner (placeholders until provided)
+- Real contact info (email, phone, address)
+- Team/board member names
+- Legal registration numbers (e.g. CLUNI/RFC) for the transparency/about page
+- Donation account details: Stripe/PayPal live keys, bank transfer info
+- Logo (already made, to be attached)
+
+## Status
+Project scaffolded 2026-08-07. No pages built yet beyond the default Next.js starter.
