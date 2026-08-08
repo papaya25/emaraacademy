@@ -251,7 +251,7 @@ export default function Home() {
             <span className="smallcaps">Transparency</span>
             <h2>Where your donation goes</h2>
             <p className="lede">
-              Every gift is tracked under restricted-fund accounting, so you can
+              Every donation is tracked under restricted-fund accounting, so you can
               earmark a donation to a specific program. We publish independently
               reviewed financial statements and report on spending at least once
               a year.

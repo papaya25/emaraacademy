@@ -30,7 +30,7 @@ Manuscript/book aesthetic: warm paper ground, content framed like an illuminated
 
 ## Contact & team
 - Phone: +52 55 2670 9079
-- Email: info@emaraacademy.mx
+- Email: info@emaraacademy.org (corrected from .mx on 2026-08-08)
 - **No team/board names are shown anywhere on the site.** The people running Emara Academy want to stay anonymous. Use a contact form + the phone/email above only — never add named staff, founder, or board bios/photos unless the owner explicitly reverses this.
 
 ## Languages

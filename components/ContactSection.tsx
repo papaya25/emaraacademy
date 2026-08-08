@@ -24,7 +24,7 @@ export default function ContactSection() {
               </p>
               <div className="corr-links">
                 <a href="tel:+525526709079">+52 55 2670 9079</a>
-                <a href="mailto:info@emaraacademy.mx">info@emaraacademy.mx</a>
+                <a href="mailto:info@emaraacademy.org">info@emaraacademy.org</a>
               </div>
               <p className="corr-promise">
                 No pressure, and no mailing list you didn&rsquo;t ask for — just a

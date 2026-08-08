@@ -29,7 +29,7 @@ export default function Footer() {
           <div className="footer-col" aria-label="Contact">
             <h3>Contact</h3>
             <a href="tel:+525526709079">+52 55 2670 9079</a>
-            <a href="mailto:info@emaraacademy.mx">info@emaraacademy.mx</a>
+            <a href="mailto:info@emaraacademy.org">info@emaraacademy.org</a>
             <p className="footer-place">
               Playa del Carmen
               <br />
@@ -40,7 +40,7 @@ export default function Footer() {
             <h3>Policies</h3>
             <Link href="/privacy-policy">Privacy Policy</Link>
             <Link href="/donation-policy">Donation &amp; Refund Policy</Link>
-            <Link href="/gift-acceptance-policy">Gift Acceptance Policy</Link>
+            <Link href="/donation-acceptance-policy">Donation Acceptance Policy</Link>
           </div>
         </div>
         <div className="footer-legal">
