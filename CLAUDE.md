@@ -17,6 +17,14 @@ Maher — business owner, not a developer. Explain things plainly, confirm befor
 ## Naming note
 The org's real name is **Emara Academy**. The original prospectus used "Imārah (عِمَارَة)" as a working title (Arabic word for "cultivation/building up") — that's the etymology/inspiration, not the brand name. Don't use "Imarah" as the site's name.
 
+## Brand
+Logo is at `brand/logo.jpg` — navy (#1c2e3f-ish) and gold arch/mihrab motif with Arabic calligraphy ("عمارة") and "EMARA ACADEMY" wordmark, cream/off-white background. Use these colors as the site's palette.
+
+## Contact & team
+- Phone: +52 55 2670 9079
+- Email: info@emaraacademy.mx
+- **No team/board names are shown anywhere on the site.** The people running Emara Academy want to stay anonymous. Use a contact form + the phone/email above only — never add named staff, founder, or board bios/photos unless the owner explicitly reverses this.
+
 ## Languages
 English first. Spanish and Arabic planned later (Spanish/Portuguese are the actual target audience for the programs; Arabic for broader reach).
 
@@ -35,11 +43,8 @@ export PATH="$HOME/.local/node22/bin:$PATH"
 ```
 
 ## Pending from the owner (placeholders until provided)
-- Real contact info (email, phone, address)
-- Team/board member names
 - Legal registration numbers (e.g. CLUNI/RFC) for the transparency/about page
 - Donation account details: Stripe/PayPal live keys, bank transfer info
-- Logo (already made, to be attached)
 
 ## Status
 Project scaffolded 2026-08-07. No pages built yet beyond the default Next.js starter.
