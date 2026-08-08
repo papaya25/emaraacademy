@@ -3,21 +3,11 @@
 import { useState } from "react";
 
 const AMOUNTS = [25, 50, 100, 250];
-const FUNDS = [
-  "Wherever it's needed most",
-  "New Muslim Education",
-  "Imam & Teacher Formation",
-  "Community Events",
-  "Mutual Aid & Emergency Fund",
-  "Outdoor Retreats",
-  "Inter-Community Exchange",
-];
 
 export default function DonatePanel() {
   const [freq, setFreq] = useState<"once" | "monthly">("once");
   const [amount, setAmount] = useState<number | "">(50);
   const [custom, setCustom] = useState("");
-  const [fund, setFund] = useState(FUNDS[0]);
 
   const effective = custom ? Number(custom) : amount;
 
@@ -78,23 +68,10 @@ export default function DonatePanel() {
           </div>
         </div>
 
-        <div className="fund-select">
-          <label className="corr-label corr-label-light" htmlFor="give-fund">
-            Direct this gift toward
-          </label>
-          <select id="give-fund" value={fund} onChange={(e) => setFund(e.target.value)}>
-            {FUNDS.map((f) => (
-              <option key={f} value={f}>
-                {f}
-              </option>
-            ))}
-          </select>
-        </div>
-
         <div className="give-methods">
           {/* TODO: wire to Stripe / PayPal checkout; bank details page to follow */}
           <a className="btn btn-gold" href="#contact">
-            Continue with Card
+            Debit/Credit Card
           </a>
           <a className="btn btn-ghost-light" href="#contact">
             PayPal
@@ -105,7 +82,7 @@ export default function DonatePanel() {
         </div>
         <p className="give-summary">
           {typeof effective === "number" && effective > 0
-            ? `$${effective} ${freq === "once" ? "one-time" : "monthly"} · ${fund}`
+            ? `$${effective} ${freq === "once" ? "one-time" : "monthly"}`
             : "Choose an amount to continue"}
           {" — payments processed securely; we never see your card details."}
         </p>

@@ -215,6 +215,35 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Volunteer */}
+      <section className="volunteer">
+        <div className="wrap">
+          <Reveal className="volunteer-grid">
+            <div>
+              <span className="smallcaps">Give Your Time</span>
+              <h2>
+                Can&rsquo;t give financially? <em>Give your time.</em>
+              </h2>
+              <p className="lede">
+                Emara Academy runs on people who show up: class assistants,
+                mentors for new converts, translators, event organizers, and
+                hands for retreats and mutual aid deliveries.
+              </p>
+              <div className="role-list">
+                <span>Class Assistant</span>
+                <span>Mentor</span>
+                <span>Translator</span>
+                <span>Event Helper</span>
+                <span>Retreat Support</span>
+              </div>
+            </div>
+            <Link className="btn btn-green" href="#contact">
+              Offer Your Time
+            </Link>
+          </Reveal>
+        </div>
+      </section>
+
       {/* Transparency */}
       <section className="transparency">
         <div className="wrap">

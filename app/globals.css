@@ -976,34 +976,20 @@ img {
 .amount-custom input::placeholder {
   color: rgba(246, 239, 223, 0.5);
 }
-.fund-select {
-  text-align: left;
-  margin-bottom: 24px;
-}
-.fund-select select {
-  width: 100%;
-  margin-top: 0.5em;
-  background: rgba(246, 239, 223, 0.08);
-  border: 1px solid rgba(246, 239, 223, 0.4);
-  border-radius: 2px;
-  padding: 0.8em 1em;
-  font-family: var(--font-lora), serif;
-  font-size: 0.92rem;
-  color: var(--paper);
-}
-.fund-select select:focus {
-  outline: none;
-  border-color: var(--gold);
-}
-.fund-select option {
-  color: var(--ink);
-  background: var(--paper);
-}
 .give-methods {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
-  gap: 12px;
+  flex-wrap: nowrap;
+  gap: 10px;
+  margin-top: 6px;
+}
+.give-methods .btn {
+  flex: 1;
+  padding: 1em 0.5em;
+  font-size: 0.76rem;
+  letter-spacing: 0.12em;
+  text-align: center;
+  white-space: nowrap;
 }
 .give-summary {
   margin-top: 18px;
@@ -1013,6 +999,56 @@ img {
 @media (max-width: 560px) {
   .amount-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .give-methods {
+    flex-direction: column;
+  }
+}
+
+/* ---------- volunteer ---------- */
+.volunteer {
+  padding-block: clamp(56px, 8vw, 96px);
+  background: var(--paper-deep);
+  border-top: 1px solid var(--rule);
+}
+.volunteer-grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: clamp(28px, 5vw, 64px);
+  align-items: center;
+}
+.volunteer h2 {
+  font-size: clamp(1.6rem, 2.2vw + 0.6rem, 2.3rem);
+  margin-top: 0.3em;
+}
+.volunteer h2 em {
+  font-style: italic;
+  color: var(--green);
+}
+.volunteer .lede {
+  margin-top: 0.9em;
+  color: var(--ink-soft);
+  max-width: 52ch;
+}
+.role-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 12px;
+  margin-top: 22px;
+}
+.role-list span {
+  font-family: var(--font-lora), serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--green);
+  border: 1px solid var(--rule);
+  padding: 0.5em 1.1em;
+  border-radius: 2px;
+  background: var(--paper);
+}
+@media (max-width: 760px) {
+  .volunteer-grid {
+    grid-template-columns: 1fr;
   }
 }
 
