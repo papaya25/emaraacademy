@@ -9,7 +9,7 @@ const links = [
   { href: "/#programs", label: "Programs" },
   { href: "/events", label: "Events" },
   { href: "/about", label: "Who We Are" },
-  { href: "/#contact", label: "Contact" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export default function TopBar() {

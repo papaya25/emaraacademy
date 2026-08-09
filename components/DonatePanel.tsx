@@ -9,12 +9,31 @@ const AMOUNTS = [25, 50, 100, 250];
 const MONTH_RAISED = 1850;
 const MONTH_GOAL = 5000;
 
+type Method = "card" | "paypal" | "bank";
+
+const METHOD_LABELS: Record<Method, string> = {
+  card: "Debit/Credit Card",
+  paypal: "PayPal",
+  bank: "Bank Transfer",
+};
+
 export default function DonatePanel() {
   const [freq, setFreq] = useState<"once" | "monthly">("once");
   const [amount, setAmount] = useState<number | "">(50);
   const [custom, setCustom] = useState("");
+  const [method, setMethod] = useState<Method>("card");
+  const [note, setNote] = useState("");
 
   const effective = custom ? Number(custom) : amount;
+  const validAmount = typeof effective === "number" && effective > 0;
+
+  const donateNow = () => {
+    // TODO: card -> embedded Stripe checkout; paypal -> PayPal buttons.
+    // Both open right here on the page (embedded, not a redirect).
+    setNote(
+      "Secure checkout will open right here — payments are in test mode until our Stripe and PayPal accounts are connected."
+    );
+  };
 
   return (
     <div className="waqf-panel">
@@ -73,24 +92,50 @@ export default function DonatePanel() {
           </div>
         </div>
 
-        <div className="give-methods">
-          {/* TODO: wire to Stripe / PayPal checkout; bank details page to follow */}
-          <a className="btn btn-gold" href="#contact">
-            Debit/Credit Card
-          </a>
-          <a className="btn btn-ghost-light" href="#contact">
-            PayPal
-          </a>
-          <a className="btn btn-ghost-light" href="#contact">
-            Bank Transfer
-          </a>
+        <div className="method-row" role="group" aria-label="Payment method">
+          {(Object.keys(METHOD_LABELS) as Method[]).map((m) => (
+            <button
+              key={m}
+              type="button"
+              className={`method-btn ${method === m ? "active" : ""}`}
+              onClick={() => {
+                setMethod(m);
+                setNote("");
+              }}
+            >
+              {METHOD_LABELS[m]}
+            </button>
+          ))}
         </div>
-        <p className="give-summary">
-          {typeof effective === "number" && effective > 0
-            ? `$${effective} ${freq === "once" ? "one-time" : "monthly"}`
-            : "Choose an amount to continue"}
-          {" — payments processed securely; we never see your card details."}
-        </p>
+
+        {method === "bank" ? (
+          <div className="bank-box">
+            <p className="bank-box-title">Donate by direct bank transfer</p>
+            <p>
+              Our account details will be published here shortly. Until then,{" "}
+              <Link href="/contact">write to us</Link> and we&rsquo;ll send them
+              to you directly — with a reference so your transfer is matched to
+              your chosen program.
+            </p>
+          </div>
+        ) : (
+          <>
+            <button
+              type="button"
+              className="btn btn-gold donate-now"
+              disabled={!validAmount}
+              onClick={donateNow}
+            >
+              {validAmount
+                ? `Donate $${effective}${freq === "monthly" ? " Monthly" : " Now"}`
+                : "Choose an amount"}
+            </button>
+            <p className="give-flow-note">
+              {note ||
+                "Checkout opens right here — no account, no leaving the page, under a minute. We never see or store your card details."}
+            </p>
+          </>
+        )}
 
         <div className="give-progress">
           <div

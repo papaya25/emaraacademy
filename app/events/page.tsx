@@ -50,7 +50,7 @@ export default function EventsPage() {
               will be waiting to welcome you.
             </p>
             <div className="spread-cta">
-              <Link className="btn btn-green" href="/#contact">
+              <Link className="btn btn-green" href="/contact">
                 Reserve a Spot
               </Link>
               <Link className="btn btn-ghost" href="/#programs">

@@ -55,4 +55,4 @@ export PATH="$HOME/.local/node22/bin:$PATH"
 - Donation account details: Stripe/PayPal live keys, bank transfer info
 
 ## Status
-Project scaffolded 2026-08-07. No pages built yet beyond the default Next.js starter.
+Pages built (all frontend-only, sample data, no backend yet): `/` (home), `/about` (Who We Are), `/events` (calendar board: city filter, color legend by cadence, day panel on the right, approximate Eid/Ramadan dates flagged "confirmed by moon sighting"), `/donations` (transparency ledger). Donate panel shows a sample raised-vs-goal bar (constants in DonatePanel.tsx). All forms/payments are visual-only pending Supabase/Resend/Stripe wiring. Owner prefers "donation" over "gift" in copy.

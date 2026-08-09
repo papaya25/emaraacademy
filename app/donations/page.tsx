@@ -68,7 +68,7 @@ export default function DonationsPage() {
             </p>
             <p>
               Questions about a donation, or considering a larger one?{" "}
-              <Link href="/#contact">Write to us first</Link> — we answer
+              <Link href="/contact">Write to us first</Link> — we answer
               everything ourselves.
             </p>
           </Reveal>

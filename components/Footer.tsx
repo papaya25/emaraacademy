@@ -29,6 +29,7 @@ export default function Footer() {
           </nav>
           <div className="footer-col" aria-label="Contact">
             <h3>Contact</h3>
+            <Link href="/contact">Write to Us</Link>
             <a href="tel:+525526709079">+52 55 2670 9079</a>
             <a href="mailto:info@emaraacademy.org">info@emaraacademy.org</a>
             <p className="footer-place">

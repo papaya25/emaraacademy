@@ -206,8 +206,8 @@ export default function AboutPage() {
               progress openly as we grow. If you want to be part of building
               this,{" "}
               <Link href="/#give">give</Link>,{" "}
-              <Link href="/#contact">volunteer</Link>, or simply{" "}
-              <Link href="/#contact">write to us</Link>.
+              <Link href="/contact">volunteer</Link>, or simply{" "}
+              <Link href="/contact">write to us</Link>.
             </p>
           </Reveal>
         </div>

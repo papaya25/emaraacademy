@@ -3,7 +3,6 @@ import Reveal from "@/components/Reveal";
 import Rosette from "@/components/Rosette";
 import NewsletterForm from "@/components/NewsletterForm";
 import DonatePanel from "@/components/DonatePanel";
-import ContactSection from "@/components/ContactSection";
 
 export default function Home() {
   return (
@@ -61,10 +60,10 @@ export default function Home() {
               community that already knows your name.
             </p>
             <div className="spread-cta">
-              <Link className="btn btn-green" href="#contact">
+              <Link className="btn btn-green" href="/contact">
                 Join a Class
               </Link>
-              <Link className="btn btn-ghost" href="#contact">
+              <Link className="btn btn-ghost" href="/contact">
                 Talk to Someone First
               </Link>
             </div>
@@ -137,43 +136,10 @@ export default function Home() {
             </p>
           </Reveal>
           <Reveal>
-            <div className="event-list">
-              {[
-                {
-                  cadence: "Weekly",
-                  title: "New Muslim Class",
-                  desc: "Foundations to Deepening tracks, Spanish & Portuguese, always with a shared meal. Playa del Carmen.",
-                },
-                {
-                  cadence: "Monthly",
-                  title: "Community Night",
-                  desc: "Convert story nights, games, and a warm meal together — built for making real friendships.",
-                },
-                {
-                  cadence: "Seasonal",
-                  title: "Eid & Ramadan Gatherings",
-                  desc: "Celebrations designed for people with no family nearby to celebrate with.",
-                },
-                {
-                  cadence: "Quarterly",
-                  title: "Outdoor Retreat",
-                  desc: "Weekend camping, sport, and short teaching circles around the fire.",
-                },
-                {
-                  cadence: "Annual",
-                  title: "Regional Exchange",
-                  desc: "Delegations and a growing conference connecting communities across Latin America.",
-                },
-              ].map((e) => (
-                <div className="event-row" key={e.title}>
-                  <span className="cadence">{e.cadence}</span>
-                  <div>
-                    <h3>{e.title}</h3>
-                    <p>{e.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
+            <p className="events-cadence-line">
+              Weekly classes · Monthly community nights · Quarterly retreats ·
+              Eid &amp; Ramadan gatherings
+            </p>
             <div className="events-actions">
               <Link className="btn btn-green" href="/events">
                 Open the Full Calendar
@@ -238,7 +204,7 @@ export default function Home() {
                 <span>Retreat Support</span>
               </div>
             </div>
-            <Link className="btn btn-green" href="#contact">
+            <Link className="btn btn-green" href="/contact">
               Offer Your Time
             </Link>
           </Reveal>
@@ -269,14 +235,30 @@ export default function Home() {
             </div>
             <p className="transparency-cta">
               Considering a major gift, or have questions before you give?{" "}
-              <Link href="#contact">Talk to us first →</Link>
+              <Link href="/contact">Talk to us first →</Link>
             </p>
           </Reveal>
         </div>
       </section>
 
-      {/* Correspondence */}
-      <ContactSection />
+      {/* Contact CTA */}
+      <section className="contact-cta" id="contact">
+        <div className="wrap narrow">
+          <Reveal>
+            <span className="smallcaps">Correspondence</span>
+            <h2>
+              Every letter is read by a person, <em>not a system.</em>
+            </h2>
+            <p>
+              A question about a class, a donation, volunteering — or your own
+              first steps in Islam. Write to us and a real person replies.
+            </p>
+            <Link className="btn btn-green" href="/contact">
+              Write to Us
+            </Link>
+          </Reveal>
+        </div>
+      </section>
     </main>
   );
 }
