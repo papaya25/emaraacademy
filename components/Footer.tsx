@@ -21,7 +21,7 @@ export default function Footer() {
           <nav className="footer-col" aria-label="Explore">
             <h3>Explore</h3>
             <Link href="/#new-muslims">New Muslims</Link>
-            <Link href="/#programs">Programs</Link>
+            <Link href="/programs">Programs</Link>
             <Link href="/events">Events</Link>
             <Link href="/donations">Donation Ledger</Link>
             <Link href="/about">Who We Are</Link>

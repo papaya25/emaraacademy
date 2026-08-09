@@ -53,7 +53,7 @@ export default function EventsPage() {
               <Link className="btn btn-green" href="/contact">
                 Reserve a Spot
               </Link>
-              <Link className="btn btn-ghost" href="/#programs">
+              <Link className="btn btn-ghost" href="/programs">
                 See the Programs
               </Link>
             </div>

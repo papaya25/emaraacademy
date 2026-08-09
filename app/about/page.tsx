@@ -107,7 +107,7 @@ export default function AboutPage() {
               the continent — so no city has to build alone.
             </p>
             <p>
-              <Link href="/#programs" className="transparency-cta-link">
+              <Link href="/programs" className="transparency-cta-link">
                 See all six programs on the home page →
               </Link>
             </p>

@@ -116,7 +116,7 @@ export default async function ProgramPage({
         ) : (
           <span />
         )}
-        <Link href="/#programs" className="chapter-nav-link chapter-nav-toc">
+        <Link href="/programs" className="chapter-nav-link chapter-nav-toc">
           Table of Contents
         </Link>
         {next ? (
