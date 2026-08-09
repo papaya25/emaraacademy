@@ -3,9 +3,10 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import LangSwitcher from "./LangSwitcher";
 
 const links = [
-  { href: "/#new-muslims", label: "New Muslims" },
+  { href: "/new-muslims", label: "New Muslims" },
   { href: "/programs", label: "Programs" },
   { href: "/events", label: "Events" },
   { href: "/about", label: "Who We Are" },
@@ -38,6 +39,7 @@ export default function TopBar() {
           <Link className="donate-seal" href="/#give" onClick={() => setOpen(false)}>
             Donate
           </Link>
+          <LangSwitcher />
         </nav>
       </div>
     </header>

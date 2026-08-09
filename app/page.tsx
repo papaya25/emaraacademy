@@ -26,7 +26,7 @@ export default function Home() {
               <Link className="btn btn-green" href="#give">
                 Support the Work
               </Link>
-              <Link className="btn btn-ghost" href="#new-muslims">
+              <Link className="btn btn-ghost" href="/new-muslims">
                 Begin Your Journey
               </Link>
             </div>
