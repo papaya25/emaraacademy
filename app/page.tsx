@@ -81,44 +81,50 @@ export default function Home() {
           <Reveal className="toc">
             {[
               {
+                slug: "new-muslim-education",
                 num: "١",
                 title: "New Muslim Education",
                 desc: "Weekly classes from first prayer to deep study, always with a shared meal",
               },
               {
+                slug: "imam-teacher-formation",
                 num: "٢",
                 title: "Imam & Teacher Formation",
                 desc: "Training teachers in the pastoral care converts actually need",
               },
               {
+                slug: "community-events",
                 num: "٣",
                 title: "Community Events",
                 desc: "Story nights, Eid gatherings, and tables with room for you",
               },
               {
+                slug: "mutual-aid-fund",
                 num: "٤",
                 title: "Mutual Aid Fund",
                 desc: "Quiet, dignified help with food, clothing, and emergencies",
               },
               {
+                slug: "outdoor-retreats",
                 num: "٥",
                 title: "Outdoor Retreats",
                 desc: "Camping, sport, and halaqas under open sky",
               },
               {
+                slug: "inter-community-exchange",
                 num: "٦",
                 title: "Inter-Community Exchange",
                 desc: "Connecting convert communities across the continent",
               },
             ].map((p) => (
-              <div className="toc-row" key={p.title}>
+              <Link className="toc-row" href={`/programs/${p.slug}`} key={p.title}>
                 <span className="toc-num" aria-hidden="true">
                   {p.num}
                 </span>
                 <span className="toc-title">{p.title}</span>
                 <span className="toc-leader" aria-hidden="true" />
                 <span className="toc-desc">{p.desc}</span>
-              </div>
+              </Link>
             ))}
           </Reveal>
         </div>

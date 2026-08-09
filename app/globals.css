@@ -1451,6 +1451,38 @@ img {
   }
 }
 
+/* ---------- chapter nav (program pages) ---------- */
+.chapter-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding-block: clamp(28px, 4vw, 44px);
+  border-top: 1px solid var(--rule);
+}
+.chapter-nav-link {
+  font-family: var(--font-amiri), serif;
+  font-weight: 700;
+  font-size: 0.98rem;
+  color: var(--green);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+.chapter-nav-link:hover {
+  color: var(--gold-deep);
+  border-color: var(--rule-gold);
+}
+.chapter-nav-toc {
+  font-family: var(--font-lora), serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
 /* ---------- about page ---------- */
 .about-hero {
   padding-block: clamp(48px, 7vw, 84px) clamp(40px, 6vw, 64px);
