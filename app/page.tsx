@@ -60,12 +60,17 @@ export default function Home() {
               community that already knows your name.
             </p>
             <div className="spread-cta">
-              <Link className="btn btn-green" href="/contact">
+              <Link className="btn btn-green" href="/classes">
                 Join a Class
               </Link>
-              <Link className="btn btn-ghost" href="/contact">
+              <a
+                className="btn btn-ghost"
+                href="https://wa.me/525526709079?text=Assalamu%20alaikum%20%E2%80%94%20I%27d%20like%20to%20talk%20to%20someone%20at%20Emara%20Academy."
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Talk to Someone First
-              </Link>
+              </a>
             </div>
           </Reveal>
         </div>

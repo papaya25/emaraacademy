@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const AMOUNTS = [25, 50, 100, 250];
 
@@ -18,21 +19,18 @@ const METHOD_LABELS: Record<Method, string> = {
 };
 
 export default function DonatePanel() {
+  const router = useRouter();
   const [freq, setFreq] = useState<"once" | "monthly">("once");
   const [amount, setAmount] = useState<number | "">(50);
   const [custom, setCustom] = useState("");
   const [method, setMethod] = useState<Method>("card");
-  const [note, setNote] = useState("");
 
   const effective = custom ? Number(custom) : amount;
   const validAmount = typeof effective === "number" && effective > 0;
 
   const donateNow = () => {
-    // TODO: card -> embedded Stripe checkout; paypal -> PayPal buttons.
-    // Both open right here on the page (embedded, not a redirect).
-    setNote(
-      "Secure checkout will open right here — payments are in test mode until our Stripe and PayPal accounts are connected."
-    );
+    if (!validAmount) return;
+    router.push(`/donate?amount=${effective}&freq=${freq}&method=${method}`);
   };
 
   return (
@@ -98,44 +96,27 @@ export default function DonatePanel() {
               key={m}
               type="button"
               className={`method-btn ${method === m ? "active" : ""}`}
-              onClick={() => {
-                setMethod(m);
-                setNote("");
-              }}
+              onClick={() => setMethod(m)}
             >
               {METHOD_LABELS[m]}
             </button>
           ))}
         </div>
 
-        {method === "bank" ? (
-          <div className="bank-box">
-            <p className="bank-box-title">Donate by direct bank transfer</p>
-            <p>
-              Our account details will be published here shortly. Until then,{" "}
-              <Link href="/contact">write to us</Link> and we&rsquo;ll send them
-              to you directly — with a reference so your transfer is matched to
-              your chosen program.
-            </p>
-          </div>
-        ) : (
-          <>
-            <button
-              type="button"
-              className="btn btn-gold donate-now"
-              disabled={!validAmount}
-              onClick={donateNow}
-            >
-              {validAmount
-                ? `Donate $${effective}${freq === "monthly" ? " Monthly" : " Now"}`
-                : "Choose an amount"}
-            </button>
-            <p className="give-flow-note">
-              {note ||
-                "Checkout opens right here — no account, no leaving the page, under a minute. We never see or store your card details."}
-            </p>
-          </>
-        )}
+        <button
+          type="button"
+          className="btn btn-gold donate-now"
+          disabled={!validAmount}
+          onClick={donateNow}
+        >
+          {validAmount
+            ? `Donate $${effective}${freq === "monthly" ? " Monthly" : " Now"}`
+            : "Choose an amount"}
+        </button>
+        <p className="give-flow-note">
+          One more step — your details and secure payment, under a minute. We
+          never see or store your card information.
+        </p>
 
         <div className="give-progress">
           <div

@@ -23,7 +23,13 @@ export default function ContactSection() {
                 Islam — write to us, or reach us directly:
               </p>
               <div className="corr-links">
-                <a href="tel:+525526709079">+52 55 2670 9079</a>
+                <a
+                  href="https://wa.me/525526709079?text=Assalamu%20alaikum%20%E2%80%94%20I%27d%20like%20to%20talk%20to%20someone%20at%20Emara%20Academy."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  WhatsApp: +52 55 2670 9079
+                </a>
                 <a href="mailto:info@emaraacademy.org">info@emaraacademy.org</a>
               </div>
               <p className="corr-promise">
