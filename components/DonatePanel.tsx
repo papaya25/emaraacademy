@@ -1,8 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 const AMOUNTS = [25, 50, 100, 250];
+
+// TODO: read from Supabase once donations go live — sample figures until then.
+const MONTH_RAISED = 1850;
+const MONTH_GOAL = 5000;
 
 export default function DonatePanel() {
   const [freq, setFreq] = useState<"once" | "monthly">("once");
@@ -86,6 +91,28 @@ export default function DonatePanel() {
             : "Choose an amount to continue"}
           {" — payments processed securely; we never see your card details."}
         </p>
+
+        <div className="give-progress">
+          <div
+            className="give-progress-bar"
+            role="progressbar"
+            aria-valuenow={MONTH_RAISED}
+            aria-valuemin={0}
+            aria-valuemax={MONTH_GOAL}
+            aria-label="Raised this month toward goal"
+          >
+            <span
+              style={{
+                width: `${Math.min(100, (MONTH_RAISED / MONTH_GOAL) * 100)}%`,
+              }}
+            />
+          </div>
+          <p>
+            ${MONTH_RAISED.toLocaleString()} raised this month of our $
+            {MONTH_GOAL.toLocaleString()} goal ·{" "}
+            <Link href="/donations">See all donations</Link>
+          </p>
+        </div>
       </div>
     </div>
   );

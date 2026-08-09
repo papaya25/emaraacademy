@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import Rosette from "@/components/Rosette";
-import EventsCalendar from "@/components/EventsCalendar";
 import NewsletterForm from "@/components/NewsletterForm";
 import DonatePanel from "@/components/DonatePanel";
 import ContactSection from "@/components/ContactSection";
@@ -176,10 +175,12 @@ export default function Home() {
               ))}
             </div>
             <div className="events-actions">
-              <EventsCalendar />
+              <Link className="btn btn-green" href="/events">
+                Open the Full Calendar
+              </Link>
               <p className="events-note">
-                Hover or tap a day to see what&rsquo;s on — write to us to
-                reserve a spot.
+                Filter by city, browse month by month, and see Eid and Ramadan
+                dates — or write to us to reserve a spot.
               </p>
             </div>
           </Reveal>
