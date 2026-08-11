@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import LangSwitcher from "./LangSwitcher";
@@ -15,6 +15,14 @@ const links = [
 
 export default function TopBar() {
   const [open, setOpen] = useState(false);
+
+  // Lock page scroll while the mobile drawer is open
+  useEffect(() => {
+    document.documentElement.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.documentElement.style.overflow = "";
+    };
+  }, [open]);
 
   return (
     <header className="topbar">
@@ -39,6 +47,15 @@ export default function TopBar() {
           <Link className="donate-seal" href="/#give" onClick={() => setOpen(false)}>
             Donate
           </Link>
+          <a
+            className="nav-whatsapp"
+            href="https://wa.me/525526709079?text=Assalamu%20alaikum%20%E2%80%94%20I%27d%20like%20to%20talk%20to%20someone%20at%20Emara%20Academy."
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => setOpen(false)}
+          >
+            WhatsApp Us
+          </a>
           <LangSwitcher />
         </nav>
       </div>

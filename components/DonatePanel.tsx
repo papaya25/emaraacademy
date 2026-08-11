@@ -97,8 +97,12 @@ export default function DonatePanel() {
               type="button"
               className={`method-btn ${method === m ? "active" : ""}`}
               onClick={() => setMethod(m)}
+              aria-label={METHOD_LABELS[m]}
             >
-              {METHOD_LABELS[m]}
+              <span className="m-full">{METHOD_LABELS[m]}</span>
+              <span className="m-short" aria-hidden="true">
+                {m === "card" ? "Card" : m === "paypal" ? "PayPal" : "Bank"}
+              </span>
             </button>
           ))}
         </div>

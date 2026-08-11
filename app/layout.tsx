@@ -3,6 +3,7 @@ import { Amiri, Lora } from "next/font/google";
 import "./globals.css";
 import TopBar from "@/components/TopBar";
 import Footer from "@/components/Footer";
+import MobileDonateBar from "@/components/MobileDonateBar";
 
 const amiri = Amiri({
   weight: ["400", "700"],
@@ -35,6 +36,7 @@ export default function RootLayout({
         <TopBar />
         {children}
         <Footer />
+        <MobileDonateBar />
       </body>
     </html>
   );
