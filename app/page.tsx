@@ -2,6 +2,7 @@ import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import Rosette from "@/components/Rosette";
 import NewsletterForm from "@/components/NewsletterForm";
+import ImpactStats from "@/components/ImpactStats";
 import DonatePanel from "@/components/DonatePanel";
 
 export default function Home() {
@@ -171,6 +172,16 @@ export default function Home() {
             <span className="smallcaps">Stay Connected</span>
             <h2>Get news on classes, events, and how your support helps</h2>
             <NewsletterForm />
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Impact stats */}
+      <section className="impact">
+        <div className="wrap">
+          <Reveal>
+            <span className="smallcaps impact-eyebrow">Our Impact So Far</span>
+            <ImpactStats />
           </Reveal>
         </div>
       </section>

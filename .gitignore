@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Draft AI-generated images pending review — approved ones get moved into public/ or brand/
+generated-images/

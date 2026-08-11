@@ -580,8 +580,20 @@ img {
 
 /* ---------- title page hero ---------- */
 .titlepage {
+  position: relative;
   padding-block: clamp(56px, 9vw, 104px) clamp(48px, 7vw, 88px);
   text-align: center;
+}
+.titlepage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("/illustrations/hero-bg.webp");
+  background-size: cover;
+  background-position: center;
+  opacity: 0.13;
+  pointer-events: none;
+  z-index: 0;
 }
 .plate {
   position: relative;
@@ -867,6 +879,58 @@ img {
 @media (max-width: 520px) {
   .newsletter-form {
     flex-direction: column;
+  }
+}
+
+/* ---------- impact stats ---------- */
+.impact {
+  padding-block: clamp(48px, 7vw, 84px);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  background: var(--paper-deep);
+}
+.impact-eyebrow {
+  display: block;
+  text-align: center;
+  margin-bottom: 1.6em;
+}
+.impact-stats {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.impact-stat {
+  flex: 1 1 200px;
+  max-width: 260px;
+  text-align: center;
+  padding-inline: clamp(20px, 4vw, 48px);
+  padding-block: 10px;
+}
+.impact-stat + .impact-stat {
+  border-left: 1px solid var(--rule-gold);
+}
+.impact-value {
+  display: block;
+  font-family: var(--font-amiri), serif;
+  font-weight: 700;
+  font-size: clamp(2.4rem, 4vw, 3.4rem);
+  color: var(--green);
+  line-height: 1;
+}
+.impact-label {
+  display: block;
+  margin-top: 0.6em;
+  font-family: var(--font-lora), serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+@media (max-width: 640px) {
+  .impact-stat + .impact-stat {
+    border-left: none;
+    border-top: 1px solid var(--rule-gold);
   }
 }
 
