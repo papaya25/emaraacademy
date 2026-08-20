@@ -1,12 +1,35 @@
 "use client";
 
 import { useState } from "react";
+import { getSupabase } from "@/lib/supabase";
 
 const REASONS = ["Joining a Class", "Donating", "Volunteering", "Something Else"];
 
+type Status = "idle" | "sending" | "sent" | "error";
+
 export default function ContactSection() {
   const [reason, setReason] = useState(REASONS[0]);
-  const [sent, setSent] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [status, setStatus] = useState<Status>("idle");
+
+  const send = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const supabase = getSupabase();
+    if (!supabase) {
+      setStatus("error");
+      return;
+    }
+    setStatus("sending");
+    const { error } = await supabase.from("contact_messages").insert({
+      name: name.trim(),
+      email: email.trim().toLowerCase(),
+      reason,
+      message: message.trim(),
+    });
+    setStatus(error ? "error" : "sent");
+  };
 
   return (
     <section className="correspondence" id="contact">
@@ -38,7 +61,7 @@ export default function ContactSection() {
               </p>
             </div>
 
-            {sent ? (
+            {status === "sent" ? (
               <div className="corr-success">
                 <p className="ar" aria-hidden="true">
                   جزاك الله خيرا
@@ -50,14 +73,7 @@ export default function ContactSection() {
                 </p>
               </div>
             ) : (
-              <form
-                className="corr-form"
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  // TODO: wire to Supabase/Resend when backend lands
-                  setSent(true);
-                }}
-              >
+              <form className="corr-form" onSubmit={send}>
                 <div>
                   <span className="corr-label">I&rsquo;m writing about</span>
                   <div className="reason-row" role="group" aria-label="Reason for writing">
@@ -78,24 +94,57 @@ export default function ContactSection() {
                     <label className="corr-label" htmlFor="corr-name">
                       Name
                     </label>
-                    <input id="corr-name" type="text" required autoComplete="name" />
+                    <input
+                      id="corr-name"
+                      type="text"
+                      required
+                      autoComplete="name"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      disabled={status === "sending"}
+                    />
                   </div>
                   <div>
                     <label className="corr-label" htmlFor="corr-email">
                       Email
                     </label>
-                    <input id="corr-email" type="email" required autoComplete="email" />
+                    <input
+                      id="corr-email"
+                      type="email"
+                      required
+                      autoComplete="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      disabled={status === "sending"}
+                    />
                   </div>
                 </div>
                 <div>
                   <label className="corr-label" htmlFor="corr-message">
                     Your message
                   </label>
-                  <textarea id="corr-message" required rows={5} />
+                  <textarea
+                    id="corr-message"
+                    required
+                    rows={5}
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    disabled={status === "sending"}
+                  />
                 </div>
-                <button className="btn btn-green" type="submit">
-                  Send Letter
+                <button
+                  className="btn btn-green"
+                  type="submit"
+                  disabled={status === "sending"}
+                >
+                  {status === "sending" ? "Sending…" : "Send Letter"}
                 </button>
+                {status === "error" && (
+                  <p className="corr-error" role="alert">
+                    Something went wrong sending your letter — please try again
+                    in a moment, or reach us on WhatsApp or email above instead.
+                  </p>
+                )}
               </form>
             )}
           </div>

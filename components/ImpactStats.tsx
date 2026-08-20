@@ -1,17 +1,24 @@
-// PLACEHOLDER FIGURES — not real yet. Maher will confirm actual counts later.
-// TODO: once the admin/backend phase tracks real enrollments, mutual-aid cases,
-// and converts supported in Supabase, replace this with live `SELECT COUNT(*)`
-// queries against those tables instead of hardcoded values — see CLAUDE.md.
-const STATS = [
-  { value: "35", label: "New Muslims Walking With Us" },
-  { value: "90", label: "Students in Weekly Classes" },
-  { value: "50", label: "People Supported by Our Programs" },
-];
+"use client";
+
+import { useSetting } from "@/lib/settings";
+
+// Fallback figures until the `site_settings` row loads (or before the
+// table exists). The live values are managed in Supabase → site_settings
+// under the key `impact_stats`, editable from the admin panel later.
+const FALLBACK = { new_muslims: 35, students: 90, supported: 50 };
 
 export default function ImpactStats() {
+  const stats = useSetting("impact_stats", FALLBACK);
+
+  const items = [
+    { value: stats.new_muslims, label: "New Muslims Walking With Us" },
+    { value: stats.students, label: "Students in Weekly Classes" },
+    { value: stats.supported, label: "People Supported by Our Programs" },
+  ];
+
   return (
     <div className="impact-stats">
-      {STATS.map((s) => (
+      {items.map((s) => (
         <div className="impact-stat" key={s.label}>
           <span className="impact-value">{s.value}</span>
           <span className="impact-label">{s.label}</span>

@@ -1,8 +1,20 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { getSupabase } from "@/lib/supabase";
 
 type EventType = "weekly" | "monthly" | "quarterly" | "special";
+
+type DbEvent = {
+  id: string;
+  title: string;
+  meta: string | null;
+  city: string | null;
+  type: string;
+  event_date: string; // YYYY-MM-DD
+};
+
+const EVENT_TYPES: EventType[] = ["weekly", "monthly", "quarterly", "special"];
 
 type CalEvent = {
   type: EventType;
@@ -111,7 +123,50 @@ export default function EventsBoard() {
   });
   const [selected, setSelected] = useState<number | null>(null);
 
+  // Real events from Supabase; null = none yet, fall back to the sample schedule
+  const [dbEvents, setDbEvents] = useState<DbEvent[] | null>(null);
+  useEffect(() => {
+    const supabase = getSupabase();
+    if (!supabase) return;
+    let cancelled = false;
+    supabase
+      .from("events")
+      .select("id,title,meta,city,type,event_date")
+      .then(({ data, error }) => {
+        if (!cancelled && !error && data && data.length) setDbEvents(data as DbEvent[]);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const isLive = dbEvents !== null;
+
+  const cities = useMemo(() => {
+    if (!dbEvents) return CITIES;
+    const unique = [...new Set(dbEvents.map((e) => e.city).filter((c): c is string => !!c))];
+    return ["All Cities", ...unique.sort()];
+  }, [dbEvents]);
+
   const events = useMemo(() => {
+    if (dbEvents) {
+      const map: Record<number, CalEvent[]> = {};
+      for (const ev of dbEvents) {
+        const [y, m, d] = ev.event_date.split("-").map(Number);
+        if (y !== cursor.year || m - 1 !== cursor.month) continue;
+        if (city !== "All Cities" && ev.city !== null && ev.city !== city) continue;
+        const type = (EVENT_TYPES as string[]).includes(ev.type)
+          ? (ev.type as EventType)
+          : "monthly";
+        (map[d] ||= []).push({
+          type,
+          title: ev.title,
+          meta: ev.meta ?? "",
+          city: ev.city,
+        });
+      }
+      return map;
+    }
     const all = eventsForMonth(cursor.year, cursor.month);
     if (city === "All Cities") return all;
     const filtered: Record<number, CalEvent[]> = {};
@@ -120,7 +175,7 @@ export default function EventsBoard() {
       if (keep.length) filtered[Number(d)] = keep;
     }
     return filtered;
-  }, [city, cursor]);
+  }, [dbEvents, city, cursor]);
 
   const firstDow = new Date(cursor.year, cursor.month, 1).getDay();
   const daysInMonth = new Date(cursor.year, cursor.month + 1, 0).getDate();
@@ -139,7 +194,7 @@ export default function EventsBoard() {
     <div className="evb">
       <div className="evb-toolbar">
         <div className="evb-cities" role="group" aria-label="Filter by city">
-          {CITIES.map((c) => (
+          {cities.map((c) => (
             <button
               key={c}
               type="button"
@@ -255,8 +310,9 @@ export default function EventsBoard() {
       </div>
 
       <p className="evb-note">
-        Sample schedule shown while our first season is being planned — dates for
-        Islamic occasions are approximate and confirmed by moon sighting.
+        {isLive
+          ? "Dates for Islamic occasions are approximate and confirmed by moon sighting."
+          : "Sample schedule shown while our first season is being planned — dates for Islamic occasions are approximate and confirmed by moon sighting."}
       </p>
     </div>
   );

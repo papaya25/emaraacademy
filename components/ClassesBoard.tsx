@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { CLASSES, CLASS_CITIES } from "@/lib/classes";
+import { CLASSES, CLASS_CITIES, type ClassInfo } from "@/lib/classes";
+import { getSupabase } from "@/lib/supabase";
 
 const WHATSAPP_URL =
   "https://wa.me/525526709079?text=" +
@@ -13,13 +14,42 @@ const WHATSAPP_URL =
 export default function ClassesBoard() {
   const [city, setCity] = useState(CLASS_CITIES[0]);
 
+  // Real classes from Supabase; null = none yet, fall back to the sample list
+  const [dbClasses, setDbClasses] = useState<ClassInfo[] | null>(null);
+  useEffect(() => {
+    const supabase = getSupabase();
+    if (!supabase) return;
+    let cancelled = false;
+    supabase
+      .from("classes")
+      .select("id,subject,blurb,track,language,city,day,time,format,status")
+      .order("sort_order", { ascending: true })
+      .then(({ data, error }) => {
+        if (!cancelled && !error && data && data.length) {
+          setDbClasses(data as ClassInfo[]);
+        }
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const isLive = dbClasses !== null;
+  const list = dbClasses ?? CLASSES;
+
+  const cities = useMemo(() => {
+    if (!dbClasses) return CLASS_CITIES;
+    const unique = [...new Set(dbClasses.map((c) => c.city))];
+    return ["All Cities", ...unique.sort()];
+  }, [dbClasses]);
+
   const visible =
-    city === "All Cities" ? CLASSES : CLASSES.filter((c) => c.city === city);
+    city === "All Cities" ? list : list.filter((c) => c.city === city);
 
   return (
     <div>
       <div className="evb-cities classes-filter" role="group" aria-label="Filter by city">
-        {CLASS_CITIES.map((c) => (
+        {cities.map((c) => (
           <button
             key={c}
             type="button"
@@ -86,10 +116,12 @@ export default function ClassesBoard() {
         ))}
       </div>
 
-      <p className="evb-note">
-        Sample schedule shown while our first season is being planned — real
-        classes, times, and cities will replace it as cohorts open.
-      </p>
+      {!isLive && (
+        <p className="evb-note">
+          Sample schedule shown while our first season is being planned — real
+          classes, times, and cities will replace it as cohorts open.
+        </p>
+      )}
     </div>
   );
 }

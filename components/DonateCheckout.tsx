@@ -3,10 +3,10 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { useSetting } from "@/lib/settings";
 
-// TODO: read from Supabase once donations go live — sample figures until then.
-const MONTH_RAISED = 1850;
-const MONTH_GOAL = 5000;
+// Fallback until site_settings loads; live values under key `donation_month`.
+const MONTH_FALLBACK = { raised: 1850, goal: 5000 };
 
 const METHOD_LABELS: Record<string, string> = {
   card: "Debit/Credit Card",
@@ -15,6 +15,7 @@ const METHOD_LABELS: Record<string, string> = {
 };
 
 export default function DonateCheckout() {
+  const month = useSetting("donation_month", MONTH_FALLBACK);
   const params = useSearchParams();
   const amount = Number(params.get("amount")) || 50;
   const freq = params.get("freq") === "monthly" ? "monthly" : "once";
@@ -165,18 +166,18 @@ export default function DonateCheckout() {
             <div
               className="give-progress-bar"
               role="progressbar"
-              aria-valuenow={MONTH_RAISED}
+              aria-valuenow={month.raised}
               aria-valuemin={0}
-              aria-valuemax={MONTH_GOAL}
+              aria-valuemax={month.goal}
               aria-label="Raised this month toward goal"
             >
               <span
-                style={{ width: `${Math.min(100, (MONTH_RAISED / MONTH_GOAL) * 100)}%` }}
+                style={{ width: `${Math.min(100, (month.raised / month.goal) * 100)}%` }}
               />
             </div>
             <p>
-              Your donation joins ${MONTH_RAISED.toLocaleString()} raised this
-              month toward our ${MONTH_GOAL.toLocaleString()} goal ·{" "}
+              Your donation joins ${month.raised.toLocaleString()} raised this
+              month toward our ${month.goal.toLocaleString()} goal ·{" "}
               <Link href="/donations">See all donations</Link>
             </p>
           </div>

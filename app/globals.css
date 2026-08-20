@@ -1570,6 +1570,11 @@ img {
 .corr-form .btn {
   justify-self: start;
 }
+.corr-error {
+  font-size: 0.88rem;
+  color: var(--terracotta);
+  max-width: 48ch;
+}
 .corr-success {
   text-align: center;
   padding-block: 30px;
