@@ -6,6 +6,7 @@ import ImpactStats from "@/components/ImpactStats";
 import DonatePanel from "@/components/DonatePanel";
 import ProgramShelf from "@/components/ProgramShelf";
 import HeroActions from "@/components/HeroActions";
+import WhatsAppLink from "@/components/WhatsAppLink";
 
 export default function Home() {
   return (
@@ -73,14 +74,12 @@ export default function Home() {
               <Link className="btn btn-green" href="/classes">
                 Join a Class
               </Link>
-              <a
+              <WhatsAppLink
                 className="btn btn-ghost"
-                href="https://wa.me/525526709079?text=Assalamu%20alaikum%20%E2%80%94%20I%27d%20like%20to%20talk%20to%20someone%20at%20Emara%20Academy."
-                target="_blank"
-                rel="noopener noreferrer"
+                message="Assalamu alaikum — I'd like to talk to someone at Emara Academy."
               >
                 Talk to Someone First
-              </a>
+              </WhatsAppLink>
             </div>
           </Reveal>
         </div>

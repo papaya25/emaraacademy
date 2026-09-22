@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { getSupabase } from "@/lib/supabase";
+import { useSetting } from "@/lib/settings";
+import { DEFAULT_CONTACT, whatsappUrl } from "@/lib/contactInfo";
 
 const REASONS = ["Joining a Class", "Donating", "Volunteering", "Something Else"];
 
@@ -13,6 +15,7 @@ export default function ContactSection() {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState<Status>("idle");
+  const contact = useSetting("contact_info", DEFAULT_CONTACT);
 
   const send = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -47,13 +50,16 @@ export default function ContactSection() {
               </p>
               <div className="corr-links">
                 <a
-                  href="https://wa.me/525526709079?text=Assalamu%20alaikum%20%E2%80%94%20I%27d%20like%20to%20talk%20to%20someone%20at%20Emara%20Academy."
+                  href={whatsappUrl(
+                    contact.phone,
+                    "Assalamu alaikum — I'd like to talk to someone at Emara Academy."
+                  )}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  WhatsApp: +52 55 2670 9079
+                  WhatsApp: {contact.phone}
                 </a>
-                <a href="mailto:info@emaraacademy.org">info@emaraacademy.org</a>
+                <a href={`mailto:${contact.email}`}>{contact.email}</a>
               </div>
               <p className="corr-promise">
                 No pressure, and no mailing list you didn&rsquo;t ask for — just a

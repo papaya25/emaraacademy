@@ -4,9 +4,11 @@ import { useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useSetting } from "@/lib/settings";
+import { useMonthRaised } from "@/lib/donations";
 
-// Fallback until site_settings loads; live values under key `donation_month`.
-const MONTH_FALLBACK = { raised: 1850, goal: 5000 };
+// Fallback until site_settings loads; live goal under key `donation_month`.
+const MONTH_FALLBACK = { goal: 5000 };
+const RAISED_FALLBACK = 1850;
 
 const METHOD_LABELS: Record<string, string> = {
   card: "Debit/Credit Card",
@@ -16,6 +18,7 @@ const METHOD_LABELS: Record<string, string> = {
 
 export default function DonateCheckout() {
   const month = useSetting("donation_month", MONTH_FALLBACK);
+  const raised = useMonthRaised(RAISED_FALLBACK);
   const params = useSearchParams();
   const amount = Number(params.get("amount")) || 50;
   const freq = params.get("freq") === "monthly" ? "monthly" : "once";
@@ -166,17 +169,17 @@ export default function DonateCheckout() {
             <div
               className="give-progress-bar"
               role="progressbar"
-              aria-valuenow={month.raised}
+              aria-valuenow={raised}
               aria-valuemin={0}
               aria-valuemax={month.goal}
               aria-label="Raised this month toward goal"
             >
               <span
-                style={{ width: `${Math.min(100, (month.raised / month.goal) * 100)}%` }}
+                style={{ width: `${Math.min(100, (raised / month.goal) * 100)}%` }}
               />
             </div>
             <p>
-              Your donation joins ${month.raised.toLocaleString()} raised this
+              Your donation joins ${raised.toLocaleString()} raised this
               month toward our ${month.goal.toLocaleString()} goal ·{" "}
               <Link href="/donations">See all donations</Link>
             </p>

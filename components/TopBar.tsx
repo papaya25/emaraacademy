@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import LangSwitcher from "./LangSwitcher";
+import WhatsAppLink from "./WhatsAppLink";
 
 const links = [
   { href: "/new-muslims", label: "New Muslims" },
@@ -47,15 +48,13 @@ export default function TopBar() {
           <Link className="donate-seal" href="/#give" onClick={() => setOpen(false)}>
             Donate
           </Link>
-          <a
+          <WhatsAppLink
             className="nav-whatsapp"
-            href="https://wa.me/525526709079?text=Assalamu%20alaikum%20%E2%80%94%20I%27d%20like%20to%20talk%20to%20someone%20at%20Emara%20Academy."
-            target="_blank"
-            rel="noopener noreferrer"
+            message="Assalamu alaikum — I'd like to talk to someone at Emara Academy."
             onClick={() => setOpen(false)}
           >
             WhatsApp Us
-          </a>
+          </WhatsAppLink>
           <LangSwitcher />
         </nav>
       </div>

@@ -5,12 +5,9 @@ import Link from "next/link";
 import { CLASSES, CLASS_CITIES, type ClassInfo } from "@/lib/classes";
 import { getSupabase } from "@/lib/supabase";
 import CityFilter from "@/components/CityFilter";
+import WhatsAppLink from "@/components/WhatsAppLink";
 
-const WHATSAPP_URL =
-  "https://wa.me/525526709079?text=" +
-  encodeURIComponent(
-    "Assalamu alaikum — I'd like to join a class at Emara Academy."
-  );
+const WHATSAPP_MESSAGE = "Assalamu alaikum — I'd like to join a class at Emara Academy.";
 
 export default function ClassesBoard() {
   const [city, setCity] = useState(CLASS_CITIES[0]);
@@ -93,14 +90,9 @@ export default function ClassesBoard() {
                   <Link className="btn btn-green class-btn" href="/contact">
                     Reserve a Spot
                   </Link>
-                  <a
-                    className="btn btn-ghost class-btn"
-                    href={WHATSAPP_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  <WhatsAppLink className="btn btn-ghost class-btn" message={WHATSAPP_MESSAGE}>
                     Ask on WhatsApp
-                  </a>
+                  </WhatsAppLink>
                 </>
               )}
             </div>

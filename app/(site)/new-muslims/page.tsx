@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import Rosette from "@/components/Rosette";
+import WhatsAppLink from "@/components/WhatsAppLink";
 
 export const metadata: Metadata = {
   title: "New to Islam — Emara Academy",
@@ -129,14 +130,12 @@ export default function NewMuslimsPage() {
               <Link className="btn btn-green" href="/classes">
                 Join a Class
               </Link>
-              <a
+              <WhatsAppLink
                 className="btn btn-ghost"
-                href="https://wa.me/525526709079?text=Assalamu%20alaikum%20%E2%80%94%20I%27d%20like%20to%20talk%20to%20someone%20at%20Emara%20Academy."
-                target="_blank"
-                rel="noopener noreferrer"
+                message="Assalamu alaikum — I'd like to talk to someone at Emara Academy."
               >
                 Talk to Someone First
-              </a>
+              </WhatsAppLink>
             </div>
           </Reveal>
         </div>

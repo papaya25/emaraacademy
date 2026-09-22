@@ -13,6 +13,9 @@ type DbEvent = {
   city: string | null;
   type: string;
   event_date: string; // YYYY-MM-DD
+  time: string | null;
+  location: string | null;
+  presenter: string | null;
 };
 
 const EVENT_TYPES: EventType[] = ["weekly", "monthly", "quarterly", "special"];
@@ -22,6 +25,9 @@ type CalEvent = {
   title: string;
   meta: string;
   city: string | null; // null = shown for every city (e.g. Islamic dates)
+  time?: string | null;
+  location?: string | null;
+  presenter?: string | null;
 };
 
 const CITIES = ["All Cities", "Playa del Carmen", "Cancún"];
@@ -132,7 +138,7 @@ export default function EventsBoard() {
     let cancelled = false;
     supabase
       .from("events")
-      .select("id,title,meta,city,type,event_date")
+      .select("id,title,meta,city,type,event_date,time,location,presenter")
       .then(({ data, error }) => {
         if (!cancelled && !error && data && data.length) setDbEvents(data as DbEvent[]);
       });
@@ -164,6 +170,9 @@ export default function EventsBoard() {
           title: ev.title,
           meta: ev.meta ?? "",
           city: ev.city,
+          time: ev.time,
+          location: ev.location,
+          presenter: ev.presenter,
         });
       }
       return map;
@@ -292,7 +301,10 @@ export default function EventsBoard() {
                     {e.city ? ` · ${e.city}` : ""}
                   </span>
                   <div className="evb-event-title">{e.title}</div>
-                  <div className="evb-event-meta">{e.meta}</div>
+                  {e.time && <div className="evb-event-meta">{e.time}</div>}
+                  {e.location && <div className="evb-event-meta">{e.location}</div>}
+                  {e.presenter && <div className="evb-event-meta">With {e.presenter}</div>}
+                  {e.meta && <div className="evb-event-meta">{e.meta}</div>}
                 </div>
               ))}
             </>

@@ -3,12 +3,40 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Reveal from "@/components/Reveal";
 import Rosette from "@/components/Rosette";
-import { PROGRAMS } from "@/lib/programs";
+import { PROGRAMS, type Program } from "@/lib/programs";
+import { getSupabase } from "@/lib/supabase";
+
+export const revalidate = 60;
 
 type Params = { slug: string };
 
 export function generateStaticParams(): Params[] {
   return PROGRAMS.map((p) => ({ slug: p.slug }));
+}
+
+async function getPrograms(): Promise<Program[]> {
+  try {
+    const supabase = getSupabase();
+    if (!supabase) return PROGRAMS;
+    const { data, error } = await supabase
+      .from("programs")
+      .select("slug,num,chapter,category,title,tagline,activities,what_it_is,problem")
+      .order("sort_order", { ascending: true });
+    if (error || !data || !data.length) return PROGRAMS;
+    return data.map((p) => ({
+      slug: p.slug,
+      num: p.num,
+      chapter: p.chapter,
+      category: p.category,
+      title: p.title,
+      tagline: p.tagline,
+      whatItIs: p.what_it_is,
+      activities: p.activities,
+      problem: p.problem,
+    }));
+  } catch {
+    return PROGRAMS;
+  }
 }
 
 export async function generateMetadata({
@@ -17,7 +45,8 @@ export async function generateMetadata({
   params: Promise<Params>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const program = PROGRAMS.find((p) => p.slug === slug);
+  const programs = await getPrograms();
+  const program = programs.find((p) => p.slug === slug);
   if (!program) return {};
   return {
     title: `${program.title} — Emara Academy`,
@@ -31,11 +60,12 @@ export default async function ProgramPage({
   params: Promise<Params>;
 }) {
   const { slug } = await params;
-  const index = PROGRAMS.findIndex((p) => p.slug === slug);
+  const programs = await getPrograms();
+  const index = programs.findIndex((p) => p.slug === slug);
   if (index === -1) notFound();
-  const program = PROGRAMS[index];
-  const prev = PROGRAMS[index - 1];
-  const next = PROGRAMS[index + 1];
+  const program = programs[index];
+  const prev = programs[index - 1];
+  const next = programs[index + 1];
 
   return (
     <main>
@@ -98,7 +128,7 @@ export default async function ProgramPage({
             <p>{program.problem}</p>
             <div className="spread-cta">
               <Link className="btn btn-green" href="/#give">
-                Sponsor This Program
+                Make a Donation
               </Link>
               <Link className="btn btn-ghost" href="/contact">
                 Ask About It First

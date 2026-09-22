@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
 import { Amiri, Lora } from "next/font/google";
 import "./globals.css";
-import TopBar from "@/components/TopBar";
-import Footer from "@/components/Footer";
-import MobileDonateBar from "@/components/MobileDonateBar";
 
 const amiri = Amiri({
   weight: ["400", "700"],
@@ -32,12 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${amiri.variable} ${lora.variable}`}>
-        <TopBar />
-        {children}
-        <Footer />
-        <MobileDonateBar />
-      </body>
+      <body className={`${amiri.variable} ${lora.variable}`}>{children}</body>
     </html>
   );
 }

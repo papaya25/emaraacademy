@@ -1,17 +1,52 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { PROGRAMS } from "@/lib/programs";
+import { PROGRAMS, type Program } from "@/lib/programs";
+import { getSupabase } from "@/lib/supabase";
 
 const ACCENTS = ["a", "b", "c"] as const;
 
 export default function ProgramShelf() {
   const [openSlug, setOpenSlug] = useState<string | null>(null);
 
+  // Real programs from Supabase; null = none yet, fall back to the static list
+  const [dbPrograms, setDbPrograms] = useState<Program[] | null>(null);
+  useEffect(() => {
+    const supabase = getSupabase();
+    if (!supabase) return;
+    let cancelled = false;
+    supabase
+      .from("programs")
+      .select("slug,num,chapter,category,title,tagline,activities,what_it_is,problem")
+      .order("sort_order", { ascending: true })
+      .then(({ data, error }) => {
+        if (!cancelled && !error && data && data.length) {
+          setDbPrograms(
+            data.map((p) => ({
+              slug: p.slug,
+              num: p.num,
+              chapter: p.chapter,
+              category: p.category,
+              title: p.title,
+              tagline: p.tagline,
+              whatItIs: p.what_it_is,
+              activities: p.activities,
+              problem: p.problem,
+            }))
+          );
+        }
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const programs = dbPrograms ?? PROGRAMS;
+
   return (
     <div className="shelf">
-      {PROGRAMS.map((p, i) => {
+      {programs.map((p, i) => {
         const open = openSlug === p.slug;
         return (
           <div className={`book3d ${ACCENTS[i % 3]}`} key={p.slug}>
