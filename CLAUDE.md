@@ -53,13 +53,45 @@ export PATH="$HOME/.local/node22/bin:$PATH"
 ## Tailwind class-name collision gotcha
 Never name a custom CSS class after a Tailwind utility (`contents`, `hidden`, `container`, `flex`, etc.) — Tailwind v4 generates the matching utility class regardless, and it silently merges with your rule on any property your rule doesn't itself set. Bit us once: the homepage/`/programs` section was `className="contents"`, which picked up Tailwind's `.contents { display: contents }` (a real utility) — that collapsed the section to a zero-size box (`getBoundingClientRect()` all zeros), which is what made the "See Our Work" hero button silently fail to scroll to it. Renamed to `.chapters` in [globals.css](app/globals.css), [app/page.tsx](app/page.tsx), [app/programs/page.tsx](app/programs/page.tsx).
 
+## Admin panel (`/admin`) — built 2026-09-22, NOT yet activated
+Code is deployed but unusable until the owner does two things in the Supabase dashboard
+(I don't have write access to this project — it's on the owner's own Supabase account,
+not the MCP-connected one):
+1. Run [`supabase/migrations/002_admin_panel.sql`](supabase/migrations/002_admin_panel.sql)
+   in the SQL Editor (after `schema.sql`, which should already be applied).
+2. Authentication → Users → Add User: email `admin@emaraacademy.org`, any password. That
+   password is the one login — **one shared account, not one per person** (owner's explicit
+   call: "no need for 2 separate accounts just one with one password"). Login screen only
+   asks for the password; the email is hardcoded in `lib/adminAuth.ts`.
+
+Until both are done, `/admin/login` works but sign-in will fail (no such user), and even
+after sign-in the admin pages will error (tables don't exist yet).
+
+What it manages: Programs/chapters (moved from `lib/programs.ts` into a `programs` table,
+public pages fall back to the static file if the table's empty), Events + Classes
+(full add/edit/delete — events gained `location`/`time`/`presenter` columns), Donations
+(a private ledger — owner logs each gift by hand since Stripe/PayPal aren't live; the
+homepage "raised this month" figure is now computed automatically from this table via the
+public `monthly_donation_total` view, no more manual updates), Messages (contact form
+submissions — previously had zero UI to read them), Newsletter (subscriber list), and
+Settings (contact email/phone — now threaded through every WhatsApp link and the footer via
+`components/WhatsAppLink.tsx`/`ContactDetails.tsx` — plus impact numbers and the monthly
+goal). Auth is cookie-based via `@supabase/ssr` (`lib/supabase/server.ts`,
+`lib/supabase/client.ts`), gated by `proxy.ts` (Next 16's renamed `middleware.ts`).
+
+**Structural change:** the public site now lives under `app/(site)/` with its own layout
+(`TopBar`/`Footer`/`MobileDonateBar`) — `app/admin` sits outside that group so it gets a
+bare shell instead of the public nav and donate bar. New public pages go in `app/(site)/`,
+not `app/`.
+
 ## Pending from the owner (placeholders until provided)
 - Legal registration numbers (e.g. CLUNI/RFC) for the transparency/about page
 - Donation account details: Stripe/PayPal live keys, bank transfer info
+- Run the admin panel migration + create the admin login (see above)
 
 ## Status
 Pages built: `/` (home), `/about`, `/events` (calendar board: city filter, color legend, day panel right, approx Eid/Ramadan dates), `/donations` (ledger), `/contact`, `/programs` + six `/programs/[slug]` chapters (`lib/programs.ts`), `/new-muslims`, `/faq`, `/classes` (sample class picker w/ city filter, `lib/classes.ts` — all "Join a Class" buttons route here), `/donate` (checkout: step indicator, params from DonatePanel, anonymous option, test-mode payment placeholders, confirmation state), `/privacy-policy`, `/donation-policy`, `/donation-acceptance-policy` (drafts flagged pending legal review, shared `components/PolicyPage.tsx`). "Talk to Someone" buttons open WhatsApp (+52 55 2670 9079 via wa.me). Language switcher: EN active, ES/AR "soon".
 
 Homepage 2026-09-21: per the client's request (relayed by the owner) to foreground the programs, the bookshelf (`components/ProgramShelf.tsx`) moved up to sit directly under the hero (was further down under "Six chapters of one mission"), and each program renders as a real 3D CSS flip-card book — colored spine, stacked-page shadow on the closed cover, `rotateY(180deg)` flip to an "open page" back face with the program description and a link to its full `/programs/[slug]` chapter. Fixed 380px card height means opening one book never reflows its siblings. Same component is reused on `/programs`. Hero CTA "Begin Your Journey" replaced with "See Our Work" (anchors to `#programs`); see the Tailwind class-collision gotcha above for the bug this surfaced and its fix.
 
-Infra: GitHub `papaya25/emaraacademy` (push after every commit — Vercel auto-deploys from it). Vercel project (team `tutcasa`) had its Framework Preset unset, which silently produced empty serverless function output (builds "succeeded" but every route 404'd) — fixed 2026-08-09 by explicitly setting `framework: "nextjs"` via the Vercel API; don't unset it. Production build uses `next build --webpack` (package.json) rather than Next.js 16's new Turbopack-build default, kept deliberately since Vercel's Turbopack-build support is still new — dev (`next dev`) still uses Turbopack. Vercel CLI is installed globally and logged in on this Mac (useful for `vercel inspect`/API debugging). Supabase project `yglhgvzpuglxgqgrjfpl` (owner's separate account, NOT in the MCP-connected account; publishable key in `.env.local` as `NEXT_PUBLIC_SUPABASE_URL`/`NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` — same vars must exist in Vercel). Newsletter form does a live insert into `newsletter_subscribers` (table exists, tested end-to-end). Backend phase 1 shipped: contact form inserts into `contact_messages`; events/classes boards read from `events`/`classes` tables (sample data as clearly-labeled fallback while tables are missing/empty); impact stats + monthly raised/goal read from `site_settings` (keys `impact_stats`, `donation_month`) via `lib/settings.ts` `useSetting` hook. Full schema in `supabase/schema.sql` — owner must run it in the Supabase SQL Editor (as of 2026-08-13 NOT yet run; contact form shows its error state until then). Security model: anon key = insert-only on contact/newsletter, read-only on events/classes/settings; writes need an authenticated Supabase user (for the admin panel, next). Remaining: admin panel (`/admin`), Stripe test mode (owner creating account), Resend, custom domain emaraacademy.org, Spanish. Owner prefers "donation" over "gift" in copy. Dev server: `.claude/launch.json` uses autoPort (port 3000 may be taken by other projects).
+Infra: GitHub `papaya25/emaraacademy` (push after every commit — Vercel auto-deploys from it). Vercel project (team `tutcasa`) had its Framework Preset unset, which silently produced empty serverless function output (builds "succeeded" but every route 404'd) — fixed 2026-08-09 by explicitly setting `framework: "nextjs"` via the Vercel API; don't unset it. Production build uses `next build --webpack` (package.json) rather than Next.js 16's new Turbopack-build default, kept deliberately since Vercel's Turbopack-build support is still new — dev (`next dev`) still uses Turbopack. Vercel CLI is installed globally and logged in on this Mac (useful for `vercel inspect`/API debugging). Supabase project `yglhgvzpuglxgqgrjfpl` (owner's separate account, NOT in the MCP-connected account; publishable key in `.env.local` as `NEXT_PUBLIC_SUPABASE_URL`/`NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` — same vars must exist in Vercel). Newsletter form does a live insert into `newsletter_subscribers` (table exists, tested end-to-end). Backend phase 1 shipped: contact form inserts into `contact_messages`; events/classes boards read from `events`/`classes` tables (sample data as clearly-labeled fallback while tables are missing/empty); impact stats + monthly raised/goal read from `site_settings` (keys `impact_stats`, `donation_month`) via `lib/settings.ts` `useSetting` hook. Full schema in `supabase/schema.sql` — owner must run it in the Supabase SQL Editor (as of 2026-08-13 NOT yet run; contact form shows its error state until then). Security model: anon key = insert-only on contact/newsletter, read-only on events/classes/settings; writes need an authenticated Supabase user (for the admin panel, next). Remaining: Stripe test mode (owner creating account), Resend, custom domain emaraacademy.org, Spanish. Admin panel is built — see "Admin panel" section above for activation steps. Owner prefers "donation" over "gift" in copy. Dev server: `.claude/launch.json` uses autoPort (port 3000 may be taken by other projects).
