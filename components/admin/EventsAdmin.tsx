@@ -101,6 +101,13 @@ export default function EventsAdmin({ events }: { events: EventRow[] }) {
           </tr>
         </thead>
         <tbody>
+          {events.length === 0 && (
+            <tr>
+              <td colSpan={7} className="admin-hint">
+                No events yet — add one above.
+              </td>
+            </tr>
+          )}
           {events.map((e) => (
             <tr key={e.id}>
               <td>{e.event_date}</td>

@@ -1,7 +1,15 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
+// Temporarily off while the Supabase project is paused (billing) and there's
+// no admin login to test against yet — the owner asked to see the admin UI
+// without the password gate for now. Flip back to true once the Supabase
+// project is unpaused and the admin@emaraacademy.org user exists.
+const ADMIN_AUTH_ENABLED = false;
+
 export async function proxy(request: NextRequest) {
+  if (!ADMIN_AUTH_ENABLED) return NextResponse.next();
+
   let response = NextResponse.next({ request });
 
   const supabase = createServerClient(

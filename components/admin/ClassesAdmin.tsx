@@ -116,6 +116,13 @@ export default function ClassesAdmin({ classes }: { classes: ClassRow[] }) {
           </tr>
         </thead>
         <tbody>
+          {classes.length === 0 && (
+            <tr>
+              <td colSpan={5} className="admin-hint">
+                No classes yet — add one above.
+              </td>
+            </tr>
+          )}
           {classes.map((c) => (
             <tr key={c.id}>
               <td>{c.subject}</td>

@@ -1,12 +1,38 @@
 import { createClient } from "@/lib/supabase/server";
 import { updateProgram } from "@/app/admin/actions";
+import { PROGRAMS } from "@/lib/programs";
+
+type ProgramRow = {
+  slug: string;
+  num: string;
+  category: string;
+  title: string;
+  tagline: string;
+  what_it_is: string;
+  activities: { title: string; desc: string }[];
+  problem: string;
+};
 
 export default async function AdminProgramsPage() {
   const supabase = await createClient();
-  const { data: programs } = await supabase
+  const { data } = await supabase
     .from("programs")
     .select("*")
     .order("sort_order", { ascending: true });
+
+  const live = data && data.length > 0;
+  const programs: ProgramRow[] = live
+    ? data
+    : PROGRAMS.map((p) => ({
+        slug: p.slug,
+        num: p.num,
+        category: p.category,
+        title: p.title,
+        tagline: p.tagline,
+        what_it_is: p.whatItIs,
+        activities: p.activities,
+        problem: p.problem,
+      }));
 
   return (
     <div>
@@ -15,7 +41,14 @@ export default async function AdminProgramsPage() {
         These are the six program chapters shown on the homepage and /programs.
         Activities: one per line, as <code>Title | Description</code>.
       </p>
-      {(programs ?? []).map((p) => (
+      {!live && (
+        <p className="admin-offline">
+          Showing today&rsquo;s content as a preview — Supabase isn&rsquo;t connected
+          (project paused or migration not run yet), so Save won&rsquo;t persist until
+          it is.
+        </p>
+      )}
+      {programs.map((p) => (
         <details className="admin-card admin-details" key={p.slug}>
           <summary>
             {p.num} · {p.title}
@@ -43,9 +76,7 @@ export default async function AdminProgramsPage() {
               <textarea
                 name="activities"
                 rows={6}
-                defaultValue={(p.activities as { title: string; desc: string }[])
-                  .map((a) => `${a.title} | ${a.desc}`)
-                  .join("\n")}
+                defaultValue={p.activities.map((a) => `${a.title} | ${a.desc}`).join("\n")}
               />
             </label>
             <label>

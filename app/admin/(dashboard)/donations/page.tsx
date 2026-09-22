@@ -84,6 +84,13 @@ export default async function AdminDonationsPage() {
           </tr>
         </thead>
         <tbody>
+          {(donations ?? []).length === 0 && (
+            <tr>
+              <td colSpan={7} className="admin-hint">
+                No donations logged yet.
+              </td>
+            </tr>
+          )}
           {(donations ?? []).map((d) => (
             <tr key={d.id}>
               <td>{d.occurred_on}</td>
