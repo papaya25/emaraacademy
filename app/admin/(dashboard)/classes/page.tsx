@@ -5,7 +5,7 @@ export default async function AdminClassesPage() {
   const supabase = await createClient();
   const { data: classes } = await supabase
     .from("classes")
-    .select("id,subject,blurb,track,language,city,day,time,format,status,sort_order")
+    .select("id,subject,blurb,track,language,city,location,day,time,format,status,sort_order")
     .order("sort_order", { ascending: true });
 
   return (

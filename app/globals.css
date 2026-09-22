@@ -2754,6 +2754,11 @@ img {
 .admin-link-danger {
   color: var(--terracotta);
 }
+.admin-delete-row {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--rule);
+}
 
 .admin-message-head {
   display: flex;

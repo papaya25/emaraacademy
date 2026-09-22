@@ -20,7 +20,7 @@ export default function ClassesBoard() {
     let cancelled = false;
     supabase
       .from("classes")
-      .select("id,subject,blurb,track,language,city,day,time,format,status")
+      .select("id,subject,blurb,track,language,city,location,day,time,format,status")
       .order("sort_order", { ascending: true })
       .then(({ data, error }) => {
         if (!cancelled && !error && data && data.length) {
@@ -67,6 +67,12 @@ export default function ClassesBoard() {
                 <dd>
                   {c.city}
                   {c.format === "Online" ? "" : ` · ${c.format}`}
+                  {c.location && (
+                    <>
+                      <br />
+                      {c.location}
+                    </>
+                  )}
                 </dd>
               </div>
               <div>

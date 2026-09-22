@@ -2,6 +2,7 @@
 export type ClassInfo = {
   id: string;
   city: string;
+  location?: string | null;
   subject: string;
   track: "Foundations" | "Practice" | "Deepening";
   language: string;

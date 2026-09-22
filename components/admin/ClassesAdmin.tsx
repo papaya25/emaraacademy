@@ -10,6 +10,7 @@ type ClassRow = {
   track: string;
   language: string;
   city: string;
+  location: string | null;
   day: string | null;
   time: string | null;
   format: string;
@@ -48,6 +49,14 @@ export default function ClassesAdmin({ classes }: { classes: ClassRow[] }) {
             <label>
               City
               <input name="city" defaultValue={editing?.city} required />
+            </label>
+            <label>
+              Location (address / venue)
+              <input
+                name="location"
+                placeholder="Mezquita Al-Noor, Av. 10 Nte"
+                defaultValue={editing?.location ?? ""}
+              />
             </label>
             <label>
               Track
@@ -110,6 +119,7 @@ export default function ClassesAdmin({ classes }: { classes: ClassRow[] }) {
           <tr>
             <th>Subject</th>
             <th>City</th>
+            <th>Location</th>
             <th>Day / Time</th>
             <th>Status</th>
             <th></th>
@@ -118,7 +128,7 @@ export default function ClassesAdmin({ classes }: { classes: ClassRow[] }) {
         <tbody>
           {classes.length === 0 && (
             <tr>
-              <td colSpan={5} className="admin-hint">
+              <td colSpan={6} className="admin-hint">
                 No classes yet — add one above.
               </td>
             </tr>
@@ -127,6 +137,7 @@ export default function ClassesAdmin({ classes }: { classes: ClassRow[] }) {
             <tr key={c.id}>
               <td>{c.subject}</td>
               <td>{c.city}</td>
+              <td>{c.location ?? "—"}</td>
               <td>
                 {c.day} {c.time}
               </td>

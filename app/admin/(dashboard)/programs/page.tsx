@@ -1,5 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
-import { updateProgram } from "@/app/admin/actions";
+import { updateProgram, createProgram, deleteProgram } from "@/app/admin/actions";
 import { PROGRAMS } from "@/lib/programs";
 
 type ProgramRow = {
@@ -12,6 +12,35 @@ type ProgramRow = {
   activities: { title: string; desc: string }[];
   problem: string;
 };
+
+const FIELDS = (
+  <>
+    <label>
+      Category
+      <input name="category" required />
+    </label>
+    <label>
+      Title
+      <input name="title" required />
+    </label>
+    <label>
+      Tagline
+      <textarea name="tagline" rows={2} required />
+    </label>
+    <label>
+      What it is
+      <textarea name="what_it_is" rows={3} required />
+    </label>
+    <label>
+      Activities (one per line: Title | Description)
+      <textarea name="activities" rows={6} />
+    </label>
+    <label>
+      The moment it answers
+      <textarea name="problem" rows={3} required />
+    </label>
+  </>
+);
 
 export default async function AdminProgramsPage() {
   const supabase = await createClient();
@@ -38,16 +67,28 @@ export default async function AdminProgramsPage() {
     <div>
       <h1>Programs</h1>
       <p className="admin-hint">
-        These are the six program chapters shown on the homepage and /programs.
-        Activities: one per line, as <code>Title | Description</code>.
+        These are the program chapters shown on the homepage and /programs. Adding or
+        removing one renumbers the rest so the chapter numbers stay in order. Activities:
+        one per line, as <code>Title | Description</code>.
       </p>
       {!live && (
         <p className="admin-offline">
           Showing today&rsquo;s content as a preview — Supabase isn&rsquo;t connected
-          (project paused or migration not run yet), so Save won&rsquo;t persist until
-          it is.
+          (project paused or migration not run yet), so saving, adding, or deleting
+          won&rsquo;t persist until it is.
         </p>
       )}
+
+      <details className="admin-card admin-details">
+        <summary>Add a new program</summary>
+        <form action={createProgram} className="admin-form">
+          {FIELDS}
+          <button className="btn btn-green" type="submit">
+            Add Program
+          </button>
+        </form>
+      </details>
+
       {programs.map((p) => (
         <details className="admin-card admin-details" key={p.slug}>
           <summary>
@@ -83,8 +124,16 @@ export default async function AdminProgramsPage() {
               The moment it answers
               <textarea name="problem" defaultValue={p.problem} rows={3} required />
             </label>
-            <button className="btn btn-green" type="submit">
-              Save
+            <div className="admin-form-row">
+              <button className="btn btn-green" type="submit">
+                Save
+              </button>
+            </div>
+          </form>
+          <form action={deleteProgram} className="admin-delete-row">
+            <input type="hidden" name="slug" value={p.slug} />
+            <button type="submit" className="admin-link admin-link-danger">
+              Delete this program
             </button>
           </form>
         </details>

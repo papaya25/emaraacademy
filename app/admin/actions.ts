@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
+import { arabicIndicNumeral, chapterHeading } from "@/lib/arabicNumerals";
 
 function str(fd: FormData, key: string): string {
   return String(fd.get(key) ?? "").trim();
@@ -10,17 +11,28 @@ function strOrNull(fd: FormData, key: string): string | null {
   const v = str(fd, key);
   return v ? v : null;
 }
+function parseActivities(fd: FormData) {
+  return str(fd, "activities")
+    .split("\n")
+    .map((line) => line.split("|"))
+    .filter(([title]) => title?.trim())
+    .map(([title, desc]) => ({ title: title.trim(), desc: (desc ?? "").trim() }));
+}
+function slugify(title: string): string {
+  return (
+    title
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "") || "program"
+  );
+}
 
 // ---- Programs -------------------------------------------------------------
 
 export async function updateProgram(fd: FormData) {
   const supabase = await createClient();
   const slug = str(fd, "slug");
-  const activities = str(fd, "activities")
-    .split("\n")
-    .map((line) => line.split("|"))
-    .filter(([title]) => title?.trim())
-    .map(([title, desc]) => ({ title: title.trim(), desc: (desc ?? "").trim() }));
 
   await supabase
     .from("programs")
@@ -30,7 +42,7 @@ export async function updateProgram(fd: FormData) {
       tagline: str(fd, "tagline"),
       what_it_is: str(fd, "what_it_is"),
       problem: str(fd, "problem"),
-      activities,
+      activities: parseActivities(fd),
       updated_at: new Date().toISOString(),
     })
     .eq("slug", slug);
@@ -38,6 +50,60 @@ export async function updateProgram(fd: FormData) {
   revalidatePath("/admin/programs");
   revalidatePath("/programs");
   revalidatePath(`/programs/${slug}`);
+  revalidatePath("/");
+}
+
+export async function createProgram(fd: FormData) {
+  const supabase = await createClient();
+  const { data: existing } = await supabase.from("programs").select("slug");
+  const existingSlugs = new Set((existing ?? []).map((p) => p.slug));
+
+  let slug = slugify(str(fd, "title"));
+  let suffix = 2;
+  while (existingSlugs.has(slug)) {
+    slug = `${slugify(str(fd, "title"))}-${suffix++}`;
+  }
+
+  const position = existingSlugs.size + 1;
+
+  await supabase.from("programs").insert({
+    slug,
+    sort_order: existingSlugs.size,
+    num: arabicIndicNumeral(position),
+    chapter: chapterHeading(position),
+    category: str(fd, "category"),
+    title: str(fd, "title"),
+    tagline: str(fd, "tagline"),
+    what_it_is: str(fd, "what_it_is"),
+    problem: str(fd, "problem"),
+    activities: parseActivities(fd),
+  });
+
+  revalidatePath("/admin/programs");
+  revalidatePath("/programs");
+  revalidatePath("/");
+}
+
+export async function deleteProgram(fd: FormData) {
+  const supabase = await createClient();
+  const slug = str(fd, "slug");
+  await supabase.from("programs").delete().eq("slug", slug);
+
+  // Renumber what's left so chapter numbers/Arabic numerals stay sequential
+  // with no gap where the deleted program used to be.
+  const { data: remaining } = await supabase
+    .from("programs")
+    .select("slug")
+    .order("sort_order", { ascending: true });
+  for (const [i, p] of (remaining ?? []).entries()) {
+    await supabase
+      .from("programs")
+      .update({ sort_order: i, num: arabicIndicNumeral(i + 1), chapter: chapterHeading(i + 1) })
+      .eq("slug", p.slug);
+  }
+
+  revalidatePath("/admin/programs");
+  revalidatePath("/programs");
   revalidatePath("/");
 }
 
@@ -83,6 +149,7 @@ export async function upsertClass(fd: FormData) {
     track: str(fd, "track") || "Foundations",
     language: str(fd, "language") || "Español",
     city: str(fd, "city"),
+    location: strOrNull(fd, "location"),
     day: strOrNull(fd, "day"),
     time: strOrNull(fd, "time"),
     format: str(fd, "format") || "In person",
