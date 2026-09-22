@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { CLASSES, CLASS_CITIES, type ClassInfo } from "@/lib/classes";
 import { getSupabase } from "@/lib/supabase";
+import CityFilter from "@/components/CityFilter";
 
 const WHATSAPP_URL =
   "https://wa.me/525526709079?text=" +
@@ -48,17 +49,8 @@ export default function ClassesBoard() {
 
   return (
     <div>
-      <div className="evb-cities classes-filter" role="group" aria-label="Filter by city">
-        {cities.map((c) => (
-          <button
-            key={c}
-            type="button"
-            className={`reason-chip ${city === c ? "active" : ""}`}
-            onClick={() => setCity(c)}
-          >
-            {c}
-          </button>
-        ))}
+      <div className="classes-filter">
+        <CityFilter cities={cities} value={city} label="Filter by city" onChange={setCity} />
       </div>
 
       <div className="class-list">

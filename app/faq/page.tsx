@@ -46,8 +46,8 @@ const DONOR_FAQ = [
     a: "Emara Academy is a legally incorporated non-profit association in Mexico. Our tax-receipt registrations are in progress — write to us before you give and we'll tell you exactly what documentation we can provide for your situation and country.",
   },
   {
-    q: "Can I sponsor a specific program?",
-    a: "Yes. Every program — education, teacher formation, events, the mutual aid fund, retreats, and regional exchange — can be sponsored individually, and restricted-fund accounting keeps your donation inside the program you chose.",
+    q: "Can I give toward a specific program?",
+    a: "Write to us before you give and tell us which program — education, teacher formation, events, the mutual aid fund, retreats, or regional exchange — you'd like your gift to support, and we'll make sure it's applied there.",
   },
   {
     q: "How do I know how the money is spent?",

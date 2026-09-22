@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { getSupabase } from "@/lib/supabase";
+import CityFilter from "@/components/CityFilter";
 
 type EventType = "weekly" | "monthly" | "quarterly" | "special";
 
@@ -193,21 +194,15 @@ export default function EventsBoard() {
   return (
     <div className="evb">
       <div className="evb-toolbar">
-        <div className="evb-cities" role="group" aria-label="Filter by city">
-          {cities.map((c) => (
-            <button
-              key={c}
-              type="button"
-              className={`reason-chip ${city === c ? "active" : ""}`}
-              onClick={() => {
-                setCity(c);
-                setSelected(null);
-              }}
-            >
-              {c}
-            </button>
-          ))}
-        </div>
+        <CityFilter
+          cities={cities}
+          value={city}
+          label="Filter by city"
+          onChange={(c) => {
+            setCity(c);
+            setSelected(null);
+          }}
+        />
         <div className="evb-legend" aria-label="Event types">
           {(Object.keys(TYPE_LABELS) as EventType[]).map((t) => (
             <span key={t} className="evb-legend-item">

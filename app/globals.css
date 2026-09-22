@@ -447,10 +447,22 @@ img {
   gap: 16px 28px;
   margin-bottom: 22px;
 }
-.evb-cities {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+.city-select select {
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  background: var(--paper) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23241c12'/%3E%3C/svg%3E") no-repeat right 0.9em center;
+  background-size: 9px 6px;
+  padding: 0.55em 2.2em 0.55em 1.1em;
+  font-family: var(--font-lora), serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+  appearance: none;
+  cursor: pointer;
+}
+.city-select select:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
 }
 .evb-legend {
   display: flex;
@@ -2430,20 +2442,13 @@ img {
     gap: 14px;
   }
 
-  /* events board: swipeable city filter, roomier legend */
+  /* events board: stacked toolbar, roomier legend */
   .evb-toolbar {
     flex-direction: column;
     align-items: stretch;
   }
-  .evb-cities {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: 6px;
-  }
-  .evb-cities .reason-chip {
-    white-space: nowrap;
-    flex: none;
+  .city-select select {
+    width: 100%;
   }
   .evb-legend {
     gap: 6px 14px;

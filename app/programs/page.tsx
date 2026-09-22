@@ -38,15 +38,21 @@ export default function ProgramsPage() {
           <Reveal>
             <span className="smallcaps">Get Involved</span>
             <h2>
-              Every chapter can be <em>sponsored individually.</em>
+              Support our work, <em>however you can.</em>
             </h2>
             <p>
-              Fund a single program, a single city, or the whole model — or give
-              your time as a mentor, translator, or event helper.
+              A donation or your time both keep these six programs running —
+              give financially, or volunteer as a mentor, translator, or event
+              helper.
             </p>
-            <Link className="btn btn-green" href="/#give">
-              Support a Program
-            </Link>
+            <div className="spread-cta">
+              <Link className="btn btn-green" href="/#give">
+                Make a Donation
+              </Link>
+              <Link className="btn btn-ghost" href="/contact">
+                Offer Your Time
+              </Link>
+            </div>
           </Reveal>
         </div>
       </section>
