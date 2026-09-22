@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 import { arabicIndicNumeral, chapterHeading } from "@/lib/arabicNumerals";
+import { isResendConfigured, sendBroadcast } from "@/lib/resend";
 
 function str(fd: FormData, key: string): string {
   return String(fd.get(key) ?? "").trim();
@@ -204,6 +205,45 @@ export async function deleteMessage(fd: FormData) {
   await supabase.from("contact_messages").delete().eq("id", str(fd, "id"));
   revalidatePath("/admin/messages");
   revalidatePath("/admin");
+}
+
+// ---- Newsletter -----------------------------------------------------------
+
+export type SendNewsletterState = { ok: boolean; message: string } | null;
+
+export async function sendNewsletter(
+  _prev: SendNewsletterState,
+  fd: FormData
+): Promise<SendNewsletterState> {
+  if (!isResendConfigured()) {
+    return { ok: false, message: "Resend isn't connected yet — add RESEND_API_KEY first." };
+  }
+
+  const subject = str(fd, "subject");
+  const body = str(fd, "body");
+  if (!subject || !body) {
+    return { ok: false, message: "Subject and message can't be empty." };
+  }
+
+  const supabase = await createClient();
+  const { data: subscribers } = await supabase.from("newsletter_subscribers").select("email");
+  const emails = (subscribers ?? []).map((s) => s.email).filter(Boolean);
+  if (emails.length === 0) {
+    return { ok: false, message: "No subscribers to send to yet." };
+  }
+
+  try {
+    await sendBroadcast(subject, body, emails);
+  } catch (err) {
+    return { ok: false, message: err instanceof Error ? err.message : "Send failed." };
+  }
+
+  await supabase
+    .from("email_campaigns")
+    .insert({ subject, body, recipient_count: emails.length });
+
+  revalidatePath("/admin/newsletter");
+  return { ok: true, message: `Sent to ${emails.length} subscriber${emails.length === 1 ? "" : "s"}.` };
 }
 
 // ---- Settings -----------------------------------------------------------

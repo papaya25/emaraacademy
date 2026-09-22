@@ -2627,6 +2627,10 @@ img {
   font-size: 1.6rem;
   margin: 0 0 20px;
 }
+.admin-subheading {
+  font-size: 1.1rem;
+  margin: 32px 0 14px;
+}
 .admin-hint {
   color: var(--ink-faint);
   font-size: 0.85rem;
