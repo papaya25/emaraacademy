@@ -69,6 +69,7 @@ MCP-connected one):
 1. Unpause the project (billing) — it's currently paused, so all Supabase calls fail; every
    admin list page falls back to empty/static-preview state instead of erroring (see below).
 2. Run [`supabase/migrations/002_admin_panel.sql`](supabase/migrations/002_admin_panel.sql)
+   then [`003_classes_location_programs_crud.sql`](supabase/migrations/003_classes_location_programs_crud.sql)
    in the SQL Editor (after `schema.sql`, which should already be applied).
 3. Once auth is turned back on: Authentication → Users → Add User: email
    `admin@emaraacademy.org`, any password. That password is the one login — **one shared
@@ -82,8 +83,10 @@ Save won't persist), Events/Classes/Donations show a plain "nothing yet" state i
 erroring. Confirmed this works — the whole panel is browsable right now even fully paused.
 
 What it manages: Programs/chapters (moved from `lib/programs.ts` into a `programs` table,
-public pages fall back to the static file if the table's empty), Events + Classes
-(full add/edit/delete — events gained `location`/`time`/`presenter` columns), Donations
+public pages fall back to the static file if the table's empty; full add/delete too — chapter
+numbers/Arabic numerals renumber automatically via `lib/arabicNumerals.ts` when the count
+changes), Events + Classes (full add/edit/delete — events gained `location`/`time`/
+`presenter` columns, classes gained `location`), Donations
 (a private ledger — owner logs each gift by hand since Stripe/PayPal aren't live; the
 homepage "raised this month" figure is now computed automatically from this table via the
 public `monthly_donation_total` view, no more manual updates), Messages (contact form
