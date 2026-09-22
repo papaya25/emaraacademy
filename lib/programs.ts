@@ -2,6 +2,7 @@ export type Program = {
   slug: string;
   num: string; // Arabic-Indic chapter numeral
   chapter: string; // Arabic chapter heading
+  category: string; // short label for the bookshelf spine
   title: string;
   tagline: string;
   whatItIs: string;
@@ -12,6 +13,7 @@ export type Program = {
 export const PROGRAMS: Program[] = [
   {
     slug: "new-muslim-education",
+    category: "Education",
     num: "١",
     chapter: "الفصل الأول",
     title: "New Muslim Education",
@@ -46,6 +48,7 @@ export const PROGRAMS: Program[] = [
   },
   {
     slug: "imam-teacher-formation",
+    category: "Formation",
     num: "٢",
     chapter: "الفصل الثاني",
     title: "Imam & Teacher Formation",
@@ -76,6 +79,7 @@ export const PROGRAMS: Program[] = [
   },
   {
     slug: "community-events",
+    category: "Community",
     num: "٣",
     chapter: "الفصل الثالث",
     title: "Community Events",
@@ -106,6 +110,7 @@ export const PROGRAMS: Program[] = [
   },
   {
     slug: "mutual-aid-fund",
+    category: "Support",
     num: "٤",
     chapter: "الفصل الرابع",
     title: "Mutual Aid & Emergency Fund",
@@ -136,6 +141,7 @@ export const PROGRAMS: Program[] = [
   },
   {
     slug: "outdoor-retreats",
+    category: "Retreat",
     num: "٥",
     chapter: "الفصل الخامس",
     title: "Outdoor Retreats",
@@ -162,6 +168,7 @@ export const PROGRAMS: Program[] = [
   },
   {
     slug: "inter-community-exchange",
+    category: "Exchange",
     num: "٦",
     chapter: "الفصل السادس",
     title: "Inter-Community Exchange",

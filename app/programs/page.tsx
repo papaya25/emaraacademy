@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import Rosette from "@/components/Rosette";
-import { PROGRAMS } from "@/lib/programs";
+import ProgramShelf from "@/components/ProgramShelf";
 
 export const metadata: Metadata = {
   title: "Programs — Emara Academy",
@@ -27,17 +27,8 @@ export default function ProgramsPage() {
 
       <section className="contents">
         <div className="wrap">
-          <Reveal className="toc">
-            {PROGRAMS.map((p) => (
-              <Link className="toc-row" href={`/programs/${p.slug}`} key={p.slug}>
-                <span className="toc-num" aria-hidden="true">
-                  {p.num}
-                </span>
-                <span className="toc-title">{p.title}</span>
-                <span className="toc-leader" aria-hidden="true" />
-                <span className="toc-desc">{p.tagline.slice(0, 90)}…</span>
-              </Link>
-            ))}
+          <Reveal>
+            <ProgramShelf />
           </Reveal>
         </div>
       </section>

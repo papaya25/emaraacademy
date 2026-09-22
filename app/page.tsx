@@ -4,6 +4,7 @@ import Rosette from "@/components/Rosette";
 import NewsletterForm from "@/components/NewsletterForm";
 import ImpactStats from "@/components/ImpactStats";
 import DonatePanel from "@/components/DonatePanel";
+import ProgramShelf from "@/components/ProgramShelf";
 
 export default function Home() {
   return (
@@ -27,12 +28,26 @@ export default function Home() {
               <Link className="btn btn-green" href="#give">
                 Support the Work
               </Link>
-              <Link className="btn btn-ghost" href="/new-muslims">
-                Begin Your Journey
+              <Link className="btn btn-ghost" href="#programs">
+                See Our Work
               </Link>
             </div>
             <p className="title-place">Playa del Carmen · Quintana Roo · México</p>
           </div>
+        </div>
+      </section>
+
+      {/* Table of contents — programs */}
+      <section className="contents" id="programs">
+        <div className="wrap">
+          <Reveal className="contents-head">
+            <span className="smallcaps">What We Do</span>
+            <h2>Six chapters of one mission</h2>
+            <p className="contents-lede">Click a book to read what it does.</p>
+          </Reveal>
+          <Reveal>
+            <ProgramShelf />
+          </Reveal>
         </div>
       </section>
 
@@ -73,65 +88,6 @@ export default function Home() {
                 Talk to Someone First
               </a>
             </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* Table of contents — programs */}
-      <section className="contents" id="programs">
-        <div className="wrap">
-          <Reveal className="contents-head">
-            <span className="smallcaps">Table of Contents</span>
-            <h2>Six chapters of one mission</h2>
-          </Reveal>
-          <Reveal className="toc">
-            {[
-              {
-                slug: "new-muslim-education",
-                num: "١",
-                title: "New Muslim Education",
-                desc: "Weekly classes from first prayer to deep study, always with a shared meal",
-              },
-              {
-                slug: "imam-teacher-formation",
-                num: "٢",
-                title: "Imam & Teacher Formation",
-                desc: "Training teachers in the pastoral care converts actually need",
-              },
-              {
-                slug: "community-events",
-                num: "٣",
-                title: "Community Events",
-                desc: "Story nights, Eid gatherings, and tables with room for you",
-              },
-              {
-                slug: "mutual-aid-fund",
-                num: "٤",
-                title: "Mutual Aid Fund",
-                desc: "Quiet, dignified help with food, clothing, and emergencies",
-              },
-              {
-                slug: "outdoor-retreats",
-                num: "٥",
-                title: "Outdoor Retreats",
-                desc: "Camping, sport, and halaqas under open sky",
-              },
-              {
-                slug: "inter-community-exchange",
-                num: "٦",
-                title: "Inter-Community Exchange",
-                desc: "Connecting convert communities across the continent",
-              },
-            ].map((p) => (
-              <Link className="toc-row" href={`/programs/${p.slug}`} key={p.title}>
-                <span className="toc-num" aria-hidden="true">
-                  {p.num}
-                </span>
-                <span className="toc-title">{p.title}</span>
-                <span className="toc-leader" aria-hidden="true" />
-                <span className="toc-desc">{p.desc}</span>
-              </Link>
-            ))}
           </Reveal>
         </div>
       </section>
