@@ -63,7 +63,7 @@ export default function OpengraphImage() {
             display: "flex",
           }}
         >
-          Building Communities That Keep New Muslims
+          Building Communities
         </div>
       </div>
     ),
