@@ -53,19 +53,33 @@ export PATH="$HOME/.local/node22/bin:$PATH"
 ## Tailwind class-name collision gotcha
 Never name a custom CSS class after a Tailwind utility (`contents`, `hidden`, `container`, `flex`, etc.) — Tailwind v4 generates the matching utility class regardless, and it silently merges with your rule on any property your rule doesn't itself set. Bit us once: the homepage/`/programs` section was `className="contents"`, which picked up Tailwind's `.contents { display: contents }` (a real utility) — that collapsed the section to a zero-size box (`getBoundingClientRect()` all zeros), which is what made the "See Our Work" hero button silently fail to scroll to it. Renamed to `.chapters` in [globals.css](app/globals.css), [app/page.tsx](app/page.tsx), [app/programs/page.tsx](app/programs/page.tsx).
 
-## Admin panel (`/admin`) — built 2026-09-22, NOT yet activated
-Code is deployed but unusable until the owner does two things in the Supabase dashboard
-(I don't have write access to this project — it's on the owner's own Supabase account,
-not the MCP-connected one):
-1. Run [`supabase/migrations/002_admin_panel.sql`](supabase/migrations/002_admin_panel.sql)
-   in the SQL Editor (after `schema.sql`, which should already be applied).
-2. Authentication → Users → Add User: email `admin@emaraacademy.org`, any password. That
-   password is the one login — **one shared account, not one per person** (owner's explicit
-   call: "no need for 2 separate accounts just one with one password"). Login screen only
-   asks for the password; the email is hardcoded in `lib/adminAuth.ts`.
+## Admin panel (`/admin`) — built 2026-09-22
+**⚠ The password gate is currently OFF in production.** `ADMIN_AUTH_ENABLED = false` in
+[`proxy.ts`](proxy.ts) — anyone with the URL can open `/admin` right now. This was the
+owner's explicit, temporary call on 2026-09-22 ("for now no need for password we can add it
+later, for now what is important is to see the design") because the Supabase project is
+paused (billing) so there's no working login to test against anyway. **Flip it back to
+`true` before this matters** — i.e. once real data (donor names, contact messages) starts
+landing in it, and definitely before/at the point the owner unpauses Supabase and wants the
+real login working.
 
-Until both are done, `/admin/login` works but sign-in will fail (no such user), and even
-after sign-in the admin pages will error (tables don't exist yet).
+Two things the owner still needs to do in the Supabase dashboard before the panel is fully
+live (I don't have write access — it's on the owner's own Supabase account, not the
+MCP-connected one):
+1. Unpause the project (billing) — it's currently paused, so all Supabase calls fail; every
+   admin list page falls back to empty/static-preview state instead of erroring (see below).
+2. Run [`supabase/migrations/002_admin_panel.sql`](supabase/migrations/002_admin_panel.sql)
+   in the SQL Editor (after `schema.sql`, which should already be applied).
+3. Once auth is turned back on: Authentication → Users → Add User: email
+   `admin@emaraacademy.org`, any password. That password is the one login — **one shared
+   account, not one per person** (owner's explicit call: "no need for 2 separate accounts
+   just one with one password"). Login screen only asks for the password; the email is
+   hardcoded in `lib/adminAuth.ts`.
+
+Admin pages are built to degrade gracefully with Supabase unreachable/paused: Programs
+falls back to `lib/programs.ts`'s static content as an editable preview (with a notice that
+Save won't persist), Events/Classes/Donations show a plain "nothing yet" state instead of
+erroring. Confirmed this works — the whole panel is browsable right now even fully paused.
 
 What it manages: Programs/chapters (moved from `lib/programs.ts` into a `programs` table,
 public pages fall back to the static file if the table's empty), Events + Classes
