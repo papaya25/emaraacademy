@@ -762,7 +762,7 @@ img {
 }
 
 /* ---------- table of contents ---------- */
-.contents {
+.chapters {
   padding-block: clamp(56px, 8vw, 100px);
   background: var(--paper-deep);
   border-block: 1px solid var(--rule);
@@ -783,43 +783,91 @@ img {
 .shelf {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 22px;
+  gap: 32px 26px;
 }
-.book {
-  border: 1px solid var(--rule-gold);
-  background: var(--paper-deep);
-  box-shadow: 0 1px 3px rgba(36, 28, 18, 0.08);
-  transition: box-shadow 0.2s ease, transform 0.2s ease;
+
+/* 3D book: a fixed-height card that flips on its Y axis, cover-side
+   facing forward when closed, an open page facing forward when open.
+   Fixed height means siblings never reflow when one book opens. */
+.book3d {
+  height: 380px;
+  perspective: 1600px;
 }
-.book:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 14px 30px -14px rgba(36, 28, 18, 0.25);
-}
-.book-cover {
+.book3d-flip {
+  position: relative;
   width: 100%;
-  text-align: left;
-  background: none;
+  height: 100%;
+  transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transform-style: preserve-3d;
+}
+.book3d-flip.open {
+  transform: rotateY(180deg);
+}
+.book3d-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Front: the closed cover */
+.book3d-front {
+  display: block;
+  width: 100%;
   border: none;
-  border-left: 4px solid transparent;
+  padding: 0;
   cursor: pointer;
-  padding: 26px 22px;
+  background: var(--paper-deep);
+  box-shadow:
+    3px 3px 0 var(--paper),
+    6px 6px 0 var(--paper-deep),
+    9px 9px 0 var(--paper),
+    0 18px 30px -16px rgba(36, 28, 18, 0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.book3d-front:hover {
+  transform: translate(-2px, -2px);
+  box-shadow:
+    5px 5px 0 var(--paper),
+    8px 8px 0 var(--paper-deep),
+    11px 11px 0 var(--paper),
+    0 22px 34px -16px rgba(36, 28, 18, 0.45);
+}
+.book3d-spine {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 15%;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.15), transparent);
+}
+.book3d-spine::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: currentColor;
+  opacity: 0.85;
+}
+.book3d.a .book3d-spine {
+  color: var(--terracotta);
+}
+.book3d.b .book3d-spine {
+  color: var(--green);
+}
+.book3d.c .book3d-spine {
+  color: var(--gold);
+}
+.book3d-cover {
+  position: absolute;
+  inset: 0 0 0 15%;
   display: flex;
   flex-direction: column;
-  gap: 6px;
-}
-.book.a .book-cover {
-  border-left-color: var(--terracotta);
-}
-.book.b .book-cover {
-  border-left-color: var(--green);
-}
-.book.c .book-cover {
-  border-left-color: var(--gold);
+  gap: 8px;
+  padding: 30px 22px;
+  text-align: left;
 }
 .book-num {
   font-family: var(--font-amiri), serif;
   color: var(--gold-deep);
-  font-size: 0.95rem;
+  font-size: 1rem;
 }
 .book-cat {
   font-family: var(--font-lora), serif;
@@ -832,44 +880,84 @@ img {
 .book-title {
   font-family: var(--font-amiri), serif;
   font-weight: 700;
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   color: var(--ink);
-  line-height: 1.3;
+  line-height: 1.32;
 }
 .book-hint {
-  margin-top: 4px;
-  font-size: 0.74rem;
-  letter-spacing: 0.08em;
+  margin-top: auto;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--terracotta);
 }
-.book-pages {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 0.35s ease;
+
+/* Back: the open page */
+.book3d-back {
+  transform: rotateY(180deg);
+  background: var(--paper);
+  border: 1px solid var(--rule-gold);
+  padding: 26px 24px 22px 34px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
 }
-.book[data-open="true"] .book-pages {
-  grid-template-rows: 1fr;
+.book3d-back::before {
+  /* gutter shadow, like the crease of an open book */
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 14px;
+  background: linear-gradient(90deg, rgba(36, 28, 18, 0.18), transparent);
 }
-.book-pages-inner {
-  overflow: hidden;
+.book3d-back .book-cat {
+  margin-bottom: 0.4em;
 }
-.book-pages-content {
-  padding: 16px 22px 26px;
-  border-top: 1px solid var(--rule);
+.book3d-back-title {
+  font-family: var(--font-amiri), serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--ink);
+  margin-bottom: 0.6em;
 }
-.book-pages-content p {
-  font-size: 0.92rem;
+.book3d-back p {
+  font-size: 0.88rem;
+  line-height: 1.55;
   color: var(--ink-soft);
-  margin-bottom: 0.8em;
+  margin-bottom: 0.9em;
 }
-.book-pages-content a {
+.book3d-back a {
+  margin-top: auto;
   font-size: 0.85rem;
   font-weight: 700;
   color: var(--terracotta);
   text-decoration: none;
   border-bottom: 1px solid rgba(181, 97, 60, 0.4);
+  width: fit-content;
 }
+.book3d-close {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: none;
+  font-size: 1.4rem;
+  line-height: 1;
+  color: var(--ink-faint);
+  cursor: pointer;
+}
+.book3d-close:hover {
+  color: var(--terracotta);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .book3d-flip {
+    transition: none;
+  }
+}
+
 @media (max-width: 900px) {
   .shelf {
     grid-template-columns: repeat(2, 1fr);
@@ -878,6 +966,9 @@ img {
 @media (max-width: 560px) {
   .shelf {
     grid-template-columns: 1fr;
+  }
+  .book3d {
+    height: 320px;
   }
 }
 

@@ -5,6 +5,7 @@ import NewsletterForm from "@/components/NewsletterForm";
 import ImpactStats from "@/components/ImpactStats";
 import DonatePanel from "@/components/DonatePanel";
 import ProgramShelf from "@/components/ProgramShelf";
+import HeroActions from "@/components/HeroActions";
 
 export default function Home() {
   return (
@@ -24,21 +25,14 @@ export default function Home() {
               Latin America — structured learning, real mentorship, and a
               community that holds you through your first years of faith.
             </p>
-            <div className="title-actions">
-              <Link className="btn btn-green" href="#give">
-                Support the Work
-              </Link>
-              <Link className="btn btn-ghost" href="#programs">
-                See Our Work
-              </Link>
-            </div>
+            <HeroActions />
             <p className="title-place">Playa del Carmen · Quintana Roo · México</p>
           </div>
         </div>
       </section>
 
       {/* Table of contents — programs */}
-      <section className="contents" id="programs">
+      <section className="chapters" id="programs">
         <div className="wrap">
           <Reveal className="contents-head">
             <span className="smallcaps">What We Do</span>

@@ -25,7 +25,7 @@ export default function ProgramsPage() {
         </div>
       </section>
 
-      <section className="contents">
+      <section className="chapters">
         <div className="wrap">
           <Reveal>
             <ProgramShelf />
