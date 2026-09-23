@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { PROGRAMS } from "@/lib/programs";
+import { POLICY_LINKS_ENABLED } from "@/lib/policies";
 
 const BASE_URL = "https://emaraacademy.vercel.app";
 
@@ -14,9 +15,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/donations",
     "/faq",
     "/contact",
-    "/privacy-policy",
-    "/donation-policy",
-    "/donation-acceptance-policy",
+    ...(POLICY_LINKS_ENABLED
+      ? ["/privacy-policy", "/donation-policy", "/donation-acceptance-policy"]
+      : []),
   ].map((path) => ({
     url: `${BASE_URL}${path}`,
     lastModified: new Date(),

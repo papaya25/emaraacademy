@@ -3,6 +3,13 @@ import { Link } from "@/i18n/routing";
 import Image from "next/image";
 import Rosette from "./Rosette";
 import ContactDetails from "./ContactDetails";
+import { POLICY_LINKS_ENABLED } from "@/lib/policies";
+
+const POLICIES = [
+  { href: "/privacy-policy", key: "privacy" },
+  { href: "/donation-policy", key: "donationPolicy" },
+  { href: "/donation-acceptance-policy", key: "acceptancePolicy" },
+] as const;
 
 export default function Footer() {
   const t = useTranslations("footer");
@@ -39,9 +46,17 @@ export default function Footer() {
           </div>
           <div className="footer-col" aria-label={t("policies")}>
             <h3>{t("policies")}</h3>
-            <Link href="/privacy-policy">{t("privacy")}</Link>
-            <Link href="/donation-policy">{t("donationPolicy")}</Link>
-            <Link href="/donation-acceptance-policy">{t("acceptancePolicy")}</Link>
+            {POLICIES.map((p) =>
+              POLICY_LINKS_ENABLED ? (
+                <Link key={p.key} href={p.href}>
+                  {t(p.key)}
+                </Link>
+              ) : (
+                <span key={p.key} className="footer-policy-off">
+                  {t(p.key)}
+                </span>
+              )
+            )}
           </div>
         </div>
         <div className="footer-legal">

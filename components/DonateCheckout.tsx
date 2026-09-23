@@ -6,6 +6,7 @@ import { Link } from "@/i18n/routing";
 import { useSearchParams } from "next/navigation";
 import { useSetting } from "@/lib/settings";
 import { useMonthRaised } from "@/lib/donations";
+import { POLICY_LINKS_ENABLED } from "@/lib/policies";
 
 // Fallback until site_settings loads; live goal under key `donation_month`.
 const MONTH_FALLBACK = { goal: 5000 };
@@ -162,7 +163,8 @@ export default function DonateCheckout() {
           )}
           <p className="checkout-secure">
             {tc.rich("secure", {
-              policy: (c) => <Link href="/donation-policy">{c}</Link>,
+              policy: (c) =>
+                POLICY_LINKS_ENABLED ? <Link href="/donation-policy">{c}</Link> : c,
             })}
           </p>
 
