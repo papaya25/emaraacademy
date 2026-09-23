@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Amiri, Lora } from "next/font/google";
+import { getLocale } from "next-intl/server";
 import "./globals.css";
 
 const amiri = Amiri({
@@ -22,13 +23,14 @@ export const metadata: Metadata = {
     "Emara Academy is a school and a family for new Muslims across Latin America — structured learning, real mentorship, and a community that holds you through your first years of faith. Based in Playa del Carmen, Mexico.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getLocale();
   return (
-    <html lang="en">
+    <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
       <body className={`${amiri.variable} ${lora.variable}`}>{children}</body>
     </html>
   );

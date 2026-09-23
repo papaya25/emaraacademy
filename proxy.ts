@@ -1,5 +1,9 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
+import createIntlMiddleware from "next-intl/middleware";
+import { routing } from "@/i18n/routing";
+
+const intlMiddleware = createIntlMiddleware(routing);
 
 // Temporarily off while the Supabase project is paused (billing) and there's
 // no admin login to test against yet — the owner asked to see the admin UI
@@ -8,8 +12,14 @@ import { NextResponse, type NextRequest } from "next/server";
 const ADMIN_AUTH_ENABLED = false;
 
 export async function proxy(request: NextRequest) {
-  if (!ADMIN_AUTH_ENABLED) return NextResponse.next();
+  if (request.nextUrl.pathname.startsWith("/admin")) {
+    if (!ADMIN_AUTH_ENABLED) return NextResponse.next();
+    return adminAuthCheck(request);
+  }
+  return intlMiddleware(request);
+}
 
+async function adminAuthCheck(request: NextRequest) {
   let response = NextResponse.next({ request });
 
   const supabase = createServerClient(
@@ -52,5 +62,5 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/admin/:path*"],
+  matcher: ["/admin/:path*", "/((?!api|_next|_vercel|.*\\..*).*)"],
 };
