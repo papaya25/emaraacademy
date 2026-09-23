@@ -3,7 +3,6 @@ import Reveal from "@/components/Reveal";
 import Rosette from "@/components/Rosette";
 import NewsletterForm from "@/components/NewsletterForm";
 import ImpactStats from "@/components/ImpactStats";
-import DonatePanel from "@/components/DonatePanel";
 import ProgramShelf from "@/components/ProgramShelf";
 import HeroActions from "@/components/HeroActions";
 import WhatsAppLink from "@/components/WhatsAppLink";
@@ -135,24 +134,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Hadith + donate */}
-      <section className="waqf" id="give">
-        <div className="wrap narrow">
-          <Reveal>
-            <p className="ar">إِذَا مَاتَ ابْنُ آدَمَ انْقَطَعَ عَمَلُهُ إِلَّا مِنْ ثَلَاثٍ</p>
-            <p className="waqf-quote">
-              &ldquo;When a person dies, their deeds come to an end — except
-              three: an ongoing charity, knowledge that continues to benefit,
-              and a righteous child who prays for them.&rdquo;
-            </p>
-            <p className="waqf-source">Ṣaḥīḥ Muslim</p>
-          </Reveal>
-          <Reveal>
-            <DonatePanel />
-          </Reveal>
-        </div>
-      </section>
-
       {/* Volunteer */}
       <section className="volunteer">
         <div className="wrap">
@@ -178,36 +159,6 @@ export default function Home() {
             <Link className="btn btn-green" href="/contact">
               Offer Your Time
             </Link>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* Transparency */}
-      <section className="transparency">
-        <div className="wrap">
-          <Reveal>
-            <span className="smallcaps">Transparency</span>
-            <h2>Where your donation goes</h2>
-            <p className="lede">
-              Every donation is tracked under restricted-fund accounting, so you can
-              earmark a donation to a specific program. We publish independently
-              reviewed financial statements and report on spending at least once
-              a year.
-            </p>
-            <div className="fund-list">
-              <span>Education</span>
-              <span>Imam &amp; Teacher Training</span>
-              <span>Community Events</span>
-              <span>Mutual Aid Fund</span>
-              <span>Outdoor Retreats</span>
-              <span>Regional Exchange</span>
-              <span>Digital Presence</span>
-              <span>Core Operations</span>
-            </div>
-            <p className="transparency-cta">
-              Considering a major gift, or have questions before you give?{" "}
-              <Link href="/contact">Talk to us first →</Link>
-            </p>
           </Reveal>
         </div>
       </section>

@@ -127,10 +127,7 @@ export default async function ProgramPage({
           <Reveal className="about-body">
             <p>{program.problem}</p>
             <div className="spread-cta">
-              <Link className="btn btn-green" href="/#give">
-                Make a Donation
-              </Link>
-              <Link className="btn btn-ghost" href="/contact">
+              <Link className="btn btn-green" href="/contact">
                 Ask About It First
               </Link>
             </div>

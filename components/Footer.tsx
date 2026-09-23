@@ -24,10 +24,8 @@ export default function Footer() {
             <Link href="/new-muslims">New Muslims</Link>
             <Link href="/programs">Programs</Link>
             <Link href="/events">Events</Link>
-            <Link href="/donations">Donation Ledger</Link>
             <Link href="/about">Who We Are</Link>
             <Link href="/faq">Questions &amp; Answers</Link>
-            <Link href="/#give">Donate</Link>
           </nav>
           <div className="footer-col" aria-label="Contact">
             <h3>Contact</h3>

@@ -205,8 +205,7 @@ export default function AboutPage() {
               account, and program blueprint in place — and we publish our
               progress openly as we grow. If you want to be part of building
               this,{" "}
-              <Link href="/#give">give</Link>,{" "}
-              <Link href="/contact">volunteer</Link>, or simply{" "}
+              <Link href="/contact">volunteer</Link> or simply{" "}
               <Link href="/contact">write to us</Link>.
             </p>
           </Reveal>

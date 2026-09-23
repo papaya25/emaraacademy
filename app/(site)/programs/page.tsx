@@ -41,15 +41,11 @@ export default function ProgramsPage() {
               Support our work, <em>however you can.</em>
             </h2>
             <p>
-              A donation or your time both keep these six programs running —
-              give financially, or volunteer as a mentor, translator, or event
-              helper.
+              Volunteer as a mentor, translator, or event helper — these six
+              programs run on people who show up.
             </p>
             <div className="spread-cta">
-              <Link className="btn btn-green" href="/#give">
-                Make a Donation
-              </Link>
-              <Link className="btn btn-ghost" href="/contact">
+              <Link className="btn btn-green" href="/contact">
                 Offer Your Time
               </Link>
             </div>

@@ -45,9 +45,6 @@ export default function TopBar() {
               {l.label}
             </Link>
           ))}
-          <Link className="donate-seal" href="/#give" onClick={() => setOpen(false)}>
-            Donate
-          </Link>
           <WhatsAppLink
             className="nav-whatsapp"
             message="Assalamu alaikum — I'd like to talk to someone at Emara Academy."
