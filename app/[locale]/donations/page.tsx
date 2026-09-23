@@ -1,32 +1,35 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/routing";
 import Reveal from "@/components/Reveal";
 import Rosette from "@/components/Rosette";
+import { rich } from "@/lib/rich";
 
-export const metadata: Metadata = {
-  title: "The Donation Ledger — Emara Academy",
-  description:
-    "Every donation to Emara Academy, recorded openly: monthly totals, program allocation, and annual reporting.",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "donations.meta" });
+  return { title: t("title"), description: t("description") };
+}
 
-// TODO: read from Supabase once donations go live — sample rows until then.
-const SAMPLE_MONTHS = [
-  { month: "August 2026", raised: 1850, goal: 5000, note: "Education & first retreat fund" },
-];
+// TODO: read from Supabase once donations go live — sample row until then
+// (its month/note text is in messages under donations.sample).
+const SAMPLE = { raised: 1850, goal: 5000 };
 
 export default function DonationsPage() {
+  const t = useTranslations("donations");
   return (
     <main>
       <section className="about-hero">
         <div className="wrap">
           <p className="ar">سِجِلّ</p>
           <Rosette />
-          <h1>The Donation Ledger</h1>
-          <p>
-            Every donation is recorded, allocated under restricted-fund
-            accounting, and reported openly — this page is where that record
-            lives.
-          </p>
+          <h1>{t("title")}</h1>
+          <p>{t("lede")}</p>
         </div>
       </section>
 
@@ -34,42 +37,33 @@ export default function DonationsPage() {
         <div className="wrap about-grid">
           <Reveal>
             <p className="folio">الأمانة</p>
-            <h2>
-              Openness is part of <em>the trust you place in us.</em>
-            </h2>
+            <h2>{t.rich("heading", rich)}</h2>
           </Reveal>
           <Reveal className="about-body">
-            <p>
-              We are at the very beginning — our first campaigns are being
-              prepared, and live donation tracking will appear here the moment
-              they open. From then on, this ledger will show monthly totals
-              against our goals, how funds were allocated across programs, and
-              our independently reviewed annual statements.
-            </p>
-            <div className="ledger-table" role="table" aria-label="Monthly donations">
+            <p>{t("body")}</p>
+            <div className="ledger-table" role="table" aria-label={t("table")}>
               <div className="ledger-row ledger-head" role="row">
-                <span role="columnheader">Month</span>
-                <span role="columnheader">Raised</span>
-                <span role="columnheader">Goal</span>
-                <span role="columnheader">Directed to</span>
+                <span role="columnheader">{t("month")}</span>
+                <span role="columnheader">{t("raised")}</span>
+                <span role="columnheader">{t("goal")}</span>
+                <span role="columnheader">{t("directedTo")}</span>
               </div>
-              {SAMPLE_MONTHS.map((m) => (
-                <div className="ledger-row" role="row" key={m.month}>
-                  <span role="cell">{m.month}</span>
-                  <span role="cell">${m.raised.toLocaleString()}</span>
-                  <span role="cell">${m.goal.toLocaleString()}</span>
-                  <span role="cell">{m.note}</span>
-                </div>
-              ))}
+              <div className="ledger-row" role="row">
+                <span role="cell">{t("sample.month")}</span>
+                <span role="cell">
+                  <bdi>${SAMPLE.raised.toLocaleString("en-US")}</bdi>
+                </span>
+                <span role="cell">
+                  <bdi>${SAMPLE.goal.toLocaleString("en-US")}</bdi>
+                </span>
+                <span role="cell">{t("sample.note")}</span>
+              </div>
             </div>
-            <p className="ledger-note">
-              Sample figures shown while donations are in test mode — live
-              tracking begins with our first campaign.
-            </p>
+            <p className="ledger-note">{t("note")}</p>
             <p>
-              Questions about a donation, or considering a larger one?{" "}
-              <Link href="/contact">Write to us first</Link> — we answer
-              everything ourselves.
+              {t.rich("questions", {
+                write: (c) => <Link href="/contact">{c}</Link>,
+              })}
             </p>
           </Reveal>
         </div>

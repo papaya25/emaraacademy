@@ -1,16 +1,23 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import Link from "next/link";
+import { useLocale, useTranslations } from "next-intl";
+import { Link } from "@/i18n/routing";
 import { CLASSES, CLASS_CITIES, type ClassInfo } from "@/lib/classes";
+import { CLASSES_AR } from "@/lib/classes.ar";
+import { displayValue } from "@/lib/i18nDisplay";
 import { getSupabase } from "@/lib/supabase";
 import CityFilter from "@/components/CityFilter";
 import WhatsAppLink from "@/components/WhatsAppLink";
 
-const WHATSAPP_MESSAGE = "Assalamu alaikum — I'd like to join a class at Emara Academy.";
+const ALL = CLASS_CITIES[0];
 
 export default function ClassesBoard() {
-  const [city, setCity] = useState(CLASS_CITIES[0]);
+  const t = useTranslations("classes.board");
+  const locale = useLocale();
+  const show = (kind: Parameters<typeof displayValue>[0], v: string) => displayValue(kind, v, locale);
+  const cityLabel = (c: string) => (c === ALL ? t("allCities") : show("city", c));
+  const [city, setCity] = useState<string>(ALL);
 
   // Real classes from Supabase; null = none yet, fall back to the sample list
   const [dbClasses, setDbClasses] = useState<ClassInfo[] | null>(null);
@@ -33,21 +40,29 @@ export default function ClassesBoard() {
   }, []);
 
   const isLive = dbClasses !== null;
-  const list = dbClasses ?? CLASSES;
+  // Sample classes have hand-written Arabic; real (Supabase) classes show
+  // their English text until the admin panel gains Arabic fields.
+  const list = dbClasses ?? (locale === "ar" ? CLASSES.map((c) => ({ ...c, ...CLASSES_AR[c.id] })) : CLASSES);
 
   const cities = useMemo(() => {
     if (!dbClasses) return CLASS_CITIES;
     const unique = [...new Set(dbClasses.map((c) => c.city))];
-    return ["All Cities", ...unique.sort()];
+    return [ALL, ...unique.sort()];
   }, [dbClasses]);
 
   const visible =
-    city === "All Cities" ? list : list.filter((c) => c.city === city);
+    city === ALL ? list : list.filter((c) => c.city === city);
 
   return (
     <div>
       <div className="classes-filter">
-        <CityFilter cities={cities} value={city} label="Filter by city" onChange={setCity} />
+        <CityFilter
+          cities={cities}
+          value={city}
+          label={t("filterCity")}
+          labelOf={cityLabel}
+          onChange={setCity}
+        />
       </div>
 
       <div className="class-list">
@@ -55,18 +70,18 @@ export default function ClassesBoard() {
           <article className="class-card" key={c.id}>
             <div className="class-card-head">
               <span className={`class-status s-${c.status.replace(/\s/g, "").toLowerCase()}`}>
-                {c.status}
+                {show("status", c.status)}
               </span>
-              <span className="class-track">{c.track}</span>
+              <span className="class-track">{show("track", c.track)}</span>
             </div>
             <h3>{c.subject}</h3>
             <p className="class-blurb">{c.blurb}</p>
             <dl className="class-meta">
               <div>
-                <dt>Where</dt>
+                <dt>{t("where")}</dt>
                 <dd>
-                  {c.city}
-                  {c.format === "Online" ? "" : ` · ${c.format}`}
+                  {cityLabel(c.city)}
+                  {c.format === "Online" ? "" : ` · ${show("format", c.format)}`}
                   {c.location && (
                     <>
                       <br />
@@ -76,28 +91,28 @@ export default function ClassesBoard() {
                 </dd>
               </div>
               <div>
-                <dt>When</dt>
+                <dt>{t("when")}</dt>
                 <dd>
-                  {c.day} · {c.time}
+                  {show("day", c.day)} · <bdi>{c.time}</bdi>
                 </dd>
               </div>
               <div>
-                <dt>Language</dt>
-                <dd>{c.language}</dd>
+                <dt>{t("language")}</dt>
+                <dd>{show("language", c.language)}</dd>
               </div>
             </dl>
             <div className="class-actions">
               {c.status === "Full" ? (
                 <Link className="btn btn-ghost class-btn" href="/contact">
-                  Join the Waitlist
+                  {t("waitlist")}
                 </Link>
               ) : (
                 <>
                   <Link className="btn btn-green class-btn" href="/contact">
-                    Reserve a Spot
+                    {t("reserve")}
                   </Link>
-                  <WhatsAppLink className="btn btn-ghost class-btn" message={WHATSAPP_MESSAGE}>
-                    Ask on WhatsApp
+                  <WhatsAppLink className="btn btn-ghost class-btn" message={t("whatsappMessage")}>
+                    {t("askWhatsapp")}
                   </WhatsAppLink>
                 </>
               )}
@@ -108,8 +123,7 @@ export default function ClassesBoard() {
 
       {!isLive && (
         <p className="evb-note">
-          Sample schedule shown while our first season is being planned — real
-          classes, times, and cities will replace it as cohorts open.
+          {t("note")}
         </p>
       )}
     </div>

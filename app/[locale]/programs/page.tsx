@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/routing";
+import { rich } from "@/lib/rich";
 import Reveal from "@/components/Reveal";
 import Rosette from "@/components/Rosette";
 import ProgramShelf from "@/components/ProgramShelf";
@@ -41,7 +42,7 @@ export default function ProgramsPage() {
         <div className="wrap narrow">
           <Reveal>
             <span className="smallcaps">{t("involved.eyebrow")}</span>
-            <h2 dangerouslySetInnerHTML={{ __html: t.raw("involved.title") }} />
+            <h2>{t.rich("involved.title", rich)}</h2>
             <p>{t("involved.lede")}</p>
             <div className="spread-cta">
               <Link className="btn btn-green" href="/contact">

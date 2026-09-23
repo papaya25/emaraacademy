@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/routing";
 import { notFound } from "next/navigation";
+import { rich } from "@/lib/rich";
 import Reveal from "@/components/Reveal";
 import Rosette from "@/components/Rosette";
 import { PROGRAMS, localizeProgram, type Program } from "@/lib/programs";
@@ -89,7 +90,7 @@ export default async function ProgramPage({
         <div className="wrap about-grid">
           <Reveal>
             <p className="folio">{program.num}</p>
-            <h2 dangerouslySetInnerHTML={{ __html: t.raw("whatItIs") }} />
+            <h2>{t.rich("whatItIs", rich)}</h2>
           </Reveal>
           <Reveal className="about-body">
             <p className="dropcap">{program.whatItIs}</p>
@@ -100,7 +101,7 @@ export default async function ProgramPage({
       <section className="about-section">
         <div className="wrap about-grid">
           <Reveal>
-            <h2 dangerouslySetInnerHTML={{ __html: t.raw("looksLike") }} />
+            <h2>{t.rich("looksLike", rich)}</h2>
           </Reveal>
           <Reveal>
             <ul className="values-list">
@@ -123,7 +124,7 @@ export default async function ProgramPage({
       <section className="about-section">
         <div className="wrap about-grid">
           <Reveal>
-            <h2 dangerouslySetInnerHTML={{ __html: t.raw("answers") }} />
+            <h2>{t.rich("answers", rich)}</h2>
           </Reveal>
           <Reveal className="about-body">
             <p>{program.problem}</p>

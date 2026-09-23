@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
+import { Link, useRouter } from "@/i18n/routing";
 import { useSetting } from "@/lib/settings";
 import { useMonthRaised } from "@/lib/donations";
 
@@ -12,15 +12,11 @@ const AMOUNTS = [25, 50, 100, 250];
 const MONTH_FALLBACK = { goal: 5000 };
 const RAISED_FALLBACK = 1850;
 
-type Method = "card" | "paypal" | "bank";
-
-const METHOD_LABELS: Record<Method, string> = {
-  card: "Debit/Credit Card",
-  paypal: "PayPal",
-  bank: "Bank Transfer",
-};
+const METHODS = ["card", "paypal", "bank"] as const;
+type Method = (typeof METHODS)[number];
 
 export default function DonatePanel() {
+  const t = useTranslations("donate");
   const router = useRouter();
   const month = useSetting("donation_month", MONTH_FALLBACK);
   const raised = useMonthRaised(RAISED_FALLBACK);
@@ -39,32 +35,28 @@ export default function DonatePanel() {
 
   return (
     <div className="waqf-panel">
-      <h2>This work is all three at once.</h2>
-      <p className="waqf-panel-lede">
-        A gift to Emara Academy is ongoing charity that funds beneficial
-        knowledge — classes, teachers, and a community that keeps new Muslims in
-        their faith long after you give it.
-      </p>
+      <h2>{t("panel.title")}</h2>
+      <p className="waqf-panel-lede">{t("panel.lede")}</p>
 
       <div className="give-config">
-        <div className="freq-toggle" role="group" aria-label="Donation frequency">
+        <div className="freq-toggle" role="group" aria-label={t("panel.frequency")}>
           <button
             type="button"
             className={freq === "once" ? "active" : ""}
             onClick={() => setFreq("once")}
           >
-            Give Once
+            {t("panel.once")}
           </button>
           <button
             type="button"
             className={freq === "monthly" ? "active" : ""}
             onClick={() => setFreq("monthly")}
           >
-            Give Monthly
+            {t("panel.monthly")}
           </button>
         </div>
 
-        <div className="amount-grid" role="group" aria-label="Donation amount">
+        <div className="amount-grid" role="group" aria-label={t("panel.amount")}>
           {AMOUNTS.map((a) => (
             <button
               key={a}
@@ -75,37 +67,37 @@ export default function DonatePanel() {
                 setCustom("");
               }}
             >
-              ${a}
+              <bdi>${a}</bdi>
             </button>
           ))}
           <div className={`amount-custom ${custom ? "active" : ""}`}>
             <span aria-hidden="true">$</span>
             <label className="sr-only" htmlFor="give-custom">
-              Custom amount
+              {t("panel.custom")}
             </label>
             <input
               id="give-custom"
               type="number"
               min={1}
-              placeholder="Other"
+              placeholder={t("panel.other")}
               value={custom}
               onChange={(e) => setCustom(e.target.value)}
             />
           </div>
         </div>
 
-        <div className="method-row" role="group" aria-label="Payment method">
-          {(Object.keys(METHOD_LABELS) as Method[]).map((m) => (
+        <div className="method-row" role="group" aria-label={t("panel.method")}>
+          {METHODS.map((m) => (
             <button
               key={m}
               type="button"
               className={`method-btn ${method === m ? "active" : ""}`}
               onClick={() => setMethod(m)}
-              aria-label={METHOD_LABELS[m]}
+              aria-label={t(`methods.${m}`)}
             >
-              <span className="m-full">{METHOD_LABELS[m]}</span>
+              <span className="m-full">{t(`methods.${m}`)}</span>
               <span className="m-short" aria-hidden="true">
-                {m === "card" ? "Card" : m === "paypal" ? "PayPal" : "Bank"}
+                {t(`methodsShort.${m}`)}
               </span>
             </button>
           ))}
@@ -118,13 +110,12 @@ export default function DonatePanel() {
           onClick={donateNow}
         >
           {validAmount
-            ? `Donate $${effective}${freq === "monthly" ? " Monthly" : " Now"}`
-            : "Choose an amount"}
+            ? t(freq === "monthly" ? "panel.donateMonthly" : "panel.donateNow", {
+                amount: String(effective),
+              })
+            : t("panel.choose")}
         </button>
-        <p className="give-flow-note">
-          One more step — your details and secure payment, under a minute. We
-          never see or store your card information.
-        </p>
+        <p className="give-flow-note">{t("panel.note")}</p>
 
         <div className="give-progress">
           <div
@@ -133,7 +124,7 @@ export default function DonatePanel() {
             aria-valuenow={raised}
             aria-valuemin={0}
             aria-valuemax={month.goal}
-            aria-label="Raised this month toward goal"
+            aria-label={t("progressLabel")}
           >
             <span
               style={{
@@ -142,9 +133,11 @@ export default function DonatePanel() {
             />
           </div>
           <p>
-            ${raised.toLocaleString()} raised this month of our $
-            {month.goal.toLocaleString()} goal ·{" "}
-            <Link href="/donations">See all donations</Link>
+            {t("panel.progress", {
+              raised: raised.toLocaleString("en-US"),
+              goal: month.goal.toLocaleString("en-US"),
+            })}{" "}
+            · <Link href="/donations">{t("seeAll")}</Link>
           </p>
         </div>
       </div>

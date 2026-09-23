@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/routing";
+import { rich } from "@/lib/rich";
 import Reveal from "@/components/Reveal";
 import Rosette from "@/components/Rosette";
 import NewsletterForm from "@/components/NewsletterForm";
@@ -34,7 +35,7 @@ export default function Home() {
             <span className="corner" />
             <p className="ar">عِمَارَة</p>
             <Rosette />
-            <h1 dangerouslySetInnerHTML={{ __html: t.raw("hero.title") }} />
+            <h1>{t.rich("hero.title", rich)}</h1>
             <p className="title-sub">{t("hero.subtitle")}</p>
             <HeroActions />
             <p className="title-place">{t("hero.place")}</p>
@@ -61,7 +62,7 @@ export default function Home() {
         <div className="wrap spread-grid">
           <Reveal>
             <p className="folio">{t("newMuslims.folio")}</p>
-            <h2 dangerouslySetInnerHTML={{ __html: t.raw("newMuslims.title") }} />
+            <h2>{t.rich("newMuslims.title", rich)}</h2>
           </Reveal>
           <Reveal className="lede-col">
             <p className="dropcap">{t("newMuslims.p1")}</p>
@@ -150,7 +151,7 @@ export default function Home() {
         <div className="wrap narrow">
           <Reveal>
             <span className="smallcaps">{t("contactCta.eyebrow")}</span>
-            <h2 dangerouslySetInnerHTML={{ __html: t.raw("contactCta.title") }} />
+            <h2>{t.rich("contactCta.title", rich)}</h2>
             <p>{t("contactCta.lede")}</p>
             <Link className="btn btn-green" href="/contact">
               {t("contactCta.cta")}

@@ -1,27 +1,32 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/routing";
 import Reveal from "@/components/Reveal";
 import Rosette from "@/components/Rosette";
 import ClassesBoard from "@/components/ClassesBoard";
+import { rich } from "@/lib/rich";
 
-export const metadata: Metadata = {
-  title: "Join a Class — Emara Academy",
-  description:
-    "Free weekly classes for new Muslims in Spanish and Portuguese — from your first prayer to deep study. Pick your city and reserve a spot.",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "classes.meta" });
+  return { title: t("title"), description: t("description") };
+}
 
 export default function ClassesPage() {
+  const t = useTranslations("classes");
   return (
     <main>
       <section className="about-hero">
         <div className="wrap">
           <p className="ar">الدروس</p>
           <Rosette />
-          <h1>Join a Class</h1>
-          <p>
-            Free, weekly, and starting from absolute zero — pick your city,
-            find your class, and we&rsquo;ll save you a seat at the table.
-          </p>
+          <h1>{t("title")}</h1>
+          <p>{t("lede")}</p>
         </div>
       </section>
 
@@ -36,16 +41,11 @@ export default function ClassesPage() {
       <section className="contact-cta">
         <div className="wrap narrow">
           <Reveal>
-            <span className="smallcaps">Not Sure Which One</span>
-            <h2>
-              Tell us where you are — <em>we&rsquo;ll suggest the right start.</em>
-            </h2>
-            <p>
-              One message with your city and your situation is enough. No
-              commitment, no pressure — just an honest recommendation.
-            </p>
+            <span className="smallcaps">{t("cta.eyebrow")}</span>
+            <h2>{t.rich("cta.title", rich)}</h2>
+            <p>{t("cta.lede")}</p>
             <Link className="btn btn-green" href="/contact">
-              Write to Us
+              {t("cta.button")}
             </Link>
           </Reveal>
         </div>

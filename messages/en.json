@@ -18,7 +18,10 @@
     "events": "Events",
     "about": "Who We Are",
     "contact": "Contact",
-    "whatsapp": "WhatsApp Us"
+    "whatsapp": "WhatsApp Us",
+    "changeLanguage": "Change language",
+    "languages": "Languages",
+    "soon": "soon"
   },
   "footer": {
     "tagline": "Building communities that keep new Muslims — education, mentorship, and belonging across Latin America.",
@@ -129,5 +132,510 @@
     "toc": "Table of Contents",
     "prev": "← {title}",
     "next": "{title} →"
+  },
+  "about": {
+    "meta": {
+      "title": "Who We Are — Emara Academy",
+      "description": "The story of Emara Academy: why we exist, what the name means, the work we do for new Muslims across Latin America, and where we're going."
+    },
+    "title": "Who We Are",
+    "lede": "A legally incorporated non-profit born in Playa del Carmen, México, with one conviction: no one who finds Islam should have to keep it alone.",
+    "story": {
+      "title": "Our story begins with a <em>pattern we couldn’t ignore.</em>",
+      "p1": "Someone says the shahada at a mosque in Quintana Roo. Everyone embraces them. And within weeks — they stop coming. Not because they stopped believing, but because nobody checked in, nobody taught them to pray in a way they could follow, nobody invited them to eat, and nobody was there when a family member mocked them for converting.",
+      "p2": "We watched this happen, again and again, and heard the same story echoed by imams and convert communities across Latin America. The region is one of the fastest-growing frontiers for conversion to Islam — yet almost none of that growth is captured by lasting community. Da’wah, as usually practiced, optimizes for the moment of conversion. Almost nothing is built for the year after.",
+      "p3": "So we built the thing that was missing: an academy for that year, and every year that follows."
+    },
+    "name": {
+      "title": "Why <em>“Emara”</em>",
+      "p1": "Our name comes from the Arabic <em>ʿimārah</em> (عِمَارَة) — cultivation, construction, the act of making a place flourish and inhabited. The Qur’anic root speaks of building something that lasts and filling it with life.",
+      "p2": "We chose it because our mission is not to plant a single seed of conversion and walk away. It is to build — classes, friendships, safety nets, and celebrations — until every person who accepts Islam in Latin America finds a community already standing around them."
+    },
+    "work": {
+      "title": "The work, in one sentence: <em>we help new Muslims stay.</em>",
+      "p1": "Everything we run is aimed at the moments converts most often disengage: right after conversion, during their first Ramadan, during family conflict, in moments of material need, and in the slow erosion of having no one to share the journey with.",
+      "p2": "Weekly education in Spanish and Portuguese. Imams and teachers trained specifically in the care converts need. Community events built around belonging. A confidential mutual aid fund. Outdoor retreats. And exchanges that connect convert communities across the continent — so no city has to build alone.",
+      "link": "See all six programs →"
+    },
+    "values": {
+      "title": "What we believe about the work",
+      "items": [
+        {
+          "title": "People before numbers",
+          "desc": "One retained new Muslim matters more to us than ten uncontacted shahadas."
+        },
+        {
+          "title": "Consistency over charisma",
+          "desc": "Programs are built as systems, not personalities — they must survive any one person leaving."
+        },
+        {
+          "title": "Dignity in giving",
+          "desc": "Material support is delivered without humiliation, judgment, or public exposure of need."
+        },
+        {
+          "title": "Local language, local culture",
+          "desc": "Everything is delivered in Spanish and Portuguese, adapted to local custom — not imported wholesale."
+        },
+        {
+          "title": "Open doors, not closed circles",
+          "desc": "Converts of any school of thought and any stage of practice are welcome."
+        }
+      ]
+    },
+    "future": {
+      "title": "Where we’re going: <em>city by city, country by country.</em>",
+      "p1": "We start by proving the full model in Playa del Carmen — education, teacher formation, events, mutual aid, and retreats. From there, the plan extends through partner mosques to Cancún, Mérida, Mexico City, and Guadalajara, then to convert communities across Latin America: Colombia, Argentina, Brazil, Chile, Costa Rica, Panama.",
+      "p2": "The goal is a network — a regional family of communities sharing one curriculum, trained teachers, and an annual gathering — so that a person who converts anywhere on the continent is never more than one introduction away from belonging.",
+      "p3": "We are a young organization with our legal foundation, bank account, and program blueprint in place — and we publish our progress openly as we grow. If you want to be part of building this, <volunteer>volunteer</volunteer> or simply <write>write to us</write>."
+    }
+  },
+  "newMuslims": {
+    "meta": {
+      "title": "New to Islam — Emara Academy",
+      "description": "You said the shahada — here's what happens next. Free weekly classes in Spanish and Portuguese, a mentor in your first two weeks, and a community that already knows your name."
+    },
+    "title": "New to Islam",
+    "lede": "You’re not late, you’re not behind, and you don’t have to figure any of this out alone. Here is exactly what happens next.",
+    "steps": {
+      "title": "What happens <em>from your first day</em>",
+      "items": [
+        {
+          "title": "Day one — someone talks with you",
+          "desc": "No forms, no test, no pressure. Just a conversation about where you are, what you’re wondering, and what you need — in Spanish, Portuguese, or English."
+        },
+        {
+          "title": "Your first two weeks — a mentor",
+          "desc": "You’re paired with an established Muslim — a big brother or sister for your first year — who checks on you, answers the small questions, and sits with you at your first gathering."
+        },
+        {
+          "title": "Every week — a class and a meal",
+          "desc": "Weekly classes that start from absolute zero: how to pray, how to fast, what to believe — always around a shared meal, because this is a family, not a lecture hall."
+        },
+        {
+          "title": "When life gets hard — quiet help",
+          "desc": "If conversion costs you a job, family support, or stability, our mutual aid fund helps with food, clothing, and emergencies — confidentially, with dignity, no gossip."
+        }
+      ]
+    },
+    "asYouAre": {
+      "title": "Come <em>as you are</em>",
+      "p1": "No Arabic needed. No cost, ever. No one checks how much you practice, which school of thought you lean toward, or whether you’ve even said the shahada yet — the curious are as welcome as the convinced.",
+      "p2": "And if you carry the heavier things — a family that doesn’t understand, doubts you’re ashamed of, loneliness you didn’t expect — you will be surrounded by people who carried exactly the same things, and stayed. That is the whole point of this community: nobody walks alone.",
+      "faqLink": "Read honest answers to common questions →"
+    },
+    "cta": {
+      "eyebrow": "Whenever You’re Ready",
+      "title": "One message is all it takes to <em>stop doing this alone.</em>",
+      "lede": "Tell us your city and where you are on the journey — we’ll take it from there."
+    }
+  },
+  "faq": {
+    "meta": {
+      "title": "Questions & Answers — Emara Academy",
+      "description": "Honest answers for new Muslims and for donors: what classes are like, what it costs, where donations go, and how to get involved."
+    },
+    "title": "Questions & Answers",
+    "lede": "Honest answers, in plain language — for people finding their way into Islam, and for people deciding whether to trust us with their donation.",
+    "newMuslims": {
+      "title": "For <em>new Muslims</em>",
+      "items": [
+        {
+          "q": "Do I need to speak Arabic?",
+          "a": "No. Every class is taught in Spanish and Portuguese, starting from zero. Arabic reading is something we teach you, gently, over time — it is never a requirement to walk in the door."
+        },
+        {
+          "q": "Does any of this cost money?",
+          "a": "No. Classes, community nights, mentorship, and the shared meals are free, always. Our programs are funded by donations precisely so that a new Muslim never has to pay to learn their religion."
+        },
+        {
+          "q": "I converted alone and there’s no mosque near me. Can I still join?",
+          "a": "Yes. Write to us wherever you are — we’ll connect you with the nearest community we know, and our online materials and check-ins are built exactly for people in your situation. You are the reason we exist."
+        },
+        {
+          "q": "I’m not Muslim yet — I’m just curious. Is it okay to come?",
+          "a": "Completely. There is no pressure, no one will push you toward a decision, and your questions are welcome for as long as you have them."
+        },
+        {
+          "q": "What if my family doesn’t accept my conversion?",
+          "a": "You are not alone in this — family tension is one of the most common things new Muslims carry, and our teachers are trained for it. We’ll help you navigate those relationships with patience and kindness, and our community becomes a second family alongside yours, not a replacement for it."
+        },
+        {
+          "q": "Which school of thought do you follow?",
+          "a": "Our doors are open to converts of every school of thought and every stage of practice. Classes teach the shared foundations, and our teachers will honestly present differences where they exist, without sectarianism."
+        },
+        {
+          "q": "What is the first class actually like?",
+          "a": "A small group, a teacher who knows your name, and a meal shared together. You won’t be tested, singled out, or asked to know anything in advance. Most people say the surprise isn’t the lesson — it’s realizing they were expected, and welcome."
+        }
+      ]
+    },
+    "donors": {
+      "title": "For <em>donors</em>",
+      "items": [
+        {
+          "q": "Is my donation tax-deductible?",
+          "a": "Emara Academy is a legally incorporated non-profit association in Mexico. Our tax-receipt registrations are in progress — write to us before you give and we’ll tell you exactly what documentation we can provide for your situation and country."
+        },
+        {
+          "q": "Can I give toward a specific program?",
+          "a": "Write to us before you give and tell us which program — education, teacher formation, events, the mutual aid fund, retreats, or regional exchange — you’d like your gift to support, and we’ll make sure it’s applied there."
+        },
+        {
+          "q": "How do I know how the money is spent?",
+          "a": "We publish our donation ledger openly, report spending at least annually, and share independently reviewed financial statements with donors. If you want more detail than we publish, ask — we answer everything ourselves."
+        },
+        {
+          "q": "Can I donate from outside Mexico?",
+          "a": "Yes. Card and PayPal donations work internationally, and we can provide transfer details for larger international gifts — write to us and we’ll make it simple."
+        },
+        {
+          "q": "Is online payment secure?",
+          "a": "Payments are processed by Stripe and PayPal — we never see or store your card details. For bank transfers, details come directly from us with a reference code so your donation is tracked correctly."
+        },
+        {
+          "q": "I can’t give money. Is there another way to help?",
+          "a": "Yes, and it matters just as much: class assistants, mentors for new converts, translators, event helpers, and hands for retreats and mutual-aid deliveries. Tell us what you’re good at and how much time you have."
+        }
+      ]
+    },
+    "cta": {
+      "eyebrow": "Still Wondering",
+      "title": "Your question isn’t here? <em>Ask it anyway.</em>",
+      "lede": "Write to us about anything — joining, giving, volunteering, or your own first steps. A real person reads and answers every letter.",
+      "button": "Write to Us"
+    }
+  },
+  "contact": {
+    "meta": {
+      "title": "Contact — Emara Academy",
+      "description": "Write to Emara Academy about joining a class, donating, or volunteering — every letter is read by a person, and every question gets a real reply."
+    },
+    "title": "Contact",
+    "lede": "Whether you’re taking your first steps in Islam, thinking about a donation, or offering your time — write to us. We answer everything ourselves.",
+    "form": {
+      "eyebrow": "Correspondence",
+      "title": "Every letter is read by a person, <em>not a system.</em>",
+      "intro": "A question about a class, a donation, or your own first steps in Islam — write to us, or reach us directly:",
+      "whatsapp": "WhatsApp:",
+      "promise": "No pressure, and no mailing list you didn’t ask for — just a real reply.",
+      "sentTitle": "Your message is on its way.",
+      "sentBody": "We’ll reply as soon as we can — usually within a day or two.",
+      "writingAbout": "I’m writing about",
+      "reasonGroup": "Reason for writing",
+      "reasons": {
+        "class": "Joining a Class",
+        "donating": "Donating",
+        "volunteering": "Volunteering",
+        "other": "Something Else"
+      },
+      "name": "Name",
+      "email": "Email",
+      "message": "Your message",
+      "sending": "Sending…",
+      "send": "Send Letter",
+      "error": "Something went wrong sending your letter — please try again in a moment, or reach us on WhatsApp or email above instead."
+    }
+  },
+  "notFound": {
+    "title": "This Page Wandered Off",
+    "lede": "The page you’re looking for doesn’t exist — but the rest of the book is right here.",
+    "home": "Back to the Title Page",
+    "programs": "See the Programs"
+  },
+  "events": {
+    "meta": {
+      "title": "Events & Lessons — Emara Academy",
+      "description": "Classes, community nights, retreats, and Eid gatherings for new Muslims across Latin America — see what's on and when."
+    },
+    "title": "Events & Lessons",
+    "lede": "Classes, gatherings, and retreats run on a steady rhythm, so you always know when to show up — pick your city and browse the calendar.",
+    "cta": {
+      "title": "Want a seat at any of these? <em>Just write.</em>",
+      "lede": "Every class and gathering is free, and nobody checks how much you already know. Tell us which city you’re in and what you’d like to join — we’ll save you a place and someone will be waiting to welcome you.",
+      "reserve": "Reserve a Spot",
+      "programs": "See the Programs"
+    },
+    "board": {
+      "filterCity": "Filter by city",
+      "allCities": "All Cities",
+      "legend": "Event types",
+      "types": {
+        "weekly": "Weekly",
+        "monthly": "Monthly",
+        "quarterly": "Quarterly",
+        "special": "Eid & Islamic dates"
+      },
+      "months": [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+      ],
+      "dow": [
+        "Sun",
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri",
+        "Sat"
+      ],
+      "prevMonth": "Previous month",
+      "nextMonth": "Next month",
+      "prevArrow": "‹",
+      "nextArrow": "›",
+      "monthTitle": "{month} {year}",
+      "dayTitle": "{month} {day}, {year}",
+      "cellLabel": "{day} {month}: {titles}",
+      "with": "With {name}",
+      "empty": "Hover or tap a marked day to see that day’s events.",
+      "noteLive": "Dates for Islamic occasions are approximate and confirmed by moon sighting.",
+      "noteSample": "Sample schedule shown while our first season is being planned — dates for Islamic occasions are approximate and confirmed by moon sighting.",
+      "sample": {
+        "classTitle": "New Muslim Class",
+        "classMeta": "7:00 PM · Foundations track",
+        "nightTitle": "Community Night",
+        "nightMeta": "6:30 PM · Story night & shared meal",
+        "retreatTitle": "Outdoor Retreat",
+        "retreatMeta": "Weekend camping, sport & halaqas",
+        "approx": "Approximate — confirmed by moon sighting",
+        "ramadan": "Ramadan begins",
+        "eidFitr": "Eid al-Fitr",
+        "eidAdha": "Eid al-Adha"
+      }
+    }
+  },
+  "classes": {
+    "meta": {
+      "title": "Join a Class — Emara Academy",
+      "description": "Free weekly classes for new Muslims in Spanish and Portuguese — from your first prayer to deep study. Pick your city and reserve a spot."
+    },
+    "title": "Join a Class",
+    "lede": "Free, weekly, and starting from absolute zero — pick your city, find your class, and we’ll save you a seat at the table.",
+    "cta": {
+      "eyebrow": "Not Sure Which One",
+      "title": "Tell us where you are — <em>we’ll suggest the right start.</em>",
+      "lede": "One message with your city and your situation is enough. No commitment, no pressure — just an honest recommendation.",
+      "button": "Write to Us"
+    },
+    "board": {
+      "filterCity": "Filter by city",
+      "allCities": "All Cities",
+      "where": "Where",
+      "when": "When",
+      "language": "Language",
+      "waitlist": "Join the Waitlist",
+      "reserve": "Reserve a Spot",
+      "askWhatsapp": "Ask on WhatsApp",
+      "whatsappMessage": "Assalamu alaikum — I'd like to join a class at Emara Academy.",
+      "note": "Sample schedule shown while our first season is being planned — real classes, times, and cities will replace it as cohorts open."
+    }
+  },
+  "donate": {
+    "meta": {
+      "title": "Make a Donation — Emara Academy",
+      "description": "Support Emara Academy with a one-time or monthly donation — secure, fast, and recorded in our open ledger."
+    },
+    "title": "Make a Donation",
+    "checkoutTitle": "Complete Your Donation",
+    "hadith": "“When a person dies, their deeds come to an end — except three: an ongoing charity, knowledge that continues to benefit, and a righteous child who prays for them.”",
+    "hadithSource": "Ṣaḥīḥ Muslim",
+    "methods": {
+      "card": "Debit/Credit Card",
+      "paypal": "PayPal",
+      "bank": "Bank Transfer"
+    },
+    "methodsShort": {
+      "card": "Card",
+      "paypal": "PayPal",
+      "bank": "Bank"
+    },
+    "progressLabel": "Raised this month toward goal",
+    "seeAll": "See all donations",
+    "panel": {
+      "title": "This work is all three at once.",
+      "lede": "A donation to Emara Academy is ongoing charity that funds beneficial knowledge — classes, teachers, and a community that keeps new Muslims in their faith long after you give it.",
+      "frequency": "Donation frequency",
+      "once": "Give Once",
+      "monthly": "Give Monthly",
+      "amount": "Donation amount",
+      "custom": "Custom amount",
+      "other": "Other",
+      "method": "Payment method",
+      "donateNow": "Donate ${amount} Now",
+      "donateMonthly": "Donate ${amount} Monthly",
+      "choose": "Choose an amount",
+      "note": "One more step — your details and secure payment, under a minute. We never see or store your card information.",
+      "progress": "${raised} raised this month of our ${goal} goal"
+    },
+    "checkout": {
+      "steps": "Donation steps",
+      "stepAmount": "Amount",
+      "stepDetails": "Your Details",
+      "stepConfirm": "Confirmation",
+      "yourDonation": "Your donation",
+      "everyMonth": "every month",
+      "oneTime": "one time",
+      "via": "via {method}",
+      "change": "Change",
+      "name": "Name",
+      "nameHidden": "(hidden from the ledger)",
+      "anonymous": "Anonymous",
+      "email": "Email — for your receipt",
+      "keepAnonymous": "Keep my donation anonymous",
+      "payment": "Payment",
+      "cardPlaceholder": "Secure card fields (Stripe) will appear here — currently in <strong>test mode</strong>, so nothing can be charged.",
+      "paypalPlaceholder": "The PayPal button will appear here — currently in <strong>test mode</strong>, so nothing can be charged.",
+      "bankPlaceholder": "Our account details (bank, CLABE, and a reference code that ties your transfer to your donation) will be shown here. Until they’re published, <write>write to us</write> and we’ll send them directly.",
+      "confirmOnce": "Confirm ${amount} Donation",
+      "confirmMonthly": "Confirm ${amount} Monthly Donation",
+      "secure": "Payments processed by Stripe and PayPal — we never see or store your card details. Donations are governed by our <policy>Donation & Refund Policy</policy>.",
+      "progress": "Your donation joins ${raised} raised this month toward our ${goal} goal",
+      "successTitle": "May it be written among your ongoing deeds.",
+      "successBody": "This was a <strong>test-mode preview</strong> — no money moved. When payments go live, this page will confirm your donation, email a receipt to {email}, and record the amount in our public ledger.",
+      "you": "you",
+      "ledger": "See the Donation Ledger",
+      "home": "Back to Home"
+    }
+  },
+  "donations": {
+    "meta": {
+      "title": "The Donation Ledger — Emara Academy",
+      "description": "Every donation to Emara Academy, recorded openly: monthly totals, program allocation, and annual reporting."
+    },
+    "title": "The Donation Ledger",
+    "lede": "Every donation is recorded, allocated under restricted-fund accounting, and reported openly — this page is where that record lives.",
+    "heading": "Openness is part of <em>the trust you place in us.</em>",
+    "body": "We are at the very beginning — our first campaigns are being prepared, and live donation tracking will appear here the moment they open. From then on, this ledger will show monthly totals against our goals, how funds were allocated across programs, and our independently reviewed annual statements.",
+    "table": "Monthly donations",
+    "month": "Month",
+    "raised": "Raised",
+    "goal": "Goal",
+    "directedTo": "Directed to",
+    "sample": {
+      "month": "August 2026",
+      "note": "Education & first retreat fund"
+    },
+    "note": "Sample figures shown while donations are in test mode — live tracking begins with our first campaign.",
+    "questions": "Questions about a donation, or considering a larger one? <write>Write to us first</write> — we answer everything ourselves."
+  },
+  "policies": {
+    "common": {
+      "questions": "Questions about this policy? <write>Write to us</write> — a real person answers.",
+      "updated": "Draft published August 2026 — under review by our legal advisors; wording may be refined before launch."
+    },
+    "privacy": {
+      "meta": {
+        "title": "Privacy Policy — Emara Academy",
+        "description": "What Emara Academy collects, why, and how it's protected — in plain language."
+      },
+      "title": "Privacy Policy",
+      "intro": "What we collect, why we collect it, and how we protect it — in plain language, because privacy policies should be readable.",
+      "sections": [
+        {
+          "heading": "What we collect",
+          "paragraphs": [
+            "When you write to us, we keep your name, email, and message so we can reply. When you subscribe to the newsletter, we keep your email address. When you donate, our payment processors (Stripe and PayPal) handle your payment details — we never see or store card numbers — and we keep the donation record: amount, date, and the name or ‘anonymous’ you chose.",
+            "We do not collect anything else, and we do not buy, sell, or trade personal information — ever."
+          ]
+        },
+        {
+          "heading": "How we use it",
+          "paragraphs": [
+            "To answer your messages, send the newsletter you asked for, issue donation receipts, and publish honest aggregate reporting (never individual details without your consent).",
+            "For new Muslims who join our programs, discretion is a religious duty for us, not just a legal one: your participation, questions, and any help you receive from the mutual aid fund are treated as confidential."
+          ]
+        },
+        {
+          "heading": "Who else touches your data",
+          "paragraphs": [
+            "Our website runs on Vercel; our database is hosted by Supabase; payments are processed by Stripe and PayPal; newsletter emails are sent through Resend. Each processes only what it needs to provide its service, under its own security and privacy commitments."
+          ]
+        },
+        {
+          "heading": "Your rights",
+          "paragraphs": [
+            "Ask us any time what we hold about you, ask us to correct it, or ask us to delete it — including unsubscribing from the newsletter, which every email lets you do in one click. Write to info@emaraacademy.org and it will be done."
+          ]
+        }
+      ]
+    },
+    "donation": {
+      "meta": {
+        "title": "Donation & Refund Policy — Emara Academy",
+        "description": "How donations to Emara Academy are handled, recorded, and — when something goes wrong — refunded."
+      },
+      "title": "Donation & Refund Policy",
+      "intro": "How your donation is handled from the moment you give it — and what happens if something goes wrong.",
+      "sections": [
+        {
+          "heading": "How donations are handled",
+          "paragraphs": [
+            "Every donation is recorded under restricted-fund accounting. If you direct your donation to a specific program, it is spent inside that program. Undirected donations go where the need is greatest, and all spending is reported in our public ledger and annual statements."
+          ]
+        },
+        {
+          "heading": "Recurring donations",
+          "paragraphs": [
+            "Monthly donations can be paused or cancelled at any time, instantly, by writing to us — no questions, no retention tactics. Cancellation stops all future charges; already-processed months are handled under the refund terms below."
+          ]
+        },
+        {
+          "heading": "Refunds",
+          "paragraphs": [
+            "Donations are generally final — that’s what lets us commit funds to programs with confidence. But mistakes deserve fixing: if you were charged in error, charged twice, gave the wrong amount, or a recurring donation ran after you cancelled, write to us within 30 days and we will refund it to your original payment method, promptly and without argument.",
+            "For any refund request, contact info@emaraacademy.org with the date and amount — please don’t open a dispute with your bank first, as that freezes funds for everyone and takes far longer than we do."
+          ]
+        },
+        {
+          "heading": "Receipts",
+          "paragraphs": [
+            "Every donation receives an emailed receipt. Documentation for tax purposes depends on your country and our registration status — write to us before giving if this matters to your situation, and we’ll tell you honestly what we can and cannot provide."
+          ]
+        }
+      ]
+    },
+    "acceptance": {
+      "meta": {
+        "title": "Donation Acceptance Policy — Emara Academy",
+        "description": "What donations Emara Academy accepts, how directed gifts are honored, and when we say no."
+      },
+      "title": "Donation Acceptance Policy",
+      "intro": "What we accept, how directed donations are honored, and — because integrity sometimes requires it — when we say no.",
+      "sections": [
+        {
+          "heading": "What we accept",
+          "paragraphs": [
+            "Monetary donations by card, PayPal, and bank transfer, one-time or recurring, from individuals and organizations. In-kind donations (food, clothing, equipment, professional services) are welcomed by prior arrangement — write to us first so we can confirm the donation matches a real program need."
+          ]
+        },
+        {
+          "heading": "Directed donations",
+          "paragraphs": [
+            "You may direct a donation to any program — education, teacher formation, events, the mutual aid fund, retreats, or regional exchange — and restricted-fund accounting keeps it there. If a directed program becomes impossible to deliver, we will contact you to redirect or refund your donation rather than silently repurposing it."
+          ]
+        },
+        {
+          "heading": "When we decline",
+          "paragraphs": [
+            "We decline donations that come with conditions incompatible with our mission or values, donations we believe derive from unlawful activity, and donations whose acceptance would compromise our independence, the dignity of the people we serve, or our standing as a religious non-profit. Declining is rare — but the option protects everything else this organization stands for."
+          ]
+        },
+        {
+          "heading": "Anonymity and recognition",
+          "paragraphs": [
+            "Donors may give anonymously, and anonymity is honored in our public ledger and reporting. We do not sell naming rights, and recognition of major supporters happens only with their explicit consent."
+          ]
+        }
+      ]
+    }
   }
 }

@@ -1,24 +1,23 @@
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/routing";
 import Rosette from "@/components/Rosette";
 
 export default function NotFound() {
+  const t = useTranslations("notFound");
   return (
     <main>
       <section className="about-hero">
         <div className="wrap">
           <p className="ar">الصفحة المفقودة</p>
           <Rosette />
-          <h1>This Page Wandered Off</h1>
-          <p>
-            The page you&rsquo;re looking for doesn&rsquo;t exist — but the rest
-            of the book is right here.
-          </p>
+          <h1>{t("title")}</h1>
+          <p>{t("lede")}</p>
           <div className="title-actions" style={{ marginTop: "1.6em" }}>
             <Link className="btn btn-green" href="/">
-              Back to the Title Page
+              {t("home")}
             </Link>
             <Link className="btn btn-ghost" href="/programs">
-              See the Programs
+              {t("programs")}
             </Link>
           </div>
         </div>

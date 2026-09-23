@@ -1,28 +1,32 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/routing";
 import Reveal from "@/components/Reveal";
 import Rosette from "@/components/Rosette";
 import EventsBoard from "@/components/EventsBoard";
+import { rich } from "@/lib/rich";
 
-export const metadata: Metadata = {
-  title: "Events & Lessons — Emara Academy",
-  description:
-    "Classes, community nights, retreats, and Eid gatherings for new Muslims across Latin America — see what's on and when.",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "events.meta" });
+  return { title: t("title"), description: t("description") };
+}
 
 export default function EventsPage() {
+  const t = useTranslations("events");
   return (
     <main>
       <section className="about-hero">
         <div className="wrap">
           <p className="ar">الفعاليات</p>
           <Rosette />
-          <h1>Events &amp; Lessons</h1>
-          <p>
-            Classes, gatherings, and retreats run on a steady rhythm, so you
-            always know when to show up — pick your city and browse the
-            calendar.
-          </p>
+          <h1>{t("title")}</h1>
+          <p>{t("lede")}</p>
         </div>
       </section>
 
@@ -38,23 +42,16 @@ export default function EventsPage() {
         <div className="wrap spread-grid">
           <Reveal>
             <p className="folio">إن شاء الله</p>
-            <h2>
-              Want a seat at any of these? <em>Just write.</em>
-            </h2>
+            <h2>{t.rich("cta.title", rich)}</h2>
           </Reveal>
           <Reveal className="lede-col">
-            <p>
-              Every class and gathering is free, and nobody checks how much you
-              already know. Tell us which city you&rsquo;re in and what
-              you&rsquo;d like to join — we&rsquo;ll save you a place and someone
-              will be waiting to welcome you.
-            </p>
+            <p>{t("cta.lede")}</p>
             <div className="spread-cta">
               <Link className="btn btn-green" href="/contact">
-                Reserve a Spot
+                {t("cta.reserve")}
               </Link>
               <Link className="btn btn-ghost" href="/programs">
-                See the Programs
+                {t("cta.programs")}
               </Link>
             </div>
           </Reveal>

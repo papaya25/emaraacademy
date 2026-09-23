@@ -8,8 +8,12 @@ export default function ContactDetails() {
   const contact = useSetting("contact_info", DEFAULT_CONTACT);
   return (
     <>
-      <a href={`tel:+${phoneDigits(contact.phone)}`}>{contact.phone}</a>
-      <a href={`mailto:${contact.email}`}>{contact.email}</a>
+      <a href={`tel:+${phoneDigits(contact.phone)}`} dir="ltr">
+        {contact.phone}
+      </a>
+      <a href={`mailto:${contact.email}`} dir="ltr">
+        {contact.email}
+      </a>
     </>
   );
 }

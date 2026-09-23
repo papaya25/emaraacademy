@@ -1,16 +1,27 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { getSupabase } from "@/lib/supabase";
 import { useSetting } from "@/lib/settings";
 import { DEFAULT_CONTACT, whatsappUrl } from "@/lib/contactInfo";
+import { rich } from "@/lib/rich";
 
-const REASONS = ["Joining a Class", "Donating", "Volunteering", "Something Else"];
+// `value` is what's stored in contact_messages.reason (the admin panel reads
+// it in English); `key` is the visitor-facing label in messages/*.json.
+const REASONS = [
+  { value: "Joining a Class", key: "class" },
+  { value: "Donating", key: "donating" },
+  { value: "Volunteering", key: "volunteering" },
+  { value: "Something Else", key: "other" },
+] as const;
 
 type Status = "idle" | "sending" | "sent" | "error";
 
 export default function ContactSection() {
-  const [reason, setReason] = useState(REASONS[0]);
+  const t = useTranslations("contact.form");
+  const tShared = useTranslations("shared");
+  const [reason, setReason] = useState<string>(REASONS[0].value);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
@@ -40,31 +51,22 @@ export default function ContactSection() {
         <div className="corr-plate">
           <div className="corr-grid">
             <div className="corr-intro">
-              <span className="smallcaps">Correspondence</span>
-              <h2>
-                Every letter is read by a person, <em>not a system.</em>
-              </h2>
-              <p>
-                A question about a class, a donation, or your own first steps in
-                Islam — write to us, or reach us directly:
-              </p>
+              <span className="smallcaps">{t("eyebrow")}</span>
+              <h2>{t.rich("title", rich)}</h2>
+              <p>{t("intro")}</p>
               <div className="corr-links">
                 <a
-                  href={whatsappUrl(
-                    contact.phone,
-                    "Assalamu alaikum — I'd like to talk to someone at Emara Academy."
-                  )}
+                  href={whatsappUrl(contact.phone, tShared("whatsappGreeting"))}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  WhatsApp: {contact.phone}
+                  {t("whatsapp")} <bdi dir="ltr">{contact.phone}</bdi>
                 </a>
-                <a href={`mailto:${contact.email}`}>{contact.email}</a>
+                <a href={`mailto:${contact.email}`} dir="ltr">
+                  {contact.email}
+                </a>
               </div>
-              <p className="corr-promise">
-                No pressure, and no mailing list you didn&rsquo;t ask for — just a
-                real reply.
-              </p>
+              <p className="corr-promise">{t("promise")}</p>
             </div>
 
             {status === "sent" ? (
@@ -72,25 +74,23 @@ export default function ContactSection() {
                 <p className="ar" aria-hidden="true">
                   جزاك الله خيرا
                 </p>
-                <h3>Your message is on its way.</h3>
-                <p>
-                  We&rsquo;ll reply as soon as we can — usually within a day or
-                  two.
-                </p>
+                <h3>{t("sentTitle")}</h3>
+                <p>{t("sentBody")}</p>
               </div>
             ) : (
               <form className="corr-form" onSubmit={send}>
                 <div>
-                  <span className="corr-label">I&rsquo;m writing about</span>
-                  <div className="reason-row" role="group" aria-label="Reason for writing">
+                  <span className="corr-label">{t("writingAbout")}</span>
+                  <div className="reason-row" role="group" aria-label={t("reasonGroup")}>
                     {REASONS.map((r) => (
                       <button
-                        key={r}
+                        key={r.value}
                         type="button"
-                        className={`reason-chip ${reason === r ? "active" : ""}`}
-                        onClick={() => setReason(r)}
+                        className={`reason-chip ${reason === r.value ? "active" : ""}`}
+                        aria-pressed={reason === r.value}
+                        onClick={() => setReason(r.value)}
                       >
-                        {r}
+                        {t(`reasons.${r.key}`)}
                       </button>
                     ))}
                   </div>
@@ -98,7 +98,7 @@ export default function ContactSection() {
                 <div className="corr-fields">
                   <div>
                     <label className="corr-label" htmlFor="corr-name">
-                      Name
+                      {t("name")}
                     </label>
                     <input
                       id="corr-name"
@@ -112,7 +112,7 @@ export default function ContactSection() {
                   </div>
                   <div>
                     <label className="corr-label" htmlFor="corr-email">
-                      Email
+                      {t("email")}
                     </label>
                     <input
                       id="corr-email"
@@ -127,7 +127,7 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <label className="corr-label" htmlFor="corr-message">
-                    Your message
+                    {t("message")}
                   </label>
                   <textarea
                     id="corr-message"
@@ -143,12 +143,11 @@ export default function ContactSection() {
                   type="submit"
                   disabled={status === "sending"}
                 >
-                  {status === "sending" ? "Sending…" : "Send Letter"}
+                  {status === "sending" ? t("sending") : t("send")}
                 </button>
                 {status === "error" && (
                   <p className="corr-error" role="alert">
-                    Something went wrong sending your letter — please try again
-                    in a moment, or reach us on WhatsApp or email above instead.
+                    {t("error")}
                   </p>
                 )}
               </form>

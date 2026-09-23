@@ -1,26 +1,29 @@
 import type { Metadata } from "next";
+import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import Rosette from "@/components/Rosette";
 import ContactSection from "@/components/ContactSection";
 
-export const metadata: Metadata = {
-  title: "Contact — Emara Academy",
-  description:
-    "Write to Emara Academy about joining a class, donating, or volunteering — every letter is read by a person, and every question gets a real reply.",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "contact.meta" });
+  return { title: t("title"), description: t("description") };
+}
 
 export default function ContactPage() {
+  const t = useTranslations("contact");
   return (
     <main>
       <section className="about-hero">
         <div className="wrap">
           <p className="ar">المراسلات</p>
           <Rosette />
-          <h1>Contact</h1>
-          <p>
-            Whether you&rsquo;re taking your first steps in Islam, thinking
-            about a donation, or offering your time — write to us. We answer
-            everything ourselves.
-          </p>
+          <h1>{t("title")}</h1>
+          <p>{t("lede")}</p>
         </div>
       </section>
       <ContactSection />

@@ -1,11 +1,16 @@
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import DonateFlow from "@/components/DonateFlow";
 
-export const metadata: Metadata = {
-  title: "Make a Donation — Emara Academy",
-  description:
-    "Support Emara Academy with a one-time or monthly donation — secure, fast, and recorded in our open ledger.",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "donate.meta" });
+  return { title: t("title"), description: t("description") };
+}
 
 export default function DonatePage() {
   return (

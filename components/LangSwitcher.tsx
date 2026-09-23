@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { usePathname } from "@/i18n/routing";
 
 const LANGS = [
@@ -14,6 +14,7 @@ export default function LangSwitcher() {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const locale = useLocale();
+  const t = useTranslations("nav");
   const pathname = usePathname();
 
   useEffect(() => {
@@ -39,13 +40,13 @@ export default function LangSwitcher() {
         className="lang-btn"
         aria-haspopup="listbox"
         aria-expanded={open}
-        aria-label="Change language"
+        aria-label={t("changeLanguage")}
         onClick={() => setOpen(!open)}
       >
         {locale.toUpperCase()}
       </button>
       {open && (
-        <div className="lang-menu" role="listbox" aria-label="Languages">
+        <div className="lang-menu" role="listbox" aria-label={t("languages")}>
           {LANGS.map((l) =>
             l.ready ? (
               <button
@@ -71,7 +72,7 @@ export default function LangSwitcher() {
                   // (and updates the cookie) once it sees the explicit
                   // prefix, so this still lands on the right clean URL.
                   // eslint-disable-next-line @next/next/no-location-assign-relative-destination -- intentional, see above
-                  window.location.href = `/${l.code}${pathname === "/" ? "" : pathname}`;
+                  window.location.href = `/${l.code}${pathname === "/" ? "" : pathname}${window.location.search}`;
                 }}
               >
                 <span>{l.label}</span>
@@ -86,7 +87,7 @@ export default function LangSwitcher() {
                 disabled
               >
                 <span>{l.label}</span>
-                <span className="lang-soon">soon</span>
+                <span className="lang-soon">{t("soon")}</span>
               </button>
             )
           )}

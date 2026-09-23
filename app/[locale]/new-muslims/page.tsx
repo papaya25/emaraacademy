@@ -1,28 +1,35 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/routing";
 import Reveal from "@/components/Reveal";
 import Rosette from "@/components/Rosette";
 import WhatsAppLink from "@/components/WhatsAppLink";
+import { rich } from "@/lib/rich";
+import { arabicIndicNumeral } from "@/lib/arabicNumerals";
 
-export const metadata: Metadata = {
-  title: "New to Islam — Emara Academy",
-  description:
-    "You said the shahada — here's what happens next. Free weekly classes in Spanish and Portuguese, a mentor in your first two weeks, and a community that already knows your name.",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "newMuslims.meta" });
+  return { title: t("title"), description: t("description") };
+}
 
 export default function NewMuslimsPage() {
+  const t = useTranslations("newMuslims");
+  const tShared = useTranslations("shared");
+  const steps = t.raw("steps.items") as { title: string; desc: string }[];
   return (
     <main>
       <section className="about-hero">
         <div className="wrap">
           <p className="ar">أهلاً بك</p>
           <Rosette />
-          <h1>New to Islam</h1>
-          <p>
-            You&rsquo;re not late, you&rsquo;re not behind, and you don&rsquo;t
-            have to figure any of this out alone. Here is exactly what happens
-            next.
-          </p>
+          <h1>{t("title")}</h1>
+          <p>{t("lede")}</p>
         </div>
       </section>
 
@@ -30,57 +37,21 @@ export default function NewMuslimsPage() {
         <div className="wrap about-grid">
           <Reveal>
             <p className="folio">الفصل الأول</p>
-            <h2>
-              What happens <em>from your first day</em>
-            </h2>
+            <h2>{t.rich("steps.title", rich)}</h2>
           </Reveal>
           <Reveal>
             <ul className="values-list">
-              <li>
-                <span className="v-num" aria-hidden="true">١</span>
-                <div>
-                  <h3>Day one — someone talks with you</h3>
-                  <p>
-                    No forms, no test, no pressure. Just a conversation about
-                    where you are, what you&rsquo;re wondering, and what you
-                    need — in Spanish, Portuguese, or English.
-                  </p>
-                </div>
-              </li>
-              <li>
-                <span className="v-num" aria-hidden="true">٢</span>
-                <div>
-                  <h3>Your first two weeks — a mentor</h3>
-                  <p>
-                    You&rsquo;re paired with an established Muslim — a big
-                    brother or sister for your first year — who checks on you,
-                    answers the small questions, and sits with you at your first
-                    gathering.
-                  </p>
-                </div>
-              </li>
-              <li>
-                <span className="v-num" aria-hidden="true">٣</span>
-                <div>
-                  <h3>Every week — a class and a meal</h3>
-                  <p>
-                    Weekly classes that start from absolute zero: how to pray,
-                    how to fast, what to believe — always around a shared meal,
-                    because this is a family, not a lecture hall.
-                  </p>
-                </div>
-              </li>
-              <li>
-                <span className="v-num" aria-hidden="true">٤</span>
-                <div>
-                  <h3>When life gets hard — quiet help</h3>
-                  <p>
-                    If conversion costs you a job, family support, or stability,
-                    our mutual aid fund helps with food, clothing, and
-                    emergencies — confidentially, with dignity, no gossip.
-                  </p>
-                </div>
-              </li>
+              {steps.map((s, i) => (
+                <li key={s.title}>
+                  <span className="v-num" aria-hidden="true">
+                    {arabicIndicNumeral(i + 1)}
+                  </span>
+                  <div>
+                    <h3>{s.title}</h3>
+                    <p>{s.desc}</p>
+                  </div>
+                </li>
+              ))}
             </ul>
           </Reveal>
         </div>
@@ -90,26 +61,13 @@ export default function NewMuslimsPage() {
         <div className="wrap about-grid">
           <Reveal>
             <p className="folio">الفصل الثاني</p>
-            <h2>
-              Come <em>as you are</em>
-            </h2>
+            <h2>{t.rich("asYouAre.title", rich)}</h2>
           </Reveal>
           <Reveal className="about-body">
-            <p className="dropcap">
-              No Arabic needed. No cost, ever. No one checks how much you
-              practice, which school of thought you lean toward, or whether
-              you&rsquo;ve even said the shahada yet — the curious are as
-              welcome as the convinced.
-            </p>
+            <p className="dropcap">{t("asYouAre.p1")}</p>
+            <p>{t("asYouAre.p2")}</p>
             <p>
-              And if you carry the heavier things — a family that doesn&rsquo;t
-              understand, doubts you&rsquo;re ashamed of, loneliness you
-              didn&rsquo;t expect — you will be surrounded by people who carried
-              exactly the same things, and stayed. That is the whole point of
-              this community: nobody walks alone.
-            </p>
-            <p>
-              <Link href="/faq">Read honest answers to common questions →</Link>
+              <Link href="/faq">{t("asYouAre.faqLink")}</Link>
             </p>
           </Reveal>
         </div>
@@ -118,23 +76,18 @@ export default function NewMuslimsPage() {
       <section className="contact-cta">
         <div className="wrap narrow">
           <Reveal>
-            <span className="smallcaps">Whenever You&rsquo;re Ready</span>
-            <h2>
-              One message is all it takes to <em>stop doing this alone.</em>
-            </h2>
-            <p>
-              Tell us your city and where you are on the journey — we&rsquo;ll
-              take it from there.
-            </p>
+            <span className="smallcaps">{t("cta.eyebrow")}</span>
+            <h2>{t.rich("cta.title", rich)}</h2>
+            <p>{t("cta.lede")}</p>
             <div className="title-actions">
               <Link className="btn btn-green" href="/classes">
-                Join a Class
+                {tShared("joinAClass")}
               </Link>
               <WhatsAppLink
                 className="btn btn-ghost"
-                message="Assalamu alaikum — I'd like to talk to someone at Emara Academy."
+                message={tShared("whatsappGreeting")}
               >
-                Talk to Someone First
+                {tShared("talkToSomeoneFirst")}
               </WhatsAppLink>
             </div>
           </Reveal>

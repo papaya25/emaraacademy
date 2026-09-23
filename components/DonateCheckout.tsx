@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/routing";
 import { useSearchParams } from "next/navigation";
 import { useSetting } from "@/lib/settings";
 import { useMonthRaised } from "@/lib/donations";
@@ -10,19 +11,17 @@ import { useMonthRaised } from "@/lib/donations";
 const MONTH_FALLBACK = { goal: 5000 };
 const RAISED_FALLBACK = 1850;
 
-const METHOD_LABELS: Record<string, string> = {
-  card: "Debit/Credit Card",
-  paypal: "PayPal",
-  bank: "Bank Transfer",
-};
+const METHODS = ["card", "paypal", "bank"];
 
 export default function DonateCheckout() {
+  const t = useTranslations("donate");
+  const tc = useTranslations("donate.checkout");
   const month = useSetting("donation_month", MONTH_FALLBACK);
   const raised = useMonthRaised(RAISED_FALLBACK);
   const params = useSearchParams();
   const amount = Number(params.get("amount")) || 50;
   const freq = params.get("freq") === "monthly" ? "monthly" : "once";
-  const method = METHOD_LABELS[params.get("method") ?? ""] ? (params.get("method") as string) : "card";
+  const method = METHODS.includes(params.get("method") ?? "") ? (params.get("method") as string) : "card";
 
   const [name, setName] = useState("");
   const [anonymous, setAnonymous] = useState(false);
@@ -37,19 +36,19 @@ export default function DonateCheckout() {
             <p className="ar" aria-hidden="true">
               جزاك الله خيرا
             </p>
-            <h2>May it be written among your ongoing deeds.</h2>
+            <h2>{tc("successTitle")}</h2>
             <p className="checkout-success-sub">
-              This was a <strong>test-mode preview</strong> — no money moved.
-              When payments go live, this page will confirm your donation,
-              email a receipt to {email || "you"}, and record the amount in our
-              public ledger.
+              {tc.rich("successBody", {
+                strong: (c) => <strong>{c}</strong>,
+                email: email || tc("you"),
+              })}
             </p>
             <div className="title-actions">
               <Link className="btn btn-green" href="/donations">
-                See the Donation Ledger
+                {tc("ledger")}
               </Link>
               <Link className="btn btn-ghost" href="/">
-                Back to Home
+                {tc("home")}
               </Link>
             </div>
           </div>
@@ -61,29 +60,32 @@ export default function DonateCheckout() {
   return (
     <section className="checkout-section">
       <div className="wrap narrow">
-        <ol className="checkout-steps" aria-label="Donation steps">
+        <ol className="checkout-steps" aria-label={tc("steps")}>
           <li className="done">
-            <span className="step-num">١</span> Amount
+            <span className="step-num">١</span> {tc("stepAmount")}
           </li>
           <li className="current">
-            <span className="step-num">٢</span> Your Details
+            <span className="step-num">٢</span> {tc("stepDetails")}
           </li>
           <li>
-            <span className="step-num">٣</span> Confirmation
+            <span className="step-num">٣</span> {tc("stepConfirm")}
           </li>
         </ol>
 
         <div className="checkout-panel">
           <div className="checkout-summary">
             <div>
-              <span className="corr-label">Your donation</span>
+              <span className="corr-label">{tc("yourDonation")}</span>
               <p className="checkout-amount">
-                ${amount} <span>{freq === "monthly" ? "every month" : "one time"}</span>
+                <bdi>${amount}</bdi>{" "}
+                <span>{freq === "monthly" ? tc("everyMonth") : tc("oneTime")}</span>
               </p>
-              <p className="checkout-method">via {METHOD_LABELS[method]}</p>
+              <p className="checkout-method">
+                {tc("via", { method: t(`methods.${method}`) })}
+              </p>
             </div>
             <Link href="/donate" className="checkout-change">
-              Change
+              {tc("change")}
             </Link>
           </div>
 
@@ -91,7 +93,7 @@ export default function DonateCheckout() {
             <div className="corr-fields">
               <div>
                 <label className="corr-label" htmlFor="don-name">
-                  Name {anonymous && "(hidden from the ledger)"}
+                  {tc("name")} {anonymous && tc("nameHidden")}
                 </label>
                 <input
                   id="don-name"
@@ -99,13 +101,13 @@ export default function DonateCheckout() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   disabled={anonymous}
-                  placeholder={anonymous ? "Anonymous" : ""}
+                  placeholder={anonymous ? tc("anonymous") : ""}
                   autoComplete="name"
                 />
               </div>
               <div>
                 <label className="corr-label" htmlFor="don-email">
-                  Email — for your receipt
+                  {tc("email")}
                 </label>
                 <input
                   id="don-email"
@@ -122,30 +124,27 @@ export default function DonateCheckout() {
                 checked={anonymous}
                 onChange={(e) => setAnonymous(e.target.checked)}
               />
-              <span>Keep my donation anonymous</span>
+              <span>{tc("keepAnonymous")}</span>
             </label>
           </div>
 
           <div className="checkout-payment">
-            <span className="corr-label">Payment</span>
+            <span className="corr-label">{tc("payment")}</span>
             {method === "card" && (
               <div className="payment-placeholder">
-                Secure card fields (Stripe) will appear here — currently in{" "}
-                <strong>test mode</strong>, so nothing can be charged.
+                {tc.rich("cardPlaceholder", { strong: (c) => <strong>{c}</strong> })}
               </div>
             )}
             {method === "paypal" && (
               <div className="payment-placeholder">
-                The PayPal button will appear here — currently in{" "}
-                <strong>test mode</strong>, so nothing can be charged.
+                {tc.rich("paypalPlaceholder", { strong: (c) => <strong>{c}</strong> })}
               </div>
             )}
             {method === "bank" && (
               <div className="payment-placeholder">
-                Our account details (bank, CLABE, and a reference code that ties
-                your transfer to your donation) will be shown here. Until
-                they&rsquo;re published, <Link href="/contact">write to us</Link>{" "}
-                and we&rsquo;ll send them directly.
+                {tc.rich("bankPlaceholder", {
+                  write: (c) => <Link href="/contact">{c}</Link>,
+                })}
               </div>
             )}
           </div>
@@ -156,13 +155,15 @@ export default function DonateCheckout() {
               className="btn btn-gold donate-now"
               onClick={() => setConfirmed(true)}
             >
-              Confirm ${amount} {freq === "monthly" ? "Monthly" : ""} Donation
+              {tc(freq === "monthly" ? "confirmMonthly" : "confirmOnce", {
+                amount: String(amount),
+              })}
             </button>
           )}
           <p className="checkout-secure">
-            Payments processed by Stripe and PayPal — we never see or store your
-            card details. Donations are governed by our{" "}
-            <Link href="/donation-policy">Donation &amp; Refund Policy</Link>.
+            {tc.rich("secure", {
+              policy: (c) => <Link href="/donation-policy">{c}</Link>,
+            })}
           </p>
 
           <div className="give-progress checkout-progress">
@@ -172,16 +173,18 @@ export default function DonateCheckout() {
               aria-valuenow={raised}
               aria-valuemin={0}
               aria-valuemax={month.goal}
-              aria-label="Raised this month toward goal"
+              aria-label={t("progressLabel")}
             >
               <span
                 style={{ width: `${Math.min(100, (raised / month.goal) * 100)}%` }}
               />
             </div>
             <p>
-              Your donation joins ${raised.toLocaleString()} raised this
-              month toward our ${month.goal.toLocaleString()} goal ·{" "}
-              <Link href="/donations">See all donations</Link>
+              {tc("progress", {
+                raised: raised.toLocaleString("en-US"),
+                goal: month.goal.toLocaleString("en-US"),
+              })}{" "}
+              · <Link href="/donations">{t("seeAll")}</Link>
             </p>
           </div>
         </div>

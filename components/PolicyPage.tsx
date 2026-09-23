@@ -1,27 +1,22 @@
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/routing";
 import Rosette from "./Rosette";
 
 export type PolicySection = { heading: string; paragraphs: string[] };
+export type PolicyKey = "privacy" | "donation" | "acceptance";
 
-export default function PolicyPage({
-  title,
-  arabic,
-  intro,
-  sections,
-}: {
-  title: string;
-  arabic: string;
-  intro: string;
-  sections: PolicySection[];
-}) {
+/** A legal policy page; its text lives in messages under `policies.<policy>`. */
+export default function PolicyPage({ policy, arabic }: { policy: PolicyKey; arabic: string }) {
+  const t = useTranslations("policies");
+  const sections = t.raw(`${policy}.sections`) as PolicySection[];
   return (
     <main>
       <section className="about-hero">
         <div className="wrap">
           <p className="ar">{arabic}</p>
           <Rosette />
-          <h1>{title}</h1>
-          <p>{intro}</p>
+          <h1>{t(`${policy}.title`)}</h1>
+          <p>{t(`${policy}.intro`)}</p>
         </div>
       </section>
       <section className="policy-body">
@@ -36,13 +31,11 @@ export default function PolicyPage({
           ))}
           <div className="policy-section policy-footer-note">
             <p>
-              Questions about this policy? <Link href="/contact">Write to us</Link>{" "}
-              — a real person answers.
+              {t.rich("common.questions", {
+                write: (c) => <Link href="/contact">{c}</Link>,
+              })}
             </p>
-            <p className="policy-updated">
-              Draft published August 2026 — under review by our legal advisors;
-              wording may be refined before launch.
-            </p>
+            <p className="policy-updated">{t("common.updated")}</p>
           </div>
         </div>
       </section>
