@@ -1,20 +1,25 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 import Reveal from "@/components/Reveal";
 import Rosette from "@/components/Rosette";
-import { PROGRAMS, type Program } from "@/lib/programs";
+import { PROGRAMS, localizeProgram, type Program } from "@/lib/programs";
 import { getSupabase } from "@/lib/supabase";
 
 export const revalidate = 60;
 
-type Params = { slug: string };
+type Params = { locale: string; slug: string };
 
-export function generateStaticParams(): Params[] {
+export function generateStaticParams(): Pick<Params, "slug">[] {
   return PROGRAMS.map((p) => ({ slug: p.slug }));
 }
 
-async function getPrograms(): Promise<Program[]> {
+async function getPrograms(locale: string): Promise<Program[]> {
+  return (await fetchPrograms()).map((p) => localizeProgram(p, locale));
+}
+
+async function fetchPrograms(): Promise<Program[]> {
   try {
     const supabase = getSupabase();
     if (!supabase) return PROGRAMS;
@@ -44,12 +49,13 @@ export async function generateMetadata({
 }: {
   params: Promise<Params>;
 }): Promise<Metadata> {
-  const { slug } = await params;
-  const programs = await getPrograms();
+  const { locale, slug } = await params;
+  const programs = await getPrograms(locale);
   const program = programs.find((p) => p.slug === slug);
   if (!program) return {};
+  const t = await getTranslations({ locale, namespace: "program" });
   return {
-    title: `${program.title} — Emara Academy`,
+    title: t("metaTitle", { title: program.title }),
     description: program.tagline,
   };
 }
@@ -59,8 +65,9 @@ export default async function ProgramPage({
 }: {
   params: Promise<Params>;
 }) {
-  const { slug } = await params;
-  const programs = await getPrograms();
+  const { locale, slug } = await params;
+  const programs = await getPrograms(locale);
+  const t = await getTranslations({ locale, namespace: "program" });
   const index = programs.findIndex((p) => p.slug === slug);
   if (index === -1) notFound();
   const program = programs[index];
@@ -82,9 +89,7 @@ export default async function ProgramPage({
         <div className="wrap about-grid">
           <Reveal>
             <p className="folio">{program.num}</p>
-            <h2>
-              What it <em>is</em>
-            </h2>
+            <h2 dangerouslySetInnerHTML={{ __html: t.raw("whatItIs") }} />
           </Reveal>
           <Reveal className="about-body">
             <p className="dropcap">{program.whatItIs}</p>
@@ -95,9 +100,7 @@ export default async function ProgramPage({
       <section className="about-section">
         <div className="wrap about-grid">
           <Reveal>
-            <h2>
-              What it <em>looks like</em>
-            </h2>
+            <h2 dangerouslySetInnerHTML={{ __html: t.raw("looksLike") }} />
           </Reveal>
           <Reveal>
             <ul className="values-list">
@@ -120,35 +123,33 @@ export default async function ProgramPage({
       <section className="about-section">
         <div className="wrap about-grid">
           <Reveal>
-            <h2>
-              The moment it <em>answers</em>
-            </h2>
+            <h2 dangerouslySetInnerHTML={{ __html: t.raw("answers") }} />
           </Reveal>
           <Reveal className="about-body">
             <p>{program.problem}</p>
             <div className="spread-cta">
               <Link className="btn btn-green" href="/contact">
-                Ask About It First
+                {t("askFirst")}
               </Link>
             </div>
           </Reveal>
         </div>
       </section>
 
-      <nav className="chapter-nav wrap" aria-label="Program chapters">
+      <nav className="chapter-nav wrap" aria-label={t("chaptersLabel")}>
         {prev ? (
           <Link href={`/programs/${prev.slug}`} className="chapter-nav-link">
-            ← {prev.title}
+            {t("prev", { title: prev.title })}
           </Link>
         ) : (
           <span />
         )}
         <Link href="/programs" className="chapter-nav-link chapter-nav-toc">
-          Table of Contents
+          {t("toc")}
         </Link>
         {next ? (
           <Link href={`/programs/${next.slug}`} className="chapter-nav-link">
-            {next.title} →
+            {t("next", { title: next.title })}
           </Link>
         ) : (
           <span />

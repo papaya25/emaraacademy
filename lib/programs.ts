@@ -1,3 +1,5 @@
+import { PROGRAMS_AR } from "./programs.ar";
+
 export type Program = {
   slug: string;
   num: string; // Arabic-Indic chapter numeral
@@ -194,3 +196,11 @@ export const PROGRAMS: Program[] = [
       "Isolation is not only individual — entire national convert communities can feel small and disconnected. Showing a new Muslim that there are thousands like them across the continent reframes conversion from a lonely event into membership in a real, large, connected community.",
   },
 ];
+
+/** The program's text in the visitor's language. Arabic falls back to the
+ *  English record for any program without a translation. */
+export function localizeProgram(p: Program, locale: string): Program {
+  if (locale !== "ar") return p;
+  const ar = PROGRAMS_AR[p.slug];
+  return ar ? { ...p, ...ar } : p;
+}

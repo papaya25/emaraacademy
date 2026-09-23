@@ -1549,6 +1549,9 @@ img {
   font-style: italic;
   color: var(--green);
 }
+.contact-cta .spread-cta {
+  justify-content: center;
+}
 .contact-cta p {
   margin: 1em auto 1.8em;
   color: var(--ink-soft);
@@ -2294,13 +2297,13 @@ img {
   color: var(--ink-soft);
   margin-bottom: 1.2em;
 }
-.about-body a {
+.about-body a:not(.btn) {
   color: var(--terracotta);
   font-weight: 600;
   text-decoration: none;
   border-bottom: 1px solid rgba(181, 97, 60, 0.4);
 }
-.about-body a:hover {
+.about-body a:not(.btn):hover {
   color: var(--gold-deep);
   border-color: var(--rule-gold);
 }

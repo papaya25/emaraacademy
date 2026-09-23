@@ -104,5 +104,30 @@
       "lede": "A question about a class, a donation, volunteering — or your own first steps in Islam. Write to us and a real person replies.",
       "cta": "Write to Us"
     }
+  },
+  "programs": {
+    "meta": {
+      "title": "Programs — Emara Academy",
+      "description": "Six programs, one mission: education, teacher formation, community events, mutual aid, retreats, and regional exchange for new Muslims across Latin America."
+    },
+    "title": "Programs",
+    "lede": "Six chapters of one mission — each built around a moment when new Muslims most often drift away, and designed to hold them instead.",
+    "involved": {
+      "eyebrow": "Get Involved",
+      "title": "Support our work, <em>however you can.</em>",
+      "lede": "Volunteer as a mentor, translator, or event helper — these six programs run on people who show up.",
+      "cta": "Offer Your Time"
+    }
+  },
+  "program": {
+    "metaTitle": "{title} — Emara Academy",
+    "whatItIs": "What it <em>is</em>",
+    "looksLike": "What it <em>looks like</em>",
+    "answers": "The moment it <em>answers</em>",
+    "askFirst": "Ask About It First",
+    "chaptersLabel": "Program chapters",
+    "toc": "Table of Contents",
+    "prev": "← {title}",
+    "next": "{title} →"
   }
 }

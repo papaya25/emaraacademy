@@ -1,15 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
-import { PROGRAMS, type Program } from "@/lib/programs";
+import { PROGRAMS, localizeProgram, type Program } from "@/lib/programs";
 import { getSupabase } from "@/lib/supabase";
 
 const ACCENTS = ["a", "b", "c"] as const;
 
 export default function ProgramShelf() {
   const t = useTranslations("shared");
+  const locale = useLocale();
   const [openSlug, setOpenSlug] = useState<string | null>(null);
 
   // Real programs from Supabase; null = none yet, fall back to the static list
@@ -44,7 +45,7 @@ export default function ProgramShelf() {
     };
   }, []);
 
-  const programs = dbPrograms ?? PROGRAMS;
+  const programs = (dbPrograms ?? PROGRAMS).map((p) => localizeProgram(p, locale));
 
   return (
     <div className="shelf">
