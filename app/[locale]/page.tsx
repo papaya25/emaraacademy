@@ -1,4 +1,7 @@
-import Link from "next/link";
+import type { Metadata } from "next";
+import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/routing";
 import Reveal from "@/components/Reveal";
 import Rosette from "@/components/Rosette";
 import NewsletterForm from "@/components/NewsletterForm";
@@ -7,7 +10,21 @@ import ProgramShelf from "@/components/ProgramShelf";
 import HeroActions from "@/components/HeroActions";
 import WhatsAppLink from "@/components/WhatsAppLink";
 
+const ROLES = ["assistant", "mentor", "translator", "eventHelper", "retreat"] as const;
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "home.meta" });
+  return { title: t("title"), description: t("description") };
+}
+
 export default function Home() {
+  const t = useTranslations("home");
+  const tShared = useTranslations("shared");
   return (
     <main>
       {/* Title page */}
@@ -17,16 +34,10 @@ export default function Home() {
             <span className="corner" />
             <p className="ar">عِمَارَة</p>
             <Rosette />
-            <h1>
-              Knowledge builds what <em>conversion alone</em> cannot.
-            </h1>
-            <p className="title-sub">
-              Emara Academy is a school and a family for new Muslims across
-              Latin America — structured learning, real mentorship, and a
-              community that holds you through your first years of faith.
-            </p>
+            <h1 dangerouslySetInnerHTML={{ __html: t.raw("hero.title") }} />
+            <p className="title-sub">{t("hero.subtitle")}</p>
             <HeroActions />
-            <p className="title-place">Playa del Carmen · Quintana Roo · México</p>
+            <p className="title-place">{t("hero.place")}</p>
           </div>
         </div>
       </section>
@@ -35,9 +46,9 @@ export default function Home() {
       <section className="chapters" id="programs">
         <div className="wrap">
           <Reveal className="contents-head">
-            <span className="smallcaps">What We Do</span>
-            <h2>Six chapters of one mission</h2>
-            <p className="contents-lede">Click a book to read what it does.</p>
+            <span className="smallcaps">{t("programs.eyebrow")}</span>
+            <h2>{t("programs.title")}</h2>
+            <p className="contents-lede">{t("programs.lede")}</p>
           </Reveal>
           <Reveal>
             <ProgramShelf />
@@ -49,35 +60,21 @@ export default function Home() {
       <section className="spread" id="new-muslims">
         <div className="wrap spread-grid">
           <Reveal>
-            <p className="folio">الفصل الأول</p>
-            <h2>
-              The year <em>after</em> the shahada is where faith is kept — or
-              quietly lost.
-            </h2>
+            <p className="folio">{t("newMuslims.folio")}</p>
+            <h2 dangerouslySetInnerHTML={{ __html: t.raw("newMuslims.title") }} />
           </Reveal>
           <Reveal className="lede-col">
-            <p className="dropcap">
-              Across Latin America, people find Islam every day — and most of
-              them find it alone. No classes in their language. No one to teach
-              them to pray. No one to sit with at Eid. Da&rsquo;wah celebrates
-              the moment of conversion; almost nothing is built for the year
-              that follows.
-            </p>
-            <p>
-              Emara Academy exists for that year, and every year after it:
-              weekly classes in Spanish and Portuguese, a mentor within your
-              first two weeks, dignified help when life gets hard, and a
-              community that already knows your name.
-            </p>
+            <p className="dropcap">{t("newMuslims.p1")}</p>
+            <p>{t("newMuslims.p2")}</p>
             <div className="spread-cta">
               <Link className="btn btn-green" href="/classes">
-                Join a Class
+                {tShared("joinAClass")}
               </Link>
               <WhatsAppLink
                 className="btn btn-ghost"
-                message="Assalamu alaikum — I'd like to talk to someone at Emara Academy."
+                message={tShared("whatsappGreeting")}
               >
-                Talk to Someone First
+                {tShared("talkToSomeoneFirst")}
               </WhatsAppLink>
             </div>
           </Reveal>
@@ -88,26 +85,17 @@ export default function Home() {
       <section className="events" id="events">
         <div className="wrap">
           <Reveal className="events-head">
-            <span className="smallcaps">Events &amp; Lessons</span>
-            <h2>A place to be, most weeks of the month</h2>
-            <p>
-              Classes, gatherings, and retreats run on a steady rhythm, so you
-              always know when to show up.
-            </p>
+            <span className="smallcaps">{t("events.eyebrow")}</span>
+            <h2>{t("events.title")}</h2>
+            <p>{t("events.lede")}</p>
           </Reveal>
           <Reveal>
-            <p className="events-cadence-line">
-              Weekly classes · Monthly community nights · Quarterly retreats ·
-              Eid &amp; Ramadan gatherings
-            </p>
+            <p className="events-cadence-line">{t("events.cadence")}</p>
             <div className="events-actions">
               <Link className="btn btn-green" href="/events">
-                Open the Full Calendar
+                {t("events.cta")}
               </Link>
-              <p className="events-note">
-                Filter by city, browse month by month, and see Eid and Ramadan
-                dates — or write to us to reserve a spot.
-              </p>
+              <p className="events-note">{t("events.note")}</p>
             </div>
           </Reveal>
         </div>
@@ -117,8 +105,8 @@ export default function Home() {
       <section className="newsletter">
         <div className="wrap narrow">
           <Reveal>
-            <span className="smallcaps">Stay Connected</span>
-            <h2>Get news on classes, events, and how your support helps</h2>
+            <span className="smallcaps">{t("newsletter.eyebrow")}</span>
+            <h2>{t("newsletter.title")}</h2>
             <NewsletterForm />
           </Reveal>
         </div>
@@ -128,7 +116,7 @@ export default function Home() {
       <section className="impact">
         <div className="wrap">
           <Reveal>
-            <span className="smallcaps impact-eyebrow">Our Impact So Far</span>
+            <span className="smallcaps impact-eyebrow">{t("impact.eyebrow")}</span>
             <ImpactStats />
           </Reveal>
         </div>
@@ -139,25 +127,19 @@ export default function Home() {
         <div className="wrap">
           <Reveal className="volunteer-grid">
             <div>
-              <span className="smallcaps">Give Your Time</span>
+              <span className="smallcaps">{t("volunteer.eyebrow")}</span>
               <h2>
-                <em>Give your time.</em>
+                <em>{t("volunteer.title")}</em>
               </h2>
-              <p className="lede">
-                Emara Academy runs on people who show up: class assistants,
-                mentors for new converts, translators, event organizers, and
-                hands for retreats and mutual aid deliveries.
-              </p>
+              <p className="lede">{t("volunteer.lede")}</p>
               <div className="role-list">
-                <span>Class Assistant</span>
-                <span>Mentor</span>
-                <span>Translator</span>
-                <span>Event Helper</span>
-                <span>Retreat Support</span>
+                {ROLES.map((r) => (
+                  <span key={r}>{t(`volunteer.roles.${r}`)}</span>
+                ))}
               </div>
             </div>
             <Link className="btn btn-green" href="/contact">
-              Offer Your Time
+              {t("volunteer.cta")}
             </Link>
           </Reveal>
         </div>
@@ -167,16 +149,11 @@ export default function Home() {
       <section className="contact-cta" id="contact">
         <div className="wrap narrow">
           <Reveal>
-            <span className="smallcaps">Correspondence</span>
-            <h2>
-              Every letter is read by a person, <em>not a system.</em>
-            </h2>
-            <p>
-              A question about a class, a donation, volunteering — or your own
-              first steps in Islam. Write to us and a real person replies.
-            </p>
+            <span className="smallcaps">{t("contactCta.eyebrow")}</span>
+            <h2 dangerouslySetInnerHTML={{ __html: t.raw("contactCta.title") }} />
+            <p>{t("contactCta.lede")}</p>
             <Link className="btn btn-green" href="/contact">
-              Write to Us
+              {t("contactCta.cta")}
             </Link>
           </Reveal>
         </div>

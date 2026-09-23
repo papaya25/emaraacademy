@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useSetting } from "@/lib/settings";
 
 // Fallback figures until the `site_settings` row loads (or before the
@@ -8,12 +9,13 @@ import { useSetting } from "@/lib/settings";
 const FALLBACK = { new_muslims: 35, students: 90, supported: 50 };
 
 export default function ImpactStats() {
+  const t = useTranslations("impact");
   const stats = useSetting("impact_stats", FALLBACK);
 
   const items = [
-    { value: stats.new_muslims, label: "New Muslims Walking With Us" },
-    { value: stats.students, label: "Students in Weekly Classes" },
-    { value: stats.supported, label: "People Supported by Our Programs" },
+    { value: stats.new_muslims, label: t("newMuslims") },
+    { value: stats.students, label: t("students") },
+    { value: stats.supported, label: t("supported") },
   ];
 
   return (

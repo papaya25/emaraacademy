@@ -1,13 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/routing";
 import { PROGRAMS, type Program } from "@/lib/programs";
 import { getSupabase } from "@/lib/supabase";
 
 const ACCENTS = ["a", "b", "c"] as const;
 
 export default function ProgramShelf() {
+  const t = useTranslations("shared");
   const [openSlug, setOpenSlug] = useState<string | null>(null);
 
   // Real programs from Supabase; null = none yet, fall back to the static list
@@ -55,7 +57,7 @@ export default function ProgramShelf() {
                 className="book3d-face book3d-front"
                 onClick={() => setOpenSlug(p.slug)}
                 aria-expanded={open}
-                aria-label={`Open ${p.title}`}
+                aria-label={t("openBook", { title: p.title })}
                 tabIndex={open ? -1 : 0}
                 aria-hidden={open}
               >
@@ -66,7 +68,7 @@ export default function ProgramShelf() {
                   </span>
                   <span className="book-cat">{p.category}</span>
                   <span className="book-title">{p.title}</span>
-                  <span className="book-hint">Tap to open</span>
+                  <span className="book-hint">{t("tapToOpen")}</span>
                 </span>
               </button>
 
@@ -77,7 +79,7 @@ export default function ProgramShelf() {
                 <button
                   className="book3d-close"
                   onClick={() => setOpenSlug(null)}
-                  aria-label={`Close ${p.title}`}
+                  aria-label={t("closeBook", { title: p.title })}
                   tabIndex={open ? 0 : -1}
                 >
                   ×
@@ -86,7 +88,7 @@ export default function ProgramShelf() {
                 <h3 className="book3d-back-title">{p.title}</h3>
                 <p>{p.whatItIs}</p>
                 <Link href={`/programs/${p.slug}`} tabIndex={open ? 0 : -1}>
-                  Read the full chapter →
+                  {t("readFullChapter")}
                 </Link>
               </div>
             </div>

@@ -876,7 +876,8 @@ img {
 }
 .book3d-cover {
   position: absolute;
-  inset: 0 0 0 15%;
+  inset-block: 0;
+  inset-inline: 15% 0;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -2833,4 +2834,21 @@ img {
 }
 [dir="rtl"] .book3d-back::before {
   background: linear-gradient(270deg, rgba(36, 28, 18, 0.18), transparent);
+}
+
+/* Arabic typography: Lora has no Arabic glyphs, so in RTL every Lora rule
+   falls through to Amiri instead of a random system font. Letter-spacing is
+   also zeroed — tracking breaks the joins between connected Arabic letters
+   (the smallcaps eyebrows, buttons, and nav all set it for English). */
+html[dir="rtl"] body {
+  --font-lora: var(--font-amiri);
+}
+html[dir="rtl"] body * {
+  letter-spacing: normal !important;
+}
+
+/* Drop caps split an Arabic word's first letter from the rest and break the
+   join — no drop cap in RTL. */
+html[dir="rtl"] .dropcap::first-letter {
+  all: unset;
 }

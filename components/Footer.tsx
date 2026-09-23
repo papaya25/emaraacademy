@@ -1,52 +1,52 @@
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/routing";
 import Image from "next/image";
 import Rosette from "./Rosette";
 import ContactDetails from "./ContactDetails";
 
 export default function Footer() {
+  const t = useTranslations("footer");
+  const tNav = useTranslations("nav");
   return (
     <footer className="site-footer">
       <div className="wrap">
         <Rosette />
         <div className="footer-grid">
           <div className="footer-id">
-            <Image src="/logo.png" alt="Emara Academy" width={104} height={146} />
-            <p className="footer-tagline">
-              Building communities that keep new Muslims — education, mentorship,
-              and belonging across Latin America.
-            </p>
+            <Image src="/logo.png" alt={tNav("logoAlt")} width={104} height={146} />
+            <p className="footer-tagline">{t("tagline")}</p>
             <p className="ar footer-ar" aria-hidden="true">
               عِمَارَة
             </p>
           </div>
-          <nav className="footer-col" aria-label="Explore">
-            <h3>Explore</h3>
-            <Link href="/new-muslims">New Muslims</Link>
-            <Link href="/programs">Programs</Link>
-            <Link href="/events">Events</Link>
-            <Link href="/about">Who We Are</Link>
-            <Link href="/faq">Questions &amp; Answers</Link>
+          <nav className="footer-col" aria-label={t("explore")}>
+            <h3>{t("explore")}</h3>
+            <Link href="/new-muslims">{tNav("newMuslims")}</Link>
+            <Link href="/programs">{tNav("programs")}</Link>
+            <Link href="/events">{tNav("events")}</Link>
+            <Link href="/about">{tNav("about")}</Link>
+            <Link href="/faq">{t("faq")}</Link>
           </nav>
-          <div className="footer-col" aria-label="Contact">
-            <h3>Contact</h3>
-            <Link href="/contact">Write to Us</Link>
+          <div className="footer-col" aria-label={t("contact")}>
+            <h3>{t("contact")}</h3>
+            <Link href="/contact">{t("writeToUs")}</Link>
             <ContactDetails />
             <p className="footer-place">
-              Playa del Carmen
+              {t("placeLine1")}
               <br />
-              Quintana Roo, México
+              {t("placeLine2")}
             </p>
           </div>
-          <div className="footer-col" aria-label="Policies">
-            <h3>Policies</h3>
-            <Link href="/privacy-policy">Privacy Policy</Link>
-            <Link href="/donation-policy">Donation &amp; Refund Policy</Link>
-            <Link href="/donation-acceptance-policy">Donation Acceptance Policy</Link>
+          <div className="footer-col" aria-label={t("policies")}>
+            <h3>{t("policies")}</h3>
+            <Link href="/privacy-policy">{t("privacy")}</Link>
+            <Link href="/donation-policy">{t("donationPolicy")}</Link>
+            <Link href="/donation-acceptance-policy">{t("acceptancePolicy")}</Link>
           </div>
         </div>
         <div className="footer-legal">
-          <span>© 2026 Emara Academy</span>
-          <span>Legally incorporated non-profit association</span>
+          <span>{t("copyright")}</span>
+          <span>{t("legal")}</span>
         </div>
       </div>
     </footer>

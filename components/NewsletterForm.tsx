@@ -1,11 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { getSupabase } from "@/lib/supabase";
 
 type Status = "idle" | "sending" | "done" | "already" | "error";
 
 export default function NewsletterForm() {
+  const t = useTranslations("newsletter");
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<Status>("idle");
 
@@ -35,8 +37,8 @@ export default function NewsletterForm() {
       <div className="newsletter-block">
         <p className="newsletter-done">
           {status === "done"
-            ? "You're on the list. We'll write when there's something worth writing about."
-            : "You're already on the list — nothing more to do."}
+            ? t("done")
+            : t("already")}
         </p>
       </div>
     );
@@ -46,7 +48,7 @@ export default function NewsletterForm() {
     <div className="newsletter-block">
       <form className="newsletter-form" onSubmit={subscribe}>
         <label className="sr-only" htmlFor="nl-email">
-          Email address
+          {t("emailLabel")}
         </label>
         <input
           id="nl-email"
@@ -59,13 +61,13 @@ export default function NewsletterForm() {
           disabled={status === "sending"}
         />
         <button className="btn btn-gold" type="submit" disabled={status === "sending"}>
-          {status === "sending" ? "Subscribing…" : "Subscribe"}
+          {status === "sending" ? t("subscribing") : t("subscribe")}
         </button>
       </form>
       <p className="newsletter-note">
         {status === "error"
-          ? "Something went wrong on our side — please try again in a moment, or write to us directly."
-          : "A few emails a month — classes, events, and what your support built. Unsubscribe anytime."}
+          ? t("error")
+          : t("note")}
       </p>
     </div>
   );

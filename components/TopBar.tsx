@@ -1,20 +1,23 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/routing";
 import Image from "next/image";
 import LangSwitcher from "./LangSwitcher";
 import WhatsAppLink from "./WhatsAppLink";
 
 const links = [
-  { href: "/new-muslims", label: "New Muslims" },
-  { href: "/programs", label: "Programs" },
-  { href: "/events", label: "Events" },
-  { href: "/about", label: "Who We Are" },
-  { href: "/contact", label: "Contact" },
-];
+  { href: "/new-muslims", key: "newMuslims" },
+  { href: "/programs", key: "programs" },
+  { href: "/events", key: "events" },
+  { href: "/about", key: "about" },
+  { href: "/contact", key: "contact" },
+] as const;
 
 export default function TopBar() {
+  const t = useTranslations("nav");
+  const tShared = useTranslations("shared");
   const [open, setOpen] = useState(false);
 
   // Lock page scroll while the mobile drawer is open
@@ -29,28 +32,28 @@ export default function TopBar() {
     <header className="topbar">
       <div className="wrap topbar-row">
         <Link className="brand" href="/" onClick={() => setOpen(false)}>
-          <Image src="/logo.png" alt="Emara Academy" width={104} height={146} priority />
+          <Image src="/logo.png" alt={t("logoAlt")} width={104} height={146} priority />
         </Link>
         <button
           className="menu-toggle"
-          aria-label="Toggle menu"
+          aria-label={t("toggleMenu")}
           aria-expanded={open}
           onClick={() => setOpen(!open)}
         >
-          Menu
+          {t("menu")}
         </button>
         <nav className={`topbar-nav ${open ? "open" : ""}`}>
           {links.map((l) => (
             <Link key={l.href} href={l.href} onClick={() => setOpen(false)}>
-              {l.label}
+              {t(l.key)}
             </Link>
           ))}
           <WhatsAppLink
             className="nav-whatsapp"
-            message="Assalamu alaikum — I'd like to talk to someone at Emara Academy."
+            message={tShared("whatsappGreeting")}
             onClick={() => setOpen(false)}
           >
-            WhatsApp Us
+            {t("whatsapp")}
           </WhatsAppLink>
           <LangSwitcher />
         </nav>

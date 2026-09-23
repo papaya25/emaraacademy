@@ -1,1 +1,108 @@
-{}
+{
+  "shared": {
+    "tapToOpen": "Tap to open",
+    "readFullChapter": "Read the full chapter →",
+    "openBook": "Open {title}",
+    "closeBook": "Close {title}",
+    "seeOurWork": "See Our Work",
+    "joinAClass": "Join a Class",
+    "talkToSomeoneFirst": "Talk to Someone First",
+    "whatsappGreeting": "Assalamu alaikum — I'd like to talk to someone at Emara Academy."
+  },
+  "nav": {
+    "logoAlt": "Emara Academy",
+    "toggleMenu": "Toggle menu",
+    "menu": "Menu",
+    "newMuslims": "New Muslims",
+    "programs": "Programs",
+    "events": "Events",
+    "about": "Who We Are",
+    "contact": "Contact",
+    "whatsapp": "WhatsApp Us"
+  },
+  "footer": {
+    "tagline": "Building communities that keep new Muslims — education, mentorship, and belonging across Latin America.",
+    "explore": "Explore",
+    "faq": "Questions & Answers",
+    "contact": "Contact",
+    "writeToUs": "Write to Us",
+    "placeLine1": "Playa del Carmen",
+    "placeLine2": "Quintana Roo, México",
+    "policies": "Policies",
+    "privacy": "Privacy Policy",
+    "donationPolicy": "Donation & Refund Policy",
+    "acceptancePolicy": "Donation Acceptance Policy",
+    "copyright": "© 2026 Emara Academy",
+    "legal": "Legally incorporated non-profit association"
+  },
+  "newsletter": {
+    "done": "You're on the list. We'll write when there's something worth writing about.",
+    "already": "You're already on the list — nothing more to do.",
+    "emailLabel": "Email address",
+    "subscribing": "Subscribing…",
+    "subscribe": "Subscribe",
+    "error": "Something went wrong on our side — please try again in a moment, or write to us directly.",
+    "note": "A few emails a month — classes, events, and what your support built. Unsubscribe anytime."
+  },
+  "impact": {
+    "newMuslims": "New Muslims Walking With Us",
+    "students": "Students in Weekly Classes",
+    "supported": "People Supported by Our Programs"
+  },
+  "home": {
+    "meta": {
+      "title": "Emara Academy — Building Communities",
+      "description": "Emara Academy is a school and a family for new Muslims across Latin America — structured learning, real mentorship, and a community that holds you through your first years of faith. Based in Playa del Carmen, Mexico."
+    },
+    "hero": {
+      "title": "Knowledge builds what <em>conversion alone</em> cannot.",
+      "subtitle": "Emara Academy is a school and a family for new Muslims across Latin America — structured learning, real mentorship, and a community that holds you through your first years of faith.",
+      "place": "Playa del Carmen · Quintana Roo · México"
+    },
+    "programs": {
+      "eyebrow": "What We Do",
+      "title": "Six chapters of one mission",
+      "lede": "Click a book to read what it does."
+    },
+    "newMuslims": {
+      "folio": "الفصل الأول",
+      "title": "The year <em>after</em> the shahada is where faith is kept — or quietly lost.",
+      "p1": "Across Latin America, people find Islam every day — and most of them find it alone. No classes in their language. No one to teach them to pray. No one to sit with at Eid. Da’wah celebrates the moment of conversion; almost nothing is built for the year that follows.",
+      "p2": "Emara Academy exists for that year, and every year after it: weekly classes in Spanish and Portuguese, a mentor within your first two weeks, dignified help when life gets hard, and a community that already knows your name."
+    },
+    "events": {
+      "eyebrow": "Events & Lessons",
+      "title": "A place to be, most weeks of the month",
+      "lede": "Classes, gatherings, and retreats run on a steady rhythm, so you always know when to show up.",
+      "cadence": "Weekly classes · Monthly community nights · Quarterly retreats · Eid & Ramadan gatherings",
+      "cta": "Open the Full Calendar",
+      "note": "Filter by city, browse month by month, and see Eid and Ramadan dates — or write to us to reserve a spot."
+    },
+    "newsletter": {
+      "eyebrow": "Stay Connected",
+      "title": "Get news on classes, events, and how your support helps"
+    },
+    "impact": {
+      "eyebrow": "Our Impact So Far"
+    },
+    "volunteer": {
+      "eyebrow": "Give Your Time",
+      "title": "Give your time.",
+      "lede": "Emara Academy runs on people who show up: class assistants, mentors for new converts, translators, event organizers, and hands for retreats and mutual aid deliveries.",
+      "roles": {
+        "assistant": "Class Assistant",
+        "mentor": "Mentor",
+        "translator": "Translator",
+        "eventHelper": "Event Helper",
+        "retreat": "Retreat Support"
+      },
+      "cta": "Offer Your Time"
+    },
+    "contactCta": {
+      "eyebrow": "Correspondence",
+      "title": "Every letter is read by a person, <em>not a system.</em>",
+      "lede": "A question about a class, a donation, volunteering — or your own first steps in Islam. Write to us and a real person replies.",
+      "cta": "Write to Us"
+    }
+  }
+}
