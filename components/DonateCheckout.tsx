@@ -82,7 +82,7 @@ export default function DonateCheckout() {
               </p>
               <p className="checkout-method">via {METHOD_LABELS[method]}</p>
             </div>
-            <Link href="/#give" className="checkout-change">
+            <Link href="/donate" className="checkout-change">
               Change
             </Link>
           </div>

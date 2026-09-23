@@ -1,27 +1,16 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
-import Rosette from "@/components/Rosette";
-import DonateCheckout from "@/components/DonateCheckout";
+import DonateFlow from "@/components/DonateFlow";
 
 export const metadata: Metadata = {
-  title: "Complete Your Donation — Emara Academy",
+  title: "Make a Donation — Emara Academy",
   description:
-    "Finish your donation to Emara Academy — secure, fast, and recorded in our open ledger.",
+    "Support Emara Academy with a one-time or monthly donation — secure, fast, and recorded in our open ledger.",
 };
 
 export default function DonatePage() {
   return (
     <main>
-      <section className="about-hero checkout-hero">
-        <div className="wrap">
-          <p className="ar">صدقة جارية</p>
-          <Rosette />
-          <h1>Complete Your Donation</h1>
-        </div>
-      </section>
-      <Suspense fallback={null}>
-        <DonateCheckout />
-      </Suspense>
+      <DonateFlow />
     </main>
   );
 }

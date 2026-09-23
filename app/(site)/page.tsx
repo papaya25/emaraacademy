@@ -141,7 +141,7 @@ export default function Home() {
             <div>
               <span className="smallcaps">Give Your Time</span>
               <h2>
-                Can&rsquo;t give financially? <em>Give your time.</em>
+                <em>Give your time.</em>
               </h2>
               <p className="lede">
                 Emara Academy runs on people who show up: class assistants,
