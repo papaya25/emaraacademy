@@ -68,7 +68,7 @@ signed-in Supabase user is treated as signed out. The password is set in the Sup
 sign-ups are on by default in Supabase. Admin pages are `noindex`.
 
 Supabase status (2026-09-24): project `yglhgvzpuglxgqgrjfpl` ("Emara Academy project", org
-`cmrbghdywqxhagixjviu`) is active, and **all migrations are applied** (schema + 002–007, run via the
+`cmrbghdywqxhagixjviu`) is active, and **all migrations are applied** (schema + 002–008 — 008 applied 2026-09-24 with the owner's go-ahead, run via the
 Supabase MCP — the project isn't in `list_projects` but `get_project`/`apply_migration` by id work).
 Security advisor is clean. Still owner-only (dashboard, no API access for it here):
 1. Authentication → Users → Add User (tick "Auto Confirm User"): email
@@ -111,7 +111,6 @@ reachable by direct link only).
 
 ## Pending from the owner (placeholders until provided)
 - Supabase dashboard: create the admin user + turn off public sign-ups (see "Admin panel")
-- **Apply migration `008_translated_content.sql`** (adds the `_es`/`_ar` content columns) BEFORE merging the admin-translation work to `main` — without it, saving a program/event/class from the admin fails. It's purely additive (nullable columns). Claude's attempt to apply it via the Supabase MCP was blocked by the auto-mode safety check on 2026-09-24; needs the owner's go-ahead or the SQL Editor
 - Connect the custom domain emaraacademy.org in Vercel + DNS at the registrar (purchased 2026-09-24; code already follows Vercel's production domain via `lib/siteUrl.ts`). Owner already has email hosting for info@emaraacademy.org.
 - Stripe account/keys (card donations are a test-mode placeholder). PayPal dropped for good.
 - Resend account + `RESEND_API_KEY` + verified sending domain (newsletter sending)
