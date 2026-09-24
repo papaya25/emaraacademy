@@ -66,19 +66,16 @@ signed-in Supabase user is treated as signed out. The password is set in the Sup
 (`public.is_admin()`): before it, every admin policy allowed *any* authenticated user, and public
 sign-ups are on by default in Supabase. Admin pages are `noindex`.
 
-Two things the owner still needs to do in the Supabase dashboard before the panel is fully
-live (I don't have write access — it's on the owner's own Supabase account, not the
-MCP-connected one):
-1. ~~Unpause the project~~ — done, owner reports it active again as of 2026-09-24. While paused, every
-   admin list page falls back to empty/static-preview state instead of erroring (see below).
-2. Run migrations `002_admin_panel.sql`, `003_classes_location_programs_crud.sql`, then
-   `004_email_campaigns.sql`, then `005_admin_only_access.sql` (all in `supabase/migrations/`) in the SQL Editor, in that
-   order, after `schema.sql` (which should already be applied).
-3. Authentication → Users → Add User (tick "Auto Confirm User"): email
-   `admin@emaraacademy.org`, any password. That password is the one login — **one shared
+Supabase status (2026-09-24): project `yglhgvzpuglxgqgrjfpl` ("Emara Academy project", org
+`cmrbghdywqxhagixjviu`) is active, and **all migrations are applied** (schema + 002–007, run via the
+Supabase MCP — the project isn't in `list_projects` but `get_project`/`apply_migration` by id work).
+Security advisor is clean. Still owner-only (dashboard, no API access for it here):
+1. Authentication → Users → Add User (tick "Auto Confirm User"): email
+   `admin@emaraacademy.org` + the password the owner chose. That password is the one login — **one shared
    account, not one per person** (owner's explicit call: "no need for 2 separate accounts
    just one with one password"). Login screen only asks for the password; the email is
-   hardcoded in `lib/adminAuth.ts`.
+   hardcoded in `lib/adminAuth.ts`. Never put the password in code or SQL (migration SQL is logged).
+2. Authentication → Sign In / Providers → turn off "Allow new users to sign up".
 
 Admin pages are built to degrade gracefully with Supabase unreachable/paused: Programs
 falls back to `lib/programs.ts`'s static content as an editable preview (with a notice that
