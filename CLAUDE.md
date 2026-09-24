@@ -45,7 +45,7 @@ English first. **Arabic is live** (since 2026-09-24): every public page is trans
 - Next.js 16 (App Router) + TypeScript + Tailwind v4 + Turbopack
 - Supabase (Postgres) for data: events, newsletter signups, program content
 - Resend for sending newsletter campaigns (Supabase only stores subscribers, doesn't send)
-- Stripe + PayPal for online donations (test mode until real keys are provided)
+- Stripe (card) + bank transfer for donations — Stripe still a test-mode placeholder until the owner provides keys; no PayPal
 - Vercel for deployment
 - No WordPress
 
@@ -102,20 +102,29 @@ impact numbers and the monthly
 goal). Auth is cookie-based via `@supabase/ssr` (`lib/supabase/server.ts`,
 `lib/supabase/client.ts`), gated by `proxy.ts` (Next 16's renamed `middleware.ts`).
 
-**Structural change:** the public site now lives under `app/(site)/` with its own layout
-(`TopBar`/`Footer`/`MobileDonateBar`) — `app/admin` sits outside that group so it gets a
-bare shell instead of the public nav and donate bar. New public pages go in `app/(site)/`,
-not `app/`.
+**Structure:** the public site lives under `app/[locale]/` (next-intl; was `app/(site)/` before
+Arabic) with its own layout (`TopBar`/`Footer`) — `app/admin` sits outside it so it gets a bare
+English-only shell. New public pages go in `app/[locale]/`, with their text in both message files.
+`MobileDonateBar` exists but is intentionally unused (owner removed all donate CTAs; `/donate` is
+reachable by direct link only).
 
 ## Pending from the owner (placeholders until provided)
-- Connect the custom domain emaraacademy.org in Vercel (purchased 2026-09-24; code already follows Vercel's production domain via `lib/siteUrl.ts`)
-- Legal registration numbers (e.g. CLUNI/RFC) for the transparency/about page
-- Donation account details: Stripe/PayPal live keys, bank transfer info
-- Run the admin panel migration + create the admin login (see above)
+- Supabase dashboard: create the admin user + turn off public sign-ups (see "Admin panel")
+- Connect the custom domain emaraacademy.org in Vercel + DNS at the registrar (purchased 2026-09-24; code already follows Vercel's production domain via `lib/siteUrl.ts`). Owner already has email hosting for info@emaraacademy.org.
+- Stripe account/keys (card donations are a test-mode placeholder). PayPal dropped for good.
+- Resend account + `RESEND_API_KEY` + verified sending domain (newsletter sending)
+- Legal registration numbers (e.g. CLUNI/RFC) for the About page
+- Confirm the legal entity name: the bank account holder is "EMARA ACADEMY S.A. DE C.V." (normally a for-profit form in Mexico) while the site says "legally incorporated non-profit association" — flagged to owner, not yet answered
+- Native-speaker proofread of the Arabic; legal review of the policies
+- Policy pages are written (EN+AR) but deliberately unlinked: `POLICY_LINKS_ENABLED = false` in `lib/policies.ts` — flip to true only when the owner says so
+
+## Ideas offered, not yet approved
+- Auto-translate admin content (programs/events/classes) into Arabic on save via the Claude API, stored in `_ar` columns with an editable Arabic tab (= Stage 3 of the i18n plan). Owner asked about it; awaiting a go-ahead.
+- Spanish translation (the programs' real audience).
 
 ## Status
-Pages built: `/` (home), `/about`, `/events` (calendar board: city filter, color legend, day panel right, approx Eid/Ramadan dates), `/donations` (ledger), `/contact`, `/programs` + six `/programs/[slug]` chapters (`lib/programs.ts`), `/new-muslims`, `/faq`, `/classes` (sample class picker w/ city filter, `lib/classes.ts` — all "Join a Class" buttons route here), `/donate` (checkout: step indicator, params from DonatePanel, anonymous option, test-mode payment placeholders, confirmation state), `/privacy-policy`, `/donation-policy`, `/donation-acceptance-policy` (drafts flagged pending legal review, shared `components/PolicyPage.tsx`). "Talk to Someone" buttons open WhatsApp (+52 55 2670 9079 via wa.me). Language switcher: EN active, ES/AR "soon".
+Pages built: `/` (home), `/about`, `/events` (calendar board: city filter, color legend, day panel right, approx Eid/Ramadan dates), `/donations` (ledger), `/contact`, `/programs` + six `/programs/[slug]` chapters (`lib/programs.ts`), `/new-muslims`, `/faq`, `/classes` (sample class picker w/ city filter, `lib/classes.ts` — all "Join a Class" buttons route here), `/donate` (checkout: step indicator, params from DonatePanel, anonymous option, test-mode payment placeholders, confirmation state), `/privacy-policy`, `/donation-policy`, `/donation-acceptance-policy` (drafts flagged pending legal review, shared `components/PolicyPage.tsx`). "Talk to Someone" buttons open WhatsApp (+52 55 2670 9079 via wa.me). Language switcher: EN + AR active, ES "soon".
 
 Homepage 2026-09-21: per the client's request (relayed by the owner) to foreground the programs, the bookshelf (`components/ProgramShelf.tsx`) moved up to sit directly under the hero (was further down under "Six chapters of one mission"), and each program renders as a real 3D CSS flip-card book — colored spine, stacked-page shadow on the closed cover, `rotateY(180deg)` flip to an "open page" back face with the program description and a link to its full `/programs/[slug]` chapter. Fixed 380px card height means opening one book never reflows its siblings. Same component is reused on `/programs`. Hero CTA "Begin Your Journey" replaced with "See Our Work" (anchors to `#programs`); see the Tailwind class-collision gotcha above for the bug this surfaced and its fix.
 
-Infra: GitHub `papaya25/emaraacademy` (push after every commit — Vercel auto-deploys from it). Vercel project (team `tutcasa`) had its Framework Preset unset, which silently produced empty serverless function output (builds "succeeded" but every route 404'd) — fixed 2026-08-09 by explicitly setting `framework: "nextjs"` via the Vercel API; don't unset it. Production build uses `next build --webpack` (package.json) rather than Next.js 16's new Turbopack-build default, kept deliberately since Vercel's Turbopack-build support is still new — dev (`next dev`) still uses Turbopack. Vercel CLI is installed globally and logged in on this Mac (useful for `vercel inspect`/API debugging). Supabase project `yglhgvzpuglxgqgrjfpl` (owner's separate account, NOT in the MCP-connected account; publishable key in `.env.local` as `NEXT_PUBLIC_SUPABASE_URL`/`NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` — same vars must exist in Vercel). Newsletter form does a live insert into `newsletter_subscribers` (table exists, tested end-to-end). Backend phase 1 shipped: contact form inserts into `contact_messages`; events/classes boards read from `events`/`classes` tables (sample data as clearly-labeled fallback while tables are missing/empty); impact stats + monthly raised/goal read from `site_settings` (keys `impact_stats`, `donation_month`) via `lib/settings.ts` `useSetting` hook. Full schema in `supabase/schema.sql` — owner must run it in the Supabase SQL Editor (as of 2026-08-13 NOT yet run; contact form shows its error state until then). Security model: anon key = insert-only on contact/newsletter, read-only on events/classes/settings; writes need an authenticated Supabase user (for the admin panel, next). Remaining: Stripe test mode (owner creating account), Resend account + `RESEND_API_KEY` (code is built and waiting — see "Admin panel" section), custom domain emaraacademy.org, Spanish. Admin panel is built — see "Admin panel" section above for activation steps. Owner prefers "donation" over "gift" in copy. Dev server: `.claude/launch.json` uses autoPort (port 3000 may be taken by other projects).
+Infra: GitHub `papaya25/emaraacademy` (push after every commit — Vercel auto-deploys from it). Vercel project `emaraacademy` (deploys show under team `amanahvacations`; older notes said `tutcasa`) had its Framework Preset unset, which silently produced empty serverless function output (builds "succeeded" but every route 404'd) — fixed 2026-08-09 by explicitly setting `framework: "nextjs"` via the Vercel API; don't unset it. Production build uses `next build --webpack` (package.json) rather than Next.js 16's new Turbopack-build default, kept deliberately since Vercel's Turbopack-build support is still new — dev (`next dev`) still uses Turbopack. Vercel CLI is installed globally and logged in on this Mac (useful for `vercel inspect`/API debugging). Supabase project `yglhgvzpuglxgqgrjfpl` (separate org from the MCP account's default org, but reachable by id through the Supabase MCP — see "Admin panel"; publishable key in `.env.local` as `NEXT_PUBLIC_SUPABASE_URL`/`NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` — same vars must exist in Vercel). Newsletter form does a live insert into `newsletter_subscribers` (table exists, tested end-to-end). Backend phase 1 shipped: contact form inserts into `contact_messages`; events/classes boards read from `events`/`classes` tables (sample data as clearly-labeled fallback while tables are missing/empty); impact stats + monthly raised/goal read from `site_settings` (keys `impact_stats`, `donation_month`) via `lib/settings.ts` `useSetting` hook. Full schema in `supabase/schema.sql` + `supabase/migrations/002–007` — all applied as of 2026-09-24. Security model: anon key = insert-only on contact/newsletter, read-only on events/classes/settings; writes need an authenticated Supabase user (for the admin panel, next). Remaining: see "Pending from the owner" above. Admin panel is built — see "Admin panel" section above for activation steps. Owner prefers "donation" over "gift" in copy. Dev server: `.claude/launch.json` uses autoPort (port 3000 may be taken by other projects).
