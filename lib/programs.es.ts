@@ -1,12 +1,7 @@
-import type { Program } from "./programs";
+import type { ProgramText } from "./programs";
 
-type ProgramText = Pick<
-  Program,
-  "category" | "title" | "tagline" | "whatItIs" | "activities" | "problem"
->;
-
-/** Spanish text for the six programs, keyed by slug. Used on /es until the
- *  admin panel's own Spanish fields exist; slug, numeral and chapter heading
+/** Built-in Spanish text for the six original programs, keyed by slug. Shown
+ *  wherever the admin panel's Spanish fields are blank; slug, numeral and chapter heading
  *  come from the English record. */
 export const PROGRAMS_ES: Record<string, ProgramText> = {
   "new-muslim-education": {

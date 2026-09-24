@@ -2843,6 +2843,86 @@ img {
   border-top: 1px solid var(--rule);
 }
 
+.admin-lang {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.75rem;
+  color: var(--ink-faint);
+}
+.admin-lang select {
+  font-family: var(--font-lora), serif;
+  font-size: 0.85rem;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 0.4em 0.5em;
+}
+.admin-login-card .admin-lang {
+  margin-top: 10px;
+}
+
+/* Content-language tabs: English / Español / العربية inside one form. */
+.admin-langtabs {
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  background: var(--paper);
+}
+.admin-langtabs-list {
+  display: flex;
+  border-bottom: 1px solid var(--rule);
+}
+.admin-langtab {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  padding: 0.7em 1.1em;
+  font-family: var(--font-lora), serif;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+.admin-langtab[lang="ar"] {
+  font-family: var(--font-amiri), serif;
+  font-size: 1rem;
+}
+.admin-langtab:hover {
+  color: var(--ink);
+}
+.admin-langtab[aria-selected="true"] {
+  color: var(--green);
+  border-bottom-color: var(--gold);
+  font-weight: 600;
+}
+.admin-langtab:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: -2px;
+}
+.admin-langtabs-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 16px;
+}
+.admin-langtabs-panel[hidden] {
+  display: none;
+}
+.admin-langtabs-panel .admin-hint {
+  margin: 0;
+}
+/* The text boxes follow the content's language, whatever the admin's own
+   language is: Arabic content right-to-left in Amiri, the others left-to-right. */
+.admin-langtabs-panel[data-lang="ar"] :is(input, textarea) {
+  direction: rtl;
+  font-family: var(--font-amiri), serif;
+  font-size: 1rem;
+}
+.admin-langtabs-panel:not([data-lang="ar"]) :is(input, textarea) {
+  direction: ltr;
+}
+
 .admin-message-head {
   display: flex;
   justify-content: space-between;
@@ -2857,7 +2937,12 @@ img {
 
 @media (max-width: 720px) {
   .admin-shell {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
+  }
+  /* Wide tables scroll sideways instead of stretching the whole page. */
+  .admin-table {
+    display: block;
+    overflow-x: auto;
   }
   .admin-nav {
     border-inline-end: none;

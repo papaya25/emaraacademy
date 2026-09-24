@@ -1,10 +1,12 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { createClient } from "@/lib/supabase/client";
 
 export default function SignOutButton() {
   const router = useRouter();
+  const t = useTranslations("admin.nav");
   return (
     <button
       className="admin-signout"
@@ -15,7 +17,7 @@ export default function SignOutButton() {
         router.refresh();
       }}
     >
-      Sign Out
+      {t("signOut")}
     </button>
   );
 }

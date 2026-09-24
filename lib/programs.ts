@@ -11,7 +11,49 @@ export type Program = {
   whatItIs: string;
   activities: { title: string; desc: string }[];
   problem: string;
+  /** Spanish/Arabic typed in the admin panel (blank fields left out). */
+  translations?: Partial<Record<string, Partial<ProgramText>>>;
 };
+
+export type ProgramText = Pick<
+  Program,
+  "category" | "title" | "tagline" | "whatItIs" | "activities" | "problem"
+>;
+
+/** Languages besides English that program text can be translated into. */
+export const TRANSLATED_LOCALES = ["es", "ar"] as const;
+
+type Row = Record<string, unknown>;
+const text = (v: unknown) => (typeof v === "string" && v.trim() ? v : undefined);
+const list = (v: unknown) =>
+  Array.isArray(v) && v.length ? (v as Program["activities"]) : undefined;
+
+/** A `programs` table row (select "*") as a Program, translations included. */
+export function programFromRow(r: Row): Program {
+  const translations: Program["translations"] = {};
+  for (const l of TRANSLATED_LOCALES) {
+    translations[l] = {
+      category: text(r[`category_${l}`]),
+      title: text(r[`title_${l}`]),
+      tagline: text(r[`tagline_${l}`]),
+      whatItIs: text(r[`what_it_is_${l}`]),
+      problem: text(r[`problem_${l}`]),
+      activities: list(r[`activities_${l}`]),
+    };
+  }
+  return {
+    slug: r.slug as string,
+    num: r.num as string,
+    chapter: r.chapter as string,
+    category: r.category as string,
+    title: r.title as string,
+    tagline: r.tagline as string,
+    whatItIs: r.what_it_is as string,
+    activities: (r.activities as Program["activities"]) ?? [],
+    problem: r.problem as string,
+    translations,
+  };
+}
 
 export const PROGRAMS: Program[] = [
   {
@@ -198,11 +240,25 @@ export const PROGRAMS: Program[] = [
   },
 ];
 
-const TRANSLATIONS: Record<string, typeof PROGRAMS_AR> = { es: PROGRAMS_ES, ar: PROGRAMS_AR };
+const BUILT_IN: Record<string, typeof PROGRAMS_AR> = { es: PROGRAMS_ES, ar: PROGRAMS_AR };
 
-/** The program's text in the visitor's language. Falls back to the English
- *  record for any program without a translation. */
+/** The program's text in the visitor's language, field by field: what was
+ *  typed in the admin panel, else the built-in translation for the six
+ *  original programs, else English.
+ *  ponytail: a Spanish/Arabic field cleared in the admin shows the built-in
+ *  text again, not English — the admin form pre-fills and saves it anyway. */
 export function localizeProgram(p: Program, locale: string): Program {
-  const text = TRANSLATIONS[locale]?.[p.slug];
-  return text ? { ...p, ...text } : p;
+  const typed = p.translations?.[locale];
+  const builtIn = BUILT_IN[locale]?.[p.slug];
+  if (!typed && !builtIn) return p;
+  const pick = <K extends keyof ProgramText>(k: K): ProgramText[K] => typed?.[k] ?? builtIn?.[k] ?? p[k];
+  return {
+    ...p,
+    category: pick("category"),
+    title: pick("title"),
+    tagline: pick("tagline"),
+    whatItIs: pick("whatItIs"),
+    activities: pick("activities"),
+    problem: pick("problem"),
+  };
 }

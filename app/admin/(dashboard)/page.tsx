@@ -1,7 +1,10 @@
 import { createClient } from "@/lib/supabase/server";
+import { getLocale, getTranslations } from "next-intl/server";
 
 export default async function AdminOverviewPage() {
   const supabase = await createClient();
+  const t = await getTranslations("admin.overview");
+  const locale = await getLocale();
 
   const startOfMonth = new Date();
   startOfMonth.setDate(1);
@@ -24,17 +27,17 @@ export default async function AdminOverviewPage() {
   const allTimeTotal = (allDonations.data ?? []).reduce((s, d) => s + Number(d.amount), 0);
 
   const cards = [
-    { label: "Raised This Month", value: `$${monthTotal.toLocaleString()}` },
-    { label: "Raised All Time", value: `$${allTimeTotal.toLocaleString()}` },
-    { label: "Donations Logged", value: (allDonations.data ?? []).length },
-    { label: "Contact Messages", value: messages.count ?? 0 },
-    { label: "Newsletter Subscribers", value: subscribers.count ?? 0 },
-    { label: "Upcoming Events", value: upcomingEvents.count ?? 0 },
+    { label: t("raisedMonth"), value: `$${monthTotal.toLocaleString(locale)}` },
+    { label: t("raisedAll"), value: `$${allTimeTotal.toLocaleString(locale)}` },
+    { label: t("donationsLogged"), value: (allDonations.data ?? []).length },
+    { label: t("contactMessages"), value: messages.count ?? 0 },
+    { label: t("subscribers"), value: subscribers.count ?? 0 },
+    { label: t("upcomingEvents"), value: upcomingEvents.count ?? 0 },
   ];
 
   return (
     <div>
-      <h1>Overview</h1>
+      <h1>{t("title")}</h1>
       <div className="admin-cards">
         {cards.map((c) => (
           <div className="admin-card" key={c.label}>

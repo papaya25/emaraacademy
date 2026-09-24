@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { getTranslations } from "next-intl/server";
 import { createClient } from "@/lib/supabase/server";
 import { arabicIndicNumeral, chapterHeading } from "@/lib/arabicNumerals";
 import { isResendConfigured, sendBroadcast } from "@/lib/resend";
@@ -12,13 +13,34 @@ function strOrNull(fd: FormData, key: string): string | null {
   const v = str(fd, key);
   return v ? v : null;
 }
-function parseActivities(fd: FormData) {
-  return str(fd, "activities")
+function parseActivities(fd: FormData, key = "activities") {
+  return str(fd, key)
     .split("\n")
     .map((line) => line.split("|"))
     .filter(([title]) => title?.trim())
     .map(([title, desc]) => ({ title: title.trim(), desc: (desc ?? "").trim() }));
 }
+/** Spanish (_es) and Arabic (_ar) copies of the given text fields — blank
+ *  becomes null, which the public site shows as the English text. */
+function translated(fd: FormData, fields: string[]) {
+  const row: Record<string, string | null> = {};
+  for (const suffix of ["_es", "_ar"]) {
+    for (const f of fields) row[f + suffix] = strOrNull(fd, f + suffix);
+  }
+  return row;
+}
+function translatedProgram(fd: FormData) {
+  const activities = (suffix: string) => {
+    const list = parseActivities(fd, `activities${suffix}`);
+    return list.length ? list : null;
+  };
+  return {
+    ...translated(fd, ["category", "title", "tagline", "what_it_is", "problem"]),
+    activities_es: activities("_es"),
+    activities_ar: activities("_ar"),
+  };
+}
+
 function slugify(title: string): string {
   return (
     title
@@ -44,6 +66,7 @@ export async function updateProgram(fd: FormData) {
       what_it_is: str(fd, "what_it_is"),
       problem: str(fd, "problem"),
       activities: parseActivities(fd),
+      ...translatedProgram(fd),
       updated_at: new Date().toISOString(),
     })
     .eq("slug", slug);
@@ -78,6 +101,7 @@ export async function createProgram(fd: FormData) {
     what_it_is: str(fd, "what_it_is"),
     problem: str(fd, "problem"),
     activities: parseActivities(fd),
+    ...translatedProgram(fd),
   });
 
   revalidatePath("/admin/programs");
@@ -122,6 +146,7 @@ export async function upsertEvent(fd: FormData) {
     location: strOrNull(fd, "location"),
     presenter: strOrNull(fd, "presenter"),
     meta: strOrNull(fd, "meta"),
+    ...translated(fd, ["title", "meta"]),
   };
   if (id) {
     await supabase.from("events").update(row).eq("id", id);
@@ -156,6 +181,7 @@ export async function upsertClass(fd: FormData) {
     format: str(fd, "format") || "In person",
     status: str(fd, "status") || "Open",
     sort_order: Number(fd.get("sort_order") ?? 0) || 0,
+    ...translated(fd, ["subject", "blurb"]),
   };
   if (id) {
     await supabase.from("classes").update(row).eq("id", id);
@@ -215,27 +241,28 @@ export async function sendNewsletter(
   _prev: SendNewsletterState,
   fd: FormData
 ): Promise<SendNewsletterState> {
+  const t = await getTranslations("admin.newsletter");
   if (!isResendConfigured()) {
-    return { ok: false, message: "Resend isn't connected yet — add RESEND_API_KEY first." };
+    return { ok: false, message: t("errNotConnected") };
   }
 
   const subject = str(fd, "subject");
   const body = str(fd, "body");
   if (!subject || !body) {
-    return { ok: false, message: "Subject and message can't be empty." };
+    return { ok: false, message: t("errEmpty") };
   }
 
   const supabase = await createClient();
   const { data: subscribers } = await supabase.from("newsletter_subscribers").select("email");
   const emails = (subscribers ?? []).map((s) => s.email).filter(Boolean);
   if (emails.length === 0) {
-    return { ok: false, message: "No subscribers to send to yet." };
+    return { ok: false, message: t("errNoSubscribers") };
   }
 
   try {
     await sendBroadcast(subject, body, emails);
   } catch (err) {
-    return { ok: false, message: err instanceof Error ? err.message : "Send failed." };
+    return { ok: false, message: err instanceof Error ? err.message : t("errFailed") };
   }
 
   await supabase
@@ -243,7 +270,7 @@ export async function sendNewsletter(
     .insert({ subject, body, recipient_count: emails.length });
 
   revalidatePath("/admin/newsletter");
-  return { ok: true, message: `Sent to ${emails.length} subscriber${emails.length === 1 ? "" : "s"}.` };
+  return { ok: true, message: t("sent", { count: emails.length }) };
 }
 
 // ---- Settings -----------------------------------------------------------

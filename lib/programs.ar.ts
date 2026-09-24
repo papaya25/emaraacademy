@@ -1,12 +1,7 @@
-import type { Program } from "./programs";
+import type { ProgramText } from "./programs";
 
-type ProgramText = Pick<
-  Program,
-  "category" | "title" | "tagline" | "whatItIs" | "activities" | "problem"
->;
-
-/** Arabic text for the six programs, keyed by slug. Used on /ar until the
- *  admin panel's own Arabic fields exist; slug, numeral and chapter heading
+/** Built-in Arabic text for the six original programs, keyed by slug. Shown
+ *  wherever the admin panel's Arabic fields are blank; slug, numeral and chapter heading
  *  come from the English record. */
 export const PROGRAMS_AR: Record<string, ProgramText> = {
   "new-muslim-education": {

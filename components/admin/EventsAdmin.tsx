@@ -1,7 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { upsertEvent, deleteEvent } from "@/app/admin/actions";
+import LangTabs from "@/components/admin/LangTabs";
 
 type EventRow = {
   id: string;
@@ -13,17 +15,45 @@ type EventRow = {
   time: string | null;
   location: string | null;
   presenter: string | null;
+  title_es?: string | null;
+  meta_es?: string | null;
+  title_ar?: string | null;
+  meta_ar?: string | null;
 };
 
-const TYPES = ["weekly", "monthly", "quarterly", "special"];
+const TYPES = ["weekly", "monthly", "quarterly", "special"] as const;
 
 export default function EventsAdmin({ events }: { events: EventRow[] }) {
+  const t = useTranslations("admin");
   const [editing, setEditing] = useState<EventRow | null>(null);
+  const typeLabel = (type: string) =>
+    (TYPES as readonly string[]).includes(type) ? t(`events.types.${type}`) : type;
+
+  // Title and notes per language; English (no suffix) is required.
+  const textFields = (suffix: "" | "_es" | "_ar") => (
+    <>
+      <label>
+        {t("events.titleField")}
+        <input
+          name={`title${suffix}`}
+          defaultValue={(editing?.[`title${suffix}`] as string | null | undefined) ?? ""}
+          required={suffix === ""}
+        />
+      </label>
+      <label>
+        {t("events.notes")}
+        <input
+          name={`meta${suffix}`}
+          defaultValue={(editing?.[`meta${suffix}`] as string | null | undefined) ?? ""}
+        />
+      </label>
+    </>
+  );
 
   return (
     <div>
       <details className="admin-card admin-details" open={!!editing}>
-        <summary>{editing ? `Editing: ${editing.title}` : "Add a new event"}</summary>
+        <summary>{editing ? t("events.editing", { title: editing.title }) : t("events.add")}</summary>
         <form
           action={async (fd) => {
             await upsertEvent(fd);
@@ -33,55 +63,48 @@ export default function EventsAdmin({ events }: { events: EventRow[] }) {
           key={editing?.id ?? "new"}
         >
           {editing && <input type="hidden" name="id" value={editing.id} />}
-          <label>
-            Title
-            <input name="title" defaultValue={editing?.title} required />
-          </label>
+          <LangTabs en={textFields("")} es={textFields("_es")} ar={textFields("_ar")} />
           <div className="admin-form-row">
             <label>
-              Type
+              {t("events.type")}
               <select name="type" defaultValue={editing?.type ?? "weekly"}>
-                {TYPES.map((t) => (
-                  <option key={t} value={t}>
-                    {t}
+                {TYPES.map((type) => (
+                  <option key={type} value={type}>
+                    {t(`events.types.${type}`)}
                   </option>
                 ))}
               </select>
             </label>
             <label>
-              City (blank = all cities)
+              {t("events.city")}
               <input name="city" defaultValue={editing?.city ?? ""} />
             </label>
             <label>
-              Date
+              {t("events.date")}
               <input type="date" name="event_date" defaultValue={editing?.event_date} required />
             </label>
             <label>
-              Time
+              {t("events.time")}
               <input name="time" placeholder="7:00 PM" defaultValue={editing?.time ?? ""} />
             </label>
           </div>
           <div className="admin-form-row">
             <label>
-              Location
+              {t("events.location")}
               <input name="location" defaultValue={editing?.location ?? ""} />
             </label>
             <label>
-              Presenter
+              {t("events.presenter")}
               <input name="presenter" defaultValue={editing?.presenter ?? ""} />
             </label>
           </div>
-          <label>
-            Notes (shown under the event)
-            <input name="meta" defaultValue={editing?.meta ?? ""} />
-          </label>
           <div className="admin-form-row">
             <button className="btn btn-green" type="submit">
-              {editing ? "Save Changes" : "Add Event"}
+              {editing ? t("common.saveChanges") : t("events.addButton")}
             </button>
             {editing && (
               <button type="button" className="btn btn-ghost" onClick={() => setEditing(null)}>
-                Cancel
+                {t("common.cancel")}
               </button>
             )}
           </div>
@@ -91,12 +114,12 @@ export default function EventsAdmin({ events }: { events: EventRow[] }) {
       <table className="admin-table">
         <thead>
           <tr>
-            <th>Date</th>
-            <th>Title</th>
-            <th>Type</th>
-            <th>City</th>
-            <th>Location</th>
-            <th>Presenter</th>
+            <th>{t("events.col.date")}</th>
+            <th>{t("events.col.title")}</th>
+            <th>{t("events.col.type")}</th>
+            <th>{t("events.col.city")}</th>
+            <th>{t("events.col.location")}</th>
+            <th>{t("events.col.presenter")}</th>
             <th></th>
           </tr>
         </thead>
@@ -104,7 +127,7 @@ export default function EventsAdmin({ events }: { events: EventRow[] }) {
           {events.length === 0 && (
             <tr>
               <td colSpan={7} className="admin-hint">
-                No events yet — add one above.
+                {t("events.empty")}
               </td>
             </tr>
           )}
@@ -112,18 +135,18 @@ export default function EventsAdmin({ events }: { events: EventRow[] }) {
             <tr key={e.id}>
               <td>{e.event_date}</td>
               <td>{e.title}</td>
-              <td>{e.type}</td>
-              <td>{e.city ?? "All"}</td>
+              <td>{typeLabel(e.type)}</td>
+              <td>{e.city ?? t("common.all")}</td>
               <td>{e.location ?? "—"}</td>
               <td>{e.presenter ?? "—"}</td>
               <td className="admin-table-actions">
                 <button type="button" className="admin-link" onClick={() => setEditing(e)}>
-                  Edit
+                  {t("common.edit")}
                 </button>
                 <form action={deleteEvent}>
                   <input type="hidden" name="id" value={e.id} />
                   <button type="submit" className="admin-link admin-link-danger">
-                    Delete
+                    {t("common.delete")}
                   </button>
                 </form>
               </td>

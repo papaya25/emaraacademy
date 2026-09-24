@@ -7,4 +7,7 @@ export const routing = defineRouting({
   localePrefix: "as-needed",
 });
 
+/** The admin panel's own language choice (the public site uses the URL). */
+export const ADMIN_LOCALE_COOKIE = "ADMIN_LOCALE";
+
 export const { Link, usePathname, useRouter } = createNavigation(routing);

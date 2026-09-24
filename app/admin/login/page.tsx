@@ -2,11 +2,14 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { createClient } from "@/lib/supabase/client";
 import { ADMIN_EMAIL } from "@/lib/adminAuth";
+import AdminLangSwitcher from "@/components/admin/AdminLangSwitcher";
 
 export default function AdminLoginPage() {
   const router = useRouter();
+  const t = useTranslations("admin.login");
   const [password, setPassword] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "error">("idle");
 
@@ -29,10 +32,10 @@ export default function AdminLoginPage() {
   return (
     <main className="admin-login">
       <form className="admin-login-card" onSubmit={submit}>
-        <h1>Admin</h1>
+        <h1>{t("title")}</h1>
         <p className="admin-login-sub">Emara Academy</p>
         <label className="corr-label" htmlFor="admin-password">
-          Password
+          {t("password")}
         </label>
         <input
           id="admin-password"
@@ -44,13 +47,14 @@ export default function AdminLoginPage() {
           disabled={status === "sending"}
         />
         <button className="btn btn-green" type="submit" disabled={status === "sending"}>
-          {status === "sending" ? "Signing in…" : "Sign In"}
+          {status === "sending" ? t("signingIn") : t("signIn")}
         </button>
         {status === "error" && (
           <p className="corr-error" role="alert">
-            Wrong password — try again.
+            {t("wrong")}
           </p>
         )}
+        <AdminLangSwitcher />
       </form>
     </main>
   );

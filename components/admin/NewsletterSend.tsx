@@ -1,9 +1,11 @@
 "use client";
 
 import { useActionState } from "react";
+import { useTranslations } from "next-intl";
 import { sendNewsletter, type SendNewsletterState } from "@/app/admin/actions";
 
 export default function NewsletterSend({ resendConfigured }: { resendConfigured: boolean }) {
+  const t = useTranslations("admin.newsletter");
   const [state, formAction, pending] = useActionState<SendNewsletterState, FormData>(
     sendNewsletter,
     null
@@ -11,25 +13,24 @@ export default function NewsletterSend({ resendConfigured }: { resendConfigured:
 
   return (
     <details className="admin-card admin-details" open>
-      <summary>Compose &amp; send</summary>
+      <summary>{t("compose")}</summary>
       {!resendConfigured && (
         <p className="admin-offline">
-          Resend isn&rsquo;t connected yet — add <code>RESEND_API_KEY</code> (and ideally{" "}
-          <code>RESEND_FROM_EMAIL</code>) to send. You can still write a draft below.
+          {t.rich("resendMissing", { code: (c) => <code>{c}</code> })}
         </p>
       )}
       <form action={formAction} className="admin-form">
         <label>
-          Subject
+          {t("subject")}
           <input name="subject" required disabled={pending} />
         </label>
         <label>
-          Message
+          {t("message")}
           <textarea name="body" rows={8} required disabled={pending} />
         </label>
         <div className="admin-form-row">
           <button className="btn btn-green" type="submit" disabled={pending || !resendConfigured}>
-            {pending ? "Sending…" : "Send to All Subscribers"}
+            {pending ? t("sending") : t("send")}
           </button>
         </div>
         {state && (

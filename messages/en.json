@@ -644,5 +644,203 @@
         }
       ]
     }
+  },
+  "admin": {
+    "nav": {
+      "title": "Emara Admin",
+      "overview": "Overview",
+      "programs": "Programs",
+      "events": "Events",
+      "classes": "Classes",
+      "donations": "Donations",
+      "messages": "Messages",
+      "newsletter": "Newsletter",
+      "settings": "Settings",
+      "signOut": "Sign Out",
+      "language": "Admin language"
+    },
+    "login": {
+      "title": "Admin",
+      "password": "Password",
+      "signIn": "Sign In",
+      "signingIn": "Signing in…",
+      "wrong": "Wrong password — try again."
+    },
+    "common": {
+      "save": "Save",
+      "saveChanges": "Save Changes",
+      "cancel": "Cancel",
+      "edit": "Edit",
+      "delete": "Delete",
+      "anonymous": "Anonymous",
+      "all": "All"
+    },
+    "langTabs": {
+      "label": "Content language",
+      "blankHint": "Anything left blank here shows in English on the {language} site.",
+      "names": {
+        "es": "Spanish",
+        "ar": "Arabic"
+      }
+    },
+    "overview": {
+      "title": "Overview",
+      "raisedMonth": "Raised This Month",
+      "raisedAll": "Raised All Time",
+      "donationsLogged": "Donations Logged",
+      "contactMessages": "Contact Messages",
+      "subscribers": "Newsletter Subscribers",
+      "upcomingEvents": "Upcoming Events"
+    },
+    "programs": {
+      "title": "Programs",
+      "hint": "These are the program chapters shown on the homepage and the Programs page. Adding or removing one renumbers the rest so the chapter numbers stay in order. Activities: one per line, as <code>Title | Description</code>.",
+      "offline": "Showing today’s content as a preview — Supabase isn’t connected (project paused or migration not run yet), so saving, adding, or deleting won’t persist until it is.",
+      "add": "Add a new program",
+      "addButton": "Add Program",
+      "deleteThis": "Delete this program",
+      "category": "Category",
+      "titleField": "Title",
+      "tagline": "Tagline",
+      "whatItIs": "What it is",
+      "activities": "Activities (one per line: Title | Description)",
+      "problem": "The moment it answers"
+    },
+    "events": {
+      "title": "Events",
+      "add": "Add a new event",
+      "editing": "Editing: {title}",
+      "addButton": "Add Event",
+      "titleField": "Title",
+      "type": "Type",
+      "types": {
+        "weekly": "Weekly",
+        "monthly": "Monthly",
+        "quarterly": "Quarterly",
+        "special": "Eid & Islamic dates"
+      },
+      "city": "City (blank = all cities)",
+      "date": "Date",
+      "time": "Time",
+      "location": "Location",
+      "presenter": "Presenter",
+      "notes": "Notes (shown under the event)",
+      "empty": "No events yet — add one above.",
+      "col": {
+        "date": "Date",
+        "title": "Title",
+        "type": "Type",
+        "city": "City",
+        "location": "Location",
+        "presenter": "Presenter"
+      }
+    },
+    "classes": {
+      "title": "Classes",
+      "add": "Add a new class",
+      "editing": "Editing: {title}",
+      "addButton": "Add Class",
+      "subject": "Subject",
+      "blurb": "Short description",
+      "city": "City",
+      "location": "Location (address / venue)",
+      "track": "Track",
+      "language": "Language taught in",
+      "day": "Day",
+      "time": "Time",
+      "format": "Format",
+      "formats": {
+        "In person": "In person",
+        "Online": "Online"
+      },
+      "status": "Status",
+      "statuses": {
+        "Open": "Open",
+        "Starting soon": "Starting soon",
+        "Full": "Full"
+      },
+      "sortOrder": "Sort order (lower shows first)",
+      "empty": "No classes yet — add one above.",
+      "col": {
+        "subject": "Subject",
+        "city": "City",
+        "location": "Location",
+        "dayTime": "Day / Time",
+        "status": "Status"
+      }
+    },
+    "donations": {
+      "title": "Donations",
+      "summary": "{count, plural, one {# donation} other {# donations}} logged · ${total} total. Stripe isn’t connected yet, so every donation is logged here by hand for now.",
+      "log": "Log a donation",
+      "date": "Date",
+      "amount": "Amount (USD)",
+      "method": "Method",
+      "methods": {
+        "card": "Card",
+        "bank": "Bank transfer",
+        "other": "Other"
+      },
+      "frequency": "Frequency",
+      "frequencies": {
+        "once": "One-time",
+        "monthly": "Monthly"
+      },
+      "donor": "Donor name (blank = anonymous)",
+      "note": "Note",
+      "addButton": "Add Donation",
+      "empty": "No donations logged yet.",
+      "col": {
+        "date": "Date",
+        "donor": "Donor",
+        "amount": "Amount",
+        "method": "Method",
+        "frequency": "Frequency",
+        "note": "Note"
+      }
+    },
+    "messages": {
+      "title": "Messages",
+      "hint": "Sent from the contact form. Delete a message once you’ve handled it.",
+      "empty": "No messages yet."
+    },
+    "newsletter": {
+      "title": "Newsletter",
+      "subscriberCount": "{count, plural, one {# subscriber} other {# subscribers}}.",
+      "pastCampaigns": "Past campaigns",
+      "subscribers": "Subscribers",
+      "noSubscribers": "No subscribers yet.",
+      "col": {
+        "sent": "Sent",
+        "subject": "Subject",
+        "recipients": "Recipients",
+        "email": "Email",
+        "subscribed": "Subscribed"
+      },
+      "compose": "Compose & send",
+      "resendMissing": "Resend isn’t connected yet — add <code>RESEND_API_KEY</code> (and ideally <code>RESEND_FROM_EMAIL</code>) to send. You can still write a draft below.",
+      "subject": "Subject",
+      "message": "Message",
+      "sending": "Sending…",
+      "send": "Send to All Subscribers",
+      "errNotConnected": "Resend isn’t connected yet — add RESEND_API_KEY first.",
+      "errEmpty": "Subject and message can’t be empty.",
+      "errNoSubscribers": "No subscribers to send to yet.",
+      "errFailed": "Send failed.",
+      "sent": "Sent to {count, plural, one {# subscriber} other {# subscribers}}."
+    },
+    "settings": {
+      "title": "Settings",
+      "contact": "Contact info",
+      "email": "Email",
+      "phone": "Phone (used for calls and WhatsApp)",
+      "impact": "Impact numbers (homepage)",
+      "newMuslims": "New Muslims",
+      "students": "Students",
+      "supported": "People Supported",
+      "goalSection": "Monthly donation goal",
+      "goalHint": "The “raised so far” number updates on its own from the Donations tab — only the goal is set here.",
+      "goal": "Goal (USD)"
+    }
   }
 }

@@ -644,5 +644,203 @@
         }
       ]
     }
+  },
+  "admin": {
+    "nav": {
+      "title": "Panel de Emara",
+      "overview": "Resumen",
+      "programs": "Programas",
+      "events": "Eventos",
+      "classes": "Clases",
+      "donations": "Donativos",
+      "messages": "Mensajes",
+      "newsletter": "Boletín",
+      "settings": "Ajustes",
+      "signOut": "Cerrar Sesión",
+      "language": "Idioma del panel"
+    },
+    "login": {
+      "title": "Administración",
+      "password": "Contraseña",
+      "signIn": "Entrar",
+      "signingIn": "Entrando…",
+      "wrong": "Contraseña incorrecta. Inténtalo de nuevo."
+    },
+    "common": {
+      "save": "Guardar",
+      "saveChanges": "Guardar Cambios",
+      "cancel": "Cancelar",
+      "edit": "Editar",
+      "delete": "Eliminar",
+      "anonymous": "Anónimo",
+      "all": "Todas"
+    },
+    "langTabs": {
+      "label": "Idioma del contenido",
+      "blankHint": "Lo que dejes vacío aquí se mostrará en inglés en el sitio en {language}.",
+      "names": {
+        "es": "español",
+        "ar": "árabe"
+      }
+    },
+    "overview": {
+      "title": "Resumen",
+      "raisedMonth": "Recaudado Este Mes",
+      "raisedAll": "Recaudado en Total",
+      "donationsLogged": "Donativos Registrados",
+      "contactMessages": "Mensajes de Contacto",
+      "subscribers": "Suscriptores del Boletín",
+      "upcomingEvents": "Próximos Eventos"
+    },
+    "programs": {
+      "title": "Programas",
+      "hint": "Estos son los capítulos de programas que aparecen en la portada y en la página de Programas. Al agregar o eliminar uno, los demás se renumeran solos para que los capítulos sigan en orden. Actividades: una por línea, así: <code>Título | Descripción</code>.",
+      "offline": "Mostrando el contenido actual como vista previa: Supabase no está conectado (proyecto en pausa o migración sin ejecutar), así que guardar, agregar o eliminar no tendrá efecto hasta que lo esté.",
+      "add": "Agregar un programa nuevo",
+      "addButton": "Agregar Programa",
+      "deleteThis": "Eliminar este programa",
+      "category": "Categoría",
+      "titleField": "Título",
+      "tagline": "Frase principal",
+      "whatItIs": "Qué es",
+      "activities": "Actividades (una por línea: Título | Descripción)",
+      "problem": "El momento al que responde"
+    },
+    "events": {
+      "title": "Eventos",
+      "add": "Agregar un evento nuevo",
+      "editing": "Editando: {title}",
+      "addButton": "Agregar Evento",
+      "titleField": "Título",
+      "type": "Tipo",
+      "types": {
+        "weekly": "Semanal",
+        "monthly": "Mensual",
+        "quarterly": "Trimestral",
+        "special": "Eid y fechas islámicas"
+      },
+      "city": "Ciudad (vacío = todas las ciudades)",
+      "date": "Fecha",
+      "time": "Hora",
+      "location": "Lugar",
+      "presenter": "Presentador",
+      "notes": "Notas (aparecen debajo del evento)",
+      "empty": "Todavía no hay eventos. Agrega uno arriba.",
+      "col": {
+        "date": "Fecha",
+        "title": "Título",
+        "type": "Tipo",
+        "city": "Ciudad",
+        "location": "Lugar",
+        "presenter": "Presentador"
+      }
+    },
+    "classes": {
+      "title": "Clases",
+      "add": "Agregar una clase nueva",
+      "editing": "Editando: {title}",
+      "addButton": "Agregar Clase",
+      "subject": "Tema",
+      "blurb": "Descripción breve",
+      "city": "Ciudad",
+      "location": "Lugar (dirección / sede)",
+      "track": "Etapa",
+      "language": "Idioma de la clase",
+      "day": "Día",
+      "time": "Hora",
+      "format": "Modalidad",
+      "formats": {
+        "In person": "Presencial",
+        "Online": "En línea"
+      },
+      "status": "Estado",
+      "statuses": {
+        "Open": "Inscripciones abiertas",
+        "Starting soon": "Empieza pronto",
+        "Full": "Cupo lleno"
+      },
+      "sortOrder": "Orden (el número más bajo aparece primero)",
+      "empty": "Todavía no hay clases. Agrega una arriba.",
+      "col": {
+        "subject": "Tema",
+        "city": "Ciudad",
+        "location": "Lugar",
+        "dayTime": "Día / Hora",
+        "status": "Estado"
+      }
+    },
+    "donations": {
+      "title": "Donativos",
+      "summary": "{count, plural, one {# donativo registrado} other {# donativos registrados}} · ${total} en total. Stripe todavía no está conectado, así que por ahora cada donativo se registra aquí a mano.",
+      "log": "Registrar un donativo",
+      "date": "Fecha",
+      "amount": "Monto (USD)",
+      "method": "Forma de pago",
+      "methods": {
+        "card": "Tarjeta",
+        "bank": "Transferencia bancaria",
+        "other": "Otra"
+      },
+      "frequency": "Frecuencia",
+      "frequencies": {
+        "once": "Única",
+        "monthly": "Mensual"
+      },
+      "donor": "Nombre del donante (vacío = anónimo)",
+      "note": "Nota",
+      "addButton": "Agregar Donativo",
+      "empty": "Todavía no hay donativos registrados.",
+      "col": {
+        "date": "Fecha",
+        "donor": "Donante",
+        "amount": "Monto",
+        "method": "Forma de pago",
+        "frequency": "Frecuencia",
+        "note": "Nota"
+      }
+    },
+    "messages": {
+      "title": "Mensajes",
+      "hint": "Enviados desde el formulario de contacto. Elimina un mensaje cuando ya lo hayas atendido.",
+      "empty": "Todavía no hay mensajes."
+    },
+    "newsletter": {
+      "title": "Boletín",
+      "subscriberCount": "{count, plural, one {# suscriptor} other {# suscriptores}}.",
+      "pastCampaigns": "Envíos anteriores",
+      "subscribers": "Suscriptores",
+      "noSubscribers": "Todavía no hay suscriptores.",
+      "col": {
+        "sent": "Enviado",
+        "subject": "Asunto",
+        "recipients": "Destinatarios",
+        "email": "Correo",
+        "subscribed": "Suscrito el"
+      },
+      "compose": "Redactar y enviar",
+      "resendMissing": "Resend todavía no está conectado: agrega <code>RESEND_API_KEY</code> (y de preferencia <code>RESEND_FROM_EMAIL</code>) para poder enviar. Mientras tanto puedes escribir un borrador abajo.",
+      "subject": "Asunto",
+      "message": "Mensaje",
+      "sending": "Enviando…",
+      "send": "Enviar a Todos los Suscriptores",
+      "errNotConnected": "Resend todavía no está conectado: primero agrega RESEND_API_KEY.",
+      "errEmpty": "El asunto y el mensaje no pueden quedar vacíos.",
+      "errNoSubscribers": "Todavía no hay suscriptores a quienes enviar.",
+      "errFailed": "No se pudo enviar.",
+      "sent": "Enviado a {count, plural, one {# suscriptor} other {# suscriptores}}."
+    },
+    "settings": {
+      "title": "Ajustes",
+      "contact": "Datos de contacto",
+      "email": "Correo electrónico",
+      "phone": "Teléfono (para llamadas y WhatsApp)",
+      "impact": "Cifras de impacto (portada)",
+      "newMuslims": "Nuevos musulmanes",
+      "students": "Alumnos",
+      "supported": "Personas apoyadas",
+      "goalSection": "Meta mensual de donativos",
+      "goalHint": "La cifra de «recaudado hasta ahora» se actualiza sola desde la pestaña Donativos; aquí solo se fija la meta.",
+      "goal": "Meta (USD)"
+    }
   }
 }

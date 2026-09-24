@@ -1,9 +1,11 @@
 import { createClient } from "@/lib/supabase/server";
+import { getTranslations } from "next-intl/server";
 import { updateContactInfo, updateImpactStats, updateDonationGoal } from "@/app/admin/actions";
 import { DEFAULT_CONTACT } from "@/lib/contactInfo";
 
 export default async function AdminSettingsPage() {
   const supabase = await createClient();
+  const t = await getTranslations("admin");
   const { data: rows } = await supabase
     .from("site_settings")
     .select("key,value")
@@ -21,61 +23,58 @@ export default async function AdminSettingsPage() {
 
   return (
     <div>
-      <h1>Settings</h1>
+      <h1>{t("settings.title")}</h1>
 
       <details className="admin-card admin-details" open>
-        <summary>Contact info</summary>
+        <summary>{t("settings.contact")}</summary>
         <form action={updateContactInfo} className="admin-form">
           <label>
-            Email
+            {t("settings.email")}
             <input type="email" name="email" defaultValue={contact.email} required />
           </label>
           <label>
-            Phone (used for calls and WhatsApp)
+            {t("settings.phone")}
             <input name="phone" defaultValue={contact.phone} required />
           </label>
           <button className="btn btn-green" type="submit">
-            Save
+            {t("common.save")}
           </button>
         </form>
       </details>
 
       <details className="admin-card admin-details">
-        <summary>Impact numbers (homepage)</summary>
+        <summary>{t("settings.impact")}</summary>
         <form action={updateImpactStats} className="admin-form">
           <div className="admin-form-row">
             <label>
-              New Muslims
+              {t("settings.newMuslims")}
               <input type="number" name="new_muslims" defaultValue={impact.new_muslims} />
             </label>
             <label>
-              Students
+              {t("settings.students")}
               <input type="number" name="students" defaultValue={impact.students} />
             </label>
             <label>
-              People Supported
+              {t("settings.supported")}
               <input type="number" name="supported" defaultValue={impact.supported} />
             </label>
           </div>
           <button className="btn btn-green" type="submit">
-            Save
+            {t("common.save")}
           </button>
         </form>
       </details>
 
       <details className="admin-card admin-details">
-        <summary>Monthly donation goal</summary>
-        <p className="admin-hint">
-          The &ldquo;raised so far&rdquo; number updates on its own from the Donations
-          tab — only the goal is set here.
-        </p>
+        <summary>{t("settings.goalSection")}</summary>
+        <p className="admin-hint">{t("settings.goalHint")}</p>
         <form action={updateDonationGoal} className="admin-form">
           <label>
-            Goal (USD)
+            {t("settings.goal")}
             <input type="number" name="goal" defaultValue={goal} />
           </label>
           <button className="btn btn-green" type="submit">
-            Save
+            {t("common.save")}
           </button>
         </form>
       </details>

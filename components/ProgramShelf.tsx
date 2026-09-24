@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
-import { PROGRAMS, localizeProgram, type Program } from "@/lib/programs";
+import { PROGRAMS, localizeProgram, programFromRow, type Program } from "@/lib/programs";
 import { getSupabase } from "@/lib/supabase";
 
 const ACCENTS = ["a", "b", "c"] as const;
@@ -21,23 +21,11 @@ export default function ProgramShelf() {
     let cancelled = false;
     supabase
       .from("programs")
-      .select("slug,num,chapter,category,title,tagline,activities,what_it_is,problem")
+      .select("*")
       .order("sort_order", { ascending: true })
       .then(({ data, error }) => {
         if (!cancelled && !error && data && data.length) {
-          setDbPrograms(
-            data.map((p) => ({
-              slug: p.slug,
-              num: p.num,
-              chapter: p.chapter,
-              category: p.category,
-              title: p.title,
-              tagline: p.tagline,
-              whatItIs: p.what_it_is,
-              activities: p.activities,
-              problem: p.problem,
-            }))
-          );
+          setDbPrograms(data.map(programFromRow));
         }
       });
     return () => {

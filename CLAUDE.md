@@ -37,8 +37,9 @@ Manuscript/book aesthetic: warm paper ground, content framed like an illuminated
 English first. **Arabic is live** (since 2026-09-24): every public page is translated via `next-intl` — English at unprefixed URLs, Arabic under `/ar/...`, right-to-left layout. **Spanish** (added 2026-09-24 on branch `spanish-i18n`, meaning-for-meaning rather than literal, Mexican usage with "tú"): every public page under `/es/...`, enabled in the language menu. Spanish/Portuguese are the actual target audience for the programs; Portuguese is not started.
 - Page text lives in `messages/en.json` / `messages/es.json` / `messages/ar.json` (one namespace per page, identical key sets). New public copy must go in **all three** files — never hardcode English in a public page/component. Use `t.rich(key, rich)` (`lib/rich.tsx`) for `<em>` in headings.
 - Internal links use `Link`/`useRouter` from `@/i18n/routing`, not `next/link`, so visitors stay in their language.
-- Program text: `lib/programs.es.ts` / `lib/programs.ar.ts` (by slug, via `localizeProgram`); sample classes: `lib/classes.es.ts` / `lib/classes.ar.ts`; city/day/track/status names: `lib/i18nDisplay.ts` (ES + AR tables). Anything edited in the admin panel still shows in English on `/es` and `/ar` until translated admin fields exist (plan: `docs/superpowers/plans/2026-09-22-arabic-i18n.md`, Stage 3).
-- The admin panel stays English-only (owner's call).
+- Program text: `lib/programs.es.ts` / `lib/programs.ar.ts` (by slug, via `localizeProgram`); sample classes: `lib/classes.es.ts` / `lib/classes.ar.ts`; city/day/track/status names: `lib/i18nDisplay.ts` (ES + AR tables).
+- **Admin-edited content is translatable** (2026-09-24): programs, events and classes forms have English / Español / العربية tabs (`components/admin/LangTabs.tsx`), saved to `_es`/`_ar` sibling columns (migration `008_translated_content.sql`). Public site picks, per field: typed translation → built-in translation (`lib/programs.es.ts`/`.ar.ts`, sample classes) → English. Program logic lives in `programFromRow`/`localizeProgram` (`lib/programs.ts`). Translation is manual — auto-translate was offered and deferred by the owner.
+- **The admin panel's own screens are EN/ES/AR** (2026-09-24, reverses the earlier "admin English-only" call at the owner's request): language picker in the admin sidebar and login card, stored in the `ADMIN_LOCALE` cookie (separate from the public site's `NEXT_LOCALE`); `i18n/request.ts` falls back to it for routes outside `app/[locale]`. Arabic admin is RTL. Admin text lives in the `admin` namespace of the three message files.
 - RTL gotchas: Lora has no Arabic glyphs (RTL swaps it for Amiri), letter-spacing breaks Arabic joins (zeroed in RTL), drop caps are off in RTL, and phone numbers/emails/money need `dir="ltr"`/`<bdi>` or they display scrambled. Use logical CSS properties (`inset-inline`, `margin-inline-start`...), never left/right.
 
 ## Tech stack
@@ -110,6 +111,7 @@ reachable by direct link only).
 
 ## Pending from the owner (placeholders until provided)
 - Supabase dashboard: create the admin user + turn off public sign-ups (see "Admin panel")
+- **Apply migration `008_translated_content.sql`** (adds the `_es`/`_ar` content columns) BEFORE merging the admin-translation work to `main` — without it, saving a program/event/class from the admin fails. It's purely additive (nullable columns). Claude's attempt to apply it via the Supabase MCP was blocked by the auto-mode safety check on 2026-09-24; needs the owner's go-ahead or the SQL Editor
 - Connect the custom domain emaraacademy.org in Vercel + DNS at the registrar (purchased 2026-09-24; code already follows Vercel's production domain via `lib/siteUrl.ts`). Owner already has email hosting for info@emaraacademy.org.
 - Stripe account/keys (card donations are a test-mode placeholder). PayPal dropped for good.
 - Resend account + `RESEND_API_KEY` + verified sending domain (newsletter sending)

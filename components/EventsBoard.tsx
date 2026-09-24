@@ -18,6 +18,8 @@ type DbEvent = {
   time: string | null;
   location: string | null;
   presenter: string | null;
+  // Spanish/Arabic typed in the admin panel (null = show the English)
+  [translated: `${"title" | "meta"}_${string}`]: string | null | undefined;
 };
 
 const EVENT_TYPES: EventType[] = ["weekly", "monthly", "quarterly", "special"];
@@ -147,7 +149,7 @@ export default function EventsBoard() {
     let cancelled = false;
     supabase
       .from("events")
-      .select("id,title,meta,city,type,event_date,time,location,presenter")
+      .select("*")
       .then(({ data, error }) => {
         if (!cancelled && !error && data && data.length) setDbEvents(data as DbEvent[]);
       });
@@ -176,8 +178,8 @@ export default function EventsBoard() {
           : "monthly";
         (map[d] ||= []).push({
           type,
-          title: ev.title,
-          meta: ev.meta ?? "",
+          title: ev[`title_${locale}`] || ev.title,
+          meta: ev[`meta_${locale}`] || ev.meta || "",
           city: ev.city,
           time: ev.time,
           location: ev.location,
@@ -194,7 +196,7 @@ export default function EventsBoard() {
       if (keep.length) filtered[Number(d)] = keep;
     }
     return filtered;
-  }, [dbEvents, city, cursor, sampleText]);
+  }, [dbEvents, city, cursor, sampleText, locale]);
 
   const firstDow = new Date(cursor.year, cursor.month, 1).getDay();
   const daysInMonth = new Date(cursor.year, cursor.month + 1, 0).getDate();

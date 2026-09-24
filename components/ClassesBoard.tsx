@@ -13,6 +13,10 @@ import WhatsAppLink from "@/components/WhatsAppLink";
 
 const ALL = CLASS_CITIES[0];
 
+type DbClass = ClassInfo & {
+  [translated: `${"subject" | "blurb"}_${string}`]: string | null | undefined;
+};
+
 export default function ClassesBoard() {
   const t = useTranslations("classes.board");
   const locale = useLocale();
@@ -21,18 +25,18 @@ export default function ClassesBoard() {
   const [city, setCity] = useState<string>(ALL);
 
   // Real classes from Supabase; null = none yet, fall back to the sample list
-  const [dbClasses, setDbClasses] = useState<ClassInfo[] | null>(null);
+  const [dbClasses, setDbClasses] = useState<DbClass[] | null>(null);
   useEffect(() => {
     const supabase = getSupabase();
     if (!supabase) return;
     let cancelled = false;
     supabase
       .from("classes")
-      .select("id,subject,blurb,track,language,city,location,day,time,format,status")
+      .select("*")
       .order("sort_order", { ascending: true })
       .then(({ data, error }) => {
         if (!cancelled && !error && data && data.length) {
-          setDbClasses(data as ClassInfo[]);
+          setDbClasses(data as DbClass[]);
         }
       });
     return () => {
@@ -41,10 +45,18 @@ export default function ClassesBoard() {
   }, []);
 
   const isLive = dbClasses !== null;
-  // Sample classes have hand-written Spanish/Arabic; real (Supabase) classes
-  // show their English text until the admin panel gains translated fields.
+  // Real classes use the Spanish/Arabic typed in the admin panel (blank =
+  // English); the sample classes have hand-written translations.
   const sampleText = locale === "ar" ? CLASSES_AR : locale === "es" ? CLASSES_ES : null;
-  const list = dbClasses ?? (sampleText ? CLASSES.map((c) => ({ ...c, ...sampleText[c.id] })) : CLASSES);
+  const list: ClassInfo[] = dbClasses
+    ? dbClasses.map((c) => ({
+        ...c,
+        subject: c[`subject_${locale}`] || c.subject,
+        blurb: c[`blurb_${locale}`] || c.blurb,
+      }))
+    : sampleText
+      ? CLASSES.map((c) => ({ ...c, ...sampleText[c.id] }))
+      : CLASSES;
 
   const cities = useMemo(() => {
     if (!dbClasses) return CLASS_CITIES;

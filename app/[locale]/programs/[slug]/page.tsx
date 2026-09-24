@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { rich } from "@/lib/rich";
 import Reveal from "@/components/Reveal";
 import Rosette from "@/components/Rosette";
-import { PROGRAMS, localizeProgram, type Program } from "@/lib/programs";
+import { PROGRAMS, localizeProgram, programFromRow, type Program } from "@/lib/programs";
 import { getSupabase } from "@/lib/supabase";
 
 export const revalidate = 60;
@@ -26,20 +26,10 @@ async function fetchPrograms(): Promise<Program[]> {
     if (!supabase) return PROGRAMS;
     const { data, error } = await supabase
       .from("programs")
-      .select("slug,num,chapter,category,title,tagline,activities,what_it_is,problem")
+      .select("*")
       .order("sort_order", { ascending: true });
     if (error || !data || !data.length) return PROGRAMS;
-    return data.map((p) => ({
-      slug: p.slug,
-      num: p.num,
-      chapter: p.chapter,
-      category: p.category,
-      title: p.title,
-      tagline: p.tagline,
-      whatItIs: p.what_it_is,
-      activities: p.activities,
-      problem: p.problem,
-    }));
+    return data.map(programFromRow);
   } catch {
     return PROGRAMS;
   }
