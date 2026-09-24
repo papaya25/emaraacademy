@@ -1,5 +1,5 @@
 /**
- * Arabic display names for short structured values (cities, weekdays, class
+ * Spanish and Arabic display names for short structured values (cities, weekdays, class
  * tracks...) that are stored in English in Supabase and the sample data.
  * The stored value never changes — only what the visitor sees. Anything
  * missing from a table is shown as-is, so a new city added in the admin
@@ -65,10 +65,58 @@ const AR: Record<string, Table> = {
   },
 };
 
+const ES: Record<keyof typeof AR, Table> = {
+  city: {
+    Cancun: "Cancún",
+    Merida: "Mérida",
+    "Mexico City": "Ciudad de México",
+    Online: "En línea",
+  },
+  day: {
+    Mondays: "Los lunes",
+    Tuesdays: "Los martes",
+    Wednesdays: "Los miércoles",
+    Thursdays: "Los jueves",
+    Fridays: "Los viernes",
+    Saturdays: "Los sábados",
+    Sundays: "Los domingos",
+    Monday: "Lunes",
+    Tuesday: "Martes",
+    Wednesday: "Miércoles",
+    Thursday: "Jueves",
+    Friday: "Viernes",
+    Saturday: "Sábado",
+    Sunday: "Domingo",
+  },
+  track: {
+    Foundations: "Fundamentos",
+    Practice: "Práctica",
+    Deepening: "Profundización",
+  },
+  status: {
+    Open: "Inscripciones abiertas",
+    "Starting soon": "Empieza pronto",
+    Full: "Cupo lleno",
+  },
+  format: {
+    "In person": "Presencial",
+    Online: "En línea",
+  },
+  language: {
+    Spanish: "Español",
+    "Português": "Portugués",
+    Portuguese: "Portugués",
+    English: "Inglés",
+    "العربية": "Árabe",
+    Arabic: "Árabe",
+  },
+};
+
+const TABLES: Record<string, Record<keyof typeof AR, Table>> = { es: ES, ar: AR };
+
 export type DisplayKind = keyof typeof AR;
 
 /** The visitor-facing label for a stored value, e.g. ("city", "Cancún", "ar") -> "كانكون". */
 export function displayValue(kind: DisplayKind, value: string, locale: string): string {
-  if (locale !== "ar") return value;
-  return AR[kind]?.[value.trim()] ?? value;
+  return TABLES[locale]?.[kind]?.[value.trim()] ?? value;
 }

@@ -1,4 +1,5 @@
 import { PROGRAMS_AR } from "./programs.ar";
+import { PROGRAMS_ES } from "./programs.es";
 
 export type Program = {
   slug: string;
@@ -197,10 +198,11 @@ export const PROGRAMS: Program[] = [
   },
 ];
 
-/** The program's text in the visitor's language. Arabic falls back to the
- *  English record for any program without a translation. */
+const TRANSLATIONS: Record<string, typeof PROGRAMS_AR> = { es: PROGRAMS_ES, ar: PROGRAMS_AR };
+
+/** The program's text in the visitor's language. Falls back to the English
+ *  record for any program without a translation. */
 export function localizeProgram(p: Program, locale: string): Program {
-  if (locale !== "ar") return p;
-  const ar = PROGRAMS_AR[p.slug];
-  return ar ? { ...p, ...ar } : p;
+  const text = TRANSLATIONS[locale]?.[p.slug];
+  return text ? { ...p, ...text } : p;
 }

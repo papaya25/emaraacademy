@@ -6,7 +6,7 @@ import { usePathname } from "@/i18n/routing";
 
 const LANGS = [
   { code: "en", label: "English", ready: true },
-  { code: "es", label: "Español", ready: false },
+  { code: "es", label: "Español", ready: true },
   { code: "ar", label: "العربية", ready: true },
 ];
 

@@ -5,6 +5,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { CLASSES, CLASS_CITIES, type ClassInfo } from "@/lib/classes";
 import { CLASSES_AR } from "@/lib/classes.ar";
+import { CLASSES_ES } from "@/lib/classes.es";
 import { displayValue } from "@/lib/i18nDisplay";
 import { getSupabase } from "@/lib/supabase";
 import CityFilter from "@/components/CityFilter";
@@ -40,9 +41,10 @@ export default function ClassesBoard() {
   }, []);
 
   const isLive = dbClasses !== null;
-  // Sample classes have hand-written Arabic; real (Supabase) classes show
-  // their English text until the admin panel gains Arabic fields.
-  const list = dbClasses ?? (locale === "ar" ? CLASSES.map((c) => ({ ...c, ...CLASSES_AR[c.id] })) : CLASSES);
+  // Sample classes have hand-written Spanish/Arabic; real (Supabase) classes
+  // show their English text until the admin panel gains translated fields.
+  const sampleText = locale === "ar" ? CLASSES_AR : locale === "es" ? CLASSES_ES : null;
+  const list = dbClasses ?? (sampleText ? CLASSES.map((c) => ({ ...c, ...sampleText[c.id] })) : CLASSES);
 
   const cities = useMemo(() => {
     if (!dbClasses) return CLASS_CITIES;

@@ -34,10 +34,10 @@ Manuscript/book aesthetic: warm paper ground, content framed like an illuminated
 - **No team/board names are shown anywhere on the site.** The people running Emara Academy want to stay anonymous. Use a contact form + the phone/email above only — never add named staff, founder, or board bios/photos unless the owner explicitly reverses this.
 
 ## Languages
-English first. **Arabic is live** (since 2026-09-24): every public page is translated via `next-intl` — English at unprefixed URLs, Arabic under `/ar/...`, right-to-left layout. Spanish is still "soon" in the language menu (Spanish/Portuguese are the actual target audience for the programs).
-- Page text lives in `messages/en.json` / `messages/ar.json` (one namespace per page). New public copy must go in **both** files — never hardcode English in a public page/component. Use `t.rich(key, rich)` (`lib/rich.tsx`) for `<em>` in headings.
-- Internal links use `Link`/`useRouter` from `@/i18n/routing`, not `next/link`, so Arabic visitors stay on `/ar`.
-- Program text in Arabic: `lib/programs.ar.ts` (by slug, via `localizeProgram`); sample classes: `lib/classes.ar.ts`; city/day/track/status names: `lib/i18nDisplay.ts`. Anything edited in the admin panel still shows in English on `/ar` until the planned Arabic admin fields exist (plan: `docs/superpowers/plans/2026-09-22-arabic-i18n.md`, Stage 3).
+English first. **Arabic is live** (since 2026-09-24): every public page is translated via `next-intl` — English at unprefixed URLs, Arabic under `/ar/...`, right-to-left layout. **Spanish** (added 2026-09-24 on branch `spanish-i18n`, meaning-for-meaning rather than literal, Mexican usage with "tú"): every public page under `/es/...`, enabled in the language menu. Spanish/Portuguese are the actual target audience for the programs; Portuguese is not started.
+- Page text lives in `messages/en.json` / `messages/es.json` / `messages/ar.json` (one namespace per page, identical key sets). New public copy must go in **all three** files — never hardcode English in a public page/component. Use `t.rich(key, rich)` (`lib/rich.tsx`) for `<em>` in headings.
+- Internal links use `Link`/`useRouter` from `@/i18n/routing`, not `next/link`, so visitors stay in their language.
+- Program text: `lib/programs.es.ts` / `lib/programs.ar.ts` (by slug, via `localizeProgram`); sample classes: `lib/classes.es.ts` / `lib/classes.ar.ts`; city/day/track/status names: `lib/i18nDisplay.ts` (ES + AR tables). Anything edited in the admin panel still shows in English on `/es` and `/ar` until translated admin fields exist (plan: `docs/superpowers/plans/2026-09-22-arabic-i18n.md`, Stage 3).
 - The admin panel stays English-only (owner's call).
 - RTL gotchas: Lora has no Arabic glyphs (RTL swaps it for Amiri), letter-spacing breaks Arabic joins (zeroed in RTL), drop caps are off in RTL, and phone numbers/emails/money need `dir="ltr"`/`<bdi>` or they display scrambled. Use logical CSS properties (`inset-inline`, `margin-inline-start`...), never left/right.
 
@@ -115,7 +115,7 @@ reachable by direct link only).
 - Resend account + `RESEND_API_KEY` + verified sending domain (newsletter sending)
 - Legal registration numbers (e.g. CLUNI/RFC) for the About page
 - Confirm the legal entity name: the bank account holder is "EMARA ACADEMY S.A. DE C.V." (normally a for-profit form in Mexico) while the site says "legally incorporated non-profit association" — flagged to owner, not yet answered
-- Native-speaker proofread of the Arabic; legal review of the policies
+- Native-speaker proofread of the Arabic and Spanish; legal review of the policies (both translations included)
 - Policy pages are written (EN+AR) but deliberately unlinked: `POLICY_LINKS_ENABLED = false` in `lib/policies.ts` — flip to true only when the owner says so
 
 ## Ideas offered, not yet approved

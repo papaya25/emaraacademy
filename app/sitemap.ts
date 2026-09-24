@@ -20,10 +20,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
   const paths = [...staticRoutes, ...PROGRAMS.map((p) => `/programs/${p.slug}`)];
 
-  // Each page in English (unprefixed) and Arabic (/ar), linked as alternates.
+  // Each page in English (unprefixed), Spanish (/es) and Arabic (/ar), linked as alternates.
   return paths.flatMap((path) => {
-    const languages = { en: `${SITE_URL}${path}`, ar: `${SITE_URL}/ar${path}` };
-    return (["en", "ar"] as const).map((lang) => ({
+    const languages = {
+      en: `${SITE_URL}${path}`,
+      es: `${SITE_URL}/es${path}`,
+      ar: `${SITE_URL}/ar${path}`,
+    };
+    return (["en", "es", "ar"] as const).map((lang) => ({
       url: languages[lang],
       lastModified: new Date(),
       alternates: { languages },
