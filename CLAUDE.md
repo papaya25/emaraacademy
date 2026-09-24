@@ -34,7 +34,7 @@ Manuscript/book aesthetic: warm paper ground, content framed like an illuminated
 - **No team/board names are shown anywhere on the site.** The people running Emara Academy want to stay anonymous. Use a contact form + the phone/email above only — never add named staff, founder, or board bios/photos unless the owner explicitly reverses this.
 
 ## Languages
-English first. **Arabic is built** (branch work from 2026-09-23, preview only until the owner approves going live): every public page is translated via `next-intl` — English at unprefixed URLs, Arabic under `/ar/...`, right-to-left layout. Spanish is still "soon" in the language menu (Spanish/Portuguese are the actual target audience for the programs).
+English first. **Arabic is live** (since 2026-09-24): every public page is translated via `next-intl` — English at unprefixed URLs, Arabic under `/ar/...`, right-to-left layout. Spanish is still "soon" in the language menu (Spanish/Portuguese are the actual target audience for the programs).
 - Page text lives in `messages/en.json` / `messages/ar.json` (one namespace per page). New public copy must go in **both** files — never hardcode English in a public page/component. Use `t.rich(key, rich)` (`lib/rich.tsx`) for `<em>` in headings.
 - Internal links use `Link`/`useRouter` from `@/i18n/routing`, not `next/link`, so Arabic visitors stay on `/ar`.
 - Program text in Arabic: `lib/programs.ar.ts` (by slug, via `localizeProgram`); sample classes: `lib/classes.ar.ts`; city/day/track/status names: `lib/i18nDisplay.ts`. Anything edited in the admin panel still shows in English on `/ar` until the planned Arabic admin fields exist (plan: `docs/superpowers/plans/2026-09-22-arabic-i18n.md`, Stage 3).
@@ -113,6 +113,7 @@ bare shell instead of the public nav and donate bar. New public pages go in `app
 not `app/`.
 
 ## Pending from the owner (placeholders until provided)
+- Connect the custom domain emaraacademy.org in Vercel (purchased 2026-09-24; code already follows Vercel's production domain via `lib/siteUrl.ts`)
 - Legal registration numbers (e.g. CLUNI/RFC) for the transparency/about page
 - Donation account details: Stripe/PayPal live keys, bank transfer info
 - Run the admin panel migration + create the admin login (see above)
