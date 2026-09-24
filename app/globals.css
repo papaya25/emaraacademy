@@ -1334,7 +1334,7 @@ img {
 
 .method-row {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 10px;
   margin-bottom: 18px;
 }
@@ -2067,6 +2067,68 @@ img {
   font-size: 0.92rem;
   color: var(--ink-soft);
   margin-top: 4px;
+}
+.bank-details {
+  border: 1px solid var(--rule-gold);
+  background: var(--paper-deep);
+  padding: 20px 22px;
+  margin-top: 4px;
+  font-size: 0.95rem;
+}
+.bank-details > p {
+  margin: 0 0 0.8em;
+  color: var(--ink-soft);
+}
+.bank-details dl {
+  margin: 0;
+}
+.bank-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 16px;
+  padding-block: 0.55em;
+  border-bottom: 1px solid var(--rule);
+}
+.bank-row dt {
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+}
+.bank-row dd {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-weight: 600;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+.bank-copy {
+  font: inherit;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--terracotta);
+  background: none;
+  border: 1px solid rgba(181, 97, 60, 0.4);
+  border-radius: 2px;
+  padding: 0.15em 0.6em;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.bank-copy:hover {
+  color: var(--gold-deep);
+  border-color: var(--rule-gold);
+}
+.bank-reference {
+  margin: 1em 0 0;
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+}
+.bank-reference a {
+  color: var(--terracotta);
+  font-weight: 600;
 }
 .payment-placeholder a {
   color: var(--terracotta);

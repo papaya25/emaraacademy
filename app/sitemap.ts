@@ -12,7 +12,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/programs",
     "/events",
     "/classes",
-    "/donations",
     "/faq",
     "/contact",
     ...(POLICY_LINKS_ENABLED

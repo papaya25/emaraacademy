@@ -4,7 +4,7 @@
 Website for **Emara Academy**, a legally incorporated non-profit based in Playa del Carmen, Quintana Roo, Mexico. It runs retention-focused programs for new Muslim converts across Latin America (education, imam/teacher training, community events, mutual aid fund, outdoor retreats, inter-community exchange).
 
 Mostly a **showcase/informational site** (who we are, programs, impact), plus:
-- Donations: Stripe, PayPal, and bank transfer (bank details shown as plain info, no integration needed)
+- Donations: Stripe and bank transfer only (owner dropped PayPal 2026-09-24). Bank details (Citibanamex, CLABE, SWIFT) live in `lib/bankDetails.ts` and show on the checkout's bank option. `/donate` and `/donations` are `noindex` (owner: reachable by link, not listed in Google)
 - Newsletter signup stored in Supabase, campaigns sent via Resend
 - Events calendar/planner
 - Admin panel (like a `/admin` area) to manage events, programs, and newsletter data
@@ -59,24 +59,22 @@ export PATH="$HOME/.local/node22/bin:$PATH"
 Never name a custom CSS class after a Tailwind utility (`contents`, `hidden`, `container`, `flex`, etc.) — Tailwind v4 generates the matching utility class regardless, and it silently merges with your rule on any property your rule doesn't itself set. Bit us once: the homepage/`/programs` section was `className="contents"`, which picked up Tailwind's `.contents { display: contents }` (a real utility) — that collapsed the section to a zero-size box (`getBoundingClientRect()` all zeros), which is what made the "See Our Work" hero button silently fail to scroll to it. Renamed to `.chapters` in [globals.css](app/globals.css), [app/page.tsx](app/page.tsx), [app/programs/page.tsx](app/programs/page.tsx).
 
 ## Admin panel (`/admin`) — built 2026-09-22
-**⚠ The password gate is currently OFF in production.** `ADMIN_AUTH_ENABLED = false` in
-[`proxy.ts`](proxy.ts) — anyone with the URL can open `/admin` right now. This was the
-owner's explicit, temporary call on 2026-09-22 ("for now no need for password we can add it
-later, for now what is important is to see the design") because the Supabase project is
-paused (billing) so there's no working login to test against anyway. **Flip it back to
-`true` before this matters** — i.e. once real data (donor names, contact messages) starts
-landing in it, and definitely before/at the point the owner unpauses Supabase and wants the
-real login working.
+**Password gate is ON** (turned back on 2026-09-24, owner's request). `ADMIN_AUTH_ENABLED = true` in
+[`proxy.ts`](proxy.ts), and only the Supabase user `admin@emaraacademy.org` gets in — any other
+signed-in Supabase user is treated as signed out. The password is set in the Supabase dashboard
+(never in code). Migration `005_admin_only_access.sql` makes the database enforce the same thing
+(`public.is_admin()`): before it, every admin policy allowed *any* authenticated user, and public
+sign-ups are on by default in Supabase. Admin pages are `noindex`.
 
 Two things the owner still needs to do in the Supabase dashboard before the panel is fully
 live (I don't have write access — it's on the owner's own Supabase account, not the
 MCP-connected one):
-1. Unpause the project (billing) — it's currently paused, so all Supabase calls fail; every
+1. ~~Unpause the project~~ — done, owner reports it active again as of 2026-09-24. While paused, every
    admin list page falls back to empty/static-preview state instead of erroring (see below).
 2. Run migrations `002_admin_panel.sql`, `003_classes_location_programs_crud.sql`, then
-   `004_email_campaigns.sql` (all in `supabase/migrations/`) in the SQL Editor, in that
+   `004_email_campaigns.sql`, then `005_admin_only_access.sql` (all in `supabase/migrations/`) in the SQL Editor, in that
    order, after `schema.sql` (which should already be applied).
-3. Once auth is turned back on: Authentication → Users → Add User: email
+3. Authentication → Users → Add User (tick "Auto Confirm User"): email
    `admin@emaraacademy.org`, any password. That password is the one login — **one shared
    account, not one per person** (owner's explicit call: "no need for 2 separate accounts
    just one with one password"). Login screen only asks for the password; the email is

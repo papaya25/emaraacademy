@@ -12,7 +12,7 @@ const AMOUNTS = [25, 50, 100, 250];
 const MONTH_FALLBACK = { goal: 5000 };
 const RAISED_FALLBACK = 1850;
 
-const METHODS = ["card", "paypal", "bank"] as const;
+const METHODS = ["card", "bank"] as const;
 type Method = (typeof METHODS)[number];
 
 export default function DonatePanel() {

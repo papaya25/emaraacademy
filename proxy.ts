@@ -2,14 +2,14 @@ import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 import createIntlMiddleware from "next-intl/middleware";
 import { routing } from "@/i18n/routing";
+import { ADMIN_EMAIL } from "@/lib/adminAuth";
 
 const intlMiddleware = createIntlMiddleware(routing);
 
-// Temporarily off while the Supabase project is paused (billing) and there's
-// no admin login to test against yet — the owner asked to see the admin UI
-// without the password gate for now. Flip back to true once the Supabase
-// project is unpaused and the admin@emaraacademy.org user exists.
-const ADMIN_AUTH_ENABLED = false;
+// Password gate for /admin (turned back on 2026-09-24 at the owner's request).
+// The one login is the Supabase user ADMIN_EMAIL; its password is set in the
+// Supabase dashboard, never in code.
+const ADMIN_AUTH_ENABLED = true;
 
 export async function proxy(request: NextRequest) {
   if (request.nextUrl.pathname.startsWith("/admin")) {
@@ -46,13 +46,16 @@ async function adminAuthCheck(request: NextRequest) {
   } = await supabase.auth.getUser();
 
   const isLoginPage = request.nextUrl.pathname === "/admin/login";
+  // Only the shared admin account gets in — any other Supabase user (e.g. one
+  // created through public sign-up) is treated as signed out.
+  const isAdmin = user?.email === ADMIN_EMAIL;
 
-  if (!user && !isLoginPage) {
+  if (!isAdmin && !isLoginPage) {
     const url = request.nextUrl.clone();
     url.pathname = "/admin/login";
     return NextResponse.redirect(url);
   }
-  if (user && isLoginPage) {
+  if (isAdmin && isLoginPage) {
     const url = request.nextUrl.clone();
     url.pathname = "/admin";
     return NextResponse.redirect(url);

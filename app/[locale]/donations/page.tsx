@@ -13,7 +13,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "donations.meta" });
-  return { title: t("title"), description: t("description") };
+  // Owner's call: reachable by direct link, but kept out of search results.
+  return {
+    title: t("title"),
+    description: t("description"),
+    robots: { index: false, follow: false },
+  };
 }
 
 // TODO: read from Supabase once donations go live — sample row until then

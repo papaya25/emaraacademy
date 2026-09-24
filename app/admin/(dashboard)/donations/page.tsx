@@ -1,7 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { addDonation, deleteDonation } from "@/app/admin/actions";
 
-const METHODS = ["card", "paypal", "bank", "other"];
+const METHODS = ["card", "bank", "other"];
 
 export default async function AdminDonationsPage() {
   const supabase = await createClient();
@@ -18,7 +18,7 @@ export default async function AdminDonationsPage() {
       <h1>Donations</h1>
       <p className="admin-hint">
         {(donations ?? []).length} donations logged · ${total.toLocaleString()} total.
-        Stripe and PayPal aren&rsquo;t connected yet, so every donation is logged here
+        Stripe isn&rsquo;t connected yet, so every donation is logged here
         by hand for now.
       </p>
 

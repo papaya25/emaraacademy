@@ -7,12 +7,13 @@ import { useSearchParams } from "next/navigation";
 import { useSetting } from "@/lib/settings";
 import { useMonthRaised } from "@/lib/donations";
 import { POLICY_LINKS_ENABLED } from "@/lib/policies";
+import BankDetails from "@/components/BankDetails";
 
 // Fallback until site_settings loads; live goal under key `donation_month`.
 const MONTH_FALLBACK = { goal: 5000 };
 const RAISED_FALLBACK = 1850;
 
-const METHODS = ["card", "paypal", "bank"];
+const METHODS = ["card", "bank"];
 
 export default function DonateCheckout() {
   const t = useTranslations("donate");
@@ -90,44 +91,47 @@ export default function DonateCheckout() {
             </Link>
           </div>
 
-          <div className="checkout-fields">
-            <div className="corr-fields">
-              <div>
-                <label className="corr-label" htmlFor="don-name">
-                  {tc("name")} {anonymous && tc("nameHidden")}
-                </label>
-                <input
-                  id="don-name"
-                  type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  disabled={anonymous}
-                  placeholder={anonymous ? tc("anonymous") : ""}
-                  autoComplete="name"
-                />
+          {/* Bank transfers are identified by the transfer reference instead. */}
+          {method !== "bank" && (
+            <div className="checkout-fields">
+              <div className="corr-fields">
+                <div>
+                  <label className="corr-label" htmlFor="don-name">
+                    {tc("name")} {anonymous && tc("nameHidden")}
+                  </label>
+                  <input
+                    id="don-name"
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    disabled={anonymous}
+                    placeholder={anonymous ? tc("anonymous") : ""}
+                    autoComplete="name"
+                  />
+                </div>
+                <div>
+                  <label className="corr-label" htmlFor="don-email">
+                    {tc("email")}
+                  </label>
+                  <input
+                    id="don-email"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    autoComplete="email"
+                  />
+                </div>
               </div>
-              <div>
-                <label className="corr-label" htmlFor="don-email">
-                  {tc("email")}
-                </label>
+              <label className="checkout-anon">
                 <input
-                  id="don-email"
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  autoComplete="email"
+                  type="checkbox"
+                  checked={anonymous}
+                  onChange={(e) => setAnonymous(e.target.checked)}
                 />
-              </div>
+                <span>{tc("keepAnonymous")}</span>
+              </label>
             </div>
-            <label className="checkout-anon">
-              <input
-                type="checkbox"
-                checked={anonymous}
-                onChange={(e) => setAnonymous(e.target.checked)}
-              />
-              <span>{tc("keepAnonymous")}</span>
-            </label>
-          </div>
+          )}
 
           <div className="checkout-payment">
             <span className="corr-label">{tc("payment")}</span>
@@ -136,18 +140,7 @@ export default function DonateCheckout() {
                 {tc.rich("cardPlaceholder", { strong: (c) => <strong>{c}</strong> })}
               </div>
             )}
-            {method === "paypal" && (
-              <div className="payment-placeholder">
-                {tc.rich("paypalPlaceholder", { strong: (c) => <strong>{c}</strong> })}
-              </div>
-            )}
-            {method === "bank" && (
-              <div className="payment-placeholder">
-                {tc.rich("bankPlaceholder", {
-                  write: (c) => <Link href="/contact">{c}</Link>,
-                })}
-              </div>
-            )}
+            {method === "bank" && <BankDetails />}
           </div>
 
           {method !== "bank" && (

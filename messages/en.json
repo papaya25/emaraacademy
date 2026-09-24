@@ -286,11 +286,11 @@
         },
         {
           "q": "Can I donate from outside Mexico?",
-          "a": "Yes. Card and PayPal donations work internationally, and we can provide transfer details for larger international gifts — write to us and we’ll make it simple."
+          "a": "Yes. Card donations work internationally, and our bank details (including the SWIFT code for international transfers) are on the donation page — write to us if anything is unclear and we’ll make it simple."
         },
         {
           "q": "Is online payment secure?",
-          "a": "Payments are processed by Stripe and PayPal — we never see or store your card details. For bank transfers, details come directly from us with a reference code so your donation is tracked correctly."
+          "a": "Card payments are processed by Stripe — we never see or store your card details. For bank transfers, our account details are on the donation page; add your name and email in the transfer reference so your donation is recorded correctly."
         },
         {
           "q": "I can’t give money. Is there another way to help?",
@@ -450,12 +450,10 @@
     "hadithSource": "Ṣaḥīḥ Muslim",
     "methods": {
       "card": "Debit/Credit Card",
-      "paypal": "PayPal",
       "bank": "Bank Transfer"
     },
     "methodsShort": {
       "card": "Card",
-      "paypal": "PayPal",
       "bank": "Bank"
     },
     "progressLabel": "Raised this month toward goal",
@@ -493,17 +491,26 @@
       "keepAnonymous": "Keep my donation anonymous",
       "payment": "Payment",
       "cardPlaceholder": "Secure card fields (Stripe) will appear here — currently in <strong>test mode</strong>, so nothing can be charged.",
-      "paypalPlaceholder": "The PayPal button will appear here — currently in <strong>test mode</strong>, so nothing can be charged.",
-      "bankPlaceholder": "Our account details (bank, CLABE, and a reference code that ties your transfer to your donation) will be shown here. Until they’re published, <write>write to us</write> and we’ll send them directly.",
       "confirmOnce": "Confirm ${amount} Donation",
       "confirmMonthly": "Confirm ${amount} Monthly Donation",
-      "secure": "Payments processed by Stripe and PayPal — we never see or store your card details. Donations are governed by our <policy>Donation & Refund Policy</policy>.",
+      "secure": "Card payments are processed by Stripe — we never see or store your card details. Donations are governed by our <policy>Donation & Refund Policy</policy>.",
       "progress": "Your donation joins ${raised} raised this month toward our ${goal} goal",
       "successTitle": "May it be written among your ongoing deeds.",
       "successBody": "This was a <strong>test-mode preview</strong> — no money moved. When payments go live, this page will confirm your donation, email a receipt to {email}, and record the amount in our public ledger.",
       "you": "you",
       "ledger": "See the Donation Ledger",
-      "home": "Back to Home"
+      "home": "Back to Home",
+      "bank": {
+        "intro": "Transfer your donation to our account at Citibanamex:",
+        "bank": "Bank",
+        "accountName": "Account name",
+        "accountNumber": "Account number",
+        "clabe": "CLABE (interbank)",
+        "swift": "SWIFT (international transfers)",
+        "reference": "In the transfer’s reference (concepto), write your name — or “anonymous” — so we can record your donation. Then <write>write to us</write> with the date and amount and we’ll email your receipt.",
+        "copy": "Copy",
+        "copied": "Copied"
+      }
     }
   },
   "donations": {
@@ -543,7 +550,7 @@
         {
           "heading": "What we collect",
           "paragraphs": [
-            "When you write to us, we keep your name, email, and message so we can reply. When you subscribe to the newsletter, we keep your email address. When you donate, our payment processors (Stripe and PayPal) handle your payment details — we never see or store card numbers — and we keep the donation record: amount, date, and the name or ‘anonymous’ you chose.",
+            "When you write to us, we keep your name, email, and message so we can reply. When you subscribe to the newsletter, we keep your email address. When you donate, our card processor (Stripe) handles your payment details — we never see or store card numbers — and we keep the donation record: amount, date, and the name or ‘anonymous’ you chose.",
             "We do not collect anything else, and we do not buy, sell, or trade personal information — ever."
           ]
         },
@@ -557,7 +564,7 @@
         {
           "heading": "Who else touches your data",
           "paragraphs": [
-            "Our website runs on Vercel; our database is hosted by Supabase; payments are processed by Stripe and PayPal; newsletter emails are sent through Resend. Each processes only what it needs to provide its service, under its own security and privacy commitments."
+            "Our website runs on Vercel; our database is hosted by Supabase; card payments are processed by Stripe and bank transfers by our bank, Citibanamex; newsletter emails are sent through Resend. Each processes only what it needs to provide its service, under its own security and privacy commitments."
           ]
         },
         {
@@ -614,7 +621,7 @@
         {
           "heading": "What we accept",
           "paragraphs": [
-            "Monetary donations by card, PayPal, and bank transfer, one-time or recurring, from individuals and organizations. In-kind donations (food, clothing, equipment, professional services) are welcomed by prior arrangement — write to us first so we can confirm the donation matches a real program need."
+            "Monetary donations by card and bank transfer, one-time or recurring, from individuals and organizations. In-kind donations (food, clothing, equipment, professional services) are welcomed by prior arrangement — write to us first so we can confirm the donation matches a real program need."
           ]
         },
         {
