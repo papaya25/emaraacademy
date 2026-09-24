@@ -110,15 +110,14 @@ English-only shell. New public pages go in `app/[locale]/`, with their text in b
 reachable by direct link only).
 
 ## Pending from the owner (placeholders until provided)
-- Supabase dashboard: create the admin user + turn off public sign-ups (see "Admin panel")
-- Connect the custom domain emaraacademy.org in Vercel + DNS at the registrar (purchased 2026-09-24; code already follows Vercel's production domain via `lib/siteUrl.ts`). Owner already has email hosting for info@emaraacademy.org.
-- Stripe account/keys (card donations are a test-mode placeholder). PayPal dropped for good.
-- Resend account + `RESEND_API_KEY` + verified sending domain (newsletter sending)
-- Legal registration numbers (e.g. CLUNI/RFC) for the About page
-- Confirm the legal entity name: the bank account holder is "EMARA ACADEMY S.A. DE C.V." (normally a for-profit form in Mexico) while the site says "legally incorporated non-profit association" — flagged to owner, not yet answered
+Status 2026-09-24: domain **emaraacademy.org is live** (IONOS DNS → Vercel; apex redirects to `www.emaraacademy.org`, the primary). Admin user `admin@emaraacademy.org` **exists and is confirmed** in Supabase (only user). Still open:
+- Supabase dashboard: confirm "Allow new users to sign up" is turned off (not verifiable from here)
+- Stripe account/keys — owner says coming soon (card donations are a test-mode placeholder). PayPal dropped for good.
+- Newsletter sending (Resend account + `RESEND_API_KEY` + verified domain) — **paused until the client confirms**; signups still collect
+- Legal registration numbers for the About page — not yet provided
+- Legal entity wording: owner confirms the org operates as a non-profit but is registered as "EMARA ACADEMY S.A. DE C.V." (chosen as fastest setup; he describes it as untaxed below a revenue threshold). The site says "legally incorporated non-profit association" in EN/ES/AR and the FAQ touches tax deductibility — flagged to owner as a wording/legal-accuracy question, NOT changed; await his decision
 - Native-speaker proofread of the Arabic and Spanish; legal review of the policies (both translations included)
-- Policy pages are written (EN+AR) but deliberately unlinked: `POLICY_LINKS_ENABLED = false` in `lib/policies.ts` — flip to true only when the owner says so
-
+- Policy pages are written (EN/ES/AR) but deliberately unlinked: `POLICY_LINKS_ENABLED = false` in `lib/policies.ts` — flip to true only when the owner says so
 ## Ideas offered, not yet approved
 - Auto-translate admin content (programs/events/classes) into Arabic on save via the Claude API, stored in `_ar` columns with an editable Arabic tab (= Stage 3 of the i18n plan). Owner asked about it; awaiting a go-ahead.
 - Spanish translation (the programs' real audience).
