@@ -1,11 +1,13 @@
 import type { MetadataRoute } from "next";
+import { SITE_URL } from "@/lib/siteUrl";
 
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
       userAgent: "*",
       allow: "/",
+      disallow: "/admin",
     },
-    sitemap: "https://emaraacademy.vercel.app/sitemap.xml",
+    sitemap: `${SITE_URL}/sitemap.xml`,
   };
 }

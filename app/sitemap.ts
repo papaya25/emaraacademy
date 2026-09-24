@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { PROGRAMS } from "@/lib/programs";
 import { POLICY_LINKS_ENABLED } from "@/lib/policies";
 
-const BASE_URL = "https://emaraacademy.vercel.app";
+import { SITE_URL } from "@/lib/siteUrl";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
@@ -18,15 +18,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...(POLICY_LINKS_ENABLED
       ? ["/privacy-policy", "/donation-policy", "/donation-acceptance-policy"]
       : []),
-  ].map((path) => ({
-    url: `${BASE_URL}${path}`,
-    lastModified: new Date(),
-  }));
+  ];
+  const paths = [...staticRoutes, ...PROGRAMS.map((p) => `/programs/${p.slug}`)];
 
-  const programRoutes = PROGRAMS.map((p) => ({
-    url: `${BASE_URL}/programs/${p.slug}`,
-    lastModified: new Date(),
-  }));
-
-  return [...staticRoutes, ...programRoutes];
+  // Each page in English (unprefixed) and Arabic (/ar), linked as alternates.
+  return paths.flatMap((path) => {
+    const languages = { en: `${SITE_URL}${path}`, ar: `${SITE_URL}/ar${path}` };
+    return (["en", "ar"] as const).map((lang) => ({
+      url: languages[lang],
+      lastModified: new Date(),
+      alternates: { languages },
+    }));
+  });
 }
