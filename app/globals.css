@@ -226,6 +226,7 @@ img {
   padding: 0.4em 0;
   border-bottom: 1px solid transparent;
   transition: color 0.2s, border-color 0.2s;
+  white-space: nowrap;
 }
 .topbar-nav a:hover {
   color: var(--green);
@@ -260,7 +261,9 @@ img {
 .nav-whatsapp {
   display: none;
 }
-@media (max-width: 820px) {
+/* Below this width the six menu items (longest in Spanish) no longer fit on
+   one line next to the logo — switch to the drawer menu. */
+@media (max-width: 1040px) {
   /* backdrop-filter would make the topbar the containing block for the
      fixed drawer below — use an opaque background instead on mobile */
   .topbar {
@@ -2283,9 +2286,12 @@ img {
 }
 
 /* Class enrollment form (under the class list, same plate as the contact form) */
-.enroll {
-  margin-top: clamp(40px, 6vw, 72px);
-  scroll-margin-top: 110px;
+.enroll-empty-actions {
+  margin-top: 1.4em;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 .corr-form select {
   width: 100%;

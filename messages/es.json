@@ -21,7 +21,8 @@
     "whatsapp": "Escríbenos por WhatsApp",
     "changeLanguage": "Cambiar idioma",
     "languages": "Idiomas",
-    "soon": "pronto"
+    "soon": "pronto",
+    "enroll": "Inscripción"
   },
   "footer": {
     "tagline": "Construimos comunidades donde los nuevos musulmanes se quedan: educación, acompañamiento y pertenencia en toda América Latina.",
@@ -431,7 +432,10 @@
       "waitlistBody": "«{class}» tiene el cupo lleno por ahora, así que te anotamos en su lista de espera. Te escribiremos por WhatsApp en cuanto se libere un lugar.",
       "another": "Inscribirme en otra clase",
       "duplicate": "Este correo ya está inscrito en esa clase: ya te tenemos.",
-      "error": "Algo falló al enviar tu inscripción. Inténtalo de nuevo en un momento o escríbenos por WhatsApp."
+      "error": "Algo falló al enviar tu inscripción. Inténtalo de nuevo en un momento o escríbenos por WhatsApp.",
+      "noClassesTitle": "Todavía no hay clases abiertas para inscribirse.",
+      "noClassesBody": "Estamos preparando las primeras clases. Consulta el horario o escríbenos y te avisaremos cuando abra la tuya.",
+      "seeClasses": "Ver las Clases"
     }
   },
   "donate": {
@@ -861,5 +865,13 @@
       },
       "confirm": "Confirmar"
     }
+  },
+  "enrollPage": {
+    "meta": {
+      "title": "Inscríbete a una Clase — Emara Academy",
+      "description": "Inscríbete a una clase gratuita para nuevos musulmanes: deja tu nombre, tu correo y tu WhatsApp, y te daremos la bienvenida antes de la primera sesión."
+    },
+    "title": "Inscríbete a una Clase",
+    "lede": "Elige una clase, déjanos tus datos y te escribiremos por WhatsApp. Siempre gratis, y nadie espera que ya sepas nada."
   }
 }

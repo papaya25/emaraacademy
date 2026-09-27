@@ -21,7 +21,8 @@
     "whatsapp": "WhatsApp Us",
     "changeLanguage": "Change language",
     "languages": "Languages",
-    "soon": "soon"
+    "soon": "soon",
+    "enroll": "Enroll"
   },
   "footer": {
     "tagline": "Building communities that keep new Muslims — education, mentorship, and belonging across Latin America.",
@@ -431,7 +432,10 @@
       "waitlistBody": "“{class}” is full right now, so we’ve put you on its waitlist. We’ll message you on WhatsApp as soon as a place opens.",
       "another": "Enroll in another class",
       "duplicate": "This email is already registered for that class — we have you.",
-      "error": "Something went wrong sending your enrollment — please try again in a moment, or message us on WhatsApp."
+      "error": "Something went wrong sending your enrollment — please try again in a moment, or message us on WhatsApp.",
+      "noClassesTitle": "No classes are open for enrollment yet.",
+      "noClassesBody": "The first classes are being planned. See the schedule, or send us a message and we’ll tell you when yours opens.",
+      "seeClasses": "See the Classes"
     }
   },
   "donate": {
@@ -861,5 +865,13 @@
       },
       "confirm": "Confirm"
     }
+  },
+  "enrollPage": {
+    "meta": {
+      "title": "Enroll in a Class — Emara Academy",
+      "description": "Sign up for a free class for new Muslims — leave your name, email and WhatsApp, and we’ll welcome you before the first session."
+    },
+    "title": "Enroll in a Class",
+    "lede": "Pick a class, leave your details, and we’ll be in touch on WhatsApp. Free, always — and no one expects you to know anything yet."
   }
 }

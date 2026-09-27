@@ -1,39 +1,49 @@
 "use client";
 
 import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
+import { Link } from "@/i18n/routing";
 import { getSupabase } from "@/lib/supabase";
+import { displayValue } from "@/lib/i18nDisplay";
+import { isClassFull, localizeClass, useLiveClasses } from "@/lib/liveClasses";
 import { rich } from "@/lib/rich";
+import WhatsAppLink from "@/components/WhatsAppLink";
 
-export type EnrollClass = { id: string; subject: string; label: string; full: boolean };
+type EnrollClass = { id: string; subject: string; label: string; full: boolean };
 
 type Status = "idle" | "sending" | "confirmed" | "waitlist" | "duplicate" | "error";
 
 /**
- * Sign-up for a real (Supabase) class. The database decides confirmed vs
- * waitlist; the message shown here uses the same rule (class full or marked
- * Full) from the public availability counts.
+ * Sign-up for a real (Supabase) class — the /enroll page. `?class=<id>`
+ * preselects a class. The database decides confirmed vs waitlist; the
+ * message shown here uses the same rule from the public availability counts.
  */
-export default function EnrollForm({
-  classes,
-  selected,
-  onSelect,
-  onEnrolled,
-}: {
-  classes: EnrollClass[];
-  selected: string;
-  onSelect: (id: string) => void;
-  onEnrolled: () => void;
-}) {
+export default function EnrollForm() {
   const t = useTranslations("classes.enroll");
   const tBoard = useTranslations("classes.board");
   const locale = useLocale();
+  const { classes: live, taken, reload } = useLiveClasses();
+  const [selected, setSelected] = useState(useSearchParams().get("class") ?? "");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const [doneClass, setDoneClass] = useState<EnrollClass | null>(null);
 
+  const show = (kind: Parameters<typeof displayValue>[0], v: string | null) =>
+    v ? displayValue(kind, v, locale) : "";
+  const classes: EnrollClass[] = (live ?? []).map((raw) => {
+    const c = localizeClass(raw, locale);
+    return {
+      id: c.id,
+      subject: c.subject,
+      label: [c.subject, [show("day", c.day), c.time].filter(Boolean).join(" · "), show("city", c.city)]
+        .filter(Boolean)
+        .join(" — "),
+      full: isClassFull(raw, taken),
+    };
+  });
   const chosen = classes.find((c) => c.id === selected);
 
   const submit = async (e: React.FormEvent) => {
@@ -57,7 +67,7 @@ export default function EnrollForm({
     }
     setDoneClass(chosen);
     setStatus(chosen.full ? "waitlist" : "confirmed");
-    onEnrolled();
+    reload();
   };
 
   const done = status === "confirmed" || status === "waitlist";
@@ -72,7 +82,20 @@ export default function EnrollForm({
             <p>{t("lede")}</p>
           </div>
 
-          {done && doneClass ? (
+          {live === null ? (
+            <div className="corr-success">
+              <h3>{t("noClassesTitle")}</h3>
+              <p>{t("noClassesBody")}</p>
+              <div className="enroll-empty-actions">
+                <Link className="btn btn-green" href="/classes">
+                  {t("seeClasses")}
+                </Link>
+                <WhatsAppLink className="btn btn-ghost" message={tBoard("whatsappMessage")}>
+                  {tBoard("askWhatsapp")}
+                </WhatsAppLink>
+              </div>
+            </div>
+          ) : done && doneClass ? (
             <div className="corr-success" role="status">
               <p className="ar" aria-hidden="true">
                 أهلًا وسهلًا
@@ -101,7 +124,7 @@ export default function EnrollForm({
                   id="enroll-class"
                   required
                   value={selected}
-                  onChange={(e) => onSelect(e.target.value)}
+                  onChange={(e) => setSelected(e.target.value)}
                   disabled={status === "sending"}
                 >
                   <option value="" disabled>
