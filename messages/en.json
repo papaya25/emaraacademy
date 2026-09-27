@@ -33,8 +33,8 @@
     "placeLine2": "Quintana Roo, México",
     "policies": "Policies",
     "privacy": "Privacy Policy",
-    "donationPolicy": "Donation & Refund Policy",
-    "acceptancePolicy": "Donation Acceptance Policy",
+    "donationPolicy": "Contributions & Refund Policy",
+    "acceptancePolicy": "Contribution Acceptance Policy",
     "copyright": "© 2026 Emara Academy",
     "legal": "Legally incorporated non-profit association"
   },
@@ -463,7 +463,7 @@
       "cardPlaceholder": "Secure card fields (Stripe) will appear here — currently in <strong>test mode</strong>, so nothing can be charged.",
       "confirmOnce": "Confirm ${amount} Donation",
       "confirmMonthly": "Confirm ${amount} Monthly Donation",
-      "secure": "Card payments are processed by Stripe — we never see or store your card details. Donations are governed by our <policy>Donation & Refund Policy</policy>.",
+      "secure": "Card payments are processed by Stripe — we never see or store your card details. Donations are governed by our <policy>Contributions & Refund Policy</policy>.",
       "progress": "Your donation joins ${raised} raised this month toward our ${goal} goal",
       "successTitle": "May it be written among your ongoing deeds.",
       "successBody": "This was a <strong>test-mode preview</strong> — no money moved. When payments go live, this page will confirm your donation, email a receipt to {email}, and record the amount in our public ledger.",
@@ -547,10 +547,10 @@
     },
     "donation": {
       "meta": {
-        "title": "Donation & Refund Policy — Emara Academy",
+        "title": "Contributions & Refund Policy — Emara Academy",
         "description": "How donations to Emara Academy are handled, recorded, and — when something goes wrong — refunded."
       },
-      "title": "Donation & Refund Policy",
+      "title": "Contributions & Refund Policy",
       "intro": "How your donation is handled from the moment you give it — and what happens if something goes wrong.",
       "sections": [
         {
@@ -582,10 +582,10 @@
     },
     "acceptance": {
       "meta": {
-        "title": "Donation Acceptance Policy — Emara Academy",
+        "title": "Contribution Acceptance Policy — Emara Academy",
         "description": "What donations Emara Academy accepts, how directed gifts are honored, and when we say no."
       },
-      "title": "Donation Acceptance Policy",
+      "title": "Contribution Acceptance Policy",
       "intro": "What we accept, how directed donations are honored, and — because integrity sometimes requires it — when we say no.",
       "sections": [
         {
