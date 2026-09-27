@@ -1,6 +1,7 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { CLASSES, CLASS_CITIES, type ClassInfo } from "@/lib/classes";
@@ -9,11 +10,17 @@ import { CLASSES_ES } from "@/lib/classes.es";
 import { displayValue } from "@/lib/i18nDisplay";
 import { isClassFull, localizeClass, useLiveClasses } from "@/lib/liveClasses";
 import CityFilter from "@/components/CityFilter";
+import EnrollForm from "@/components/EnrollForm";
 import WhatsAppLink from "@/components/WhatsAppLink";
 
 const ALL = CLASS_CITIES[0];
 
-export default function ClassesBoard() {
+/**
+ * The class cards with a city filter. With `withForm` (the /enroll page) the
+ * sign-up form sits underneath and a card's Enroll button picks that class in
+ * it; without it (/classes) the button links to /enroll?class=….
+ */
+export default function ClassesBoard({ withForm = false }: { withForm?: boolean }) {
   const t = useTranslations("classes.board");
   const locale = useLocale();
   const show = (kind: Parameters<typeof displayValue>[0], v: string) => displayValue(kind, v, locale);
@@ -25,6 +32,24 @@ export default function ClassesBoard() {
   const dbClasses = classes ?? null;
 
   const isLive = dbClasses !== null;
+
+  // The class chosen in the sign-up form (?class= from a card or the calendar).
+  const params = useSearchParams();
+  const [enrollClass, setEnrollClass] = useState(params.get("class") ?? "");
+  const pickClass = (id: string) => {
+    setEnrollClass(id);
+    document.getElementById("enroll")?.scrollIntoView({ behavior: "smooth" });
+  };
+  // Arriving with a class already chosen: go straight to the form once it shows.
+  useEffect(() => {
+    if (!(withForm && isLive && params.get("class"))) return;
+    // After the page's own scroll-to-top on arrival.
+    const id = setTimeout(
+      () => document.getElementById("enroll")?.scrollIntoView({ behavior: "instant" }),
+      150
+    );
+    return () => clearTimeout(id);
+  }, [withForm, isLive, params]);
   // Real classes use the Spanish/Arabic typed in the admin panel (blank =
   // English); the sample classes have hand-written translations.
   const sampleText = locale === "ar" ? CLASSES_AR : locale === "es" ? CLASSES_ES : null;
@@ -104,12 +129,22 @@ export default function ClassesBoard() {
             <div className="class-actions">
               {isLive ? (
                 <>
-                  <Link
-                    className={`btn ${isFull(c) ? "btn-ghost" : "btn-green"} class-btn`}
-                    href={{ pathname: "/enroll", query: { class: c.id } }}
-                  >
-                    {isFull(c) ? t("joinWaitlist") : t("enroll")}
-                  </Link>
+                  {withForm ? (
+                    <button
+                      type="button"
+                      className={`btn ${isFull(c) ? "btn-ghost" : "btn-green"} class-btn`}
+                      onClick={() => pickClass(c.id)}
+                    >
+                      {isFull(c) ? t("joinWaitlist") : t("enroll")}
+                    </button>
+                  ) : (
+                    <Link
+                      className={`btn ${isFull(c) ? "btn-ghost" : "btn-green"} class-btn`}
+                      href={{ pathname: "/enroll", query: { class: c.id } }}
+                    >
+                      {isFull(c) ? t("joinWaitlist") : t("enroll")}
+                    </Link>
+                  )}
                   <WhatsAppLink className="btn btn-ghost class-btn" message={t("whatsappMessage")}>
                     {t("askWhatsapp")}
                   </WhatsAppLink>
@@ -138,6 +173,8 @@ export default function ClassesBoard() {
           {t("note")}
         </p>
       )}
+
+      {withForm && isLive && <EnrollForm selected={enrollClass} onSelect={setEnrollClass} />}
 
     </div>
   );

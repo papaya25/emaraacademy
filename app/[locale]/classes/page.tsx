@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
@@ -33,7 +34,9 @@ export default function ClassesPage() {
       <section className="evb-section">
         <div className="wrap">
           <Reveal>
-            <ClassesBoard />
+            <Suspense>
+              <ClassesBoard />
+            </Suspense>
           </Reveal>
         </div>
       </section>

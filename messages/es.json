@@ -432,10 +432,7 @@
       "waitlistBody": "«{class}» tiene el cupo lleno por ahora, así que te anotamos en su lista de espera. Te escribiremos por WhatsApp en cuanto se libere un lugar.",
       "another": "Inscribirme en otra clase",
       "duplicate": "Este correo ya está inscrito en esa clase: ya te tenemos.",
-      "error": "Algo falló al enviar tu inscripción. Inténtalo de nuevo en un momento o escríbenos por WhatsApp.",
-      "noClassesTitle": "Todavía no hay clases abiertas para inscribirse.",
-      "noClassesBody": "Estamos preparando las primeras clases. Consulta el horario o escríbenos y te avisaremos cuando abra la tuya.",
-      "seeClasses": "Ver las Clases"
+      "error": "Algo falló al enviar tu inscripción. Inténtalo de nuevo en un momento o escríbenos por WhatsApp."
     }
   },
   "donate": {

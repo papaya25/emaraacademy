@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import Rosette from "@/components/Rosette";
-import EnrollForm from "@/components/EnrollForm";
+import ClassesBoard from "@/components/ClassesBoard";
 
 export async function generateMetadata({
   params,
@@ -30,9 +30,9 @@ export default function EnrollPage() {
 
       <section className="evb-section">
         <div className="wrap">
-          {/* EnrollForm reads ?class= from the URL */}
+          {/* Class cards, then the sign-up form (reads ?class= from the URL) */}
           <Suspense>
-            <EnrollForm />
+            <ClassesBoard withForm />
           </Suspense>
         </div>
       </section>

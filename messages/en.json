@@ -432,10 +432,7 @@
       "waitlistBody": "“{class}” is full right now, so we’ve put you on its waitlist. We’ll message you on WhatsApp as soon as a place opens.",
       "another": "Enroll in another class",
       "duplicate": "This email is already registered for that class — we have you.",
-      "error": "Something went wrong sending your enrollment — please try again in a moment, or message us on WhatsApp.",
-      "noClassesTitle": "No classes are open for enrollment yet.",
-      "noClassesBody": "The first classes are being planned. See the schedule, or send us a message and we’ll tell you when yours opens.",
-      "seeClasses": "See the Classes"
+      "error": "Something went wrong sending your enrollment — please try again in a moment, or message us on WhatsApp."
     }
   },
   "donate": {
