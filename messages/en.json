@@ -863,7 +863,8 @@
         "confirmed": "Confirmed",
         "waitlist": "Waitlist"
       },
-      "confirm": "Confirm"
+      "confirm": "Confirm",
+      "noneForClass": "No sign-ups yet for this class."
     }
   },
   "enrollPage": {

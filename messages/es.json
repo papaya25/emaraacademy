@@ -863,7 +863,8 @@
         "confirmed": "Confirmado",
         "waitlist": "Lista de espera"
       },
-      "confirm": "Confirmar"
+      "confirm": "Confirmar",
+      "noneForClass": "Todavía no hay inscripciones en esta clase."
     }
   },
   "enrollPage": {

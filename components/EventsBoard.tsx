@@ -5,6 +5,8 @@ import { useLocale, useTranslations } from "next-intl";
 import { getSupabase } from "@/lib/supabase";
 import CityFilter from "@/components/CityFilter";
 import { displayValue } from "@/lib/i18nDisplay";
+import { Link } from "@/i18n/routing";
+import { localizeClass, useLiveClasses, type DbClass } from "@/lib/liveClasses";
 
 type EventType = "weekly" | "monthly" | "quarterly" | "special";
 
@@ -32,6 +34,7 @@ type CalEvent = {
   time?: string | null;
   location?: string | null;
   presenter?: string | null;
+  classId?: string; // set for a weekly class — the day panel links to its sign-up
 };
 
 /** Filter value meaning "no city filter" — never shown directly. */
@@ -51,6 +54,47 @@ const SPECIAL_DATES: Record<string, "ramadan" | "eidFitr" | "eidAdha"> = {
   "2027-2-10": "eidFitr",
   "2027-4-17": "eidAdha",
 };
+
+/** Weekday (0 = Sunday) of a class's free-text day, e.g. "Thursdays" or
+ *  "jueves"; null when it can't be read (the class then isn't placed). */
+const WEEKDAYS = [
+  ["sun", "dom"],
+  ["mon", "lun"],
+  ["tue", "mar"],
+  ["wed", "mié", "mie"],
+  ["thu", "jue"],
+  ["fri", "vie"],
+  ["sat", "sáb", "sab"],
+];
+function weekdayOf(day: string | null): number | null {
+  const d = (day ?? "").trim().toLowerCase();
+  const i = WEEKDAYS.findIndex((names) => names.some((n) => d.startsWith(n)));
+  return i === -1 ? null : i;
+}
+
+/** Every date in the month when a weekly class meets. */
+function classesForMonth(year: number, month: number, classes: DbClass[], locale: string) {
+  const map: Record<number, CalEvent[]> = {};
+  const days = new Date(year, month + 1, 0).getDate();
+  for (const raw of classes) {
+    const wd = weekdayOf(raw.day);
+    if (wd === null) continue;
+    const c = localizeClass(raw, locale);
+    for (let d = 1; d <= days; d++) {
+      if (new Date(year, month, d).getDay() !== wd) continue;
+      (map[d] ||= []).push({
+        type: "weekly",
+        title: c.subject,
+        meta: "",
+        city: c.city,
+        time: c.time,
+        location: c.location,
+        classId: c.id,
+      });
+    }
+  }
+  return map;
+}
 
 /** Visitor-language text for the sample schedule (the `events.board.sample` messages). */
 type SampleText = Record<
@@ -158,18 +202,43 @@ export default function EventsBoard() {
     };
   }, []);
 
-  const isLive = dbEvents !== null;
+  // Real classes also appear, every week on their day.
+  const tClasses = useTranslations("classes.board");
+  const { classes } = useLiveClasses();
+  const liveClasses = classes ?? null;
+
+  const isLive = dbEvents !== null || liveClasses !== null;
 
   const cities = useMemo(() => {
-    if (!dbEvents) return CITIES;
-    const unique = [...new Set(dbEvents.map((e) => e.city).filter((c): c is string => !!c))];
+    if (!isLive) return CITIES;
+    const all = [...(dbEvents ?? []).map((e) => e.city), ...(liveClasses ?? []).map((c) => c.city)];
+    const unique = [...new Set(all.filter((c): c is string => !!c))];
     return [ALL, ...unique.sort()];
-  }, [dbEvents]);
+  }, [isLive, dbEvents, liveClasses]);
 
   const events = useMemo(() => {
-    if (dbEvents) {
-      const map: Record<number, CalEvent[]> = {};
-      for (const ev of dbEvents) {
+    if (isLive) {
+      const map = classesForMonth(cursor.year, cursor.month, liveClasses ?? [], locale);
+      if (city !== ALL) {
+        for (const d of Object.keys(map)) {
+          map[Number(d)] = map[Number(d)].filter((e) => e.city === city);
+          if (!map[Number(d)].length) delete map[Number(d)];
+        }
+      }
+      // Approximate Ramadan/Eid dates show for every city, live or sample.
+      const days = new Date(cursor.year, cursor.month + 1, 0).getDate();
+      for (let d = 1; d <= days; d++) {
+        const special = SPECIAL_DATES[`${cursor.year}-${cursor.month}-${d}`];
+        if (special) {
+          (map[d] ||= []).push({
+            type: "special",
+            title: sampleText[special],
+            meta: sampleText.approx,
+            city: null,
+          });
+        }
+      }
+      for (const ev of dbEvents ?? []) {
         const [y, m, d] = ev.event_date.split("-").map(Number);
         if (y !== cursor.year || m - 1 !== cursor.month) continue;
         if (city !== ALL && ev.city !== null && ev.city !== city) continue;
@@ -196,7 +265,7 @@ export default function EventsBoard() {
       if (keep.length) filtered[Number(d)] = keep;
     }
     return filtered;
-  }, [dbEvents, city, cursor, sampleText, locale]);
+  }, [isLive, dbEvents, liveClasses, city, cursor, sampleText, locale]);
 
   const firstDow = new Date(cursor.year, cursor.month, 1).getDay();
   const daysInMonth = new Date(cursor.year, cursor.month + 1, 0).getDate();
@@ -319,6 +388,14 @@ export default function EventsBoard() {
                   {e.location && <div className="evb-event-meta">{e.location}</div>}
                   {e.presenter && <div className="evb-event-meta">{t("with", { name: e.presenter })}</div>}
                   {e.meta && <div className="evb-event-meta">{e.meta}</div>}
+                  {e.classId && (
+                    <Link
+                      className="evb-enroll"
+                      href={{ pathname: "/enroll", query: { class: e.classId } }}
+                    >
+                      {tClasses("enroll")} →
+                    </Link>
+                  )}
                 </div>
               ))}
             </>

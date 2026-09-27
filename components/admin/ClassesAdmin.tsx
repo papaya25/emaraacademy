@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { upsertClass, deleteClass } from "@/app/admin/actions";
 import LangTabs from "@/components/admin/LangTabs";
@@ -184,10 +185,12 @@ export default function ClassesAdmin({
               </td>
               <td>{statusLabel(c.status)}</td>
               <td>
-                <bdi>
-                  {taken[c.id] ?? 0}
-                  {c.capacity ? ` / ${c.capacity}` : ""}
-                </bdi>
+                <Link className="admin-link" href={`/admin/enrollments#${c.id}`}>
+                  <bdi>
+                    {taken[c.id] ?? 0}
+                    {c.capacity ? ` / ${c.capacity}` : ""}
+                  </bdi>
+                </Link>
               </td>
               <td className="admin-table-actions">
                 <button type="button" className="admin-link" onClick={() => setEditing(c)}>

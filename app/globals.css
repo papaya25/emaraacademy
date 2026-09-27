@@ -2285,6 +2285,19 @@ img {
   }
 }
 
+.evb-enroll {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--green);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule-gold);
+}
+.evb-enroll:hover {
+  color: var(--gold-deep);
+}
+
 /* Class enrollment form (under the class list, same plate as the contact form) */
 .enroll-empty-actions {
   margin-top: 1.4em;

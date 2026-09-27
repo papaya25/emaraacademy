@@ -863,7 +863,8 @@
         "confirmed": "مؤكَّد",
         "waitlist": "قائمة الانتظار"
       },
-      "confirm": "تأكيد"
+      "confirm": "تأكيد",
+      "noneForClass": "لا توجد تسجيلات في هذا الدرس بعد."
     }
   },
   "enrollPage": {
