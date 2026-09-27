@@ -9,11 +9,13 @@ import { CLASSES_ES } from "@/lib/classes.es";
 import { displayValue } from "@/lib/i18nDisplay";
 import { getSupabase } from "@/lib/supabase";
 import CityFilter from "@/components/CityFilter";
+import EnrollForm from "@/components/EnrollForm";
 import WhatsAppLink from "@/components/WhatsAppLink";
 
 const ALL = CLASS_CITIES[0];
 
 type DbClass = ClassInfo & {
+  capacity?: number | null;
   [translated: `${"subject" | "blurb"}_${string}`]: string | null | undefined;
 };
 
@@ -44,6 +46,24 @@ export default function ClassesBoard() {
     };
   }, []);
 
+  // Places taken per real class (counts only — who enrolled stays private).
+  const [taken, setTaken] = useState<Record<string, number>>({});
+  const loadAvailability = () => {
+    getSupabase()
+      ?.from("class_availability")
+      .select("class_id,taken")
+      .then(({ data, error }) => {
+        if (!error && data) setTaken(Object.fromEntries(data.map((r) => [r.class_id, r.taken])));
+      });
+  };
+  useEffect(loadAvailability, []);
+
+  const [enrollClass, setEnrollClass] = useState("");
+  const pickClass = (id: string) => {
+    setEnrollClass(id);
+    document.getElementById("enroll")?.scrollIntoView({ behavior: "smooth" });
+  };
+
   const isLive = dbClasses !== null;
   // Real classes use the Spanish/Arabic typed in the admin panel (blank =
   // English); the sample classes have hand-written translations.
@@ -66,6 +86,21 @@ export default function ClassesBoard() {
 
   const visible =
     city === ALL ? list : list.filter((c) => c.city === city);
+
+  // Same rule the database uses to put a sign-up on the waitlist.
+  const capacityOf = (id: string) => dbClasses?.find((c) => c.id === id)?.capacity ?? null;
+  const isFull = (c: ClassInfo) => {
+    const cap = capacityOf(c.id);
+    return c.status === "Full" || (cap !== null && (taken[c.id] ?? 0) >= cap);
+  };
+  const enrollOptions = list.map((c) => ({
+    id: c.id,
+    subject: c.subject,
+    label: [c.subject, [show("day", c.day), c.time].filter(Boolean).join(" · "), cityLabel(c.city)]
+      .filter(Boolean)
+      .join(" — "),
+    full: isFull(c),
+  }));
 
   return (
     <div>
@@ -115,8 +150,28 @@ export default function ClassesBoard() {
                 <dd>{show("language", c.language)}</dd>
               </div>
             </dl>
+            {isLive && capacityOf(c.id) !== null && (
+              <p className="class-places">
+                {isFull(c)
+                  ? t("fullWaitlist")
+                  : t("placesLeft", { count: capacityOf(c.id)! - (taken[c.id] ?? 0) })}
+              </p>
+            )}
             <div className="class-actions">
-              {c.status === "Full" ? (
+              {isLive ? (
+                <>
+                  <button
+                    type="button"
+                    className={`btn ${isFull(c) ? "btn-ghost" : "btn-green"} class-btn`}
+                    onClick={() => pickClass(c.id)}
+                  >
+                    {isFull(c) ? t("joinWaitlist") : t("enroll")}
+                  </button>
+                  <WhatsAppLink className="btn btn-ghost class-btn" message={t("whatsappMessage")}>
+                    {t("askWhatsapp")}
+                  </WhatsAppLink>
+                </>
+              ) : c.status === "Full" ? (
                 <Link className="btn btn-ghost class-btn" href="/contact">
                   {t("waitlist")}
                 </Link>
@@ -139,6 +194,15 @@ export default function ClassesBoard() {
         <p className="evb-note">
           {t("note")}
         </p>
+      )}
+
+      {isLive && (
+        <EnrollForm
+          classes={enrollOptions}
+          selected={enrollClass}
+          onSelect={setEnrollClass}
+          onEnrolled={loadAvailability}
+        />
       )}
     </div>
   );

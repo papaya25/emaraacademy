@@ -181,6 +181,7 @@ export async function upsertClass(fd: FormData) {
     format: str(fd, "format") || "In person",
     status: str(fd, "status") || "Open",
     sort_order: Number(fd.get("sort_order") ?? 0) || 0,
+    capacity: Math.floor(Number(str(fd, "capacity"))) || null,
     ...translated(fd, ["subject", "blurb"]),
   };
   if (id) {
@@ -196,6 +197,23 @@ export async function deleteClass(fd: FormData) {
   const supabase = await createClient();
   await supabase.from("classes").delete().eq("id", str(fd, "id"));
   revalidatePath("/admin/classes");
+  revalidatePath("/classes");
+}
+
+// ---- Enrollments ----------------------------------------------------------
+
+export async function confirmEnrollment(fd: FormData) {
+  const supabase = await createClient();
+  await supabase.from("enrollments").update({ status: "confirmed" }).eq("id", str(fd, "id"));
+  revalidatePath("/admin/enrollments");
+  revalidatePath("/classes");
+}
+
+export async function deleteEnrollment(fd: FormData) {
+  const supabase = await createClient();
+  await supabase.from("enrollments").delete().eq("id", str(fd, "id"));
+  revalidatePath("/admin/enrollments");
+  revalidatePath("/admin");
   revalidatePath("/classes");
 }
 

@@ -406,7 +406,32 @@
       "reserve": "Aparta Tu Lugar",
       "askWhatsapp": "Pregunta por WhatsApp",
       "whatsappMessage": "Assalamu alaikum — me gustaría unirme a una clase de Emara Academy.",
-      "note": "Este es un horario de ejemplo mientras planeamos nuestra primera temporada; las clases, horarios y ciudades reales lo irán reemplazando conforme se abran los grupos."
+      "note": "Este es un horario de ejemplo mientras planeamos nuestra primera temporada; las clases, horarios y ciudades reales lo irán reemplazando conforme se abran los grupos.",
+      "enroll": "Inscribirme",
+      "joinWaitlist": "Anotarme en la Lista de Espera",
+      "placesLeft": "{count, plural, one {Queda # lugar} other {Quedan # lugares}}",
+      "fullWaitlist": "Cupo lleno — lista de espera abierta"
+    },
+    "enroll": {
+      "eyebrow": "Inscripción",
+      "title": "Aparta tu lugar <em>en una clase.</em>",
+      "lede": "Déjanos tus datos y te escribiremos por WhatsApp para darte la bienvenida antes de la primera clase. Es gratis y no tienes que preparar nada.",
+      "class": "Clase",
+      "choose": "Elige una clase",
+      "waitlistTag": "lista de espera",
+      "name": "Nombre",
+      "email": "Correo electrónico",
+      "whatsapp": "Número de WhatsApp",
+      "whatsappHint": "Con clave de país, por ejemplo +52 55 1234 5678",
+      "submit": "Inscribirme",
+      "submitting": "Enviando…",
+      "successTitle": "Ya estás inscrito.",
+      "successBody": "Tu lugar en «{class}» está apartado. Pronto te escribiremos por WhatsApp con todo lo que necesitas.",
+      "waitlistTitle": "Estás en la lista de espera.",
+      "waitlistBody": "«{class}» tiene el cupo lleno por ahora, así que te anotamos en su lista de espera. Te escribiremos por WhatsApp en cuanto se libere un lugar.",
+      "another": "Inscribirme en otra clase",
+      "duplicate": "Este correo ya está inscrito en esa clase: ya te tenemos.",
+      "error": "Algo falló al enviar tu inscripción. Inténtalo de nuevo en un momento o escríbenos por WhatsApp."
     }
   },
   "donate": {
@@ -627,7 +652,8 @@
       "newsletter": "Boletín",
       "settings": "Ajustes",
       "signOut": "Cerrar Sesión",
-      "language": "Idioma del panel"
+      "language": "Idioma del panel",
+      "enrollments": "Inscripciones"
     },
     "login": {
       "title": "Administración",
@@ -660,7 +686,8 @@
       "donationsLogged": "Donativos Registrados",
       "contactMessages": "Mensajes de Contacto",
       "subscribers": "Suscriptores del Boletín",
-      "upcomingEvents": "Próximos Eventos"
+      "upcomingEvents": "Próximos Eventos",
+      "enrollments": "Inscripciones"
     },
     "programs": {
       "title": "Programas",
@@ -736,8 +763,10 @@
         "city": "Ciudad",
         "location": "Lugar",
         "dayTime": "Día / Hora",
-        "status": "Estado"
-      }
+        "status": "Estado",
+        "enrolled": "Inscritos"
+      },
+      "capacity": "Lugares (vacío = sin límite)"
     },
     "donations": {
       "title": "Donativos",
@@ -811,6 +840,26 @@
       "goalSection": "Meta mensual de donativos",
       "goalHint": "La cifra de «recaudado hasta ahora» se actualiza sola desde la pestaña Donativos; aquí solo se fija la meta.",
       "goal": "Meta (USD)"
+    },
+    "enrollments": {
+      "title": "Inscripciones",
+      "hint": "Personas que se inscribieron a una clase desde el sitio. Cuando una clase se llena, las nuevas inscripciones pasan a su lista de espera; cuando se libere un lugar, pasa a alguien con «Confirmar».",
+      "empty": "Todavía no hay inscripciones. Aparecerán aquí en cuanto alguien se inscriba a una clase.",
+      "taken": "{taken} de {capacity} lugares ocupados",
+      "takenNoLimit": "{taken} inscritos · sin límite",
+      "waitlistCount": "{count} en lista de espera",
+      "col": {
+        "name": "Nombre",
+        "email": "Correo",
+        "whatsapp": "WhatsApp",
+        "status": "Estado",
+        "date": "Inscrito el"
+      },
+      "statuses": {
+        "confirmed": "Confirmado",
+        "waitlist": "Lista de espera"
+      },
+      "confirm": "Confirmar"
     }
   }
 }

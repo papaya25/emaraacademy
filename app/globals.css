@@ -2282,6 +2282,39 @@ img {
   }
 }
 
+/* Class enrollment form (under the class list, same plate as the contact form) */
+.enroll {
+  margin-top: clamp(40px, 6vw, 72px);
+  scroll-margin-top: 110px;
+}
+.corr-form select {
+  width: 100%;
+  background: var(--paper-deep);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  padding: 0.8em 1em;
+  font-family: var(--font-lora), serif;
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+.corr-form select:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+.enroll-hint {
+  margin-top: 0.45em;
+  font-size: 0.8rem;
+  color: var(--ink-faint);
+}
+.enroll-again {
+  margin-top: 1.4em;
+}
+.class-places {
+  font-size: 0.8rem;
+  color: var(--gold-deep);
+  font-weight: 600;
+}
+
 /* ---------- policy pages ---------- */
 .policy-body {
   padding-block: clamp(40px, 6vw, 72px) clamp(56px, 8vw, 96px);

@@ -18,6 +18,7 @@ type ClassRow = {
   format: string;
   status: string;
   sort_order: number;
+  capacity?: number | null;
   subject_es?: string | null;
   blurb_es?: string | null;
   subject_ar?: string | null;
@@ -27,7 +28,14 @@ type ClassRow = {
 const STATUSES = ["Open", "Starting soon", "Full"] as const;
 const FORMATS = ["In person", "Online"] as const;
 
-export default function ClassesAdmin({ classes }: { classes: ClassRow[] }) {
+export default function ClassesAdmin({
+  classes,
+  taken,
+}: {
+  classes: ClassRow[];
+  /** Confirmed enrollments per class id. */
+  taken: Record<string, number>;
+}) {
   const t = useTranslations("admin");
   const [editing, setEditing] = useState<ClassRow | null>(null);
   const statusLabel = (s: string) =>
@@ -123,10 +131,16 @@ export default function ClassesAdmin({ classes }: { classes: ClassRow[] }) {
               </select>
             </label>
           </div>
-          <label>
-            {t("classes.sortOrder")}
-            <input type="number" name="sort_order" defaultValue={editing?.sort_order ?? 0} />
-          </label>
+          <div className="admin-form-row">
+            <label>
+              {t("classes.capacity")}
+              <input type="number" name="capacity" min={1} defaultValue={editing?.capacity ?? ""} />
+            </label>
+            <label>
+              {t("classes.sortOrder")}
+              <input type="number" name="sort_order" defaultValue={editing?.sort_order ?? 0} />
+            </label>
+          </div>
           <div className="admin-form-row">
             <button className="btn btn-green" type="submit">
               {editing ? t("common.saveChanges") : t("classes.addButton")}
@@ -148,13 +162,14 @@ export default function ClassesAdmin({ classes }: { classes: ClassRow[] }) {
             <th>{t("classes.col.location")}</th>
             <th>{t("classes.col.dayTime")}</th>
             <th>{t("classes.col.status")}</th>
+            <th>{t("classes.col.enrolled")}</th>
             <th></th>
           </tr>
         </thead>
         <tbody>
           {classes.length === 0 && (
             <tr>
-              <td colSpan={6} className="admin-hint">
+              <td colSpan={7} className="admin-hint">
                 {t("classes.empty")}
               </td>
             </tr>
@@ -168,6 +183,12 @@ export default function ClassesAdmin({ classes }: { classes: ClassRow[] }) {
                 {c.day} {c.time}
               </td>
               <td>{statusLabel(c.status)}</td>
+              <td>
+                <bdi>
+                  {taken[c.id] ?? 0}
+                  {c.capacity ? ` / ${c.capacity}` : ""}
+                </bdi>
+              </td>
               <td className="admin-table-actions">
                 <button type="button" className="admin-link" onClick={() => setEditing(c)}>
                   {t("common.edit")}

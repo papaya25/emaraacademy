@@ -8,6 +8,7 @@ const NAV = [
   { href: "/admin/programs", key: "programs" },
   { href: "/admin/events", key: "events" },
   { href: "/admin/classes", key: "classes" },
+  { href: "/admin/enrollments", key: "enrollments" },
   { href: "/admin/donations", key: "donations" },
   { href: "/admin/messages", key: "messages" },
   { href: "/admin/newsletter", key: "newsletter" },

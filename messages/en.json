@@ -406,7 +406,32 @@
       "reserve": "Reserve a Spot",
       "askWhatsapp": "Ask on WhatsApp",
       "whatsappMessage": "Assalamu alaikum — I'd like to join a class at Emara Academy.",
-      "note": "Sample schedule shown while our first season is being planned — real classes, times, and cities will replace it as cohorts open."
+      "note": "Sample schedule shown while our first season is being planned — real classes, times, and cities will replace it as cohorts open.",
+      "enroll": "Enroll",
+      "joinWaitlist": "Join the Waitlist",
+      "placesLeft": "{count, plural, one {# place left} other {# places left}}",
+      "fullWaitlist": "Full — waitlist open"
+    },
+    "enroll": {
+      "eyebrow": "Enrollment",
+      "title": "Save your place <em>in a class.</em>",
+      "lede": "Leave your details and we’ll message you on WhatsApp to welcome you before the first class. It’s free, and there’s nothing to prepare.",
+      "class": "Class",
+      "choose": "Choose a class",
+      "waitlistTag": "waitlist",
+      "name": "Name",
+      "email": "Email",
+      "whatsapp": "WhatsApp number",
+      "whatsappHint": "With country code, e.g. +52 55 1234 5678",
+      "submit": "Enroll",
+      "submitting": "Sending…",
+      "successTitle": "You’re enrolled.",
+      "successBody": "Your place in “{class}” is saved. We’ll message you on WhatsApp soon with everything you need.",
+      "waitlistTitle": "You’re on the waitlist.",
+      "waitlistBody": "“{class}” is full right now, so we’ve put you on its waitlist. We’ll message you on WhatsApp as soon as a place opens.",
+      "another": "Enroll in another class",
+      "duplicate": "This email is already registered for that class — we have you.",
+      "error": "Something went wrong sending your enrollment — please try again in a moment, or message us on WhatsApp."
     }
   },
   "donate": {
@@ -627,7 +652,8 @@
       "newsletter": "Newsletter",
       "settings": "Settings",
       "signOut": "Sign Out",
-      "language": "Admin language"
+      "language": "Admin language",
+      "enrollments": "Enrollments"
     },
     "login": {
       "title": "Admin",
@@ -660,7 +686,8 @@
       "donationsLogged": "Donations Logged",
       "contactMessages": "Contact Messages",
       "subscribers": "Newsletter Subscribers",
-      "upcomingEvents": "Upcoming Events"
+      "upcomingEvents": "Upcoming Events",
+      "enrollments": "Enrollments"
     },
     "programs": {
       "title": "Programs",
@@ -736,8 +763,10 @@
         "city": "City",
         "location": "Location",
         "dayTime": "Day / Time",
-        "status": "Status"
-      }
+        "status": "Status",
+        "enrolled": "Enrolled"
+      },
+      "capacity": "Places (blank = no limit)"
     },
     "donations": {
       "title": "Donations",
@@ -811,6 +840,26 @@
       "goalSection": "Monthly donation goal",
       "goalHint": "The “raised so far” number updates on its own from the Donations tab — only the goal is set here.",
       "goal": "Goal (USD)"
+    },
+    "enrollments": {
+      "title": "Enrollments",
+      "hint": "People who signed up for a class on the website. When a class is full, new sign-ups go on its waitlist — move someone in with “Confirm” once a place opens.",
+      "empty": "No enrollments yet. They appear here as soon as someone signs up for a class.",
+      "taken": "{taken} of {capacity} places taken",
+      "takenNoLimit": "{taken} enrolled · no limit",
+      "waitlistCount": "{count} on the waitlist",
+      "col": {
+        "name": "Name",
+        "email": "Email",
+        "whatsapp": "WhatsApp",
+        "status": "Status",
+        "date": "Signed up"
+      },
+      "statuses": {
+        "confirmed": "Confirmed",
+        "waitlist": "Waitlist"
+      },
+      "confirm": "Confirm"
     }
   }
 }
