@@ -33,8 +33,8 @@
     "placeLine2": "Quintana Roo, México",
     "policies": "Políticas",
     "privacy": "Aviso de Privacidad",
-    "donationPolicy": "Política de Donaciones y Reembolsos",
-    "acceptancePolicy": "Política de Aceptación de Donativos",
+    "donationPolicy": "Política de Aportaciones y Reembolsos",
+    "acceptancePolicy": "Política de Aceptación de Aportaciones",
     "copyright": "© 2026 Emara Academy",
     "legal": "Asociación sin fines de lucro legalmente constituida"
   },
@@ -488,7 +488,7 @@
       "cardPlaceholder": "Aquí aparecerán los campos seguros para tu tarjeta (Stripe). Por ahora está en <strong>modo de prueba</strong>, así que no se puede hacer ningún cargo.",
       "confirmOnce": "Confirmar Donativo de ${amount}",
       "confirmMonthly": "Confirmar Donativo Mensual de ${amount}",
-      "secure": "Los pagos con tarjeta los procesa Stripe: nunca vemos ni guardamos los datos de tu tarjeta. Los donativos se rigen por nuestra <policy>Política de Donaciones y Reembolsos</policy>.",
+      "secure": "Los pagos con tarjeta los procesa Stripe: nunca vemos ni guardamos los datos de tu tarjeta. Los donativos se rigen por nuestra <policy>Política de Aportaciones y Reembolsos</policy>.",
       "progress": "Tu donativo se suma a los ${raised} recaudados este mes para nuestra meta de ${goal}",
       "successTitle": "Que quede escrito entre tus obras que no se acaban.",
       "successBody": "Esta fue una <strong>vista previa en modo de prueba</strong>: no se movió ningún dinero. Cuando los pagos estén activos, esta página confirmará tu donativo, enviará un recibo a {email} y registrará el monto en nuestro registro público de donativos.",
@@ -572,10 +572,10 @@
     },
     "donation": {
       "meta": {
-        "title": "Política de Donaciones y Reembolsos — Emara Academy",
+        "title": "Política de Aportaciones y Reembolsos — Emara Academy",
         "description": "Cómo se manejan, registran y — cuando algo sale mal — reembolsan los donativos a Emara Academy."
       },
-      "title": "Política de Donaciones y Reembolsos",
+      "title": "Política de Aportaciones y Reembolsos",
       "intro": "Cómo manejamos tu donativo desde el momento en que lo das, y qué pasa si algo sale mal.",
       "sections": [
         {
@@ -607,10 +607,10 @@
     },
     "acceptance": {
       "meta": {
-        "title": "Política de Aceptación de Donativos — Emara Academy",
+        "title": "Política de Aceptación de Aportaciones — Emara Academy",
         "description": "Qué donativos acepta Emara Academy, cómo se respetan los donativos con destino específico y cuándo decimos que no."
       },
-      "title": "Política de Aceptación de Donativos",
+      "title": "Política de Aceptación de Aportaciones",
       "intro": "Qué aceptamos, cómo respetamos los donativos con destino específico y — porque la integridad a veces lo exige — cuándo decimos que no.",
       "sections": [
         {
