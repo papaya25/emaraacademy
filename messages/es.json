@@ -232,10 +232,10 @@
   "faq": {
     "meta": {
       "title": "Preguntas y Respuestas — Emara Academy",
-      "description": "Respuestas honestas para nuevos musulmanes y para donantes: cómo son las clases, cuánto cuestan, a dónde van los donativos y cómo participar."
+      "description": "Respuestas honestas para nuevos musulmanes: cómo son las clases, cuánto cuestan y cómo dar tus primeros pasos con nosotros."
     },
     "title": "Preguntas y Respuestas",
-    "lede": "Respuestas honestas y en palabras sencillas, para quienes están descubriendo el islam y para quienes están decidiendo si confiarnos su donativo.",
+    "lede": "Respuestas honestas y en palabras sencillas, para quienes están descubriendo el islam.",
     "newMuslims": {
       "title": "Para <em>nuevos musulmanes</em>",
       "items": [
@@ -245,7 +245,7 @@
         },
         {
           "q": "¿Algo de esto cuesta dinero?",
-          "a": "No. Las clases, las noches comunitarias, el acompañamiento de un mentor y las comidas compartidas son gratis, siempre. Nuestros programas se sostienen con donativos justamente para que ningún nuevo musulmán tenga que pagar por aprender su religión."
+          "a": "No. Las clases, las noches comunitarias, el acompañamiento de un mentor y las comidas compartidas son gratis, siempre. Este trabajo lo sostienen personas que creen en él, justamente para que ningún nuevo musulmán tenga que pagar por aprender su religión."
         },
         {
           "q": "Me convertí solo y no hay ninguna mezquita cerca de mí. ¿Puedo participar?",
@@ -269,39 +269,10 @@
         }
       ]
     },
-    "donors": {
-      "title": "Para <em>donantes</em>",
-      "items": [
-        {
-          "q": "¿Mi donativo es deducible de impuestos?",
-          "a": "Emara Academy es una asociación sin fines de lucro legalmente constituida en México. Nuestros registros para emitir recibos deducibles están en trámite; escríbenos antes de donar y te diremos exactamente qué documentación podemos darte según tu situación y tu país."
-        },
-        {
-          "q": "¿Puedo donar para un programa en específico?",
-          "a": "Escríbenos antes de donar y dinos a qué programa quieres destinar tu donativo — educación, formación de maestros, encuentros, el fondo de ayuda mutua, retiros o intercambio regional — y nos aseguraremos de que se use ahí."
-        },
-        {
-          "q": "¿Cómo sé en qué se gasta el dinero?",
-          "a": "Publicamos abiertamente nuestro registro de donativos, informamos del gasto al menos una vez al año y compartimos con los donantes estados financieros revisados por terceros independientes. Si quieres más detalle del que publicamos, pregúntanos: respondemos todo nosotros mismos."
-        },
-        {
-          "q": "¿Puedo donar desde fuera de México?",
-          "a": "Sí. Los donativos con tarjeta funcionan desde cualquier país, y nuestros datos bancarios (incluido el código SWIFT para transferencias internacionales) están en la página de donativos. Si algo no queda claro, escríbenos y te lo hacemos fácil."
-        },
-        {
-          "q": "¿Es seguro pagar en línea?",
-          "a": "Los pagos con tarjeta los procesa Stripe: nosotros nunca vemos ni guardamos los datos de tu tarjeta. Para transferencias bancarias, los datos de nuestra cuenta están en la página de donativos; pon tu nombre y tu correo en el concepto de la transferencia para que tu donativo quede bien registrado."
-        },
-        {
-          "q": "No puedo dar dinero. ¿Hay otra forma de ayudar?",
-          "a": "Sí, y es igual de valiosa: asistentes de clase, mentores para los recién convertidos, traductores, apoyo en eventos y manos para los retiros y las entregas de ayuda mutua. Cuéntanos en qué eres bueno y cuánto tiempo tienes."
-        }
-      ]
-    },
     "cta": {
       "eyebrow": "¿Te Quedó Alguna Duda?",
       "title": "¿No encuentras tu pregunta? <em>Hazla de todos modos.</em>",
-      "lede": "Escríbenos sobre lo que sea: participar, donar, ser voluntario o tus propios primeros pasos. Una persona de verdad lee y responde cada carta.",
+      "lede": "Escríbenos sobre lo que sea: unirte a una clase, ser voluntario o tus propios primeros pasos. Una persona de verdad lee y responde cada carta.",
       "button": "Escríbenos"
     }
   },

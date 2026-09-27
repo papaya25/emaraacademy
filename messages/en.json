@@ -232,10 +232,10 @@
   "faq": {
     "meta": {
       "title": "Questions & Answers — Emara Academy",
-      "description": "Honest answers for new Muslims and for donors: what classes are like, what it costs, where donations go, and how to get involved."
+      "description": "Honest answers for new Muslims: what classes are like, what they cost, and how to take your first steps with us."
     },
     "title": "Questions & Answers",
-    "lede": "Honest answers, in plain language — for people finding their way into Islam, and for people deciding whether to trust us with their donation.",
+    "lede": "Honest answers, in plain language, for people finding their way into Islam.",
     "newMuslims": {
       "title": "For <em>new Muslims</em>",
       "items": [
@@ -245,7 +245,7 @@
         },
         {
           "q": "Does any of this cost money?",
-          "a": "No. Classes, community nights, mentorship, and the shared meals are free, always. Our programs are funded by donations precisely so that a new Muslim never has to pay to learn their religion."
+          "a": "No. Classes, community nights, mentorship, and the shared meals are free, always. This work is supported by people who believe in it, precisely so that a new Muslim never has to pay to learn their religion."
         },
         {
           "q": "I converted alone and there’s no mosque near me. Can I still join?",
@@ -269,39 +269,10 @@
         }
       ]
     },
-    "donors": {
-      "title": "For <em>donors</em>",
-      "items": [
-        {
-          "q": "Is my donation tax-deductible?",
-          "a": "Emara Academy is a legally incorporated non-profit association in Mexico. Our tax-receipt registrations are in progress — write to us before you give and we’ll tell you exactly what documentation we can provide for your situation and country."
-        },
-        {
-          "q": "Can I give toward a specific program?",
-          "a": "Write to us before you give and tell us which program — education, teacher formation, events, the mutual aid fund, retreats, or regional exchange — you’d like your gift to support, and we’ll make sure it’s applied there."
-        },
-        {
-          "q": "How do I know how the money is spent?",
-          "a": "We publish our donation ledger openly, report spending at least annually, and share independently reviewed financial statements with donors. If you want more detail than we publish, ask — we answer everything ourselves."
-        },
-        {
-          "q": "Can I donate from outside Mexico?",
-          "a": "Yes. Card donations work internationally, and our bank details (including the SWIFT code for international transfers) are on the donation page — write to us if anything is unclear and we’ll make it simple."
-        },
-        {
-          "q": "Is online payment secure?",
-          "a": "Card payments are processed by Stripe — we never see or store your card details. For bank transfers, our account details are on the donation page; add your name and email in the transfer reference so your donation is recorded correctly."
-        },
-        {
-          "q": "I can’t give money. Is there another way to help?",
-          "a": "Yes, and it matters just as much: class assistants, mentors for new converts, translators, event helpers, and hands for retreats and mutual-aid deliveries. Tell us what you’re good at and how much time you have."
-        }
-      ]
-    },
     "cta": {
       "eyebrow": "Still Wondering",
       "title": "Your question isn’t here? <em>Ask it anyway.</em>",
-      "lede": "Write to us about anything — joining, giving, volunteering, or your own first steps. A real person reads and answers every letter.",
+      "lede": "Write to us about anything — joining a class, volunteering, or your own first steps. A real person reads and answers every letter.",
       "button": "Write to Us"
     }
   },

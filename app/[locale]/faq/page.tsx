@@ -59,18 +59,6 @@ export default function FaqPage() {
         </div>
       </section>
 
-      <section className="about-section">
-        <div className="wrap about-grid">
-          <Reveal>
-            <p className="folio">الفصل الثاني</p>
-            <h2>{t.rich("donors.title", rich)}</h2>
-          </Reveal>
-          <Reveal>
-            <FaqList items={t.raw("donors.items") as FaqItem[]} />
-          </Reveal>
-        </div>
-      </section>
-
       <section className="contact-cta">
         <div className="wrap narrow">
           <Reveal>
