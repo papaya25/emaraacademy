@@ -104,7 +104,7 @@
     "contactCta": {
       "eyebrow": "Correspondencia",
       "title": "Cada carta la lee una persona, <em>no un sistema.</em>",
-      "lede": "Una duda sobre una clase, un donativo, el voluntariado… o tus propios primeros pasos en el islam. Escríbenos y te responde una persona de verdad.",
+      "lede": "Una duda sobre una clase, el voluntariado… o tus propios primeros pasos en el islam. Escríbenos y te responde una persona de verdad.",
       "cta": "Escríbenos"
     }
   },
@@ -308,14 +308,14 @@
   "contact": {
     "meta": {
       "title": "Contacto — Emara Academy",
-      "description": "Escribe a Emara Academy para unirte a una clase, donar o ser voluntario. Cada carta la lee una persona y cada pregunta recibe una respuesta de verdad."
+      "description": "Escribe a Emara Academy para unirte a una clase, ser voluntario o dar tus primeros pasos en el islam. Cada carta la lee una persona y cada pregunta recibe una respuesta de verdad."
     },
     "title": "Contacto",
-    "lede": "Ya sea que estés dando tus primeros pasos en el islam, pensando en hacer un donativo u ofreciendo tu tiempo, escríbenos. Respondemos todo nosotros mismos.",
+    "lede": "Ya sea que estés dando tus primeros pasos en el islam, buscando una clase u ofreciendo tu tiempo, escríbenos. Respondemos todo nosotros mismos.",
     "form": {
       "eyebrow": "Correspondencia",
       "title": "Cada carta la lee una persona, <em>no un sistema.</em>",
-      "intro": "Una duda sobre una clase, un donativo o tus propios primeros pasos en el islam: escríbenos o contáctanos directamente:",
+      "intro": "Una duda sobre una clase, el voluntariado o tus propios primeros pasos en el islam: escríbenos o contáctanos directamente:",
       "whatsapp": "WhatsApp:",
       "promise": "Sin presiones y sin listas de correo que no pediste: solo una respuesta de verdad.",
       "sentTitle": "Tu mensaje va en camino.",
@@ -324,7 +324,6 @@
       "reasonGroup": "Motivo del mensaje",
       "reasons": {
         "class": "Unirme a una Clase",
-        "donating": "Hacer un Donativo",
         "volunteering": "Ser Voluntario",
         "other": "Otra Cosa"
       },

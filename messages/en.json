@@ -104,7 +104,7 @@
     "contactCta": {
       "eyebrow": "Correspondence",
       "title": "Every letter is read by a person, <em>not a system.</em>",
-      "lede": "A question about a class, a donation, volunteering — or your own first steps in Islam. Write to us and a real person replies.",
+      "lede": "A question about a class, volunteering — or your own first steps in Islam. Write to us and a real person replies.",
       "cta": "Write to Us"
     }
   },
@@ -308,14 +308,14 @@
   "contact": {
     "meta": {
       "title": "Contact — Emara Academy",
-      "description": "Write to Emara Academy about joining a class, donating, or volunteering — every letter is read by a person, and every question gets a real reply."
+      "description": "Write to Emara Academy about joining a class, volunteering, or your first steps in Islam — every letter is read by a person, and every question gets a real reply."
     },
     "title": "Contact",
-    "lede": "Whether you’re taking your first steps in Islam, thinking about a donation, or offering your time — write to us. We answer everything ourselves.",
+    "lede": "Whether you’re taking your first steps in Islam, looking for a class, or offering your time — write to us. We answer everything ourselves.",
     "form": {
       "eyebrow": "Correspondence",
       "title": "Every letter is read by a person, <em>not a system.</em>",
-      "intro": "A question about a class, a donation, or your own first steps in Islam — write to us, or reach us directly:",
+      "intro": "A question about a class, volunteering, or your own first steps in Islam — write to us, or reach us directly:",
       "whatsapp": "WhatsApp:",
       "promise": "No pressure, and no mailing list you didn’t ask for — just a real reply.",
       "sentTitle": "Your message is on its way.",
@@ -324,7 +324,6 @@
       "reasonGroup": "Reason for writing",
       "reasons": {
         "class": "Joining a Class",
-        "donating": "Donating",
         "volunteering": "Volunteering",
         "other": "Something Else"
       },

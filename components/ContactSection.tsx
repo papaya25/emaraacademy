@@ -11,7 +11,6 @@ import { rich } from "@/lib/rich";
 // it in English); `key` is the visitor-facing label in messages/*.json.
 const REASONS = [
   { value: "Joining a Class", key: "class" },
-  { value: "Donating", key: "donating" },
   { value: "Volunteering", key: "volunteering" },
   { value: "Something Else", key: "other" },
 ] as const;
