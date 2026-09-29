@@ -123,7 +123,7 @@ reachable by direct link only).
 - Legal (from the SAT Constancia, 2026-09-26): "EMARA ACADEMY", Sociedad por Acciones Simplificada de C.V., RFC EAC260327JP1, RESICO regime (monthly ISR/IVA obligations), registered address in Roma Norte, CDMX — do NOT publish the address (anonymity). Bank says "S.A. de C.V." — mismatch flagged. Owner chose to keep the "non-profit association" wording for now pending his accountant.
 
 ## Pending from the owner (placeholders until provided)
-- **At publish of the Arabic-first update:** apply `supabase/migrations/011_remove_mutual_aid_program.sql` (deletes the mutual aid program row + renumbers 5→4, 6→5). Held back because the live site reads the table directly. The code side (static fallback, ES/AR built-ins, every text mention in EN/ES/AR, "six"→"five") is already done.
+- Arabic-first update, contact registration and Page texts editor **published 2026-09-29**; migration `011_remove_mutual_aid_program.sql` applied the same day (5 programs left, renumbered).
 - New Muslims page's three new Arabic sections are text only — owner will say later what "ابدأ التسجيل", the four "أنشطة المسلم الجديد" items and "تواصل دائم" should open.
 Status 2026-09-24: domain **emaraacademy.org is live** (IONOS DNS → Vercel; apex redirects to `www.emaraacademy.org`, the primary). Admin user `admin@emaraacademy.org` **exists and is confirmed** in Supabase (only user). Still open:
 - Supabase dashboard: confirm "Allow new users to sign up" is turned off (not verifiable from here)
