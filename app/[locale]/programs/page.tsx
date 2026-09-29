@@ -43,7 +43,7 @@ export default function ProgramsPage() {
           <Reveal>
             <span className="smallcaps">{t("involved.eyebrow")}</span>
             <h2>{t.rich("involved.title", rich)}</h2>
-            <p>{t("involved.lede")}</p>
+            {t.has("involved.lede") && <p>{t("involved.lede")}</p>}
             <div className="spread-cta">
               <Link className="btn btn-green" href="/contact">
                 {t("involved.cta")}

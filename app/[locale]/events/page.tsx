@@ -23,7 +23,7 @@ export default function EventsPage() {
     <main>
       <section className="about-hero">
         <div className="wrap">
-          <p className="ar">الفعاليات</p>
+          <p className="ar">الأنشطة</p>
           <Rosette />
           <h1>{t("title")}</h1>
           <p>{t("lede")}</p>

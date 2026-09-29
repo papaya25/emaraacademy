@@ -21,8 +21,7 @@
     "whatsapp": "WhatsApp Us",
     "changeLanguage": "Change language",
     "languages": "Languages",
-    "soon": "soon",
-    "enroll": "Enroll"
+    "soon": "soon"
   },
   "footer": {
     "tagline": "Building communities that keep new Muslims — education, mentorship, and belonging across Latin America.",
@@ -65,14 +64,14 @@
     },
     "programs": {
       "eyebrow": "What We Do",
-      "title": "Six chapters of one mission",
+      "title": "Five chapters of one mission",
       "lede": "Click a book to read what it does."
     },
     "newMuslims": {
       "folio": "الفصل الأول",
       "title": "The year <em>after</em> the shahada is where faith is kept — or quietly lost.",
       "p1": "Across Latin America, people find Islam every day — and most of them find it alone. No classes in their language. No one to teach them to pray. No one to sit with at Eid. Da’wah celebrates the moment of conversion; almost nothing is built for the year that follows.",
-      "p2": "Emara Academy exists for that year, and every year after it: weekly classes in Spanish and Portuguese, a mentor within your first two weeks, dignified help when life gets hard, and a community that already knows your name."
+      "p2": "Emara Academy exists for that year, and every year after it: weekly classes in Spanish and Portuguese, a mentor within your first two weeks, and a community that already knows your name."
     },
     "events": {
       "eyebrow": "Events & Lessons",
@@ -92,7 +91,7 @@
     "volunteer": {
       "eyebrow": "Give Your Time",
       "title": "Give your time.",
-      "lede": "Emara Academy runs on people who show up: class assistants, mentors for new converts, translators, event organizers, and hands for retreats and mutual aid deliveries.",
+      "lede": "Emara Academy runs on people who show up: class assistants, mentors for new converts, translators, event organizers, and hands for retreats.",
       "roles": {
         "assistant": "Class Assistant",
         "mentor": "Mentor",
@@ -112,14 +111,14 @@
   "programs": {
     "meta": {
       "title": "Programs — Emara Academy",
-      "description": "Six programs, one mission: education, teacher formation, community events, mutual aid, retreats, and regional exchange for new Muslims across Latin America."
+      "description": "Five programs, one mission: education, teacher formation, community events, retreats, and regional exchange for new Muslims across Latin America."
     },
     "title": "Programs",
-    "lede": "Six chapters of one mission — each built around a moment when new Muslims most often drift away, and designed to hold them instead.",
+    "lede": "Five chapters of one mission — each built around a moment when new Muslims most often drift away, and designed to hold them instead.",
     "involved": {
       "eyebrow": "Get Involved",
       "title": "Support our work, <em>however you can.</em>",
-      "lede": "Volunteer as a mentor, translator, or event helper — these six programs run on people who show up.",
+      "lede": "Volunteer as a mentor, translator, or event helper — these five programs run on people who show up.",
       "cta": "Offer Your Time"
     }
   },
@@ -155,8 +154,8 @@
     "work": {
       "title": "The work, in one sentence: <em>we help new Muslims stay.</em>",
       "p1": "Everything we run is aimed at the moments converts most often disengage: right after conversion, during their first Ramadan, during family conflict, in moments of material need, and in the slow erosion of having no one to share the journey with.",
-      "p2": "Weekly education in Spanish and Portuguese. Imams and teachers trained specifically in the care converts need. Community events built around belonging. A confidential mutual aid fund. Outdoor retreats. And exchanges that connect convert communities across the continent — so no city has to build alone.",
-      "link": "See all six programs →"
+      "p2": "Weekly education in Spanish and Portuguese. Imams and teachers trained specifically in the care converts need. Community events built around belonging. Outdoor retreats. And exchanges that connect convert communities across the continent — so no city has to build alone.",
+      "link": "See all five programs →"
     },
     "values": {
       "title": "What we believe about the work",
@@ -185,7 +184,7 @@
     },
     "future": {
       "title": "Where we’re going: <em>city by city, country by country.</em>",
-      "p1": "We start by proving the full model in Playa del Carmen — education, teacher formation, events, mutual aid, and retreats. From there, the plan extends through partner mosques to Cancún, Mérida, Mexico City, and Guadalajara, then to convert communities across Latin America: Colombia, Argentina, Brazil, Chile, Costa Rica, Panama.",
+      "p1": "We start by proving the full model in Playa del Carmen — education, teacher formation, events, and retreats. From there, the plan extends through partner mosques to Cancún, Mérida, Mexico City, and Guadalajara, then to convert communities across Latin America: Colombia, Argentina, Brazil, Chile, Costa Rica, Panama.",
       "p2": "The goal is a network — a regional family of communities sharing one curriculum, trained teachers, and an annual gathering — so that a person who converts anywhere on the continent is never more than one introduction away from belonging.",
       "p3": "We are a young organization with our legal foundation, bank account, and program blueprint in place — and we publish our progress openly as we grow. If you want to be part of building this, <volunteer>volunteer</volunteer> or simply <write>write to us</write>."
     }
@@ -211,10 +210,6 @@
         {
           "title": "Every week — a class and a meal",
           "desc": "Weekly classes that start from absolute zero: how to pray, how to fast, what to believe — always around a shared meal, because this is a family, not a lecture hall."
-        },
-        {
-          "title": "When life gets hard — quiet help",
-          "desc": "If conversion costs you a job, family support, or stability, our mutual aid fund helps with food, clothing, and emergencies — confidentially, with dignity, no gossip."
         }
       ]
     },
@@ -285,18 +280,11 @@
     "title": "Contact",
     "lede": "Whether you’re taking your first steps in Islam, looking for a class, or offering your time — write to us. We answer everything ourselves.",
     "form": {
-      "eyebrow": "Correspondence",
-      "title": "Every letter is read by a person, <em>not a system.</em>",
-      "intro": "A question about a class, volunteering, or your own first steps in Islam — write to us, or reach us directly:",
-      "whatsapp": "WhatsApp:",
-      "promise": "No pressure, and no mailing list you didn’t ask for — just a real reply.",
       "sentTitle": "Your message is on its way.",
       "sentBody": "We’ll reply as soon as we can — usually within a day or two.",
       "writingAbout": "I’m writing about",
       "reasonGroup": "Reason for writing",
       "reasons": {
-        "class": "Joining a Class",
-        "volunteering": "Volunteering",
         "other": "Something Else"
       },
       "name": "Name",
@@ -304,7 +292,28 @@
       "message": "Your message",
       "sending": "Sending…",
       "send": "Send Letter",
-      "error": "Something went wrong sending your letter — please try again in a moment, or reach us on WhatsApp or email above instead."
+      "error": "Something went wrong sending your letter — please try again in a moment, or reach us on WhatsApp or email above instead.",
+      "joinTitle": "Be part of Emara",
+      "roles": {
+        "student": "Register as a student",
+        "teacher": "Register as a teacher",
+        "translator": "Register as a translator",
+        "photographer": "Register as an event photographer",
+        "volunteer": "Register as a volunteer"
+      },
+      "register": "Register",
+      "aboutYou": "Tell us a little about yourself (optional)",
+      "noClasses": "No classes are open for registration right now — choose “Something Else” to write to us.",
+      "roleSentTitle": "Your registration is in.",
+      "roleSentBody": "Thank you — we’ll contact you on WhatsApp soon."
+    },
+    "reach": {
+      "title": "How to reach us",
+      "whatsapp": "WhatsApp",
+      "email": "Email",
+      "instagram": "Instagram",
+      "facebook": "Facebook",
+      "tiktok": "TikTok"
     }
   },
   "notFound": {
@@ -414,25 +423,16 @@
       "fullWaitlist": "Full — waitlist open"
     },
     "enroll": {
-      "eyebrow": "Enrollment",
-      "title": "Save your place <em>in a class.</em>",
-      "lede": "Leave your details and we’ll message you on WhatsApp to welcome you before the first class. It’s free, and there’s nothing to prepare.",
       "class": "Class",
       "choose": "Choose a class",
       "waitlistTag": "waitlist",
-      "name": "Name",
-      "email": "Email",
       "whatsapp": "WhatsApp number",
       "whatsappHint": "With country code, e.g. +52 55 1234 5678",
-      "submit": "Enroll",
-      "submitting": "Sending…",
       "successTitle": "You’re enrolled.",
       "successBody": "Your place in “{class}” is saved. We’ll message you on WhatsApp soon with everything you need.",
       "waitlistTitle": "You’re on the waitlist.",
       "waitlistBody": "“{class}” is full right now, so we’ve put you on its waitlist. We’ll message you on WhatsApp as soon as a place opens.",
-      "another": "Enroll in another class",
-      "duplicate": "This email is already registered for that class — we have you.",
-      "error": "Something went wrong sending your enrollment — please try again in a moment, or message us on WhatsApp."
+      "duplicate": "This email is already registered for that class — we have you."
     }
   },
   "donate": {
@@ -554,7 +554,7 @@
           "heading": "How we use it",
           "paragraphs": [
             "To answer your messages, send the newsletter you asked for, issue donation receipts, and publish honest aggregate reporting (never individual details without your consent).",
-            "For new Muslims who join our programs, discretion is a religious duty for us, not just a legal one: your participation, questions, and any help you receive from the mutual aid fund are treated as confidential."
+            "For new Muslims who join our programs, discretion is a religious duty for us, not just a legal one: your participation, questions, and any help you receive from us are treated as confidential."
           ]
         },
         {
@@ -623,7 +623,7 @@
         {
           "heading": "Directed donations",
           "paragraphs": [
-            "You may direct a donation to any program — education, teacher formation, events, the mutual aid fund, retreats, or regional exchange — and restricted-fund accounting keeps it there. If a directed program becomes impossible to deliver, we will contact you to redirect or refund your donation rather than silently repurposing it."
+            "You may direct a donation to any program — education, teacher formation, events, retreats, or regional exchange — and restricted-fund accounting keeps it there. If a directed program becomes impossible to deliver, we will contact you to redirect or refund your donation rather than silently repurposing it."
           ]
         },
         {
@@ -840,7 +840,11 @@
       "supported": "People Supported",
       "goalSection": "Monthly donation goal",
       "goalHint": "The “raised so far” number updates on its own from the Donations tab — only the goal is set here.",
-      "goal": "Goal (USD)"
+      "goal": "Goal (USD)",
+      "social": "Social media links (full address, e.g. https://www.instagram.com/…) — leave blank to hide",
+      "instagram": "Instagram",
+      "facebook": "Facebook",
+      "tiktok": "TikTok"
     },
     "enrollments": {
       "title": "Enrollments",
@@ -861,15 +865,17 @@
         "waitlist": "Waitlist"
       },
       "confirm": "Confirm",
-      "noneForClass": "No sign-ups yet for this class."
+      "noneForClass": "No sign-ups yet for this class.",
+      "classesTitle": "Class sign-ups",
+      "teamTitle": "Team registrations",
+      "teamEmpty": "No one yet.",
+      "message": "About them",
+      "roles": {
+        "teacher": "Teachers",
+        "translator": "Translators",
+        "photographer": "Event photographers",
+        "volunteer": "Volunteers"
+      }
     }
-  },
-  "enrollPage": {
-    "meta": {
-      "title": "Enroll in a Class — Emara Academy",
-      "description": "Sign up for a free class for new Muslims — leave your name, email and WhatsApp, and we’ll welcome you before the first session."
-    },
-    "title": "Enroll in a Class",
-    "lede": "Pick a class, leave your details, and we’ll be in touch on WhatsApp. Free, always — and no one expects you to know anything yet."
   }
 }

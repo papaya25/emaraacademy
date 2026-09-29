@@ -217,6 +217,12 @@ export async function deleteEnrollment(fd: FormData) {
   revalidatePath("/classes");
 }
 
+export async function deleteRegistration(fd: FormData) {
+  const supabase = await createClient();
+  await supabase.from("registrations").delete().eq("id", str(fd, "id"));
+  revalidatePath("/admin/enrollments");
+}
+
 // ---- Donations ----------------------------------------------------------
 
 export async function addDonation(fd: FormData) {
@@ -297,7 +303,13 @@ export async function updateContactInfo(fd: FormData) {
   const supabase = await createClient();
   await supabase.from("site_settings").upsert({
     key: "contact_info",
-    value: { email: str(fd, "email"), phone: str(fd, "phone") },
+    value: {
+      email: str(fd, "email"),
+      phone: str(fd, "phone"),
+      instagram: str(fd, "instagram"),
+      facebook: str(fd, "facebook"),
+      tiktok: str(fd, "tiktok"),
+    },
     updated_at: new Date().toISOString(),
   });
   revalidatePath("/admin/settings");

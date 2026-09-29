@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/routing";
@@ -26,6 +27,9 @@ export async function generateMetadata({
 export default function Home() {
   const t = useTranslations("home");
   const tShared = useTranslations("shared");
+  const tNav = useTranslations("nav");
+  // Parts that a language no longer has text for are left out (Arabic leads;
+  // English/Spanish keep theirs until they're re-translated from the Arabic).
   return (
     <main>
       {/* Title page */}
@@ -33,7 +37,14 @@ export default function Home() {
         <div className="wrap">
           <div className="plate">
             <span className="corner" />
-            <p className="ar">عِمَارَة</p>
+            <Image
+              className="title-logo"
+              src="/logo.png"
+              alt={tNav("logoAlt")}
+              width={104}
+              height={146}
+              priority
+            />
             <Rosette />
             <h1>{t.rich("hero.title", rich)}</h1>
             <p className="title-sub">{t("hero.subtitle")}</p>
@@ -49,7 +60,7 @@ export default function Home() {
           <Reveal className="contents-head">
             <span className="smallcaps">{t("programs.eyebrow")}</span>
             <h2>{t("programs.title")}</h2>
-            <p className="contents-lede">{t("programs.lede")}</p>
+            {t.has("programs.lede") && <p className="contents-lede">{t("programs.lede")}</p>}
           </Reveal>
           <Reveal>
             <ProgramShelf />
@@ -58,29 +69,31 @@ export default function Home() {
       </section>
 
       {/* Chapter I — the problem / for new Muslims */}
-      <section className="spread" id="new-muslims">
-        <div className="wrap spread-grid">
-          <Reveal>
-            <p className="folio">{t("newMuslims.folio")}</p>
-            <h2>{t.rich("newMuslims.title", rich)}</h2>
-          </Reveal>
-          <Reveal className="lede-col">
-            <p className="dropcap">{t("newMuslims.p1")}</p>
-            <p>{t("newMuslims.p2")}</p>
-            <div className="spread-cta">
-              <Link className="btn btn-green" href="/classes">
-                {tShared("joinAClass")}
-              </Link>
-              <WhatsAppLink
-                className="btn btn-ghost"
-                message={tShared("whatsappGreeting")}
-              >
-                {tShared("talkToSomeoneFirst")}
-              </WhatsAppLink>
-            </div>
-          </Reveal>
-        </div>
-      </section>
+      {t.has("newMuslims.title") && (
+        <section className="spread" id="new-muslims">
+          <div className="wrap spread-grid">
+            <Reveal>
+              <p className="folio">{t("newMuslims.folio")}</p>
+              <h2>{t.rich("newMuslims.title", rich)}</h2>
+            </Reveal>
+            <Reveal className="lede-col">
+              <p className="dropcap">{t("newMuslims.p1")}</p>
+              <p>{t("newMuslims.p2")}</p>
+              <div className="spread-cta">
+                <Link className="btn btn-green" href="/classes">
+                  {tShared("joinAClass")}
+                </Link>
+                <WhatsAppLink
+                  className="btn btn-ghost"
+                  message={tShared("whatsappGreeting")}
+                >
+                  {tShared("talkToSomeoneFirst")}
+                </WhatsAppLink>
+              </div>
+            </Reveal>
+          </div>
+        </section>
+      )}
 
       {/* Events */}
       <section className="events" id="events">
@@ -91,12 +104,14 @@ export default function Home() {
             <p>{t("events.lede")}</p>
           </Reveal>
           <Reveal>
-            <p className="events-cadence-line">{t("events.cadence")}</p>
+            {t.has("events.cadence") && (
+              <p className="events-cadence-line">{t("events.cadence")}</p>
+            )}
             <div className="events-actions">
               <Link className="btn btn-green" href="/events">
                 {t("events.cta")}
               </Link>
-              <p className="events-note">{t("events.note")}</p>
+              {t.has("events.note") && <p className="events-note">{t("events.note")}</p>}
             </div>
           </Reveal>
         </div>
@@ -124,41 +139,45 @@ export default function Home() {
       </section>
 
       {/* Volunteer */}
-      <section className="volunteer">
-        <div className="wrap">
-          <Reveal className="volunteer-grid">
-            <div>
-              <span className="smallcaps">{t("volunteer.eyebrow")}</span>
-              <h2>
-                <em>{t("volunteer.title")}</em>
-              </h2>
-              <p className="lede">{t("volunteer.lede")}</p>
-              <div className="role-list">
-                {ROLES.map((r) => (
-                  <span key={r}>{t(`volunteer.roles.${r}`)}</span>
-                ))}
+      {t.has("volunteer.title") && (
+        <section className="volunteer">
+          <div className="wrap">
+            <Reveal className="volunteer-grid">
+              <div>
+                <span className="smallcaps">{t("volunteer.eyebrow")}</span>
+                <h2>
+                  <em>{t("volunteer.title")}</em>
+                </h2>
+                <p className="lede">{t("volunteer.lede")}</p>
+                <div className="role-list">
+                  {ROLES.map((r) => (
+                    <span key={r}>{t(`volunteer.roles.${r}`)}</span>
+                  ))}
+                </div>
               </div>
-            </div>
-            <Link className="btn btn-green" href="/contact">
-              {t("volunteer.cta")}
-            </Link>
-          </Reveal>
-        </div>
-      </section>
+              <Link className="btn btn-green" href="/contact">
+                {t("volunteer.cta")}
+              </Link>
+            </Reveal>
+          </div>
+        </section>
+      )}
 
       {/* Contact CTA */}
-      <section className="contact-cta" id="contact">
-        <div className="wrap narrow">
-          <Reveal>
-            <span className="smallcaps">{t("contactCta.eyebrow")}</span>
-            <h2>{t.rich("contactCta.title", rich)}</h2>
-            <p>{t("contactCta.lede")}</p>
-            <Link className="btn btn-green" href="/contact">
-              {t("contactCta.cta")}
-            </Link>
-          </Reveal>
-        </div>
-      </section>
+      {t.has("contactCta.title") && (
+        <section className="contact-cta" id="contact">
+          <div className="wrap narrow">
+            <Reveal>
+              <span className="smallcaps">{t("contactCta.eyebrow")}</span>
+              <h2>{t.rich("contactCta.title", rich)}</h2>
+              <p>{t("contactCta.lede")}</p>
+              <Link className="btn btn-green" href="/contact">
+                {t("contactCta.cta")}
+              </Link>
+            </Reveal>
+          </div>
+        </section>
+      )}
     </main>
   );
 }

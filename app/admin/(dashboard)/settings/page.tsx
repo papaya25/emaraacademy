@@ -1,7 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { getTranslations } from "next-intl/server";
 import { updateContactInfo, updateImpactStats, updateDonationGoal } from "@/app/admin/actions";
-import { DEFAULT_CONTACT } from "@/lib/contactInfo";
+import { DEFAULT_CONTACT, type ContactInfo } from "@/lib/contactInfo";
 
 export default async function AdminSettingsPage() {
   const supabase = await createClient();
@@ -12,12 +12,13 @@ export default async function AdminSettingsPage() {
     .in("key", ["contact_info", "impact_stats", "donation_month"]);
 
   const settings = Object.fromEntries((rows ?? []).map((r) => [r.key, r.value])) as {
-    contact_info?: { email: string; phone: string };
+    contact_info?: ContactInfo;
     impact_stats?: { new_muslims: number; students: number; supported: number };
     donation_month?: { goal: number };
   };
 
-  const contact = settings.contact_info ?? DEFAULT_CONTACT;
+  // Older saved settings have no social links yet — fall back per field.
+  const contact = { ...DEFAULT_CONTACT, ...settings.contact_info };
   const impact = settings.impact_stats ?? { new_muslims: 0, students: 0, supported: 0 };
   const goal = settings.donation_month?.goal ?? 5000;
 
@@ -36,6 +37,13 @@ export default async function AdminSettingsPage() {
             {t("settings.phone")}
             <input name="phone" defaultValue={contact.phone} required />
           </label>
+          <p className="admin-hint">{t("settings.social")}</p>
+          {(["instagram", "facebook", "tiktok"] as const).map((k) => (
+            <label key={k}>
+              {t(`settings.${k}`)}
+              <input type="url" name={k} defaultValue={contact[k] ?? ""} dir="ltr" />
+            </label>
+          ))}
           <button className="btn btn-green" type="submit">
             {t("common.save")}
           </button>

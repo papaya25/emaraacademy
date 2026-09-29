@@ -1,8 +1,10 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import Rosette from "@/components/Rosette";
 import ContactSection from "@/components/ContactSection";
+import ReachUs from "@/components/ReachUs";
 
 export async function generateMetadata({
   params,
@@ -26,7 +28,11 @@ export default function ContactPage() {
           <p>{t("lede")}</p>
         </div>
       </section>
-      <ContactSection />
+      {/* ContactSection reads ?class= from the URL */}
+      <Suspense>
+        <ContactSection />
+      </Suspense>
+      <ReachUs />
     </main>
   );
 }

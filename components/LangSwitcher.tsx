@@ -64,11 +64,11 @@ export default function LangSwitcher() {
                   // transition between locales (stale <html dir/lang>).
                   //
                   // Always include the explicit /<locale> prefix, even for
-                  // English — once a NEXT_LOCALE cookie is set to a
-                  // non-default locale, a bare unprefixed URL is ambiguous
+                  // Arabic (the default) — once a NEXT_LOCALE cookie is set
+                  // to another locale, a bare unprefixed URL is ambiguous
                   // and the middleware honors the cookie over it, so the
-                  // English option would silently no-op. The middleware
-                  // normalizes /en/... back down to the unprefixed URL
+                  // Arabic option would silently no-op. The middleware
+                  // normalizes /ar/... back down to the unprefixed URL
                   // (and updates the cookie) once it sees the explicit
                   // prefix, so this still lands on the right clean URL.
                   // eslint-disable-next-line @next/next/no-location-assign-relative-destination -- intentional, see above

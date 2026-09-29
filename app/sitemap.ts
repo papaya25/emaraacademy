@@ -12,7 +12,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/programs",
     "/events",
     "/classes",
-    "/enroll",
     "/faq",
     "/contact",
     ...(POLICY_LINKS_ENABLED
@@ -21,12 +20,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
   const paths = [...staticRoutes, ...PROGRAMS.map((p) => `/programs/${p.slug}`)];
 
-  // Each page in English (unprefixed), Spanish (/es) and Arabic (/ar), linked as alternates.
+  // Each page in Arabic (unprefixed, the main language), English (/en) and
+  // Spanish (/es), linked as alternates.
   return paths.flatMap((path) => {
     const languages = {
-      en: `${SITE_URL}${path}`,
+      ar: `${SITE_URL}${path}`,
+      en: `${SITE_URL}/en${path}`,
       es: `${SITE_URL}/es${path}`,
-      ar: `${SITE_URL}/ar${path}`,
     };
     return (["en", "es", "ar"] as const).map((lang) => ({
       url: languages[lang],

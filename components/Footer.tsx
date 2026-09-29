@@ -31,7 +31,6 @@ export default function Footer() {
             <Link href="/new-muslims">{tNav("newMuslims")}</Link>
             <Link href="/programs">{tNav("programs")}</Link>
             <Link href="/events">{tNav("events")}</Link>
-            <Link href="/enroll">{tNav("enroll")}</Link>
             <Link href="/about">{tNav("about")}</Link>
             <Link href="/faq">{t("faq")}</Link>
           </nav>

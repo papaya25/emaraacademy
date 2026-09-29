@@ -1,6 +1,6 @@
 import type { ProgramText } from "./programs";
 
-/** Built-in Spanish text for the six original programs, keyed by slug. Shown
+/** Built-in Spanish text for the five original programs, keyed by slug. Shown
  *  wherever the admin panel's Spanish fields are blank; slug, numeral and chapter heading
  *  come from the English record. */
 export const PROGRAMS_ES: Record<string, ProgramText> = {
@@ -91,34 +91,6 @@ export const PROGRAMS_ES: Record<string, ProgramText> = {
     ],
     problem:
       "Muchos conversos cuentan que, de un día para otro, ganaron una religión y perdieron su mundo social. Los encuentros reconstruyen ese mundo perdido, y eso es lo que más influye en que alguien siga comprometido a largo plazo.",
-  },
-  "mutual-aid-fund": {
-    category: "Apoyo",
-    title: "Fondo de Ayuda Mutua y Emergencias",
-    tagline:
-      "Una red de apoyo digna, basada en la necesidad real, para que las dificultades económicas nunca sean el motivo por el que alguien se aleja.",
-    whatItIs:
-      "Un fondo de apoyo confidencial, administrado a través de las mezquitas aliadas, que da ayuda directa y por un tiempo definido — comida, ropa, dinero para emergencias y contactos para conseguir trabajo — a nuevos musulmanes que de verdad la necesitan; muchos perdieron el apoyo económico de su familia por haberse convertido.",
-    activities: [
-      {
-        title: "Solicitudes confidenciales",
-        desc: "Pedir ayuda nunca se convierte en chisme de mezquita.",
-      },
-      {
-        title: "Lo básico en una emergencia",
-        desc: "Despensas, ropa — incluidos paquetes de ropa modesta para empezar — y apoyo económico a corto plazo.",
-      },
-      {
-        title: "Apoyo para salir adelante",
-        desc: "Pequeños apoyos económicos y préstamos sin intereses (qard hasan) para que quienes perdieron su ingreso vuelvan a ponerse de pie.",
-      },
-      {
-        title: "Red de profesionales",
-        desc: "Abogados, médicos y terapeutas dispuestos a atender a nuevos musulmanes gratis o con descuento.",
-      },
-    ],
-    problem:
-      "Los conversos — sobre todo las mujeres que empiezan a usar el hiyab — pueden enfrentar consecuencias económicas y familiares reales por convertirse. Sin una red de apoyo, la falta de dinero se vuelve la razón práctica, no de fe, por la que la gente deja de practicar en silencio.",
   },
   "outdoor-retreats": {
     category: "Retiros",

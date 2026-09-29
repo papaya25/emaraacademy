@@ -12,7 +12,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
     ? requested
     : hasLocale(routing.locales, fallback)
       ? fallback
-      : routing.defaultLocale;
+      : "en"; // the admin panel opens in English until another language is picked
 
   return {
     locale,

@@ -154,41 +154,10 @@ export const PROGRAMS: Program[] = [
       "Many converts describe conversion as gaining a religion and losing a social world overnight. Events replace the social world that was lost — the single biggest predictor of whether someone stays engaged long-term.",
   },
   {
-    slug: "mutual-aid-fund",
-    category: "Support",
-    num: "٤",
-    chapter: "الفصل الرابع",
-    title: "Mutual Aid & Emergency Fund",
-    tagline:
-      "A dignified, needs-based safety net so that material hardship never becomes the reason someone drifts away.",
-    whatItIs:
-      "A confidential support fund, administered through partner mosques, providing direct, time-limited help — food, clothing, emergency cash, and connections to livelihood opportunities — for new Muslims in genuine need, many of whom lost family financial support because of their conversion.",
-    activities: [
-      {
-        title: "Confidential intake",
-        desc: "Requests for help never become mosque gossip.",
-      },
-      {
-        title: "Emergency essentials",
-        desc: "Food packages, clothing — including modest-clothing starter kits — and short-term cash assistance.",
-      },
-      {
-        title: "Livelihood track",
-        desc: "Micro-grants and interest-free loans (qard hasan) to help converts who lost income get back on their feet.",
-      },
-      {
-        title: "Professional referral network",
-        desc: "Lawyers, doctors, and therapists willing to offer discounted or free help to new Muslims.",
-      },
-    ],
-    problem:
-      "Converts — especially women who begin wearing hijab — can face real economic and family consequences for converting. Without a safety net, financial hardship becomes the practical, non-ideological reason people quietly stop practicing.",
-  },
-  {
     slug: "outdoor-retreats",
     category: "Retreat",
-    num: "٥",
-    chapter: "الفصل الخامس",
+    num: "٤",
+    chapter: "الفصل الرابع",
     title: "Outdoor Retreats",
     tagline:
       "Weekend retreats combining nature, sport, and Islamic learning — built for people who find classroom-only formats hard to stay engaged with.",
@@ -214,8 +183,8 @@ export const PROGRAMS: Program[] = [
   {
     slug: "inter-community-exchange",
     category: "Exchange",
-    num: "٦",
-    chapter: "الفصل السادس",
+    num: "٥",
+    chapter: "الفصل الخامس",
     title: "Inter-Community Exchange",
     tagline:
       "Structured trips connecting new-Muslim communities across Latin America, so no city's program has to reinvent itself in isolation.",
@@ -243,7 +212,7 @@ export const PROGRAMS: Program[] = [
 const BUILT_IN: Record<string, typeof PROGRAMS_AR> = { es: PROGRAMS_ES, ar: PROGRAMS_AR };
 
 /** The program's text in the visitor's language, field by field: what was
- *  typed in the admin panel, else the built-in translation for the six
+ *  typed in the admin panel, else the built-in translation for the five
  *  original programs, else English.
  *  ponytail: a Spanish/Arabic field cleared in the admin shows the built-in
  *  text again, not English — the admin form pre-fills and saves it anyway. */

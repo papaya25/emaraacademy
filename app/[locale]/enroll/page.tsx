@@ -1,41 +1,14 @@
-import { Suspense } from "react";
-import type { Metadata } from "next";
-import { useTranslations } from "next-intl";
-import { getTranslations } from "next-intl/server";
-import Rosette from "@/components/Rosette";
-import ClassesBoard from "@/components/ClassesBoard";
+import { redirect } from "@/i18n/routing";
 
-export async function generateMetadata({
+// Enrollment moved into the contact page (owner, 2026-09-28). Old /enroll
+// links — including ?class=… from a class card — land on its form.
+export default async function EnrollPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ locale: string }>;
-}): Promise<Metadata> {
-  const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "enrollPage.meta" });
-  return { title: t("title"), description: t("description") };
-}
-
-export default function EnrollPage() {
-  const t = useTranslations("enrollPage");
-  return (
-    <main>
-      <section className="about-hero">
-        <div className="wrap">
-          <p className="ar">التسجيل</p>
-          <Rosette />
-          <h1>{t("title")}</h1>
-          <p>{t("lede")}</p>
-        </div>
-      </section>
-
-      <section className="evb-section">
-        <div className="wrap">
-          {/* Class cards, then the sign-up form (reads ?class= from the URL) */}
-          <Suspense>
-            <ClassesBoard withForm />
-          </Suspense>
-        </div>
-      </section>
-    </main>
-  );
+  searchParams: Promise<{ class?: string }>;
+}) {
+  const [{ locale }, { class: classId }] = await Promise.all([params, searchParams]);
+  redirect({ href: { pathname: "/contact", query: classId ? { class: classId } : {} }, locale });
 }

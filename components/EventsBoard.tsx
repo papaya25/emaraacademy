@@ -391,7 +391,7 @@ export default function EventsBoard() {
                   {e.classId && (
                     <Link
                       className="evb-enroll"
-                      href={{ pathname: "/enroll", query: { class: e.classId } }}
+                      href={{ pathname: "/contact", query: { class: e.classId } }}
                     >
                       {tClasses("enroll")} →
                     </Link>

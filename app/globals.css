@@ -722,6 +722,12 @@ img {
   color: var(--gold-deep);
   line-height: 1.4;
 }
+.title-logo {
+  display: block;
+  height: clamp(110px, 13vw, 150px);
+  width: auto;
+  margin: 0 auto 6px;
+}
 .titlepage h1 {
   font-size: clamp(2.2rem, 4.4vw + 0.6rem, 3.9rem);
   line-height: 1.22;
@@ -1622,53 +1628,6 @@ img {
   background: var(--paper);
   padding: clamp(28px, 5vw, 56px);
 }
-.corr-grid {
-  display: grid;
-  grid-template-columns: 0.85fr 1.15fr;
-  gap: clamp(32px, 5vw, 64px);
-  align-items: start;
-}
-.corr-intro h2 {
-  font-size: clamp(1.5rem, 1.9vw + 0.6rem, 2.1rem);
-  margin-top: 0.5em;
-  line-height: 1.35;
-}
-.corr-intro h2 em {
-  font-style: italic;
-  color: var(--green);
-}
-.corr-intro > p {
-  margin-top: 1em;
-  color: var(--ink-soft);
-  max-width: 36ch;
-  font-size: 0.96rem;
-}
-.corr-links {
-  margin-top: 1.4em;
-  display: flex;
-  flex-direction: column;
-  gap: 0.6em;
-}
-.corr-links a {
-  font-family: var(--font-amiri), serif;
-  font-weight: 700;
-  font-size: 1.12rem;
-  color: var(--green);
-  text-decoration: none;
-  width: fit-content;
-  border-bottom: 1px solid var(--rule-gold);
-  padding-bottom: 1px;
-}
-.corr-links a:hover {
-  color: var(--gold-deep);
-}
-.corr-promise {
-  margin-top: 1.6em;
-  padding-top: 1.2em;
-  border-top: 1px solid var(--rule);
-  font-size: 0.85rem;
-  color: var(--ink-faint);
-}
 .corr-form {
   display: grid;
   gap: 18px;
@@ -1760,9 +1719,6 @@ img {
   font-size: 0.92rem;
 }
 @media (max-width: 780px) {
-  .corr-grid {
-    grid-template-columns: 1fr;
-  }
   .corr-fields {
     grid-template-columns: 1fr;
   }
@@ -2298,11 +2254,78 @@ img {
   color: var(--gold-deep);
 }
 
-/* Class enrollment form (under the class list, same plate as the contact form) */
-.enroll {
-  margin-top: clamp(40px, 6vw, 72px);
+/* Contact page: the form box (registration + message) and "How to reach us" */
+.corr-join-title {
+  font-size: clamp(1.4rem, 1.6vw + 0.7rem, 1.9rem);
+  margin: 0 0 22px;
+  text-align: center;
+}
+#contact-form {
+  display: grid;
+  gap: 22px;
+  max-width: 860px;
+  margin-inline: auto;
   scroll-margin-top: 110px;
 }
+.corr-note {
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+.reach-us {
+  padding-block: clamp(48px, 7vw, 88px);
+  text-align: center;
+}
+.reach-us h2 {
+  font-size: clamp(1.4rem, 1.6vw + 0.7rem, 1.9rem);
+  margin-bottom: 24px;
+}
+.reach-list {
+  margin: 0;
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--rule);
+}
+.reach-list > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  padding: 14px 4px;
+  border-bottom: 1px solid var(--rule);
+}
+.reach-list dt {
+  font-family: var(--font-lora), serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.reach-list dd {
+  margin: 0;
+}
+.reach-list a {
+  font-family: var(--font-amiri), serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--green);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule-gold);
+}
+.reach-list a:hover {
+  color: var(--gold-deep);
+}
+
+/* New Muslims: sub-items under a numbered step */
+.path-items {
+  margin: 0.5em 0 0;
+  padding-inline-start: 1.1em;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+/* Class enrollment form (under the class list, same plate as the contact form) */
 .corr-form select {
   width: 100%;
   background: var(--paper-deep);
