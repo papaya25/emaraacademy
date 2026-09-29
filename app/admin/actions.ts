@@ -1,10 +1,24 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, updateTag } from "next/cache";
 import { getTranslations } from "next-intl/server";
 import { createClient } from "@/lib/supabase/server";
 import { arabicIndicNumeral, chapterHeading } from "@/lib/arabicNumerals";
 import { isResendConfigured, sendBroadcast } from "@/lib/resend";
+import {
+  EDITABLE_PAGES,
+  EMPTY_STORE,
+  LOCALES,
+  applyPageText,
+  flattenPage,
+  type EditablePage,
+  type PageTextStore,
+} from "@/lib/pageText";
+import ar from "@/messages/ar.json";
+import en from "@/messages/en.json";
+import es from "@/messages/es.json";
+
+const BASE_MESSAGES = { ar, en, es };
 
 function str(fd: FormData, key: string): string {
   return String(fd.get(key) ?? "").trim();
@@ -295,6 +309,45 @@ export async function sendNewsletter(
 
   revalidatePath("/admin/newsletter");
   return { ok: true, message: t("sent", { count: emails.length }) };
+}
+
+// ---- Page texts -----------------------------------------------------------
+
+/** Saves one page's texts in every language. Fields are named
+ *  "<locale>::<path>". Only texts that actually changed are stored, each with
+ *  the time it changed — that's how English/Spanish get flagged when the
+ *  Arabic is newer. A text set back to the built-in wording is dropped. */
+export async function savePageText(fd: FormData) {
+  const page = str(fd, "page") as EditablePage;
+  if (!(page in EDITABLE_PAGES)) return;
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("site_settings")
+    .select("value")
+    .eq("key", "page_text")
+    .maybeSingle();
+  const store: PageTextStore = structuredClone({ ...EMPTY_STORE, ...(data?.value ?? {}) });
+  const now = new Date().toISOString();
+
+  for (const locale of LOCALES) {
+    const base = flattenPage(BASE_MESSAGES[locale], page);
+    const saved = (store.text[locale] ??= {});
+    const current = flattenPage(applyPageText(BASE_MESSAGES[locale], saved), page);
+    for (const path of Object.keys(base)) {
+      const value = fd.get(`${locale}::${path}`);
+      if (typeof value !== "string") continue;
+      const text = value.replace(/\r\n/g, "\n").trim();
+      if (text === current[path]) continue;
+      if (text === base[path]) delete saved[path];
+      else saved[path] = text;
+      (store.updated[path] ??= {})[locale] = now;
+    }
+  }
+
+  await supabase.from("site_settings").upsert({ key: "page_text", value: store, updated_at: now });
+  updateTag("page-text");
+  revalidatePath("/", "layout");
+  revalidatePath(`/admin/pages/${page}`);
 }
 
 // ---- Settings -----------------------------------------------------------

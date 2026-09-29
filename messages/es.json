@@ -144,18 +144,21 @@
       "title": "Nuestra historia empieza con <em>algo que no podíamos seguir ignorando.</em>",
       "p1": "Alguien pronuncia la shahada en una mezquita de Quintana Roo. Todos lo abrazan. Y en pocas semanas… deja de venir. No porque haya dejado de creer, sino porque nadie le preguntó cómo estaba, nadie le enseñó a rezar de una forma que pudiera seguir, nadie lo invitó a comer y nadie estuvo ahí cuando un familiar se burló de él por haberse convertido.",
       "p2": "Lo vimos pasar una y otra vez, y escuchamos la misma historia de boca de imames y comunidades de conversos en toda América Latina. La región es una de las que más crece en conversiones al islam, pero casi nada de ese crecimiento se convierte en una comunidad que perdure. La da’wah, como suele hacerse, se enfoca en el momento de la conversión. Casi nada se construye para el año siguiente.",
-      "p3": "Así que construimos lo que faltaba: una academia para ese año y para todos los que vienen después."
+      "p3": "Así que construimos lo que faltaba: una academia para ese año y para todos los que vienen después.",
+      "folio": "الفصل الأول"
     },
     "name": {
       "title": "Por qué <em>“Emara”</em>",
       "p1": "Nuestro nombre viene del árabe <em>ʿimārah</em> (عِمَارَة): cultivar, construir, hacer que un lugar florezca y se llene de vida. La raíz coránica habla de edificar algo que perdure y llenarlo de vida.",
-      "p2": "Lo elegimos porque nuestra misión no es sembrar una sola semilla de conversión y marcharnos. Es construir — clases, amistades, redes de apoyo y celebraciones — hasta que toda persona que abrace el islam en América Latina encuentre una comunidad que ya la está esperando."
+      "p2": "Lo elegimos porque nuestra misión no es sembrar una sola semilla de conversión y marcharnos. Es construir — clases, amistades, redes de apoyo y celebraciones — hasta que toda persona que abrace el islam en América Latina encuentre una comunidad que ya la está esperando.",
+      "folio": "الفصل الثاني"
     },
     "work": {
       "title": "Nuestro trabajo, en una frase: <em>ayudamos a los nuevos musulmanes a quedarse.</em>",
       "p1": "Todo lo que hacemos apunta a los momentos en los que los conversos suelen alejarse: justo después de convertirse, en su primer Ramadán, en los conflictos con la familia, en momentos de necesidad económica y en el desgaste lento de no tener con quién compartir el camino.",
       "p2": "Educación semanal en español y portugués. Imames y maestros preparados específicamente para acompañar a los conversos. Encuentros comunitarios pensados para sentirse parte. Retiros al aire libre. E intercambios que conectan a las comunidades de conversos de todo el continente, para que ninguna ciudad tenga que construir sola.",
-      "link": "Conoce los cinco programas →"
+      "link": "Conoce los cinco programas →",
+      "folio": "الفصل الثالث"
     },
     "values": {
       "title": "Lo que creemos sobre este trabajo",
@@ -180,14 +183,17 @@
           "title": "Puertas abiertas, no círculos cerrados",
           "desc": "Son bienvenidos los conversos de cualquier escuela de pensamiento y en cualquier etapa de su práctica."
         }
-      ]
+      ],
+      "folio": "الفصل الرابع"
     },
     "future": {
       "title": "Hacia dónde vamos: <em>ciudad por ciudad, país por país.</em>",
       "p1": "Empezamos por demostrar el modelo completo en Playa del Carmen: educación, formación de maestros, encuentros y retiros. De ahí, el plan es crecer a través de mezquitas aliadas hacia Cancún, Mérida, la Ciudad de México y Guadalajara, y luego hacia comunidades de conversos en toda América Latina: Colombia, Argentina, Brasil, Chile, Costa Rica y Panamá.",
       "p2": "La meta es una red: una familia regional de comunidades que comparten un mismo programa de estudios, maestros preparados y un encuentro anual, para que quien se convierta en cualquier parte del continente esté siempre a una sola presentación de encontrar su lugar.",
-      "p3": "Somos una organización joven que ya cuenta con su constitución legal, su cuenta bancaria y el plan de sus programas, y compartimos nuestros avances abiertamente conforme crecemos. Si quieres ser parte de esta construcción, <volunteer>súmate como voluntario</volunteer> o simplemente <write>escríbenos</write>."
-    }
+      "p3": "Somos una organización joven que ya cuenta con su constitución legal, su cuenta bancaria y el plan de sus programas, y compartimos nuestros avances abiertamente conforme crecemos. Si quieres ser parte de esta construcción, <volunteer>súmate como voluntario</volunteer> o simplemente <write>escríbenos</write>.",
+      "folio": "الفصل الخامس"
+    },
+    "ornament": "عِمَارَة"
   },
   "newMuslims": {
     "meta": {
@@ -211,19 +217,22 @@
           "title": "Cada semana: una clase y una comida",
           "desc": "Clases semanales que empiezan desde cero: cómo rezar, cómo ayunar, en qué creemos. Siempre alrededor de una comida compartida, porque esto es una familia, no un auditorio."
         }
-      ]
+      ],
+      "folio": "الفصل الأول"
     },
     "asYouAre": {
       "title": "Ven <em>tal como eres</em>",
       "p1": "No necesitas saber árabe. No cuesta nada, nunca. Nadie revisa cuánto practicas, qué escuela de pensamiento sigues, ni si ya pronunciaste la shahada: quien tiene curiosidad es tan bienvenido como quien ya está convencido.",
       "p2": "Y si cargas con cosas más pesadas — una familia que no te entiende, dudas que te dan vergüenza, una soledad que no esperabas —, estarás rodeado de personas que cargaron exactamente lo mismo, y se quedaron. De eso se trata esta comunidad: nadie camina solo.",
-      "faqLink": "Lee respuestas honestas a las preguntas más comunes →"
+      "faqLink": "Lee respuestas honestas a las preguntas más comunes →",
+      "folio": "الفصل الثاني"
     },
     "cta": {
       "eyebrow": "Cuando Estés Listo",
       "title": "Basta un mensaje para <em>dejar de hacerlo solo.</em>",
       "lede": "Cuéntanos en qué ciudad vives y en qué punto del camino estás; nosotros nos encargamos del resto."
-    }
+    },
+    "ornament": "مرحباً بك"
   },
   "faq": {
     "meta": {
@@ -654,7 +663,8 @@
       "settings": "Ajustes",
       "signOut": "Cerrar Sesión",
       "language": "Idioma del panel",
-      "enrollments": "Inscripciones"
+      "enrollments": "Inscripciones",
+      "pages": "Textos de páginas"
     },
     "login": {
       "title": "Administración",
@@ -876,6 +886,18 @@
         "photographer": "Fotógrafos de eventos",
         "volunteer": "Voluntarios"
       }
+    },
+    "pageTexts": {
+      "title": "Textos de páginas",
+      "intro": "Cambia la redacción de estas páginas sin llamar a un desarrollador. Escribe primero el árabe y después actualiza el inglés y el español.",
+      "pages": {
+        "home": "Página de inicio",
+        "new-muslims": "Nuevos Musulmanes",
+        "about": "Quiénes Somos"
+      },
+      "help": "Primero el árabe, luego el inglés y el español. Deja tal cual todo lo que esté entre {lt} y {gt} — por ejemplo {example} pone esas palabras en cursiva verde. Vacía un cuadro para ocultar ese texto en el sitio (solo en ese idioma). Los cambios guardados aparecen en el sitio en menos de un minuto.",
+      "outdated": "El árabe cambió después de esto; actualízalo",
+      "save": "Guardar Todos los Idiomas"
     }
   }
 }

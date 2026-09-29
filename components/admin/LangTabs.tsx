@@ -15,11 +15,16 @@ type Code = (typeof TABS)[number]["code"];
 /**
  * English / Español / العربية tabs around a form's translatable fields. All
  * three panels stay in the form (inactive ones are only hidden), so one Save
- * stores every language at once.
+ * stores every language at once. `arabicFirst` (page texts) opens on Arabic
+ * and drops the "blank shows English" note, since there blank means hidden.
  */
-export default function LangTabs(panels: Record<Code, React.ReactNode>) {
+export default function LangTabs({
+  arabicFirst = false,
+  ...panels
+}: Record<Code, React.ReactNode> & { arabicFirst?: boolean }) {
   const t = useTranslations("admin.langTabs");
-  const [active, setActive] = useState<Code>("en");
+  const tabs = arabicFirst ? [TABS[2], TABS[0], TABS[1]] : TABS;
+  const [active, setActive] = useState<Code>(arabicFirst ? "ar" : "en");
   const id = useId();
   const refs = useRef<Partial<Record<Code, HTMLDivElement | null>>>({});
 
@@ -40,7 +45,7 @@ export default function LangTabs(panels: Record<Code, React.ReactNode>) {
   return (
     <div className="admin-langtabs">
       <div role="tablist" aria-label={t("label")} className="admin-langtabs-list">
-        {TABS.map(({ code, label }, i) => (
+        {tabs.map(({ code, label }, i) => (
           <button
             key={code}
             type="button"
@@ -58,7 +63,7 @@ export default function LangTabs(panels: Record<Code, React.ReactNode>) {
               if (!step) return;
               e.preventDefault();
               const rtl = getComputedStyle(e.currentTarget).direction === "rtl";
-              const next = TABS[(i + (rtl ? -step : step) + TABS.length) % TABS.length].code;
+              const next = tabs[(i + (rtl ? -step : step) + tabs.length) % tabs.length].code;
               setActive(next);
               document.getElementById(`${id}-tab-${next}`)?.focus();
             }}
@@ -67,7 +72,7 @@ export default function LangTabs(panels: Record<Code, React.ReactNode>) {
           </button>
         ))}
       </div>
-      {TABS.map(({ code }) => (
+      {tabs.map(({ code }) => (
         <div
           key={code}
           role="tabpanel"
@@ -80,7 +85,7 @@ export default function LangTabs(panels: Record<Code, React.ReactNode>) {
           }}
           className="admin-langtabs-panel"
         >
-          {code !== "en" && (
+          {code !== "en" && !arabicFirst && (
             <p className="admin-hint">{t("blankHint", { language: t(`names.${code}`) })}</p>
           )}
           {panels[code]}

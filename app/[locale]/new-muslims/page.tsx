@@ -7,6 +7,7 @@ import Rosette from "@/components/Rosette";
 import WhatsAppLink from "@/components/WhatsAppLink";
 import { rich } from "@/lib/rich";
 import { arabicIndicNumeral } from "@/lib/arabicNumerals";
+import { hasText } from "@/lib/pageText";
 
 export async function generateMetadata({
   params,
@@ -21,27 +22,32 @@ export async function generateMetadata({
 export default function NewMuslimsPage() {
   const t = useTranslations("newMuslims");
   const tShared = useTranslations("shared");
+  const has = (key: string) => hasText(t, key); // empty (admin → Page texts) = hidden
   // Arabic leads: it has the new "path" list; English/Spanish keep the older
   // sections until they're re-translated from the Arabic.
-  const steps = t.has("steps.items") ? (t.raw("steps.items") as { title: string; desc: string }[]) : [];
-  const path = t.has("path") ? (t.raw("path") as { title: string; items: string[] }[]) : [];
+  const steps = (
+    t.has("steps.items") ? (t.raw("steps.items") as { title: string; desc: string }[]) : []
+  ).filter((s) => s.title);
+  const path = (t.has("path") ? (t.raw("path") as { title: string; items: string[] }[]) : [])
+    .filter((s) => s.title)
+    .map((s) => ({ ...s, items: s.items.filter(Boolean) }));
   return (
     <main>
       <section className="about-hero">
         <div className="wrap">
-          <p className="ar">مرحباً بك</p>
+          {has("ornament") && <p className="ar">{t("ornament")}</p>}
           <Rosette />
-          <h1>{t("title")}</h1>
-          <p>{t("lede")}</p>
+          {has("title") && <h1>{t("title")}</h1>}
+          {has("lede") && <p>{t("lede")}</p>}
         </div>
       </section>
 
-      {t.has("steps.title") && (
+      {has("steps.title") && (
         <section className="about-section">
           <div className="wrap about-grid">
             <Reveal>
-              <p className="folio">الفصل الأول</p>
-              <h2>{t.rich("steps.title", rich)}</h2>
+              {has("steps.folio") && <p className="folio">{t("steps.folio")}</p>}
+              {has("steps.title") && <h2>{t.rich("steps.title", rich)}</h2>}
             </Reveal>
             <Reveal>
               <ul className="values-list">
@@ -52,7 +58,7 @@ export default function NewMuslimsPage() {
                     </span>
                     <div>
                       <h3>{s.title}</h3>
-                      <p>{s.desc}</p>
+                      {s.desc && <p>{s.desc}</p>}
                     </div>
                   </li>
                 ))}
@@ -62,19 +68,21 @@ export default function NewMuslimsPage() {
         </section>
       )}
 
-      {t.has("asYouAre.title") && (
+      {has("asYouAre.title") && (
         <section className="about-section">
           <div className="wrap about-grid">
             <Reveal>
-              <p className="folio">الفصل الثاني</p>
-              <h2>{t.rich("asYouAre.title", rich)}</h2>
+              {has("asYouAre.folio") && <p className="folio">{t("asYouAre.folio")}</p>}
+              {has("asYouAre.title") && <h2>{t.rich("asYouAre.title", rich)}</h2>}
             </Reveal>
             <Reveal className="about-body">
-              <p className="dropcap">{t("asYouAre.p1")}</p>
-              <p>{t("asYouAre.p2")}</p>
-              <p>
-                <Link href="/faq">{t("asYouAre.faqLink")}</Link>
-              </p>
+              {has("asYouAre.p1") && <p className="dropcap">{t("asYouAre.p1")}</p>}
+              {has("asYouAre.p2") && <p>{t("asYouAre.p2")}</p>}
+              {has("asYouAre.faqLink") && (
+                <p>
+                  <Link href="/faq">{t("asYouAre.faqLink")}</Link>
+                </p>
+              )}
             </Reveal>
           </div>
         </section>
@@ -111,9 +119,9 @@ export default function NewMuslimsPage() {
       <section className="contact-cta">
         <div className="wrap narrow">
           <Reveal>
-            <span className="smallcaps">{t("cta.eyebrow")}</span>
-            <h2>{t.rich("cta.title", rich)}</h2>
-            <p>{t("cta.lede")}</p>
+            {has("cta.eyebrow") && <span className="smallcaps">{t("cta.eyebrow")}</span>}
+            {has("cta.title") && <h2>{t.rich("cta.title", rich)}</h2>}
+            {has("cta.lede") && <p>{t("cta.lede")}</p>}
             <div className="title-actions">
               <Link className="btn btn-green" href="/classes">
                 {tShared("joinAClass")}

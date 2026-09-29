@@ -2995,6 +2995,19 @@ img {
   direction: ltr;
 }
 
+.admin-card-link {
+  text-decoration: none;
+  transition: border-color 0.2s;
+}
+.admin-card-link:hover {
+  border-color: var(--gold);
+}
+.admin-outdated {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--terracotta);
+}
+
 .admin-message-head {
   display: flex;
   justify-content: space-between;

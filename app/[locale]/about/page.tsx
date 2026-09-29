@@ -6,6 +6,7 @@ import Reveal from "@/components/Reveal";
 import Rosette from "@/components/Rosette";
 import { rich } from "@/lib/rich";
 import { arabicIndicNumeral } from "@/lib/arabicNumerals";
+import { hasText } from "@/lib/pageText";
 
 export async function generateMetadata({
   params,
@@ -19,28 +20,29 @@ export async function generateMetadata({
 
 export default function AboutPage() {
   const t = useTranslations("about");
-  const values = t.raw("values.items") as { title: string; desc: string }[];
+  const has = (key: string) => hasText(t, key); // empty (admin → Page texts) = hidden
+  const values = (t.raw("values.items") as { title: string; desc: string }[]).filter((v) => v.title);
   return (
     <main>
       <section className="about-hero">
         <div className="wrap">
-          <p className="ar">عِمَارَة</p>
+          {has("ornament") && <p className="ar">{t("ornament")}</p>}
           <Rosette />
-          <h1>{t("title")}</h1>
-          <p>{t("lede")}</p>
+          {has("title") && <h1>{t("title")}</h1>}
+          {has("lede") && <p>{t("lede")}</p>}
         </div>
       </section>
 
       <section className="about-section">
         <div className="wrap about-grid">
           <Reveal>
-            <p className="folio">الفصل الأول</p>
-            <h2>{t.rich("story.title", rich)}</h2>
+            {has("story.folio") && <p className="folio">{t("story.folio")}</p>}
+            {has("story.title") && <h2>{t.rich("story.title", rich)}</h2>}
           </Reveal>
           <Reveal className="about-body">
-            <p className="dropcap">{t("story.p1")}</p>
-            <p>{t("story.p2")}</p>
-            <p>{t("story.p3")}</p>
+            {has("story.p1") && <p className="dropcap">{t("story.p1")}</p>}
+            {has("story.p2") && <p>{t("story.p2")}</p>}
+            {has("story.p3") && <p>{t("story.p3")}</p>}
           </Reveal>
         </div>
       </section>
@@ -48,12 +50,12 @@ export default function AboutPage() {
       <section className="about-section">
         <div className="wrap about-grid">
           <Reveal>
-            <p className="folio">الفصل الثاني</p>
-            <h2>{t.rich("name.title", rich)}</h2>
+            {has("name.folio") && <p className="folio">{t("name.folio")}</p>}
+            {has("name.title") && <h2>{t.rich("name.title", rich)}</h2>}
           </Reveal>
           <Reveal className="about-body">
-            <p>{t.rich("name.p1", rich)}</p>
-            <p>{t("name.p2")}</p>
+            {has("name.p1") && <p>{t.rich("name.p1", rich)}</p>}
+            {has("name.p2") && <p>{t("name.p2")}</p>}
           </Reveal>
         </div>
       </section>
@@ -61,17 +63,19 @@ export default function AboutPage() {
       <section className="about-section">
         <div className="wrap about-grid">
           <Reveal>
-            <p className="folio">الفصل الثالث</p>
-            <h2>{t.rich("work.title", rich)}</h2>
+            {has("work.folio") && <p className="folio">{t("work.folio")}</p>}
+            {has("work.title") && <h2>{t.rich("work.title", rich)}</h2>}
           </Reveal>
           <Reveal className="about-body">
-            <p>{t("work.p1")}</p>
-            <p>{t("work.p2")}</p>
-            <p>
-              <Link href="/programs" className="transparency-cta-link">
-                {t("work.link")}
-              </Link>
-            </p>
+            {has("work.p1") && <p>{t("work.p1")}</p>}
+            {has("work.p2") && <p>{t("work.p2")}</p>}
+            {has("work.link") && (
+              <p>
+                <Link href="/programs" className="transparency-cta-link">
+                  {t("work.link")}
+                </Link>
+              </p>
+            )}
           </Reveal>
         </div>
       </section>
@@ -79,8 +83,8 @@ export default function AboutPage() {
       <section className="about-section">
         <div className="wrap about-grid">
           <Reveal>
-            <p className="folio">الفصل الرابع</p>
-            <h2>{t("values.title")}</h2>
+            {has("values.folio") && <p className="folio">{t("values.folio")}</p>}
+            {has("values.title") && <h2>{t("values.title")}</h2>}
           </Reveal>
           <Reveal>
             <ul className="values-list">
@@ -91,7 +95,7 @@ export default function AboutPage() {
                   </span>
                   <div>
                     <h3>{v.title}</h3>
-                    <p>{v.desc}</p>
+                    {v.desc && <p>{v.desc}</p>}
                   </div>
                 </li>
               ))}
@@ -103,18 +107,20 @@ export default function AboutPage() {
       <section className="about-section">
         <div className="wrap about-grid">
           <Reveal>
-            <p className="folio">الفصل الخامس</p>
-            <h2>{t.rich("future.title", rich)}</h2>
+            {has("future.folio") && <p className="folio">{t("future.folio")}</p>}
+            {has("future.title") && <h2>{t.rich("future.title", rich)}</h2>}
           </Reveal>
           <Reveal className="about-body">
-            <p>{t("future.p1")}</p>
-            <p>{t("future.p2")}</p>
-            <p>
-              {t.rich("future.p3", {
-                volunteer: (c) => <Link href="/contact">{c}</Link>,
-                write: (c) => <Link href="/contact">{c}</Link>,
-              })}
-            </p>
+            {has("future.p1") && <p>{t("future.p1")}</p>}
+            {has("future.p2") && <p>{t("future.p2")}</p>}
+            {has("future.p3") && (
+              <p>
+                {t.rich("future.p3", {
+                  volunteer: (c) => <Link href="/contact">{c}</Link>,
+                  write: (c) => <Link href="/contact">{c}</Link>,
+                })}
+              </p>
+            )}
           </Reveal>
         </div>
       </section>
