@@ -22,7 +22,7 @@
     "changeLanguage": "Cambiar idioma",
     "languages": "Idiomas",
     "soon": "pronto",
-    "coran": "Corán gratis"
+    "coran": "Corán de regalo"
   },
   "footer": {
     "tagline": "Construimos comunidades donde los nuevos musulmanes se quedan: educación, acompañamiento y pertenencia en toda América Latina.",
@@ -677,7 +677,7 @@
       "language": "Idioma del panel",
       "enrollments": "Inscripciones",
       "pages": "Textos de páginas",
-      "coran": "Corán gratis"
+      "coran": "Corán de regalo"
     },
     "login": {
       "title": "Administración",
@@ -915,7 +915,7 @@
       "save": "Guardar Todos los Idiomas"
     },
     "coran": {
-      "title": "Corán gratis — solicitudes",
+      "title": "Corán de regalo — solicitudes",
       "intro": "Solicitudes enviadas desde la página «Un Corán para ti». Cambia el estado de cada una conforme avanza y descarga la lista para el envío.",
       "stats": {
         "requests": "Solicitudes",
@@ -987,11 +987,11 @@
   "coran": {
     "meta": {
       "title": "Un Corán para ti — Emara Academy",
-      "description": "Campaña de Emara Academy: regalamos ejemplares del Corán en español en todo México. Pide el tuyo, sin costo."
+      "description": "Campaña de Emara Academy: regalamos ejemplares del Corán en español en todo México. Pide el tuyo: es nuestro regalo para ti."
     },
     "ornament": "القرآن الكريم",
     "title": "Un Corán para ti",
-    "lede": "Estamos regalando ejemplares del Corán en español en todo México. Si quieres el tuyo, llena el formulario: es gratis.",
+    "lede": "Estamos regalando ejemplares del Corán en español en todo México. Si quieres el tuyo, llena el formulario: es nuestro regalo para ti.",
     "gift": {
       "title": "Un regalo, <em>con cariño</em>",
       "p1": "Cada ejemplar es la traducción comentada al español del Lic. M. Isa García, y llega con una tarjeta y un separador de Emara Academy.",
@@ -999,7 +999,7 @@
     },
     "form": {
       "title": "Pide tu Corán",
-      "lede": "Llena el formulario para pedir el tuyo, sin costo.",
+      "lede": "Llena el formulario para recibir el tuyo como regalo.",
       "name": "Nombre",
       "age": "Edad",
       "phone": "Número de teléfono (WhatsApp)",

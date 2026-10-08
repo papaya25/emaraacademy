@@ -22,7 +22,7 @@
     "changeLanguage": "Change language",
     "languages": "Languages",
     "soon": "soon",
-    "coran": "Free Qur’an"
+    "coran": "A Qur’an as a Gift"
   },
   "footer": {
     "tagline": "Building communities that keep new Muslims — education, mentorship, and belonging across Latin America.",
@@ -677,7 +677,7 @@
       "language": "Admin language",
       "enrollments": "Enrollments",
       "pages": "Page texts",
-      "coran": "Free Qur’an"
+      "coran": "Gift Qur’ans"
     },
     "login": {
       "title": "Admin",
@@ -915,7 +915,7 @@
       "save": "Save All Languages"
     },
     "coran": {
-      "title": "Free Qur’an — requests",
+      "title": "Gift Qur’ans — requests",
       "intro": "Requests sent from the “A Qur’an for You” page. Change a request’s status as it moves along; download the list for shipping.",
       "stats": {
         "requests": "Requests",
@@ -987,11 +987,11 @@
   "coran": {
     "meta": {
       "title": "A Qur’an for You — Emara Academy",
-      "description": "An Emara Academy campaign: we’re giving away copies of the Qur’an in Spanish across Mexico. Ask for yours, free of charge."
+      "description": "An Emara Academy campaign: we’re giving copies of the Qur’an in Spanish as gifts across Mexico. Ask for yours — it’s our gift to you."
     },
     "ornament": "القرآن الكريم",
     "title": "A Qur’an for You",
-    "lede": "We’re giving away copies of the Qur’an in Spanish across Mexico. If you’d like yours, fill in the form — it’s free.",
+    "lede": "We’re giving copies of the Qur’an in Spanish as gifts across Mexico. If you’d like yours, fill in the form — it’s our gift to you.",
     "gift": {
       "title": "A gift, <em>with love</em>",
       "p1": "Each copy is the annotated Spanish translation by Lic. M. Isa García, and comes with a card and a bookmark from Emara Academy.",
@@ -999,7 +999,7 @@
     },
     "form": {
       "title": "Ask for your Qur’an",
-      "lede": "Fill in the form to ask for yours — free of charge.",
+      "lede": "Fill in the form to receive yours as a gift.",
       "name": "Name",
       "age": "Age",
       "phone": "Phone number (WhatsApp)",
