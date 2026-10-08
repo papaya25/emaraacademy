@@ -6,7 +6,8 @@ import Reveal from "@/components/Reveal";
 import Rosette from "@/components/Rosette";
 import { rich } from "@/lib/rich";
 import { hasText } from "@/lib/pageText";
-import { CORAN_FORM_EMBED, CORAN_FORM_URL, CORAN_PHOTOS } from "@/lib/coranCampaign";
+import { CORAN_PHOTOS } from "@/lib/coranCampaign";
+import CoranRequestForm from "@/components/CoranRequestForm";
 
 export async function generateMetadata({
   params,
@@ -70,12 +71,9 @@ export default function CoranPage() {
         <div className="wrap narrow">
           {has("form.title") && <h2>{t("form.title")}</h2>}
           {has("form.lede") && <p>{t("form.lede")}</p>}
-          <iframe className="coran-form" src={CORAN_FORM_EMBED} title={t("form.frameTitle")} loading="lazy" />
-          <p className="coran-form-fallback">
-            <a href={CORAN_FORM_URL} target="_blank" rel="noopener noreferrer">
-              {t("form.fallback")}
-            </a>
-          </p>
+          <div className="corr-plate coran-plate">
+            <CoranRequestForm />
+          </div>
         </div>
       </section>
     </main>

@@ -2365,20 +2365,47 @@ img {
   color: var(--ink-soft);
   margin-top: 0.6em;
 }
-.coran-form {
-  display: block;
-  width: 100%;
-  height: 1400px;
+.coran-plate {
   margin-top: 28px;
-  border: 1px solid var(--rule-gold);
-  background: #fff;
+  text-align: start;
 }
-.coran-form-fallback {
-  margin-top: 14px;
-  font-size: 0.9rem;
+.coran-form-subtitle {
+  font-size: 1.15rem;
+  margin: 10px 0 -4px;
+  padding-top: 18px;
+  border-top: 1px solid var(--rule);
 }
-.coran-form-fallback a {
-  color: var(--green);
+.corr-optional {
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink-faint);
+}
+.coran-yesno {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+.coran-yesno label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-inline-end: 18px;
+  font-size: 0.95rem;
+}
+.coran-privacy {
+  font-size: 0.82rem;
+  color: var(--ink-faint);
+}
+.coran-trap {
+  position: absolute;
+  inset-inline-start: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+.coran-sent {
+  text-align: center;
 }
 .coran-home {
   padding-block: clamp(48px, 7vw, 88px);
@@ -3103,6 +3130,63 @@ img {
   font-size: 0.78rem;
   font-weight: 600;
   color: var(--terracotta);
+}
+
+.admin-stat-tables {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+  margin-top: 6px;
+}
+.admin-filter-row {
+  margin: 10px 0 20px;
+}
+.coran-request-card {
+  border-inline-start: 4px solid var(--gold);
+}
+.coran-request-card.s-sent {
+  border-inline-start-color: var(--green-soft);
+}
+.coran-request-card.s-delivered {
+  border-inline-start-color: var(--green);
+}
+.coran-request-card.s-cancelled {
+  border-inline-start-color: var(--rule);
+  opacity: 0.7;
+}
+.coran-request-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-bottom: 12px;
+}
+.coran-address {
+  font-style: normal;
+  line-height: 1.6;
+  font-size: 0.95rem;
+  background: var(--paper);
+  border: 1px dashed var(--rule-gold);
+  padding: 10px 12px;
+  margin: 4px 0 8px;
+  text-align: left;
+}
+.coran-request-facts {
+  margin: 0;
+  display: grid;
+  gap: 8px;
+  font-size: 0.88rem;
+}
+.coran-request-facts dt {
+  color: var(--ink-faint);
+  font-size: 0.75rem;
+}
+.coran-request-facts dd {
+  margin: 0;
+}
+@media (max-width: 720px) {
+  .coran-request-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .admin-message-head {

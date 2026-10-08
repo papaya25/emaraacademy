@@ -676,7 +676,8 @@
       "signOut": "Sign Out",
       "language": "Admin language",
       "enrollments": "Enrollments",
-      "pages": "Page texts"
+      "pages": "Page texts",
+      "coran": "Free Qur’an"
     },
     "login": {
       "title": "Admin",
@@ -710,7 +711,8 @@
       "contactMessages": "Contact Messages",
       "subscribers": "Newsletter Subscribers",
       "upcomingEvents": "Upcoming Events",
-      "enrollments": "Enrollments"
+      "enrollments": "Enrollments",
+      "coranPending": "Qur’an requests waiting"
     },
     "programs": {
       "title": "Programs",
@@ -911,6 +913,75 @@
       "help": "Arabic first, then English and Spanish. Keep anything between {lt} and {gt} exactly as it is — for example {example} shows those words in green italics. Empty a box to hide that text on the website (in that language only). Saved changes appear on the website within a minute.",
       "outdated": "The Arabic changed after this — please update it",
       "save": "Save All Languages"
+    },
+    "coran": {
+      "title": "Free Qur’an — requests",
+      "intro": "Requests sent from the “A Qur’an for You” page. Change a request’s status as it moves along; download the list for shipping.",
+      "stats": {
+        "requests": "Requests",
+        "copies": "Copies requested",
+        "pending": "Waiting to ship",
+        "sent": "Sent",
+        "delivered": "Delivered",
+        "cancelled": "Cancelled",
+        "copiesShipped": "Copies sent or delivered",
+        "avgAge": "Average age"
+      },
+      "byState": "By state",
+      "byRelation": "Relationship with Islam",
+      "byHeard": "How they heard",
+      "byFirst": "First Qur’an?",
+      "byMonth": "Requests per month",
+      "colRequests": "Requests",
+      "colCopies": "Copies",
+      "unknown": "Not answered",
+      "yes": "Yes",
+      "no": "No",
+      "filterStatus": "Status",
+      "filterState": "State",
+      "all": "All",
+      "apply": "Filter",
+      "export": "Download for Shipping (Excel / CSV)",
+      "empty": "No requests yet.",
+      "emptyFiltered": "No requests match these filters.",
+      "statuses": {
+        "pending": "Pending",
+        "sent": "Sent",
+        "delivered": "Delivered",
+        "cancelled": "Cancelled"
+      },
+      "card": {
+        "shipTo": "Ship to",
+        "copies": "{count, plural, one {# copy} other {# copies}}",
+        "age": "{age} years old",
+        "refs": "Directions",
+        "firstQuran": "First Qur’an",
+        "relation": "Relationship with Islam",
+        "heard": "Heard via",
+        "reason": "Why they want one",
+        "comments": "Comments",
+        "status": "Status",
+        "tracking": "Tracking / note",
+        "save": "Save",
+        "delete": "Delete",
+        "received": "Received {date}"
+      },
+      "relations": {
+        "curious": "Curious",
+        "new_muslim": "New Muslim",
+        "muslim": "Muslim",
+        "gift": "A gift",
+        "other": "Other"
+      },
+      "heard": {
+        "instagram": "Instagram",
+        "facebook": "Facebook",
+        "tiktok": "TikTok",
+        "whatsapp": "WhatsApp",
+        "friend": "Friend / relative",
+        "mosque": "Mosque",
+        "other": "Other"
+      }
     }
   },
   "coran": {
@@ -929,8 +1000,57 @@
     "form": {
       "title": "Ask for your Qur’an",
       "lede": "Fill in the form to ask for yours — free of charge.",
-      "fallback": "Can’t see the form? Open it here →",
-      "frameTitle": "Form to ask for a Qur’an"
+      "name": "Name",
+      "age": "Age",
+      "phone": "Phone number (WhatsApp)",
+      "phoneHint": "We’ll only use it if we need to contact you about your delivery.",
+      "email": "Email",
+      "addressTitle": "Delivery address",
+      "street": "Street name",
+      "extInt": "Street number and apartment/unit number",
+      "colonia": "Neighborhood (colonia)",
+      "postalCode": "Postal code",
+      "city": "City or municipality",
+      "state": "State (Mexico)",
+      "chooseState": "Choose your state",
+      "refs": "Directions to find your home",
+      "refsHint": "For example: blue house, across from the pharmacy.",
+      "quantity": "How many copies would you like?",
+      "quantityHint": "Up to 10 — for example, for family or friends.",
+      "firstQuran": "Is this the first time you’ll have a Qur’an?",
+      "yes": "Yes",
+      "no": "No",
+      "relation": "What is your relationship with Islam?",
+      "relations": {
+        "curious": "I’m curious to learn about it",
+        "new_muslim": "I became Muslim recently",
+        "muslim": "I’m Muslim",
+        "gift": "It’s a gift for someone",
+        "other": "Other"
+      },
+      "heardFrom": "How did you hear about this campaign?",
+      "heard": {
+        "instagram": "Instagram",
+        "facebook": "Facebook",
+        "tiktok": "TikTok",
+        "whatsapp": "WhatsApp",
+        "friend": "A friend or relative",
+        "mosque": "A mosque",
+        "other": "Other"
+      },
+      "choose": "Choose an option",
+      "optional": "(optional)",
+      "reason": "Why would you like to receive a Qur’an?",
+      "reasonHint": "We’d love to know a little about what moved you to ask for it.",
+      "comments": "Comments",
+      "privacy": "The information you provide will be used only to manage the UN CORÁN PARA TI project and send your requested copy.",
+      "submit": "Send My Request",
+      "sending": "Sending…",
+      "sentTitle": "We’ve received your request!",
+      "sentBody": "We’ll write to you soon to arrange the delivery of your Qur’an. May God be with you in this reading.",
+      "another": "Make another request",
+      "error": "Something went wrong sending your request. Please check your details and try again in a moment.",
+      "postalError": "The postal code must be 5 digits."
     },
     "photos": {
       "mosque": "A copy of the Qur’an in Spanish, held up inside a mosque",

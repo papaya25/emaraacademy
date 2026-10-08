@@ -676,7 +676,8 @@
       "signOut": "Cerrar Sesión",
       "language": "Idioma del panel",
       "enrollments": "Inscripciones",
-      "pages": "Textos de páginas"
+      "pages": "Textos de páginas",
+      "coran": "Corán gratis"
     },
     "login": {
       "title": "Administración",
@@ -710,7 +711,8 @@
       "contactMessages": "Mensajes de Contacto",
       "subscribers": "Suscriptores del Boletín",
       "upcomingEvents": "Próximos Eventos",
-      "enrollments": "Inscripciones"
+      "enrollments": "Inscripciones",
+      "coranPending": "Solicitudes de Corán pendientes"
     },
     "programs": {
       "title": "Programas",
@@ -911,6 +913,75 @@
       "help": "Primero el árabe, luego el inglés y el español. Deja tal cual todo lo que esté entre {lt} y {gt} — por ejemplo {example} pone esas palabras en cursiva verde. Vacía un cuadro para ocultar ese texto en el sitio (solo en ese idioma). Los cambios guardados aparecen en el sitio en menos de un minuto.",
       "outdated": "El árabe cambió después de esto; actualízalo",
       "save": "Guardar Todos los Idiomas"
+    },
+    "coran": {
+      "title": "Corán gratis — solicitudes",
+      "intro": "Solicitudes enviadas desde la página «Un Corán para ti». Cambia el estado de cada una conforme avanza y descarga la lista para el envío.",
+      "stats": {
+        "requests": "Solicitudes",
+        "copies": "Ejemplares solicitados",
+        "pending": "Por enviar",
+        "sent": "Enviadas",
+        "delivered": "Entregadas",
+        "cancelled": "Canceladas",
+        "copiesShipped": "Ejemplares enviados o entregados",
+        "avgAge": "Edad promedio"
+      },
+      "byState": "Por estado",
+      "byRelation": "Relación con el islam",
+      "byHeard": "Cómo se enteraron",
+      "byFirst": "¿Primer Corán?",
+      "byMonth": "Solicitudes por mes",
+      "colRequests": "Solicitudes",
+      "colCopies": "Ejemplares",
+      "unknown": "Sin respuesta",
+      "yes": "Sí",
+      "no": "No",
+      "filterStatus": "Estado del envío",
+      "filterState": "Estado",
+      "all": "Todos",
+      "apply": "Filtrar",
+      "export": "Descargar para Envío (Excel / CSV)",
+      "empty": "Todavía no hay solicitudes.",
+      "emptyFiltered": "Ninguna solicitud coincide con estos filtros.",
+      "statuses": {
+        "pending": "Pendiente",
+        "sent": "Enviada",
+        "delivered": "Entregada",
+        "cancelled": "Cancelada"
+      },
+      "card": {
+        "shipTo": "Enviar a",
+        "copies": "{count, plural, one {# ejemplar} other {# ejemplares}}",
+        "age": "{age} años",
+        "refs": "Referencias",
+        "firstQuran": "Primer Corán",
+        "relation": "Relación con el islam",
+        "heard": "Se enteró por",
+        "reason": "Por qué lo quiere",
+        "comments": "Comentarios",
+        "status": "Estado del envío",
+        "tracking": "Guía / nota",
+        "save": "Guardar",
+        "delete": "Eliminar",
+        "received": "Recibida el {date}"
+      },
+      "relations": {
+        "curious": "Curiosidad",
+        "new_muslim": "Musulmán reciente",
+        "muslim": "Musulmán",
+        "gift": "Para regalar",
+        "other": "Otra"
+      },
+      "heard": {
+        "instagram": "Instagram",
+        "facebook": "Facebook",
+        "tiktok": "TikTok",
+        "whatsapp": "WhatsApp",
+        "friend": "Amigo / familiar",
+        "mosque": "Mezquita",
+        "other": "Otro"
+      }
     }
   },
   "coran": {
@@ -929,8 +1000,57 @@
     "form": {
       "title": "Pide tu Corán",
       "lede": "Llena el formulario para pedir el tuyo, sin costo.",
-      "fallback": "¿No ves el formulario? Ábrelo aquí →",
-      "frameTitle": "Formulario para pedir un Corán"
+      "name": "Nombre",
+      "age": "Edad",
+      "phone": "Número de teléfono (WhatsApp)",
+      "phoneHint": "Lo utilizaremos únicamente si necesitamos comunicarnos contigo respecto a tu solicitud de envío.",
+      "email": "Correo electrónico",
+      "addressTitle": "Dirección de envío",
+      "street": "Nombre de la calle",
+      "extInt": "Número exterior y número interior",
+      "colonia": "Colonia",
+      "postalCode": "Código postal",
+      "city": "Ciudad o municipio",
+      "state": "Estado de la República Mexicana",
+      "chooseState": "Elige tu estado",
+      "refs": "Referencias para localizar tu domicilio",
+      "refsHint": "Por ejemplo: casa azul, frente a la farmacia.",
+      "quantity": "¿Cuántos ejemplares quieres?",
+      "quantityHint": "Hasta 10 — por ejemplo, para tu familia o amigos.",
+      "firstQuran": "¿Es la primera vez que tendrás un Corán?",
+      "yes": "Sí",
+      "no": "No",
+      "relation": "¿Cuál es tu relación con el islam?",
+      "relations": {
+        "curious": "Tengo curiosidad por conocerlo",
+        "new_muslim": "Soy musulmán desde hace poco",
+        "muslim": "Soy musulmán",
+        "gift": "Es para regalar a alguien",
+        "other": "Otra"
+      },
+      "heardFrom": "¿Cómo te enteraste de esta campaña?",
+      "heard": {
+        "instagram": "Instagram",
+        "facebook": "Facebook",
+        "tiktok": "TikTok",
+        "whatsapp": "WhatsApp",
+        "friend": "Un amigo o familiar",
+        "mosque": "Una mezquita",
+        "other": "Otro"
+      },
+      "choose": "Elige una opción",
+      "optional": "(opcional)",
+      "reason": "¿Por qué te gustaría recibir un Corán?",
+      "reasonHint": "Queremos conocer un poquito qué te motivó a solicitarlo.",
+      "comments": "Comentarios",
+      "privacy": "La información proporcionada será utilizada únicamente para gestionar el proyecto UN CORÁN PARA TI y realizar el envío solicitado.",
+      "submit": "Enviar mi solicitud",
+      "sending": "Enviando…",
+      "sentTitle": "¡Recibimos tu solicitud!",
+      "sentBody": "Pronto te escribiremos para coordinar el envío de tu Corán. Que Dios te acompañe en esta lectura.",
+      "another": "Hacer otra solicitud",
+      "error": "Algo falló al enviar tu solicitud. Revisa los datos e inténtalo de nuevo en un momento.",
+      "postalError": "El código postal debe tener 5 números."
     },
     "photos": {
       "mosque": "Un ejemplar del Corán en español, sostenido dentro de una mezquita",

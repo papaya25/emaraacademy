@@ -11,7 +11,7 @@ export default async function AdminOverviewPage() {
   const monthStr = startOfMonth.toISOString().slice(0, 10);
   const todayStr = new Date().toISOString().slice(0, 10);
 
-  const [monthDonations, allDonations, messages, subscribers, upcomingEvents, enrollments] =
+  const [monthDonations, allDonations, messages, subscribers, upcomingEvents, enrollments, coranPending] =
     await Promise.all([
       supabase.from("donations").select("amount").gte("occurred_on", monthStr),
       supabase.from("donations").select("amount"),
@@ -22,6 +22,7 @@ export default async function AdminOverviewPage() {
         .select("id", { count: "exact", head: true })
         .gte("event_date", todayStr),
       supabase.from("enrollments").select("id", { count: "exact", head: true }),
+      supabase.from("coran_requests").select("id", { count: "exact", head: true }).eq("status", "pending"),
     ]);
 
   const monthTotal = (monthDonations.data ?? []).reduce((s, d) => s + Number(d.amount), 0);
@@ -35,6 +36,7 @@ export default async function AdminOverviewPage() {
     { label: t("subscribers"), value: subscribers.count ?? 0 },
     { label: t("upcomingEvents"), value: upcomingEvents.count ?? 0 },
     { label: t("enrollments"), value: enrollments.count ?? 0 },
+    { label: t("coranPending"), value: coranPending.count ?? 0 },
   ];
 
   return (

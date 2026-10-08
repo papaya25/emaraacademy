@@ -5,6 +5,7 @@ import { getTranslations } from "next-intl/server";
 import { createClient } from "@/lib/supabase/server";
 import { arabicIndicNumeral, chapterHeading } from "@/lib/arabicNumerals";
 import { isResendConfigured, sendBroadcast } from "@/lib/resend";
+import { REQUEST_STATUSES } from "@/lib/coranCampaign";
 import {
   EDITABLE_PAGES,
   EMPTY_STORE,
@@ -235,6 +236,33 @@ export async function deleteRegistration(fd: FormData) {
   const supabase = await createClient();
   await supabase.from("registrations").delete().eq("id", str(fd, "id"));
   revalidatePath("/admin/enrollments");
+}
+
+// ---- Un Corán para ti requests ---------------------------------------------
+
+export async function updateCoranRequest(fd: FormData) {
+  const supabase = await createClient();
+  const id = str(fd, "id");
+  const status = str(fd, "status");
+  if (!(REQUEST_STATUSES as readonly string[]).includes(status)) return;
+  const { data: before } = await supabase.from("coran_requests").select("status").eq("id", id).maybeSingle();
+  await supabase
+    .from("coran_requests")
+    .update({
+      status,
+      tracking: strOrNull(fd, "tracking"),
+      ...(before && before.status !== status ? { status_changed_at: new Date().toISOString() } : {}),
+    })
+    .eq("id", id);
+  revalidatePath("/admin/coran");
+  revalidatePath("/admin");
+}
+
+export async function deleteCoranRequest(fd: FormData) {
+  const supabase = await createClient();
+  await supabase.from("coran_requests").delete().eq("id", str(fd, "id"));
+  revalidatePath("/admin/coran");
+  revalidatePath("/admin");
 }
 
 // ---- Donations ----------------------------------------------------------
