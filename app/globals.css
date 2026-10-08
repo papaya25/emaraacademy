@@ -2316,6 +2316,12 @@ img {
   color: var(--gold-deep);
 }
 
+/* Stripe's embedded card form on the donation page */
+.card-checkout {
+  margin-top: 6px;
+  min-height: 380px;
+}
+
 /* New Muslims: sub-items under a numbered step */
 .path-items {
   margin: 0.5em 0 0;

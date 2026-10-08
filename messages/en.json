@@ -495,13 +495,12 @@
       "email": "Email — for your receipt",
       "keepAnonymous": "Keep my donation anonymous",
       "payment": "Payment",
-      "cardPlaceholder": "Secure card fields (Stripe) will appear here — currently in <strong>test mode</strong>, so nothing can be charged.",
-      "confirmOnce": "Confirm ${amount} Donation",
-      "confirmMonthly": "Confirm ${amount} Monthly Donation",
+      "confirmOnce": "Continue to Pay ${amount}",
+      "confirmMonthly": "Continue to Pay ${amount} Monthly",
       "secure": "Card payments are processed by Stripe — we never see or store your card details. Donations are governed by our <policy>Contributions & Refund Policy</policy>.",
       "progress": "Your donation joins ${raised} raised this month toward our ${goal} goal",
       "successTitle": "May it be written among your ongoing deeds.",
-      "successBody": "This was a <strong>test-mode preview</strong> — no money moved. When payments go live, this page will confirm your donation, email a receipt to {email}, and record the amount in our public ledger.",
+      "successBody": "We received your donation of ${amount}. A receipt is on its way to {email}.",
       "you": "you",
       "ledger": "See the Donation Ledger",
       "home": "Back to Home",
@@ -515,7 +514,13 @@
         "reference": "In the transfer’s reference (concepto), write your name — or “anonymous” — so we can record your donation. Then <write>write to us</write> with the date and amount and we’ll email your receipt.",
         "copy": "Copy",
         "copied": "Copied"
-      }
+      },
+      "notConfigured": "Card payments aren’t switched on yet — for now, please use a bank transfer, or write to us.",
+      "loadError": "The card form couldn’t load — please refresh the page and try again, or use a bank transfer.",
+      "successMonthly": "It will repeat every month. To pause or cancel it, just write to us — any time.",
+      "incompleteTitle": "The payment wasn’t completed.",
+      "incompleteBody": "No money was taken. You can try again, or choose a bank transfer instead.",
+      "retry": "Try Again"
     }
   },
   "donations": {

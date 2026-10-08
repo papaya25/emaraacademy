@@ -495,13 +495,12 @@
       "email": "Correo electrónico, para tu recibo",
       "keepAnonymous": "Quiero que mi donativo sea anónimo",
       "payment": "Pago",
-      "cardPlaceholder": "Aquí aparecerán los campos seguros para tu tarjeta (Stripe). Por ahora está en <strong>modo de prueba</strong>, así que no se puede hacer ningún cargo.",
-      "confirmOnce": "Confirmar Donativo de ${amount}",
-      "confirmMonthly": "Confirmar Donativo Mensual de ${amount}",
+      "confirmOnce": "Continuar para Pagar ${amount}",
+      "confirmMonthly": "Continuar para Pagar ${amount} al Mes",
       "secure": "Los pagos con tarjeta los procesa Stripe: nunca vemos ni guardamos los datos de tu tarjeta. Los donativos se rigen por nuestra <policy>Política de Aportaciones y Reembolsos</policy>.",
       "progress": "Tu donativo se suma a los ${raised} recaudados este mes para nuestra meta de ${goal}",
       "successTitle": "Que quede escrito entre tus obras que no se acaban.",
-      "successBody": "Esta fue una <strong>vista previa en modo de prueba</strong>: no se movió ningún dinero. Cuando los pagos estén activos, esta página confirmará tu donativo, enviará un recibo a {email} y registrará el monto en nuestro registro público de donativos.",
+      "successBody": "Recibimos tu donativo de ${amount}. Tu recibo va en camino a {email}.",
       "you": "ti",
       "ledger": "Ver el Registro de Donativos",
       "home": "Volver al Inicio",
@@ -515,7 +514,13 @@
         "reference": "En el concepto de la transferencia escribe tu nombre — o «anónimo» — para que podamos registrar tu donativo. Después <write>escríbenos</write> con la fecha y el monto, y te enviaremos tu recibo por correo.",
         "copy": "Copiar",
         "copied": "Copiado"
-      }
+      },
+      "notConfigured": "Los pagos con tarjeta aún no están activos; por ahora, usa una transferencia bancaria o escríbenos.",
+      "loadError": "No se pudo cargar el formulario de tarjeta. Recarga la página e inténtalo de nuevo, o usa una transferencia bancaria.",
+      "successMonthly": "Se repetirá cada mes. Para pausarlo o cancelarlo, solo escríbenos, cuando quieras.",
+      "incompleteTitle": "El pago no se completó.",
+      "incompleteBody": "No se cobró nada. Puedes intentarlo de nuevo o elegir una transferencia bancaria.",
+      "retry": "Intentar de Nuevo"
     }
   },
   "donations": {

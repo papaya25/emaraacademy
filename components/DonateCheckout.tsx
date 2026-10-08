@@ -1,13 +1,14 @@
 "use client";
 
-import { useState } from "react";
-import { useTranslations } from "next-intl";
+import { useCallback, useMemo, useState } from "react";
+import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { useSearchParams } from "next/navigation";
 import { useSetting } from "@/lib/settings";
 import { useMonthRaised } from "@/lib/donations";
 import { POLICY_LINKS_ENABLED } from "@/lib/policies";
 import BankDetails from "@/components/BankDetails";
+import CardPayment, { cardPaymentsEnabled } from "@/components/CardPayment";
 
 // Fallback until site_settings loads; live goal under key `donation_month`.
 const MONTH_FALLBACK = { goal: 5000 };
@@ -17,47 +18,29 @@ const METHODS = ["card", "bank"];
 
 export default function DonateCheckout() {
   const t = useTranslations("donate");
+  const locale = useLocale();
   const tc = useTranslations("donate.checkout");
   const month = useSetting("donation_month", MONTH_FALLBACK);
   const raised = useMonthRaised(RAISED_FALLBACK);
   const params = useSearchParams();
-  const amount = Number(params.get("amount")) || 50;
+  // The server checks the amount again before charging (1–10,000 USD).
+  const amount = Math.min(10000, Math.max(1, Math.round(Number(params.get("amount")) || 50)));
   const freq = params.get("freq") === "monthly" ? "monthly" : "once";
   const method = METHODS.includes(params.get("method") ?? "") ? (params.get("method") as string) : "card";
 
   const [name, setName] = useState("");
   const [anonymous, setAnonymous] = useState(false);
   const [email, setEmail] = useState("");
-  const [confirmed, setConfirmed] = useState(false);
-
-  if (confirmed) {
-    return (
-      <section className="checkout-section">
-        <div className="wrap narrow">
-          <div className="checkout-panel checkout-success">
-            <p className="ar" aria-hidden="true">
-              جزاك الله خيرا
-            </p>
-            <h2>{tc("successTitle")}</h2>
-            <p className="checkout-success-sub">
-              {tc.rich("successBody", {
-                strong: (c) => <strong>{c}</strong>,
-                email: email || tc("you"),
-              })}
-            </p>
-            <div className="title-actions">
-              <Link className="btn btn-green" href="/donations">
-                {tc("ledger")}
-              </Link>
-              <Link className="btn btn-ghost" href="/">
-                {tc("home")}
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-    );
-  }
+  // Card: the Stripe form opens once details are entered (and stays open).
+  const [paying, setPaying] = useState(false);
+  const [cardError, setCardError] = useState(false);
+  const onCardError = useCallback(() => setCardError(true), []);
+  const request = useMemo(
+    () => ({ amount, frequency: freq, name, email, anonymous, locale }) as const,
+    // Fixed when the form opens — later typing can't change the charge.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [paying]
+  );
 
   return (
     <section className="checkout-section">
@@ -104,7 +87,7 @@ export default function DonateCheckout() {
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    disabled={anonymous}
+                    disabled={anonymous || paying}
                     placeholder={anonymous ? tc("anonymous") : ""}
                     autoComplete="name"
                   />
@@ -118,7 +101,9 @@ export default function DonateCheckout() {
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    disabled={paying}
                     autoComplete="email"
+                    dir="ltr"
                   />
                 </div>
               </div>
@@ -126,6 +111,7 @@ export default function DonateCheckout() {
                 <input
                   type="checkbox"
                   checked={anonymous}
+                  disabled={paying}
                   onChange={(e) => setAnonymous(e.target.checked)}
                 />
                 <span>{tc("keepAnonymous")}</span>
@@ -135,20 +121,21 @@ export default function DonateCheckout() {
 
           <div className="checkout-payment">
             <span className="corr-label">{tc("payment")}</span>
-            {method === "card" && (
-              <div className="payment-placeholder">
-                {tc.rich("cardPlaceholder", { strong: (c) => <strong>{c}</strong> })}
-              </div>
-            )}
+            {method === "card" &&
+              (!cardPaymentsEnabled ? (
+                <p className="payment-placeholder">{tc("notConfigured")}</p>
+              ) : cardError ? (
+                <p className="corr-error" role="alert">
+                  {tc("loadError")}
+                </p>
+              ) : (
+                paying && <CardPayment request={request} onError={onCardError} />
+              ))}
             {method === "bank" && <BankDetails />}
           </div>
 
-          {method !== "bank" && (
-            <button
-              type="button"
-              className="btn btn-gold donate-now"
-              onClick={() => setConfirmed(true)}
-            >
+          {method === "card" && cardPaymentsEnabled && !paying && (
+            <button type="button" className="btn btn-gold donate-now" onClick={() => setPaying(true)}>
               {tc(freq === "monthly" ? "confirmMonthly" : "confirmOnce", {
                 amount: String(amount),
               })}
