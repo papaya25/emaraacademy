@@ -2322,6 +2322,97 @@ img {
   min-height: 380px;
 }
 
+/* Campaign: Un Corán para ti (page + home section) */
+.coran-jump {
+  margin-top: 22px;
+}
+.coran-gallery {
+  padding-block: clamp(28px, 4vw, 48px);
+  background: var(--paper-deep);
+  border-block: 1px solid var(--rule);
+}
+.coran-gallery .wrap {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+.coran-gallery img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border: 1px solid var(--rule-gold);
+}
+.coran-quote {
+  margin: 1.4em 0 0;
+  padding-inline-start: 1.1em;
+  border-inline-start: 2px solid var(--gold);
+  font-family: var(--font-amiri), serif;
+  font-style: italic;
+  font-size: 1.12rem;
+  line-height: 1.7;
+  color: var(--green);
+}
+.coran-form-section {
+  padding-block: clamp(48px, 7vw, 88px);
+  text-align: center;
+  scroll-margin-top: 90px;
+}
+.coran-form-section h2 {
+  font-size: clamp(1.5rem, 1.9vw + 0.6rem, 2.1rem);
+}
+.coran-form-section > .wrap > p {
+  color: var(--ink-soft);
+  margin-top: 0.6em;
+}
+.coran-form {
+  display: block;
+  width: 100%;
+  height: 1400px;
+  margin-top: 28px;
+  border: 1px solid var(--rule-gold);
+  background: #fff;
+}
+.coran-form-fallback {
+  margin-top: 14px;
+  font-size: 0.9rem;
+}
+.coran-form-fallback a {
+  color: var(--green);
+}
+.coran-home {
+  padding-block: clamp(48px, 7vw, 88px);
+  background: var(--paper-deep);
+  border-block: 1px solid var(--rule);
+}
+.coran-home-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(28px, 5vw, 64px);
+  align-items: center;
+}
+.coran-home img {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--rule-gold);
+}
+.coran-home h2 {
+  font-size: clamp(1.6rem, 2.2vw + 0.6rem, 2.4rem);
+  margin: 0.3em 0 0.4em;
+}
+.coran-home p {
+  color: var(--ink-soft);
+  margin-bottom: 1.2em;
+}
+@media (max-width: 760px) {
+  .coran-gallery .wrap {
+    grid-template-columns: 1fr 1fr;
+  }
+  .coran-home-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* New Muslims: sub-items under a numbered step */
 .path-items {
   margin: 0.5em 0 0;

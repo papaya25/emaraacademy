@@ -21,7 +21,8 @@
     "whatsapp": "Escríbenos por WhatsApp",
     "changeLanguage": "Cambiar idioma",
     "languages": "Idiomas",
-    "soon": "pronto"
+    "soon": "pronto",
+    "coran": "Corán gratis"
   },
   "footer": {
     "tagline": "Construimos comunidades donde los nuevos musulmanes se quedan: educación, acompañamiento y pertenencia en toda América Latina.",
@@ -106,6 +107,12 @@
       "title": "Cada carta la lee una persona, <em>no un sistema.</em>",
       "lede": "Una duda sobre una clase, el voluntariado… o tus propios primeros pasos en el islam. Escríbenos y te responde una persona de verdad.",
       "cta": "Escríbenos"
+    },
+    "coran": {
+      "eyebrow": "Campaña",
+      "title": "Un Corán para ti",
+      "lede": "Regalamos ejemplares del Corán en español en todo México.",
+      "cta": "Pide el Tuyo"
     }
   },
   "programs": {
@@ -898,11 +905,38 @@
       "pages": {
         "home": "Página de inicio",
         "new-muslims": "Nuevos Musulmanes",
-        "about": "Quiénes Somos"
+        "about": "Quiénes Somos",
+        "coran": "Un Corán para ti"
       },
       "help": "Primero el árabe, luego el inglés y el español. Deja tal cual todo lo que esté entre {lt} y {gt} — por ejemplo {example} pone esas palabras en cursiva verde. Vacía un cuadro para ocultar ese texto en el sitio (solo en ese idioma). Los cambios guardados aparecen en el sitio en menos de un minuto.",
       "outdated": "El árabe cambió después de esto; actualízalo",
       "save": "Guardar Todos los Idiomas"
+    }
+  },
+  "coran": {
+    "meta": {
+      "title": "Un Corán para ti — Emara Academy",
+      "description": "Campaña de Emara Academy: regalamos ejemplares del Corán en español en todo México. Pide el tuyo, sin costo."
+    },
+    "ornament": "القرآن الكريم",
+    "title": "Un Corán para ti",
+    "lede": "Estamos regalando ejemplares del Corán en español en todo México. Si quieres el tuyo, llena el formulario: es gratis.",
+    "gift": {
+      "title": "Un regalo, <em>con cariño</em>",
+      "p1": "Cada ejemplar es la traducción comentada al español del Lic. M. Isa García, y llega con una tarjeta y un separador de Emara Academy.",
+      "quote": "Que cada palabra que encuentres te permita descubrir, aprender y acercarte a Dios. Lo recibes como un regalo, con el propósito de que encuentre un lugar en tu hogar."
+    },
+    "form": {
+      "title": "Pide tu Corán",
+      "lede": "Llena el formulario para pedir el tuyo, sin costo.",
+      "fallback": "¿No ves el formulario? Ábrelo aquí →",
+      "frameTitle": "Formulario para pedir un Corán"
+    },
+    "photos": {
+      "mosque": "Un ejemplar del Corán en español, sostenido dentro de una mezquita",
+      "tags": "Ejemplares del Corán envueltos para regalo, cada uno con la tarjeta «Un Corán para ti»",
+      "box": "El Corán en español en una caja de regalo, junto a la tarjeta de Emara Academy",
+      "bookmark": "El Corán con su separador «Lee — اقرأ», la tarjeta y un pin de Bismillah"
     }
   }
 }

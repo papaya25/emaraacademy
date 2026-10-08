@@ -21,7 +21,8 @@
     "whatsapp": "WhatsApp Us",
     "changeLanguage": "Change language",
     "languages": "Languages",
-    "soon": "soon"
+    "soon": "soon",
+    "coran": "Free Qur’an"
   },
   "footer": {
     "tagline": "Building communities that keep new Muslims — education, mentorship, and belonging across Latin America.",
@@ -106,6 +107,12 @@
       "title": "Every letter is read by a person, <em>not a system.</em>",
       "lede": "A question about a class, volunteering — or your own first steps in Islam. Write to us and a real person replies.",
       "cta": "Write to Us"
+    },
+    "coran": {
+      "eyebrow": "Campaign",
+      "title": "A Qur’an for You",
+      "lede": "We’re giving away copies of the Qur’an in Spanish across Mexico.",
+      "cta": "Ask for Yours"
     }
   },
   "programs": {
@@ -898,11 +905,38 @@
       "pages": {
         "home": "Home page",
         "new-muslims": "New Muslims",
-        "about": "Who We Are"
+        "about": "Who We Are",
+        "coran": "A Qur’an for You"
       },
       "help": "Arabic first, then English and Spanish. Keep anything between {lt} and {gt} exactly as it is — for example {example} shows those words in green italics. Empty a box to hide that text on the website (in that language only). Saved changes appear on the website within a minute.",
       "outdated": "The Arabic changed after this — please update it",
       "save": "Save All Languages"
+    }
+  },
+  "coran": {
+    "meta": {
+      "title": "A Qur’an for You — Emara Academy",
+      "description": "An Emara Academy campaign: we’re giving away copies of the Qur’an in Spanish across Mexico. Ask for yours, free of charge."
+    },
+    "ornament": "القرآن الكريم",
+    "title": "A Qur’an for You",
+    "lede": "We’re giving away copies of the Qur’an in Spanish across Mexico. If you’d like yours, fill in the form — it’s free.",
+    "gift": {
+      "title": "A gift, <em>with love</em>",
+      "p1": "Each copy is the annotated Spanish translation by Lic. M. Isa García, and comes with a card and a bookmark from Emara Academy.",
+      "quote": "May every word you find help you discover, learn, and draw closer to God. It comes to you as a gift, in the hope that it finds a place in your home."
+    },
+    "form": {
+      "title": "Ask for your Qur’an",
+      "lede": "Fill in the form to ask for yours — free of charge.",
+      "fallback": "Can’t see the form? Open it here →",
+      "frameTitle": "Form to ask for a Qur’an"
+    },
+    "photos": {
+      "mosque": "A copy of the Qur’an in Spanish, held up inside a mosque",
+      "tags": "Copies of the Qur’an wrapped as gifts, each with the “Un Corán para ti” card",
+      "box": "The Spanish Qur’an in a gift box, next to the Emara Academy card",
+      "bookmark": "The Qur’an with its “Read — اقرأ” bookmark, the card and a Bismillah pin"
     }
   }
 }

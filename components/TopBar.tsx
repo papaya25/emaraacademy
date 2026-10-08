@@ -11,6 +11,7 @@ const links = [
   { href: "/new-muslims", key: "newMuslims" },
   { href: "/programs", key: "programs" },
   { href: "/events", key: "events" },
+  { href: "/coran", key: "coran" }, // campaign — remove when it ends
   { href: "/about", key: "about" },
   { href: "/contact", key: "contact" },
 ] as const;

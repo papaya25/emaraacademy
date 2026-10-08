@@ -13,6 +13,7 @@ export const EDITABLE_PAGES = {
   home: ["home", "shared.seeOurWork", "impact", "newsletter.note", "newsletter.subscribe"],
   "new-muslims": ["newMuslims"],
   about: ["about"],
+  coran: ["coran"],
 } as const;
 export type EditablePage = keyof typeof EDITABLE_PAGES;
 

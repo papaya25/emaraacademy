@@ -71,6 +71,33 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Campaign: Un Corán para ti — remove when it ends */}
+      {has("coran.title") && (
+        <section className="coran-home">
+          <div className="wrap coran-home-grid">
+            <Reveal>
+              <Image
+                src="/campaign/coran-caja-regalo.jpg"
+                alt={t("coran.title")}
+                width={1312}
+                height={1199}
+                sizes="(max-width: 760px) 100vw, 45vw"
+              />
+            </Reveal>
+            <Reveal>
+              {has("coran.eyebrow") && <span className="smallcaps">{t("coran.eyebrow")}</span>}
+              <h2>{t("coran.title")}</h2>
+              {has("coran.lede") && <p>{t("coran.lede")}</p>}
+              {has("coran.cta") && (
+                <Link className="btn btn-green" href="/coran">
+                  {t("coran.cta")}
+                </Link>
+              )}
+            </Reveal>
+          </div>
+        </section>
+      )}
+
       {/* Chapter I — the problem / for new Muslims */}
       {has("newMuslims.title") && (
         <section className="spread" id="new-muslims">
