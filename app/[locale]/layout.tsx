@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import TopBar from "@/components/TopBar";
 import Footer from "@/components/Footer";
+import VisitTracker from "@/components/VisitTracker";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -23,6 +24,7 @@ export default async function LocaleLayout({
       <TopBar />
       {children}
       <Footer />
+      <VisitTracker />
     </NextIntlClientProvider>
   );
 }

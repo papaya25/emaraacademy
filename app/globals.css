@@ -3189,6 +3189,52 @@ img {
   }
 }
 
+/* Admin → Statistics: proportional bars without a chart library */
+.stat-bar {
+  position: relative;
+  display: block;
+  min-inline-size: 120px;
+  padding: 2px 6px;
+}
+.stat-bar > span {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  background: rgba(30, 77, 59, 0.14);
+  border-inline-end: 2px solid var(--green);
+}
+.stat-bar > b {
+  position: relative;
+  font-weight: 600;
+}
+.stat-days {
+  display: grid;
+  grid-template-columns: repeat(30, 1fr);
+  align-items: end;
+  gap: 3px;
+  block-size: 140px;
+  margin-top: 10px;
+}
+.stat-day {
+  block-size: 100%;
+  display: flex;
+  align-items: flex-end;
+  background: rgba(36, 28, 18, 0.04);
+}
+.stat-day > span {
+  display: block;
+  inline-size: 100%;
+  background: var(--green);
+  min-block-size: 1px;
+}
+.stat-days-axis {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--ink-faint);
+  margin-top: 6px;
+}
+
 .admin-message-head {
   display: flex;
   justify-content: space-between;

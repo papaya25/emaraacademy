@@ -677,7 +677,8 @@
       "language": "Admin language",
       "enrollments": "Enrollments",
       "pages": "Page texts",
-      "coran": "Gift Qur’ans"
+      "coran": "Gift Qur’ans",
+      "stats": "Statistics"
     },
     "login": {
       "title": "Admin",
@@ -820,7 +821,9 @@
         "amount": "Amount",
         "method": "Method",
         "frequency": "Frequency",
-        "note": "Note"
+        "note": "Note",
+        "email": "Email",
+        "country": "Country"
       }
     },
     "messages": {
@@ -981,6 +984,59 @@
         "friend": "Friend / relative",
         "mosque": "Mosque",
         "other": "Other"
+      }
+    },
+    "stats": {
+      "title": "Statistics",
+      "intro": "Who visits the website and what donations came in. Visitors are counted once per day each, without cookies; bots are left out. Counting started on {date}.",
+      "visitors": "Visitors",
+      "today": "Visitors today",
+      "last7": "Visitors, last 7 days",
+      "last30": "Visitors, last 30 days",
+      "views30": "Pages viewed, last 30 days",
+      "perDay": "Visitors per day (last 30 days)",
+      "countries": "Countries (last 30 days)",
+      "pages": "Most visited pages (last 30 days)",
+      "referrers": "Sites that sent visitors (last 30 days)",
+      "unknownCountry": "Unknown",
+      "noVisits": "No visits counted yet — numbers appear here as people visit the website.",
+      "colVisitors": "Visitors",
+      "colViews": "Views",
+      "colCountry": "Country",
+      "colPage": "Page",
+      "colSite": "Site",
+      "donations": "Donations",
+      "thisMonth": "Raised this month",
+      "thisYear": "Raised this year",
+      "allTime": "Raised all time",
+      "donationsYear": "Donations this year",
+      "donorsYear": "Donors this year",
+      "monthly": "Month by month ({year})",
+      "yearly": "Year by year",
+      "colMonth": "Month",
+      "colYear": "Year",
+      "colTotal": "Total",
+      "colDonations": "Donations",
+      "colDonors": "Donors",
+      "recent": "Latest donations",
+      "colDate": "Date",
+      "colName": "Donor",
+      "colEmail": "Email",
+      "colAmount": "Amount",
+      "colMethod": "Method",
+      "colFrequency": "Frequency",
+      "anonymous": "Anonymous",
+      "allDonations": "See the full ledger →",
+      "noDonations": "No donations yet.",
+      "methods": {
+        "card": "Card",
+        "bank": "Bank transfer",
+        "paypal": "PayPal",
+        "other": "Other"
+      },
+      "frequencies": {
+        "once": "One-time",
+        "monthly": "Monthly"
       }
     }
   },

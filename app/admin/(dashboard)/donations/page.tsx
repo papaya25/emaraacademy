@@ -14,6 +14,7 @@ export default async function AdminDonationsPage() {
     .order("occurred_on", { ascending: false })
     .limit(200);
 
+  const regionName = new Intl.DisplayNames([locale], { type: "region" });
   const total = (donations ?? []).reduce((s, d) => s + Number(d.amount), 0);
 
   return (
@@ -80,6 +81,8 @@ export default async function AdminDonationsPage() {
           <tr>
             <th>{t("donations.col.date")}</th>
             <th>{t("donations.col.donor")}</th>
+            <th>{t("donations.col.email")}</th>
+            <th>{t("donations.col.country")}</th>
             <th>{t("donations.col.amount")}</th>
             <th>{t("donations.col.method")}</th>
             <th>{t("donations.col.frequency")}</th>
@@ -90,7 +93,7 @@ export default async function AdminDonationsPage() {
         <tbody>
           {(donations ?? []).length === 0 && (
             <tr>
-              <td colSpan={7} className="admin-hint">
+              <td colSpan={9} className="admin-hint">
                 {t("donations.empty")}
               </td>
             </tr>
@@ -99,6 +102,8 @@ export default async function AdminDonationsPage() {
             <tr key={d.id}>
               <td>{d.occurred_on}</td>
               <td>{d.donor_name ?? t("common.anonymous")}</td>
+              <td dir="ltr">{d.donor_email ?? "—"}</td>
+              <td>{d.donor_country ? (regionName.of(d.donor_country) ?? d.donor_country) : "—"}</td>
               <td>${Number(d.amount).toLocaleString(locale)}</td>
               <td>{METHODS.includes(d.method) ? t(`donations.methods.${d.method}`) : d.method}</td>
               <td>{d.frequency === "once" || d.frequency === "monthly" ? t(`donations.frequencies.${d.frequency}`) : d.frequency}</td>

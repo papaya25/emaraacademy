@@ -5,6 +5,7 @@ import AdminLangSwitcher from "@/components/admin/AdminLangSwitcher";
 
 const NAV = [
   { href: "/admin", key: "overview" },
+  { href: "/admin/stats", key: "stats" },
   { href: "/admin/pages", key: "pages" },
   { href: "/admin/programs", key: "programs" },
   { href: "/admin/events", key: "events" },

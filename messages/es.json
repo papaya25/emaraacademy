@@ -677,7 +677,8 @@
       "language": "Idioma del panel",
       "enrollments": "Inscripciones",
       "pages": "Textos de páginas",
-      "coran": "Corán de regalo"
+      "coran": "Corán de regalo",
+      "stats": "Estadísticas"
     },
     "login": {
       "title": "Administración",
@@ -820,7 +821,9 @@
         "amount": "Monto",
         "method": "Forma de pago",
         "frequency": "Frecuencia",
-        "note": "Nota"
+        "note": "Nota",
+        "email": "Correo",
+        "country": "País"
       }
     },
     "messages": {
@@ -981,6 +984,59 @@
         "friend": "Amigo / familiar",
         "mosque": "Mezquita",
         "other": "Otro"
+      }
+    },
+    "stats": {
+      "title": "Estadísticas",
+      "intro": "Quién visita el sitio y qué donativos llegaron. Cada visitante cuenta una vez por día, sin cookies; los robots no cuentan. El conteo empezó el {date}.",
+      "visitors": "Visitantes",
+      "today": "Visitantes hoy",
+      "last7": "Visitantes, últimos 7 días",
+      "last30": "Visitantes, últimos 30 días",
+      "views30": "Páginas vistas, últimos 30 días",
+      "perDay": "Visitantes por día (últimos 30 días)",
+      "countries": "Países (últimos 30 días)",
+      "pages": "Páginas más visitadas (últimos 30 días)",
+      "referrers": "Sitios que enviaron visitantes (últimos 30 días)",
+      "unknownCountry": "Desconocido",
+      "noVisits": "Todavía no hay visitas contadas; los números aparecerán aquí conforme la gente visite el sitio.",
+      "colVisitors": "Visitantes",
+      "colViews": "Vistas",
+      "colCountry": "País",
+      "colPage": "Página",
+      "colSite": "Sitio",
+      "donations": "Donativos",
+      "thisMonth": "Recaudado este mes",
+      "thisYear": "Recaudado este año",
+      "allTime": "Recaudado en total",
+      "donationsYear": "Donativos este año",
+      "donorsYear": "Donantes este año",
+      "monthly": "Mes por mes ({year})",
+      "yearly": "Año por año",
+      "colMonth": "Mes",
+      "colYear": "Año",
+      "colTotal": "Total",
+      "colDonations": "Donativos",
+      "colDonors": "Donantes",
+      "recent": "Últimos donativos",
+      "colDate": "Fecha",
+      "colName": "Donante",
+      "colEmail": "Correo",
+      "colAmount": "Monto",
+      "colMethod": "Forma de pago",
+      "colFrequency": "Frecuencia",
+      "anonymous": "Anónimo",
+      "allDonations": "Ver el registro completo →",
+      "noDonations": "Todavía no hay donativos.",
+      "methods": {
+        "card": "Tarjeta",
+        "bank": "Transferencia",
+        "paypal": "PayPal",
+        "other": "Otra"
+      },
+      "frequencies": {
+        "once": "Única",
+        "monthly": "Mensual"
       }
     }
   },

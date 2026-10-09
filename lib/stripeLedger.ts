@@ -10,6 +10,8 @@ export type LedgerRow = {
   frequency: "once" | "monthly";
   note: string;
   stripe_ref: string;
+  donor_email: string | null;
+  donor_country: string | null;
 };
 
 export function ledgerRow(event: Stripe.Event): LedgerRow | null {
@@ -27,6 +29,8 @@ export function ledgerRow(event: Stripe.Event): LedgerRow | null {
       frequency: "once",
       note: "Stripe (card)",
       stripe_ref: typeof s.payment_intent === "string" ? s.payment_intent : s.id,
+      donor_email: s.customer_details?.email ?? null,
+      donor_country: s.customer_details?.address?.country ?? null,
     };
   }
 
@@ -42,6 +46,8 @@ export function ledgerRow(event: Stripe.Event): LedgerRow | null {
       frequency: "monthly",
       note: "Stripe (card, monthly)",
       stripe_ref: inv.id ?? `${event.id}`,
+      donor_email: inv.customer_email ?? null,
+      donor_country: inv.customer_address?.country ?? null,
     };
   }
 
