@@ -10,6 +10,15 @@
       ],
       "port": 3000,
       "autoPort": true
+    },
+    {
+      "name": "emara-prod",
+      "runtimeExecutable": "/bin/zsh",
+      "runtimeArgs": [
+        "-c",
+        "export PATH=\"$HOME/.local/node22/bin:$PATH\" && npm run start -- -p 3999"
+      ],
+      "port": 3999
     }
   ]
 }
