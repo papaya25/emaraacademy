@@ -1,5 +1,6 @@
+import { use } from "react";
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import PolicyPage from "@/components/PolicyPage";
 
 export async function generateMetadata({
@@ -12,6 +13,7 @@ export async function generateMetadata({
   return { title: t("title"), description: t("description") };
 }
 
-export default function DonationPolicyPage() {
+export default function DonationPolicyPage({ params }: { params: Promise<{ locale: string }> }) {
+  setRequestLocale(use(params).locale); // lets this page be prerendered as static HTML
   return <PolicyPage policy="donation" arabic="الصدقات" />;
 }

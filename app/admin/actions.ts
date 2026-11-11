@@ -21,6 +21,13 @@ import es from "@/messages/es.json";
 
 const BASE_MESSAGES = { ar, en, es };
 
+/** The public pages are prerendered (static, all three languages); after an
+ *  admin edit, mark them all stale so each rebuilds on its next visit. The
+ *  route pattern covers /ar, /en and /es at once. */
+function refreshPublicSite() {
+  revalidatePath("/[locale]", "layout");
+}
+
 function str(fd: FormData, key: string): string {
   return String(fd.get(key) ?? "").trim();
 }
@@ -87,9 +94,7 @@ export async function updateProgram(fd: FormData) {
     .eq("slug", slug);
 
   revalidatePath("/admin/programs");
-  revalidatePath("/programs");
-  revalidatePath(`/programs/${slug}`);
-  revalidatePath("/");
+  refreshPublicSite();
 }
 
 export async function createProgram(fd: FormData) {
@@ -120,8 +125,7 @@ export async function createProgram(fd: FormData) {
   });
 
   revalidatePath("/admin/programs");
-  revalidatePath("/programs");
-  revalidatePath("/");
+  refreshPublicSite();
 }
 
 export async function deleteProgram(fd: FormData) {
@@ -143,8 +147,7 @@ export async function deleteProgram(fd: FormData) {
   }
 
   revalidatePath("/admin/programs");
-  revalidatePath("/programs");
-  revalidatePath("/");
+  refreshPublicSite();
 }
 
 // ---- Events -----------------------------------------------------------
@@ -169,14 +172,14 @@ export async function upsertEvent(fd: FormData) {
     await supabase.from("events").insert(row);
   }
   revalidatePath("/admin/events");
-  revalidatePath("/events");
+  refreshPublicSite();
 }
 
 export async function deleteEvent(fd: FormData) {
   const supabase = await createClient();
   await supabase.from("events").delete().eq("id", str(fd, "id"));
   revalidatePath("/admin/events");
-  revalidatePath("/events");
+  refreshPublicSite();
 }
 
 // ---- Classes ----------------------------------------------------------
@@ -205,14 +208,14 @@ export async function upsertClass(fd: FormData) {
     await supabase.from("classes").insert(row);
   }
   revalidatePath("/admin/classes");
-  revalidatePath("/classes");
+  refreshPublicSite();
 }
 
 export async function deleteClass(fd: FormData) {
   const supabase = await createClient();
   await supabase.from("classes").delete().eq("id", str(fd, "id"));
   revalidatePath("/admin/classes");
-  revalidatePath("/classes");
+  refreshPublicSite();
 }
 
 // ---- Enrollments ----------------------------------------------------------
@@ -221,7 +224,7 @@ export async function confirmEnrollment(fd: FormData) {
   const supabase = await createClient();
   await supabase.from("enrollments").update({ status: "confirmed" }).eq("id", str(fd, "id"));
   revalidatePath("/admin/enrollments");
-  revalidatePath("/classes");
+  refreshPublicSite();
 }
 
 export async function deleteEnrollment(fd: FormData) {
@@ -229,7 +232,7 @@ export async function deleteEnrollment(fd: FormData) {
   await supabase.from("enrollments").delete().eq("id", str(fd, "id"));
   revalidatePath("/admin/enrollments");
   revalidatePath("/admin");
-  revalidatePath("/classes");
+  refreshPublicSite();
 }
 
 export async function deleteRegistration(fd: FormData) {
@@ -279,7 +282,7 @@ export async function addDonation(fd: FormData) {
   });
   revalidatePath("/admin/donations");
   revalidatePath("/admin");
-  revalidatePath("/");
+  refreshPublicSite();
 }
 
 export async function deleteDonation(fd: FormData) {
@@ -287,7 +290,7 @@ export async function deleteDonation(fd: FormData) {
   await supabase.from("donations").delete().eq("id", str(fd, "id"));
   revalidatePath("/admin/donations");
   revalidatePath("/admin");
-  revalidatePath("/");
+  refreshPublicSite();
 }
 
 // ---- Messages -----------------------------------------------------------
@@ -374,7 +377,7 @@ export async function savePageText(fd: FormData) {
 
   await supabase.from("site_settings").upsert({ key: "page_text", value: store, updated_at: now });
   updateTag("page-text");
-  revalidatePath("/", "layout");
+  refreshPublicSite();
   revalidatePath(`/admin/pages/${page}`);
 }
 
@@ -394,7 +397,7 @@ export async function updateContactInfo(fd: FormData) {
     updated_at: new Date().toISOString(),
   });
   revalidatePath("/admin/settings");
-  revalidatePath("/", "layout");
+  refreshPublicSite();
 }
 
 export async function updateImpactStats(fd: FormData) {
@@ -409,7 +412,7 @@ export async function updateImpactStats(fd: FormData) {
     updated_at: new Date().toISOString(),
   });
   revalidatePath("/admin/settings");
-  revalidatePath("/");
+  refreshPublicSite();
 }
 
 export async function updateDonationGoal(fd: FormData) {
@@ -420,5 +423,5 @@ export async function updateDonationGoal(fd: FormData) {
     updated_at: new Date().toISOString(),
   });
   revalidatePath("/admin/settings");
-  revalidatePath("/");
+  refreshPublicSite();
 }

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 import { rich } from "@/lib/rich";
@@ -8,7 +8,9 @@ import Rosette from "@/components/Rosette";
 import { PROGRAMS, localizeProgram, programFromRow, type Program } from "@/lib/programs";
 import { getSupabase } from "@/lib/supabase";
 
-export const revalidate = 60;
+// Prerendered, then refreshed at most every 5 minutes (program texts come
+// from the database); saving a program in the admin refreshes it at once.
+export const revalidate = 300;
 
 type Params = { locale: string; slug: string };
 
@@ -57,6 +59,7 @@ export default async function ProgramPage({
   params: Promise<Params>;
 }) {
   const { locale, slug } = await params;
+  setRequestLocale(locale);
   const programs = await getPrograms(locale);
   const t = await getTranslations({ locale, namespace: "program" });
   const index = programs.findIndex((p) => p.slug === slug);

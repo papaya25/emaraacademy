@@ -1,6 +1,7 @@
+import { use } from "react";
 import type { Metadata } from "next";
 import { useTranslations } from "next-intl";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/routing";
 import Reveal from "@/components/Reveal";
 import Rosette from "@/components/Rosette";
@@ -34,7 +35,8 @@ function FaqList({ items }: { items: FaqItem[] }) {
   );
 }
 
-export default function FaqPage() {
+export default function FaqPage({ params }: { params: Promise<{ locale: string }> }) {
+  setRequestLocale(use(params).locale); // lets this page be prerendered as static HTML
   const t = useTranslations("faq");
   return (
     <main>

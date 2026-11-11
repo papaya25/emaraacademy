@@ -22,16 +22,17 @@ async function savedPageText(locale: string): Promise<Record<string, string>> {
   }
 }
 
+async function adminLocale(): Promise<string> {
+  const picked = (await cookies()).get(ADMIN_LOCALE_COOKIE)?.value;
+  return hasLocale(routing.locales, picked) ? picked : "en";
+}
+
 export default getRequestConfig(async ({ requestLocale }) => {
   const requested = await requestLocale;
-  // Routes outside app/[locale] (the admin panel) have no locale in the URL;
-  // they use the language picked in the admin sidebar instead.
-  const fallback = (await cookies()).get(ADMIN_LOCALE_COOKIE)?.value;
-  const locale = hasLocale(routing.locales, requested)
-    ? requested
-    : hasLocale(routing.locales, fallback)
-      ? fallback
-      : "en"; // the admin panel opens in English until another language is picked
+  // Public pages: the language comes from the URL (no cookies read, so they
+  // stay static). Routes outside app/[locale] — the admin panel — have none;
+  // they use the language picked in the admin sidebar (English by default).
+  const locale = hasLocale(routing.locales, requested) ? requested : await adminLocale();
 
   const messages = (await import(`../messages/${locale}.json`)).default;
   return { locale, messages: applyPageText(messages, await savedPageText(locale)) };

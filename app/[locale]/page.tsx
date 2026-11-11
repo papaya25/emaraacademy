@@ -1,7 +1,8 @@
+import { use } from "react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/routing";
 import { rich } from "@/lib/rich";
 import { hasText } from "@/lib/pageText";
@@ -25,7 +26,8 @@ export async function generateMetadata({
   return { title: t("title"), description: t("description") };
 }
 
-export default function Home() {
+export default function Home({ params }: { params: Promise<{ locale: string }> }) {
+  setRequestLocale(use(params).locale); // lets this page be prerendered as static HTML
   const t = useTranslations("home");
   const tShared = useTranslations("shared");
   const tNav = useTranslations("nav");

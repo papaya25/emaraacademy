@@ -1,7 +1,7 @@
-import { Suspense } from "react";
+import { Suspense, use } from "react";
 import type { Metadata } from "next";
 import { useTranslations } from "next-intl";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import Rosette from "@/components/Rosette";
 import ContactSection from "@/components/ContactSection";
 import ReachUs from "@/components/ReachUs";
@@ -16,7 +16,8 @@ export async function generateMetadata({
   return { title: t("title"), description: t("description") };
 }
 
-export default function ContactPage() {
+export default function ContactPage({ params }: { params: Promise<{ locale: string }> }) {
+  setRequestLocale(use(params).locale); // lets this page be prerendered as static HTML
   const t = useTranslations("contact");
   return (
     <main>

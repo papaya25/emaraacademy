@@ -58,6 +58,14 @@ There is no system `node`/`npm`/`npx` on this machine. Node 22 lives at `~/.loca
 export PATH="$HOME/.local/node22/bin:$PATH"
 ```
 
+## Static rendering (2026-11-11 — Vercel CPU)
+The AMANAH Vercel team (Hobby, shared with Amanah + TutCasa) has a 4h/30-day Fluid Active CPU allowance; going over pauses all three sites. Public pages are therefore **prerendered** (● SSG, all 3 languages, 45 pages) instead of rendering per visit:
+- `app/[locale]/layout.tsx` is the public site's **root layout** (owns `<html lang dir>`, fonts from `lib/fonts.ts`, globals.css) and calls `setRequestLocale`; **every page under `app/[locale]` must call `setRequestLocale(use(params).locale)`** (async pages: `setRequestLocale(locale)`), or that page turns dynamic again. `app/admin/layout.tsx` is the admin's own root layout (dynamic, language from the `ADMIN_LOCALE` cookie). `app/layout.tsx` is a pass-through + `app/not-found.tsx` fallback (next-intl's recommended setup).
+- `i18n/request.ts` reads cookies **only** when the URL has no locale (admin) — reading them for public pages would make every page dynamic.
+- Pages refresh at most every 300s (the Page-texts fetch is cached 300s, tag `page-text`; `programs/[slug]` has `revalidate = 300`). Every admin save calls `refreshPublicSite()` (= `revalidatePath("/[locale]", "layout")`, all languages at once) in `app/admin/actions.ts` — plain paths like `revalidatePath("/programs")` no longer match the cached `/es/programs` etc. Verified on a local production build: HIT → MISS (rebuilt) → HIT right after a refresh.
+- Still dynamic on purpose: `/[locale]/[...rest]` (unknown URLs → styled 404; its HTML arrives via the RSC payload, renders fine in browsers), `/donate/complete`, `/enroll` (redirect), admin, `/api/*`. `/api/track` still runs once per page view (light). `proxy.ts` (next-intl locale detection) still runs on each page request.
+- Data that admins edit and that's fetched in the browser (programs shelf, events, classes, settings, impact stats) never needed a refresh — it doesn't touch Vercel CPU.
+
 ## Tailwind class-name collision gotcha
 Never name a custom CSS class after a Tailwind utility (`contents`, `hidden`, `container`, `flex`, etc.) — Tailwind v4 generates the matching utility class regardless, and it silently merges with your rule on any property your rule doesn't itself set. Bit us once: the homepage/`/programs` section was `className="contents"`, which picked up Tailwind's `.contents { display: contents }` (a real utility) — that collapsed the section to a zero-size box (`getBoundingClientRect()` all zeros), which is what made the "See Our Work" hero button silently fail to scroll to it. Renamed to `.chapters` in [globals.css](app/globals.css), [app/page.tsx](app/page.tsx), [app/programs/page.tsx](app/programs/page.tsx).
 

@@ -1,6 +1,7 @@
+import { use } from "react";
 import type { Metadata } from "next";
 import { useTranslations } from "next-intl";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/routing";
 import Reveal from "@/components/Reveal";
 import Rosette from "@/components/Rosette";
@@ -25,7 +26,8 @@ export async function generateMetadata({
 // (its month/note text is in messages under donations.sample).
 const SAMPLE = { raised: 1850, goal: 5000 };
 
-export default function DonationsPage() {
+export default function DonationsPage({ params }: { params: Promise<{ locale: string }> }) {
+  setRequestLocale(use(params).locale); // lets this page be prerendered as static HTML
   const t = useTranslations("donations");
   return (
     <main>

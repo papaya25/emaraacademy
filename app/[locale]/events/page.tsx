@@ -1,6 +1,7 @@
+import { use } from "react";
 import type { Metadata } from "next";
 import { useTranslations } from "next-intl";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/routing";
 import Reveal from "@/components/Reveal";
 import Rosette from "@/components/Rosette";
@@ -17,7 +18,8 @@ export async function generateMetadata({
   return { title: t("title"), description: t("description") };
 }
 
-export default function EventsPage() {
+export default function EventsPage({ params }: { params: Promise<{ locale: string }> }) {
+  setRequestLocale(use(params).locale); // lets this page be prerendered as static HTML
   const t = useTranslations("events");
   return (
     <main>

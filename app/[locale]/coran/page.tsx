@@ -1,7 +1,8 @@
+import { use } from "react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import Reveal from "@/components/Reveal";
 import Rosette from "@/components/Rosette";
 import { rich } from "@/lib/rich";
@@ -24,7 +25,8 @@ export async function generateMetadata({
 }
 
 /** "Un Corán para ti" — the free Qur'an campaign page. */
-export default function CoranPage() {
+export default function CoranPage({ params }: { params: Promise<{ locale: string }> }) {
+  setRequestLocale(use(params).locale); // lets this page be prerendered as static HTML
   const t = useTranslations("coran");
   const has = (key: string) => hasText(t, key); // empty (admin → Page texts) = hidden
   return (
