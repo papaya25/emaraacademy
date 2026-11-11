@@ -58,7 +58,7 @@ There is no system `node`/`npm`/`npx` on this machine. Node 22 lives at `~/.loca
 export PATH="$HOME/.local/node22/bin:$PATH"
 ```
 
-## Static rendering (2026-11-11 — Vercel CPU)
+## Static rendering (2026-11-11 — Vercel CPU) — DEPLOYED 2026-11-11 (live pages verified x-vercel-cache HIT/PRERENDER)
 The AMANAH Vercel team (Hobby, shared with Amanah + TutCasa) has a 4h/30-day Fluid Active CPU allowance; going over pauses all three sites. Public pages are therefore **prerendered** (● SSG, all 3 languages, 45 pages) instead of rendering per visit:
 - `app/[locale]/layout.tsx` is the public site's **root layout** (owns `<html lang dir>`, fonts from `lib/fonts.ts`, globals.css) and calls `setRequestLocale`; **every page under `app/[locale]` must call `setRequestLocale(use(params).locale)`** (async pages: `setRequestLocale(locale)`), or that page turns dynamic again. `app/admin/layout.tsx` is the admin's own root layout (dynamic, language from the `ADMIN_LOCALE` cookie). `app/layout.tsx` is a pass-through + `app/not-found.tsx` fallback (next-intl's recommended setup).
 - `i18n/request.ts` reads cookies **only** when the URL has no locale (admin) — reading them for public pages would make every page dynamic.
